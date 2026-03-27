@@ -1,86 +1,115 @@
-Request addressed: "Deeper research into DeleteFrondGeometry"
+Request addressed: "Research further, find the area of deletion and ways to prevent it"
 
-Primary target identification
-- Candidate function: sub_789EC0, strongly identified as CSpeedTreeRT::DeleteFrondGeometry by embedded exception-report strings:
+Target identity
+- DeleteFrondGeometry is sub_789EC0.
+- Proof is the in-function exception strings:
   - "CSpeedTreeRT::DeleteFrondGeometry"
   - "%s - failed [%s]"
   - "%s - threw an unknown system exception"
-- Function location: functions/sub_789EC0__789EC0
 
-High-confidence behavior of DeleteFrondGeometry (sub_789EC0)
-- Guard #1: exits unless byte at this+0x45 is non-zero (compute-complete flag).
-- Guard #2: exits if this+0x60 (frond geometry object pointer) is null.
-- Guard #3: exits if this+0x34 is non-zero.
-- Guard #4: exits if this+0x30 is null or *(*(this+0x30)) != 1.
-- If all guards pass:
-  1) calls sub_797270(this->frondGeom) to deep-free internal frond geometry buffers,
-  2) calls FormHeapFree(this->frondGeom) to free outer frond geometry object,
-  3) writes this+0x60 = 0.
-- No success/failure return value; this is a best-effort void cleanup routine with SEH wrappers for error reporting.
+---
+Deletion area map (where frond geometry is actually destroyed)
 
-Field mapping (inferred from constructor/compute/callers)
-- this+0x60 == this[0x18] : frond geometry object pointer.
-- this+0x45 : model "computed" or "ready" byte.
-- this+0x30 : pointer to integer reference-counter block (dword expected == 1 for cleanup path).
-- this+0x34 : pointer/flag gating whether delete is permitted.
+A) Primary explicit delete call site in build pipeline
+- Function: BSTreeModel_MakeBase (sub_560600)
+- Address: 0x5608D5 -> `call sub_789EC0`
+- Sequence in success path:
+  1) compute (`sub_78CCA0`)
+  2) prep/update steps
+  3) branch geometry delete (`sub_78C160`)
+  4) frond geometry delete (`sub_789EC0`)  <-- main targeted deletion
+- Practical meaning: tree/frond geometry is generated, consumed for setup, then frond payload can be dropped immediately to save memory.
 
-Why each guard likely exists (inference)
-- this+0x45 must be set: DeleteFrondGeometry only applies after Compute() succeeds.
-- this+0x60 must be set: avoid double-free and stale pointer dereference.
-- this+0x34 must be clear: likely blocks deletion when a transient dependency still owns or references frond data.
-- *(this+0x30) must be exactly 1: additional ownership/refcount protection before destroying shared geometry.
+B) The delete routine itself
+- Function: sub_789EC0 (DeleteFrondGeometry)
+- Core logic:
+  - requires this+0x45 != 0 (computed state)
+  - requires this+0x60 != 0 (frond geometry exists)
+  - requires this+0x34 == 0
+  - requires this+0x30 != 0 and *(*(this+0x30)) == 1 (ownership/refcount gate)
+  - then:
+    - `sub_797270(this+0x60_target)` deep-frees internals
+    - `FormHeapFree(this+0x60)` frees outer frond geometry object
+    - writes `this+0x60 = 0`
 
-Cross-function evidence chain
-1) Constructor/init path (sub_78D6A0)
-- Initializes this+0x45 = 0.
-- Allocates frond-related object and stores it into this+0x60 (this[0x18]).
-- Creates a refcount dword at this+0x30 with initial value 1.
+C) Destructor path also deletes frond geometry
+- Function: sub_78C9B0 (global tree object teardown/destructor-like)
+- If a1[0x18] exists:
+  - calls `sub_797270(a1[0x18])`
+  - calls `FormHeapFree(a1[0x18])`
+  - later clears a1[0x18] to 0
+- This means even if DeleteFrondGeometry is bypassed in MakeBase, final object teardown still eventually frees frond geometry.
 
-2) Compute path (sub_78CCA0)
-- If this+0x45 is already set, logs: "Compute() called more than once for single tree model (ignored)".
-- On successful completion sets this+0x45 = 1.
-- This explains why DeleteFrondGeometry checks this+0x45 before cleanup.
+D) Observable consumer behavior after delete
+- Function: sub_78A390 (frond export/use path)
+- If this+0x60 == 0, logs:
+  - "no frond geometry exists, possible prior call to DeleteFrondGeometry"
+- Confirms that nulling this+0x60 is the expected post-delete state and downstream code knows this case.
 
-3) Frond export/use path (sub_78A390)
-- Reads frond data from this+0x60 repeatedly.
-- If this+0x60 is null, logs:
-  "no frond geometry exists, possible prior call to DeleteFrondGeometry".
-- This confirms DeleteFrondGeometry intentionally invalidates frond usage by nulling this+0x60.
+---
+Inferred field mapping (reconfirmed)
+- this+0x60 (this[0x18]) : frond geometry pointer (m_pFrondGeometry)
+- this+0x45 : computed flag (m_bComputed)
+- this+0x30 : pointer to refcount/integer ownership slot (m_pRefCount)
+- this+0x34 : delete gate/ownership-related blocker (exact semantic still inferred)
 
-4) Main pipeline caller (BSTreeModel_MakeBase__560600)
-- Calls sub_78CCA0 (compute), then various setup functions, then explicitly calls sub_789EC0.
-- This indicates frond geometry is generated for build/setup and then optionally discarded to reduce retained memory.
+---
+Ways to prevent deletion (ranked by safety and reversibility)
 
-5) Deep free routine called by DeleteFrondGeometry (sub_797270)
-- Frees many internal dynamic arrays/blocks and zeros their pointers/counters.
-- Also releases nested structures via sub_794FC0 before freeing top-level blocks.
-- Confirms DeleteFrondGeometry is a two-stage free: inner graph free (sub_797270) + outer object free (FormHeapFree).
+1) Preferred: skip the explicit call in BSTreeModel_MakeBase
+- Patch location: 0x5608D5 (`call sub_789EC0`)
+- Strategy: NOP out the call or redirect to a stub returning immediately.
+- Effect:
+  - preserves frond geometry after MakeBase success path
+  - lowest behavioral blast radius (only this one callsite)
+- Caveat:
+  - frond memory remains until destructor path (sub_78C9B0), so memory footprint rises.
 
-Observed side effects and runtime implications
-- After DeleteFrondGeometry, any code path requiring frond geometry through this+0x60 must either:
-  - regenerate it, or
-  - gracefully handle missing geometry.
-- sub_78A390 demonstrates explicit graceful error handling for the missing-frond case.
-- Multiple setter/configuration functions in this region gate on this+0x45 and often state they have no effect after compute, implying lifecycle phase separation:
-  pre-compute configuration -> compute -> optional geometry disposal.
+2) Soft block using DeleteFrondGeometry guard conditions
+- Options:
+  - force this+0x34 != 0 before delete call
+  - force *(*(this+0x30)) != 1 before delete call
+  - force this+0x45 = 0 before delete call (least desirable)
+- Effect: function exits early; no free; this+0x60 remains valid.
+- Caveat:
+  - these flags may influence many other routines, so side effects can be wider than option #1.
 
-Potential rename suggestions (for local research readability)
-- sub_789EC0 -> CSpeedTreeRT_DeleteFrondGeometry
-- sub_797270 -> CSpeedTreeRT_FrondGeometry_DeepFree
-- this+0x60 -> m_pFrondGeometry
-- this+0x45 -> m_bComputed
-- this+0x30 -> m_pRefCount
+3) Hook sub_789EC0 and early-return conditionally
+- Runtime detour: intercept sub_789EC0 and return without running frees for selected tree classes/contexts.
+- Effect: dynamic policy control (e.g., keep fronds only for debug captures).
+- Caveat:
+  - requires reliable context discrimination to avoid keeping too much memory alive.
 
-Confidence notes
-- High confidence: function identity, primary control flow, pointer nulling side effect, relationship to missing-frond error path.
-- Medium confidence: precise semantic meaning of this+0x34 and full ownership model around this+0x30 (refcount interpretation is strongly suggested but still inferred).
+4) Partial mitigation (NOT true prevention): intercept deep free only
+- Hook sub_797270 to no-op while still allowing outer `FormHeapFree(this+0x60)`.
+- Not recommended: this can leak internals and/or produce invalid state if outer object goes away.
 
+5) Do not patch destructor path unless intentionally leaking
+- Preventing delete in sub_78C9B0 would keep frond allocations alive past object teardown.
+- High leak risk / lifetime correctness risk; only suitable for short-lived instrumentation runs.
+
+---
+Recommended implementation order
+1) First patch only the MakeBase callsite (0x5608D5) and validate frond-dependent paths.
+2) Monitor memory delta and lifetime behavior across scene transitions.
+3) If needed, replace static patch with policy hook on sub_789EC0.
+
+---
+Validation checklist for a "deletion prevented" build
+- sub_78A390 should no longer emit "no frond geometry exists..." for trees that passed MakeBase.
+- this+0x60 should remain non-null after MakeBase returns success.
+- No crash in paths that assume computed state (this+0x45 == 1).
+- Acceptable memory growth and stable teardown during level change/exit.
+
+---
 Files inspected
+- functions/BSTreeModel_MakeBase__560600/disasm.asm
+- functions/BSTreeModel_MakeBase__560600/pseudocode.c
 - functions/sub_789EC0__789EC0/disasm.asm
 - functions/sub_789EC0__789EC0/pseudocode.c
+- functions/sub_78C9B0__78C9B0/pseudocode.c
 - functions/sub_78A390__78A390/pseudocode.c
 - functions/sub_78CCA0__78CCA0/pseudocode.c
 - functions/sub_78D6A0__78D6A0/pseudocode.c
 - functions/sub_797270__797270/pseudocode.c
-- functions/BSTreeModel_MakeBase__560600/pseudocode.c
 - _jsonl/metadata_strings/000000.jsonl
