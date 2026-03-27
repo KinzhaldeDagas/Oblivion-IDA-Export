@@ -1,0 +1,92 @@
+Request addressed: "Find all Frond Hooks and places of interest in relation to SpeedTree Frond/Fronds"
+
+Scope and method
+- Searched for explicit hook-style functions and checked whether any are Frond/SpeedTree-Frond specific.
+- Enumerated Frond/Fronds/SpeedTreeFrond string anchors from metadata strings and mapped their xrefs to concrete function locations.
+- Collected directly related constructor/destructor/type-registration points for SpeedTreeFrondShader.
+
+Commands used
+- rg -n -i "speedtree|frond|fronds" .
+- Python scan of functions_index_by_name.json for names containing "hook"
+- Python scan of data/named_items/_index.json + xrefs_to.json for entries containing "frond"
+- rg -n -i "Frond|CSpeedTreeRT::SetFrond|DeleteFrond|CFrondEngine|BSSM_FRONDS|speedtree\\frond|STFROND|SpeedTreeFrondShader" functions metadata/strings.json data/named_items/_index.json
+
+Frond Hooks (explicit hook functions)
+- No explicit Frond-specific hook functions were found.
+- Only 2 hook-named functions exist in the repository export, and neither is SpeedTree/Frond-related:
+  1) NiDX9ImplicitDepthStencilBufferDataEx_GetBufferDataHook
+     - functions/NiDX9ImplicitDepthStencilBufferDataEx_GetBufferDataHook__76D530
+  2) __initp_eh_hooks
+     - functions/initp_eh_hooks__98C435
+
+Frond / SpeedTree Frond places of interest
+
+1) CSpeedTreeRT Frond runtime method anchors
+- DeleteFrondGeometry flow
+  - String anchor: "CSpeedTreeRT::DeleteFrondGeometry" (0xA8BC00)
+  - Function evidence: functions/sub_789EC0__789EC0
+- SetFrondLightingMethod flow
+  - String anchors: "CSpeedTreeRT::SetFrondLightingMethod" (0xA8BEC0)
+                   "SetFrondLightingMethod() has no effect after Compute() has been called" (0xA8BEE8)
+  - Function evidence: functions/sub_78B560__78B560
+- SetFrondWindMethod flow
+  - String anchors: "CSpeedTreeRT::SetFrondWindMethod" (0xA8C0A4)
+                   "SetFrondWindMethod() has no effect after Compute() has been called" (0xA8C0C8)
+  - Function evidence: functions/sub_78BAA0__78BAA0
+- Frond geometry error diagnostic
+  - String anchor: "no frond geometry exists, possible prior call to DeleteFrondGeometry" (0xA8BC70)
+  - Function evidence: functions/sub_78A390__78A390
+
+2) CFrondEngine / frond parsing + compute diagnostics
+- Malformed frond texture info
+  - String anchor: "malformed frond texture information (token %d)" (0xA8C710)
+  - Function evidence: functions/def_79F39F__79F568
+- Malformed frond info
+  - String anchor: "malformed frond info (token %d)" (0xA8C6F0)
+  - Function evidence: functions/sub_7A5530__7A5530 and functions/sub_79F1E0__79F1E0
+- Frond vertex ceiling + compute default case
+  - String anchors: "frond vertices exceed %d" (0xA8C7DC)
+                   "default reached in CFrondEngine::Compute()" (0xA8C7F8)
+  - Function evidence: functions/sub_7A1CD0__7A1CD0
+
+3) Frond shader asset and compile target setup
+- Frond shader path + shader object file naming
+  - String anchors: "speedtree\\frond.v.hlsl" (0xA94534), "speedtree\\frond.p.hlsl" (0xA9451C)
+                   "STFROND%03i.vso" (0xA9450C), "STFROND%03i.pso" (0xA944E8), "STFROND2%03i.pso" (0xA944F8)
+  - Function evidence: functions/sub_80E0C0__80E0C0
+
+4) Render-pass and shader class registration points
+- Render-pass token
+  - String anchor: "BSSM_FRONDS" (0xA8F0FC)
+  - Function evidence: functions/BSShaderProperty_GetRenderPassName__7B4920
+- SpeedTreeFrondShader class/type registration
+  - String anchor: "SpeedTreeFrondShader" (0xA9457C)
+  - Function evidence: functions/sub_A11EB0__A11EB0
+- SpeedTreeFrondShaderProperty class/type registration
+  - String anchor: "SpeedTreeFrondShaderProperty" (0xA95BB0)
+  - Function evidence: functions/sub_A12020__A12020
+
+5) Core SpeedTreeFrondShader lifecycle functions
+- Constructor: functions/0SpeedTreeFrondShader@@QAE@XZ__80E8C0
+- Destructor: functions/1SpeedTreeFrondShader@@UAE@XZ__80DF80
+- Scalar deleting destructor: functions/GSpeedTreeFrondShader@@UAEPAXI@Z__80E980
+- Allocation / creation call site that instantiates frond shader:
+  - functions/sub_80EE10__80EE10 (allocates and calls SpeedTreeFrondShader::SpeedTreeFrondShader)
+
+Named-item Frond anchors (quick lookup folders)
+- data/named_items/aNoFrondGeometr__A8BC70
+- data/named_items/aSetfrondlighti__A8BEE8
+- data/named_items/aSetfrondwindme__A8C0C8
+- data/named_items/aMalformedFrond__A8C710
+- data/named_items/aFrondVerticesE__A8C7DC
+- data/named_items/aBssm_fronds__A8F0FC
+- data/named_items/aStfrond03i_pso__A944E8
+- data/named_items/aStfrond203i_ps__A944F8
+- data/named_items/aStfrond03i_vso__A9450C
+- data/named_items/aSpeedtreeFrond__A94534
+- data/named_items/aSpeedtreefrond__A9457C
+- data/named_items/7SpeedTreeFrondShader@@6B@__A9443C
+
+Bottom line
+- There are no explicit "Frond hook" exports by hook naming convention.
+- The strongest practical Frond interception points are the CSpeedTreeRT Frond methods (delete/lighting/wind), Frond compute/parser diagnostics, Frond shader asset setup, render-pass naming, and SpeedTreeFrondShader lifecycle/creation sites listed above.
