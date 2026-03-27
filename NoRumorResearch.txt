@@ -1,0 +1,97 @@
+NoRumorResearch - DialogMenu Topic Tile Construction Findings
+Date: 2026-03-27
+Repository: Oblivion-IDA-Export
+
+Goal
+----
+Hide the selectable "Rumor"/"Rumors" topic button in NPC dialogue lists without using SetNoRumors (which changes NPC rumor behavior globally).
+
+Primary Finding: Best Hook Site
+-------------------------------
+Function: sub_59E680
+Address range: 0x59E680 - 0x59EA07
+Folder: functions/sub_59E680__59E680/
+
+Why this function matters:
+- It is the topic-list UI tile builder for DialogMenu.
+- It references the string aTopic_template at site 0x59E761.
+- It creates per-topic UI entries via Menu_CreateTileFromTemplate.
+- It writes the human-readable topic name into the tile via Tile_SetString.
+
+Relevant behavior from pseudocode:
+1) Loop over available dialogue topics from an iterator-like object (sub_6B8660 / sub_6B8650 / sub_6B85F0).
+2) For each topic:
+   - BSStringT_Set("topic_template")
+   - Menu_CreateTileFromTemplate(..., "topic_template", ...)
+   - read topic name pointer via sub_6B8650(...)
+   - Tile_SetString(tile, 0xFDE, topicName)
+3) Assign additional tile metadata/index floats (0xFA8/0xFAA/0xFF0 etc.).
+
+Conclusion:
+- This is the precise location to suppress a specific displayed topic button (e.g., Rumor/Rumors) while preserving all other dialogue behavior.
+
+Secondary Finding: Refresh/Entry Paths
+--------------------------------------
+sub_59E680 has known callers:
+- sub_59EA10 (0x59EA10)
+- sub_59EA60 (0x59EA60)
+- sub_59EB90 (0x59EB90)
+
+Observed implications:
+- Hooking/filtering in sub_59E680 likely catches multiple refresh scenarios (normal refresh, topic change flows, and fallback/refresh branches).
+
+Supporting caller notes:
+- sub_59EA10 initializes/refreshes internal topic state then calls sub_59E680.
+- sub_59EA60 appears to refresh based on a TESTopic parameter then calls sub_59E680.
+- sub_59EB90 has branch logic around current topic selection and also calls sub_59E680 in fallback refresh path.
+
+What NOT to use for this request
+--------------------------------
+SetNoRumors / GetNoRumors / ExtraHasNoRumors exist, but they are behavior/state flags and not strictly a UI-button-only hide path.
+
+Evidence observed:
+- Script command strings present in metadata/strings.json: "SetNoRumors", "GetNoRumors".
+- xrefs_to these strings point to Script_CommandList? (0xB0C8C0).
+- RTTI type descriptor exists for ExtraHasNoRumors.
+
+This supports the user's concern: using SetNoRumors is the wrong move when requirement is to only remove the Rumor topic button from the list.
+
+Implementation-Oriented Recommendations
+--------------------------------------
+Recommended patch strategy (UI-only filtering):
+1) Patch inside sub_59E680 topic-build loop.
+2) Read candidate topic name before (or immediately after retrieval, but before tile creation if possible).
+3) If case-insensitive match for "Rumor" or "Rumors":
+   - skip tile creation and label assignment for this entry,
+   - advance iterator exactly once,
+   - keep index/counter state coherent so remaining topics continue to map correctly.
+
+Safer alternative if pre-create compare is hard:
+- Create tile as usual, but immediately suppress/hide/remove tile when title matches rumor.
+- Pre-create filtering is preferred to avoid flicker or index mismatch.
+
+Potential pitfalls to validate:
+- Selection index continuity after skipping an entry.
+- Topic-added notifications/new-topic highlight behavior.
+- Whether localized strings can alter exact rumor label text.
+
+Observed symbols/strings related to topic UI and menu
+-----------------------------------------------------
+- aTopic_template (0xA6B8C8)
+- aDialogueTopic (0xA3D324)
+- aRefreshtopicli (0xA4E178) [script command string entry]
+- DialogMenu constructors/destructors around 0x59E4E0+
+
+Quick reference file map used in this research
+----------------------------------------------
+- functions/sub_59E680__59E680/{function.json,pseudocode.c,data_refs.json,callers.json,callees.json}
+- functions/sub_59EA10__59EA10/pseudocode.c
+- functions/sub_59EA60__59EA60/pseudocode.c
+- functions/sub_59EB90__59EB90/pseudocode.c
+- data/named_items/aTopic_template__A6B8C8/{item.json,xrefs_to.json}
+- data/named_items/aRefreshtopicli__A4E178/{item.json,xrefs_to.json}
+- metadata/strings.json
+
+Final recommendation
+--------------------
+For this implementation goal, target DialogMenu topic tile construction at sub_59E680 and perform an explicit topic-name filter for Rumor/Rumors during tile generation.
