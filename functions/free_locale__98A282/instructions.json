@@ -1,0 +1,248 @@
+[
+  {
+    "ea": "0x98A282",
+    "line": "push    8",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x98A284",
+    "line": "push    offset stru_AFFC28",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98A289",
+    "line": "call    __SEH_prolog4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98A28E",
+    "line": "mov     esi, [ebp+arg_0]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98A291",
+    "line": "xor     edi, edi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x98A293",
+    "line": "cmp     esi, edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x98A295",
+    "line": "jz      short loc_98A306",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98A297",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98A29A",
+    "line": "cmp     eax, edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x98A29C",
+    "line": "jz      short loc_98A2BA",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98A29E",
+    "line": "push    eax; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98A29F",
+    "line": "call    ds:InterlockedDecrement",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x98A2A5",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2A7",
+    "line": "jnz     short loc_98A2BA",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2A9",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98A2AC",
+    "line": "cmp     eax, offset dword_B31390",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x98A2B1",
+    "line": "jz      short loc_98A2BA",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2B3",
+    "line": "push    eax; Memory",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98A2B4",
+    "line": "call    _free",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98A2B9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98A2BA",
+    "line": "cmp     [esi], edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2BC",
+    "line": "jz      short __free_locale___$LN12_4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2BE",
+    "line": "push    0Ch",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2C0",
+    "line": "call    __lock",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98A2C5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98A2C6",
+    "line": "mov     [ebp+ms_exc.registration.TryLevel], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98A2C9",
+    "line": "push    dword ptr [esi]; lpAddend",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2CB",
+    "line": "call    ___removelocaleref",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98A2D0",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98A2D1",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2D3",
+    "line": "cmp     eax, edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2D5",
+    "line": "jz      short loc_98A2E9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2D7",
+    "line": "cmp     [eax], edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2D9",
+    "line": "jnz     short loc_98A2E9",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2DB",
+    "line": "cmp     eax, offset unk_B318C0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x98A2E0",
+    "line": "jz      short loc_98A2E9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98A2E2",
+    "line": "push    eax; Memory",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98A2E3",
+    "line": "call    ___freetlocinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98A2E8",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98A2E9",
+    "line": "mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x98A2F0",
+    "line": "call    __free_locale___$LN11_6",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

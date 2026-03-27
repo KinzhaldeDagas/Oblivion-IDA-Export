@@ -1,0 +1,104 @@
+[
+  {
+    "ea": "0x522760",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x522761",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x522763",
+    "line": "call    TESActorBase_IsFemale",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x522768",
+    "line": "cmp     eax, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x52276B",
+    "line": "mov     eax, [esi+0E8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x522771",
+    "line": "push    6",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x522773",
+    "line": "lea     ecx, [eax+80h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x522779",
+    "line": "jz      short loc_52277E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x52277B",
+    "line": "lea     ecx, [eax+74h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x52277E",
+    "line": "call    TESAttributes_GetAVi",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x522783",
+    "line": "movzx   eax, al",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x522786",
+    "line": "push    eax; char",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x522787",
+    "line": "push    6; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x522789",
+    "line": "lea     ecx, [esi+88h]; int",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x52278F",
+    "line": "call    TESAttributes_SetAVi",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x522794",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x522795",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

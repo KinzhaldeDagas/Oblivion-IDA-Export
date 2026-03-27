@@ -1,0 +1,1 @@
+IEnumSTATSTGImpl_0

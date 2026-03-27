@@ -1,0 +1,789 @@
+{
+  "decl": "NiDX9RendererMembr",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "super",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 4192,
+      "type": "NiRendererMembr"
+    },
+    {
+      "name": "pad210",
+      "offset_bits": 4192,
+      "offset_bytes": 524,
+      "size_bits": 896,
+      "type": "UInt32[28]"
+    },
+    {
+      "name": "device",
+      "offset_bits": 5088,
+      "offset_bytes": 636,
+      "size_bits": 32,
+      "type": "IDirect3DDevice9 *"
+    },
+    {
+      "name": "caps",
+      "offset_bits": 5120,
+      "offset_bytes": 640,
+      "size_bits": 2432,
+      "type": "D3DCAPS9"
+    },
+    {
+      "name": "deviceWindow",
+      "offset_bits": 7552,
+      "offset_bytes": 944,
+      "size_bits": 32,
+      "type": "HANDLE"
+    },
+    {
+      "name": "focusWindow",
+      "offset_bits": 7584,
+      "offset_bytes": 948,
+      "size_bits": 32,
+      "type": "HANDLE"
+    },
+    {
+      "name": "rendererInfo",
+      "offset_bits": 7616,
+      "offset_bytes": 952,
+      "size_bits": 4096,
+      "type": "char[512]"
+    },
+    {
+      "name": "adapterIdx",
+      "offset_bits": 11712,
+      "offset_bytes": 1464,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "d3dDevType",
+      "offset_bits": 11744,
+      "offset_bytes": 1468,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "d3dDevFlags",
+      "offset_bits": 11776,
+      "offset_bytes": 1472,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "softwareVertexProcessing",
+      "offset_bits": 11808,
+      "offset_bytes": 1476,
+      "size_bits": 8,
+      "type": "UInt8"
+    },
+    {
+      "name": "mixedVertexProcessing",
+      "offset_bits": 11816,
+      "offset_bytes": 1477,
+      "size_bits": 8,
+      "type": "UInt8"
+    },
+    {
+      "name": "pad5CA",
+      "offset_bits": 11824,
+      "offset_bytes": 1478,
+      "size_bits": 16,
+      "type": "UInt8[2]"
+    },
+    {
+      "name": "adapterDesc",
+      "offset_bits": 11840,
+      "offset_bytes": 1480,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "name": "deviceDesc",
+      "offset_bits": 11872,
+      "offset_bytes": 1484,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "name": "clearColor",
+      "offset_bits": 11904,
+      "offset_bytes": 1488,
+      "size_bits": 32,
+      "type": "D3DCOLOR"
+    },
+    {
+      "name": "clearDepth",
+      "offset_bits": 11936,
+      "offset_bytes": 1492,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "name": "clearStencil",
+      "offset_bits": 11968,
+      "offset_bytes": 1496,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "rendFlags",
+      "offset_bits": 12000,
+      "offset_bytes": 1500,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "behavior",
+      "offset_bits": 12032,
+      "offset_bytes": 1504,
+      "size_bits": 256,
+      "type": "char[32]"
+    },
+    {
+      "name": "PrePackObjects",
+      "offset_bits": 12288,
+      "offset_bytes": 1536,
+      "size_bits": 128,
+      "type": "NiTMap_void"
+    },
+    {
+      "name": "pad624",
+      "offset_bits": 12416,
+      "offset_bytes": 1552,
+      "size_bits": 416,
+      "type": "UInt32[13]"
+    },
+    {
+      "name": "camRight",
+      "offset_bits": 12832,
+      "offset_bytes": 1604,
+      "size_bits": 96,
+      "type": "NiPoint3"
+    },
+    {
+      "name": "camUp",
+      "offset_bits": 12928,
+      "offset_bytes": 1616,
+      "size_bits": 96,
+      "type": "NiPoint3"
+    },
+    {
+      "name": "modelCamRight",
+      "offset_bits": 13024,
+      "offset_bytes": 1628,
+      "size_bits": 96,
+      "type": "NiPoint3"
+    },
+    {
+      "name": "modelCamUp",
+      "offset_bits": 13120,
+      "offset_bytes": 1640,
+      "size_bits": 96,
+      "type": "NiPoint3"
+    },
+    {
+      "name": "NearDepth",
+      "offset_bits": 13216,
+      "offset_bytes": 1652,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "name": "DepthRange",
+      "offset_bits": 13248,
+      "offset_bytes": 1656,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "name": "identityMatrix",
+      "offset_bits": 13280,
+      "offset_bytes": 1660,
+      "size_bits": 512,
+      "type": "D3DMATRIX"
+    },
+    {
+      "name": "viewport",
+      "offset_bits": 13792,
+      "offset_bytes": 1724,
+      "size_bits": 192,
+      "type": "D3DVIEWPORT9"
+    },
+    {
+      "name": "HWBones",
+      "offset_bits": 13984,
+      "offset_bytes": 1748,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "MaxStreams",
+      "offset_bits": 14016,
+      "offset_bytes": 1752,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "Unk6E0",
+      "offset_bits": 14048,
+      "offset_bytes": 1756,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "Unk6E4",
+      "offset_bits": 14080,
+      "offset_bytes": 1760,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "pad6E8",
+      "offset_bits": 14112,
+      "offset_bytes": 1764,
+      "size_bits": 8,
+      "type": "UInt8"
+    },
+    {
+      "name": "unk6E9",
+      "offset_bits": 14120,
+      "offset_bytes": 1765,
+      "size_bits": 8,
+      "type": "UInt8"
+    },
+    {
+      "name": "pad6EA",
+      "offset_bits": 14128,
+      "offset_bytes": 1766,
+      "size_bits": 16,
+      "type": "UInt8[2]"
+    },
+    {
+      "name": "ResetCounter",
+      "offset_bits": 14144,
+      "offset_bytes": 1768,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "lostDevice",
+      "offset_bits": 14176,
+      "offset_bytes": 1772,
+      "size_bits": 8,
+      "type": "UInt8"
+    },
+    {
+      "name": "pad6F1",
+      "offset_bits": 14184,
+      "offset_bytes": 1773,
+      "size_bits": 24,
+      "type": "UInt8[3]"
+    },
+    {
+      "name": "unk6F4",
+      "offset_bits": 14208,
+      "offset_bytes": 1776,
+      "size_bits": 2816,
+      "type": "Unk6F4[4]"
+    },
+    {
+      "name": "DefaultTextureFormat",
+      "offset_bits": 17024,
+      "offset_bytes": 2128,
+      "size_bits": 128,
+      "type": "UInt32[4]"
+    },
+    {
+      "name": "DefaultTextureData",
+      "offset_bits": 17152,
+      "offset_bytes": 2144,
+      "size_bits": 128,
+      "type": "NiPixelData *[4]"
+    },
+    {
+      "name": "unk874",
+      "offset_bits": 17280,
+      "offset_bytes": 2160,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "defaultRTGroup",
+      "offset_bits": 17312,
+      "offset_bytes": 2164,
+      "size_bits": 32,
+      "type": "NiRenderTargetGroup *"
+    },
+    {
+      "name": "currentRTGroup",
+      "offset_bits": 17344,
+      "offset_bytes": 2168,
+      "size_bits": 32,
+      "type": "NiRenderTargetGroup *"
+    },
+    {
+      "name": "currentscreenRTGroup",
+      "offset_bits": 17376,
+      "offset_bytes": 2172,
+      "size_bits": 32,
+      "type": "NiRenderTargetGroup *"
+    },
+    {
+      "name": "screenRTGroups",
+      "offset_bits": 17408,
+      "offset_bytes": 2176,
+      "size_bits": 128,
+      "type": "NiTMap_void"
+    },
+    {
+      "name": "unk894",
+      "offset_bits": 17536,
+      "offset_bytes": 2192,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "unk898",
+      "offset_bits": 17568,
+      "offset_bytes": 2196,
+      "size_bits": 8,
+      "type": "UInt8"
+    },
+    {
+      "name": "pad899",
+      "offset_bits": 17576,
+      "offset_bytes": 2197,
+      "size_bits": 24,
+      "type": "UInt8[3]"
+    },
+    {
+      "name": "unk89C",
+      "offset_bits": 17600,
+      "offset_bytes": 2200,
+      "size_bits": 32,
+      "type": "NiObject *"
+    },
+    {
+      "name": "geometryGroupMgr",
+      "offset_bits": 17632,
+      "offset_bytes": 2204,
+      "size_bits": 32,
+      "type": "NiGeometryGroupManager *"
+    },
+    {
+      "name": "unsharedGeometryGroup",
+      "offset_bits": 17664,
+      "offset_bytes": 2208,
+      "size_bits": 32,
+      "type": "NiGeometryGroup *"
+    },
+    {
+      "name": "dynamicGeometryGroup",
+      "offset_bits": 17696,
+      "offset_bytes": 2212,
+      "size_bits": 32,
+      "type": "NiGeometryGroup *"
+    },
+    {
+      "name": "renderState",
+      "offset_bits": 17728,
+      "offset_bytes": 2216,
+      "size_bits": 32,
+      "type": "NiDX9RenderState *"
+    },
+    {
+      "name": "vertexBufferMgr",
+      "offset_bits": 17760,
+      "offset_bytes": 2220,
+      "size_bits": 32,
+      "type": "NiDX9VertexBufferManager *"
+    },
+    {
+      "name": "indexBufferMgr",
+      "offset_bits": 17792,
+      "offset_bytes": 2224,
+      "size_bits": 32,
+      "type": "NiDX9IndexBufferManager *"
+    },
+    {
+      "name": "textureMgr",
+      "offset_bits": 17824,
+      "offset_bytes": 2228,
+      "size_bits": 32,
+      "type": "NiDX9TextureManager *"
+    },
+    {
+      "name": "lightMgr",
+      "offset_bits": 17856,
+      "offset_bytes": 2232,
+      "size_bits": 32,
+      "type": "NiDX9LightManager *"
+    },
+    {
+      "name": "renderedTextures",
+      "offset_bits": 17888,
+      "offset_bytes": 2236,
+      "size_bits": 128,
+      "type": "NiTMap_void"
+    },
+    {
+      "name": "renderedCubeMaps",
+      "offset_bits": 18016,
+      "offset_bytes": 2252,
+      "size_bits": 128,
+      "type": "NiTMap_void"
+    },
+    {
+      "name": "dynamicTextures",
+      "offset_bits": 18144,
+      "offset_bytes": 2268,
+      "size_bits": 128,
+      "type": "NiTMap_void"
+    },
+    {
+      "name": "ClipperImage",
+      "offset_bits": 18272,
+      "offset_bytes": 2284,
+      "size_bits": 32,
+      "type": "NiTexture *"
+    },
+    {
+      "name": "atDisplayFrame",
+      "offset_bits": 18304,
+      "offset_bytes": 2288,
+      "size_bits": 128,
+      "type": "NiTList_void"
+    },
+    {
+      "name": "shaderInterfaces",
+      "offset_bits": 18432,
+      "offset_bytes": 2304,
+      "size_bits": 128,
+      "type": "NiTList_void"
+    },
+    {
+      "name": "Unk914",
+      "offset_bits": 18560,
+      "offset_bytes": 2320,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "Unk918",
+      "offset_bits": 18592,
+      "offset_bytes": 2324,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "Unk91C",
+      "offset_bits": 18624,
+      "offset_bytes": 2328,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "Unk920",
+      "offset_bits": 18656,
+      "offset_bytes": 2332,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "Unk924",
+      "offset_bits": 18688,
+      "offset_bytes": 2336,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "Unk928",
+      "offset_bits": 18720,
+      "offset_bytes": 2340,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "Unk92C",
+      "offset_bits": 18752,
+      "offset_bytes": 2344,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "Unk930",
+      "offset_bits": 18784,
+      "offset_bytes": 2348,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "Unk934",
+      "offset_bits": 18816,
+      "offset_bytes": 2352,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "Unk938",
+      "offset_bits": 18848,
+      "offset_bytes": 2356,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "Unk93C",
+      "offset_bits": 18880,
+      "offset_bytes": 2360,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "worldMatrix",
+      "offset_bits": 18912,
+      "offset_bytes": 2364,
+      "size_bits": 512,
+      "type": "D3DXMATRIX"
+    },
+    {
+      "name": "viewMatrix",
+      "offset_bits": 19424,
+      "offset_bytes": 2428,
+      "size_bits": 512,
+      "type": "D3DXMATRIX"
+    },
+    {
+      "name": "projMatrix",
+      "offset_bits": 19936,
+      "offset_bytes": 2492,
+      "size_bits": 512,
+      "type": "D3DXMATRIX"
+    },
+    {
+      "name": "invViewMatrix",
+      "offset_bits": 20448,
+      "offset_bytes": 2556,
+      "size_bits": 512,
+      "type": "D3DXMATRIX"
+    },
+    {
+      "name": "ScreenTextureVerts",
+      "offset_bits": 20960,
+      "offset_bytes": 2620,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "ScreenTextureColors",
+      "offset_bits": 20992,
+      "offset_bytes": 2624,
+      "size_bits": 32,
+      "type": "NiColorAlpha *"
+    },
+    {
+      "name": "ScreenTextureTexCoords",
+      "offset_bits": 21024,
+      "offset_bytes": 2628,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "unkA4C",
+      "offset_bits": 21056,
+      "offset_bytes": 2632,
+      "size_bits": 16,
+      "type": "UInt16"
+    },
+    {
+      "name": "unkA4E",
+      "offset_bits": 21072,
+      "offset_bytes": 2634,
+      "size_bits": 16,
+      "type": "UInt8[2]"
+    },
+    {
+      "name": "ScreenTextureIndices",
+      "offset_bits": 21088,
+      "offset_bytes": 2636,
+      "size_bits": 32,
+      "type": "UInt16 *"
+    },
+    {
+      "name": "NumScreenTextureIndices",
+      "offset_bits": 21120,
+      "offset_bytes": 2640,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "width",
+      "offset_bits": 21152,
+      "offset_bytes": 2644,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "height",
+      "offset_bits": 21184,
+      "offset_bytes": 2648,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "flags",
+      "offset_bits": 21216,
+      "offset_bytes": 2652,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "windowDevice",
+      "offset_bits": 21248,
+      "offset_bytes": 2656,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "windowFocus",
+      "offset_bits": 21280,
+      "offset_bytes": 2660,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "adapterType",
+      "offset_bits": 21312,
+      "offset_bytes": 2664,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "deviceType",
+      "offset_bits": 21344,
+      "offset_bytes": 2668,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "frameBufferFormat",
+      "offset_bits": 21376,
+      "offset_bytes": 2672,
+      "size_bits": 32,
+      "type": "FrameBufferFormat"
+    },
+    {
+      "name": "depthStencilFormat",
+      "offset_bits": 21408,
+      "offset_bytes": 2676,
+      "size_bits": 32,
+      "type": "DepthStencilFormat"
+    },
+    {
+      "name": "presentationInterval",
+      "offset_bits": 21440,
+      "offset_bytes": 2680,
+      "size_bits": 32,
+      "type": "PresentationInterval"
+    },
+    {
+      "name": "swapEffect",
+      "offset_bits": 21472,
+      "offset_bytes": 2684,
+      "size_bits": 32,
+      "type": "SwapEffect"
+    },
+    {
+      "name": "frameBufferMode",
+      "offset_bits": 21504,
+      "offset_bytes": 2688,
+      "size_bits": 32,
+      "type": "FrameBufferMode"
+    },
+    {
+      "name": "backBufferCount",
+      "offset_bits": 21536,
+      "offset_bytes": 2692,
+      "size_bits": 32,
+      "type": "UInt32"
+    },
+    {
+      "name": "refreshRate",
+      "offset_bits": 21568,
+      "offset_bytes": 2696,
+      "size_bits": 32,
+      "type": "RefreshRate"
+    },
+    {
+      "name": "unkA90",
+      "offset_bits": 21600,
+      "offset_bytes": 2700,
+      "size_bits": 8,
+      "type": "UInt8"
+    },
+    {
+      "name": "padA91",
+      "offset_bits": 21608,
+      "offset_bytes": 2701,
+      "size_bits": 24,
+      "type": "UInt8[3]"
+    },
+    {
+      "name": "defaultShader",
+      "offset_bits": 21632,
+      "offset_bytes": 2704,
+      "size_bits": 32,
+      "type": "NiD3DShader *"
+    },
+    {
+      "name": "unkA98",
+      "offset_bits": 21664,
+      "offset_bytes": 2708,
+      "size_bits": 128,
+      "type": "NiTArray_void"
+    },
+    {
+      "name": "unkAA8",
+      "offset_bits": 21792,
+      "offset_bytes": 2724,
+      "size_bits": 128,
+      "type": "NiTArray_void"
+    },
+    {
+      "name": "lostDeviceCallbacks",
+      "offset_bits": 21920,
+      "offset_bytes": 2740,
+      "size_bits": 128,
+      "type": "NiTArray_void"
+    },
+    {
+      "name": "lostDeviceCallbacksRefcons",
+      "offset_bits": 22048,
+      "offset_bytes": 2756,
+      "size_bits": 128,
+      "type": "NiTArray_void"
+    },
+    {
+      "name": "padAD0",
+      "offset_bits": 22176,
+      "offset_bytes": 2772,
+      "size_bits": 320,
+      "type": "UInt32[10]"
+    }
+  ],
+  "name": "NiDX9RendererMembr",
+  "ordinal": 9156,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

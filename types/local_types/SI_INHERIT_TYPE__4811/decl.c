@@ -1,0 +1,1 @@
+_SI_INHERIT_TYPE

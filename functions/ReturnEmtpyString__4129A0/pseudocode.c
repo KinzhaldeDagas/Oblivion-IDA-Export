@@ -1,0 +1,4 @@
+CHAR *ReturnEmtpyString()
+{
+  return EmptyString;
+}

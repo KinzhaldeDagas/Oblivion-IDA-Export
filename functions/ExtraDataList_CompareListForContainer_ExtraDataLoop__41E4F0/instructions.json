@@ -1,0 +1,128 @@
+[
+  {
+    "ea": "0x41E4F0",
+    "line": "mov     al, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41E4F3",
+    "line": "cmp     al, 12h",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x41E4F5",
+    "line": "jz      short ExtraDataList_CompareListForContainer___Return_1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41E4F7",
+    "line": "cmp     al, 27h ; '''",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x41E4F9",
+    "line": "jz      short ExtraDataList_CompareListForContainer___Return_1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41E4FB",
+    "line": "cmp     al, 2Ah ; '*'",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x41E4FD",
+    "line": "jz      short ExtraDataList_CompareListForContainer___ExtraDataLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41E4FF",
+    "line": "mov     [esp+a2], al",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x41E503",
+    "line": "mov     ecx, dword ptr [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x41E507",
+    "line": "push    ecx; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41E508",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41E50A",
+    "line": "call    BaseExtraList_GetExtraData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41E50F",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41E511",
+    "line": "jz      short ExtraDataList_CompareListForContainer___Return_1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41E513",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41E515",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41E517",
+    "line": "mov     eax, [edx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41E51A",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41E51B",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x41E51D",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41E51F",
+    "line": "jnz     short ExtraDataList_CompareListForContainer___Return_1",
+    "mnemonic": "jnz",
+    "size": 2
+  }
+]

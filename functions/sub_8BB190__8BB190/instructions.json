@@ -1,0 +1,98 @@
+[
+  {
+    "ea": "0x8BB190",
+    "line": "mov     edx, [esp+DstBuf]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8BB194",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BB195",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8BB197",
+    "line": "mov     eax, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8BB19A",
+    "line": "mov     ecx, [esp+4+Count]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8BB19E",
+    "line": "push    eax; Count",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BB19F",
+    "line": "push    ecx; Count",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BB1A0",
+    "line": "push    1; ElementSize",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x8BB1A2",
+    "line": "push    edx; DstBuf",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BB1A3",
+    "line": "call    _fread",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8BB1A8",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x8BB1AB",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8BB1AD",
+    "line": "jg      short loc_8BB1B3",
+    "mnemonic": "jg",
+    "size": 2
+  },
+  {
+    "ea": "0x8BB1AF",
+    "line": "mov     byte ptr [esi+10h], 0",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8BB1B3",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8BB1B4",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

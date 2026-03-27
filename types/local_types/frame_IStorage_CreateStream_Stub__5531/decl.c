@@ -1,0 +1,1 @@
+__frame_IStorage_CreateStream_Stub

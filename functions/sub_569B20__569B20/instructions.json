@@ -1,0 +1,926 @@
+[
+  {
+    "ea": "0x569B20",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569B21",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569B22",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569B24",
+    "line": "cmp     byte ptr [esi], 5",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569B27",
+    "line": "jz      loc_569CE1",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x569B2D",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x569B30",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569B31",
+    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569B35",
+    "line": "push    0FFFFFFFFh; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x569B37",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569B39",
+    "line": "mov     dword ptr [esp+10h+ArgList], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569B3D",
+    "line": "call    TESForm_GetOverrideFile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569B42",
+    "line": "push    eax; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569B43",
+    "line": "lea     ecx, [esp+10h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x569B47",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569B48",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569B4D",
+    "line": "movsx   eax, byte ptr [esi]",
+    "mnemonic": "movsx",
+    "size": 3
+  },
+  {
+    "ea": "0x569B50",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x569B53",
+    "line": "sub     eax, 0",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x569B56",
+    "line": "jz      loc_569C64",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x569B5C",
+    "line": "sub     eax, 1",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x569B5F",
+    "line": "jz      short loc_569BDD",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x569B61",
+    "line": "sub     eax, 3",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x569B64",
+    "line": "jnz     loc_569CE0",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x569B6A",
+    "line": "mov     edx, dword ptr [esp+0Ch+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569B6E",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569B6F",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569B74",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x569B77",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x569B79",
+    "line": "jz      short loc_569B8D",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x569B7B",
+    "line": "cmp     byte ptr [esi], 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569B7E",
+    "line": "jnz     loc_569CE0",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x569B84",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569B85",
+    "line": "mov     [esi+8], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x569B88",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569B89",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569B8A",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x569B8D",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569B8F",
+    "line": "call    TESForm__GetEditorNameLen",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569B94",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x569B96",
+    "line": "jz      short loc_569BBF",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x569B98",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569B9A",
+    "line": "mov     edx, [eax+0D4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x569BA0",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569BA2",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x569BA4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569BA5",
+    "line": "mov     eax, dword ptr [esp+10h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569BA9",
+    "line": "push    eax; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569BAA",
+    "line": "push    offset aUnableToFin_28; \"Unable to find Package Location Object \"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x569BAF",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569BB4",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x569BB7",
+    "line": "cmp     byte ptr [esi], 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569BBA",
+    "line": "jmp     loc_569CD7",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x569BBF",
+    "line": "mov     ecx, [edi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x569BC2",
+    "line": "mov     edx, dword ptr [esp+0Ch+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569BC6",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569BC7",
+    "line": "push    edx; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569BC8",
+    "line": "push    offset aUnableToFin_29; \"Unable to find Package Location Object \"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x569BCD",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569BD2",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x569BD5",
+    "line": "cmp     byte ptr [esi], 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569BD8",
+    "line": "jmp     loc_569CD7",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x569BDD",
+    "line": "mov     eax, dword ptr [esp+0Ch+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569BE1",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x569BE3",
+    "line": "push    offset ??_R0?AVTESObjectCELL@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x569BE8",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x569BED",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x569BEF",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569BF0",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569BF5",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x569BF8",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569BF9",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569BFE",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x569C01",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x569C03",
+    "line": "jz      short loc_569C17",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x569C05",
+    "line": "cmp     byte ptr [esi], 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569C08",
+    "line": "jnz     loc_569CE0",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x569C0E",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569C0F",
+    "line": "mov     [esi+8], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x569C12",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569C13",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569C14",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x569C17",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569C19",
+    "line": "call    TESForm__GetEditorNameLen",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569C1E",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x569C20",
+    "line": "jz      short loc_569C49",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x569C22",
+    "line": "mov     edx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569C24",
+    "line": "mov     eax, [edx+0D4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x569C2A",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569C2C",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x569C2E",
+    "line": "mov     ecx, dword ptr [esp+0Ch+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569C32",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569C33",
+    "line": "push    ecx; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569C34",
+    "line": "push    offset aUnableToFin_30; \"Unable to find Package Location Cell (%\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x569C39",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569C3E",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x569C41",
+    "line": "cmp     byte ptr [esi], 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569C44",
+    "line": "jmp     loc_569CD7",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x569C49",
+    "line": "mov     edx, [edi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x569C4C",
+    "line": "mov     eax, dword ptr [esp+0Ch+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569C50",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569C51",
+    "line": "push    eax; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569C52",
+    "line": "push    offset aUnableToFin_31; \"Unable to find Package Location Cell (%\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x569C57",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569C5C",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x569C5F",
+    "line": "cmp     byte ptr [esi], 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569C62",
+    "line": "jmp     short loc_569CD7",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x569C64",
+    "line": "mov     ecx, dword ptr [esp+0Ch+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569C68",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x569C6A",
+    "line": "push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x569C6F",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x569C74",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x569C76",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569C77",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569C7C",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x569C7F",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569C80",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569C85",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x569C88",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x569C8A",
+    "line": "jz      short loc_569C9A",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x569C8C",
+    "line": "cmp     byte ptr [esi], 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569C8F",
+    "line": "jnz     short loc_569CE0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x569C91",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569C92",
+    "line": "mov     [esi+8], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x569C95",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569C96",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569C97",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x569C9A",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569C9C",
+    "line": "call    TESForm__GetEditorNameLen",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569CA1",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x569CA3",
+    "line": "jz      short loc_569CBE",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x569CA5",
+    "line": "mov     edx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569CA7",
+    "line": "mov     eax, [edx+0D4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x569CAD",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569CAF",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x569CB1",
+    "line": "mov     ecx, dword ptr [esp+0Ch+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569CB5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569CB6",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569CB7",
+    "line": "push    offset aUnableToFin_32; \"Unable to find Package Location Referen\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x569CBC",
+    "line": "jmp     short loc_569CCC",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x569CBE",
+    "line": "mov     edx, [edi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x569CC1",
+    "line": "mov     eax, dword ptr [esp+0Ch+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569CC5",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569CC6",
+    "line": "push    eax; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569CC7",
+    "line": "push    offset aUnableToFin_33; \"Unable to find Package Location Referen\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x569CCC",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569CD1",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x569CD4",
+    "line": "cmp     byte ptr [esi], 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569CD7",
+    "line": "jnz     short loc_569CE0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x569CD9",
+    "line": "mov     dword ptr [esi+8], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x569CE0",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569CE1",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569CE2",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569CE3",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

@@ -1,0 +1,344 @@
+[
+  {
+    "ea": "0x613780",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x613781",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613783",
+    "line": "mov     ecx, [esi+3Ch]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x613786",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x613787",
+    "line": "xor     edi, edi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x613789",
+    "line": "call    Actor_IsCreature",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x61378E",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x613790",
+    "line": "jnz     short loc_6137D9",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x613792",
+    "line": "cmp     [esi+70h], edi",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x613795",
+    "line": "jnz     short loc_6137A9",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x613797",
+    "line": "mov     ecx, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x61379A",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x61379C",
+    "line": "mov     edx, [eax+284h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6137A2",
+    "line": "push    11h",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6137A4",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x6137A6",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6137A7",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6137A8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x6137A9",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6137AB",
+    "line": "call    sub_612D60",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6137B0",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6137B2",
+    "line": "jz      short loc_613805",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6137B4",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6137B5",
+    "line": "mov     ebx, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6137B8",
+    "line": "mov     edi, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6137BA",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6137BC",
+    "line": "add     edi, 284h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x6137C2",
+    "line": "call    sub_612D60",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6137C7",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6137C9",
+    "line": "call    TESObjectWEAP_GetWeaponSkillAV",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6137CE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6137CF",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6137D1",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6137D3",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x6137D5",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6137D6",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6137D7",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6137D8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x6137D9",
+    "line": "mov     esi, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6137DC",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6137DE",
+    "line": "push    offset ??_R0?AVCreature@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x6137E3",
+    "line": "push    offset ??_R0?AVActor@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x6137E8",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6137EA",
+    "line": "push    esi; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6137EB",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6137F0",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x6137F3",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6137F5",
+    "line": "jz      short loc_613805",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6137F7",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6137F9",
+    "line": "call    sub_624FC0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6137FE",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6137FF",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x613800",
+    "line": "jmp     Double_To_SInt32",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x613805",
+    "line": "mov     eax, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613807",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x613808",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x613809",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

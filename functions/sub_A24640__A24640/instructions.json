@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA24640",
+    "line": "push    offset bActivateGamebyroPicks",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA24645",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA2464A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA2464F",
+    "line": "mov     eax, off_B135AC; \"bActivatePickUseGamebryoPick:Interface\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA24654",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA24656",
+    "line": "jz      short locret_A24664",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA24658",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA2465B",
+    "line": "jnz     short locret_A24664",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA2465D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA2465E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA24663",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA24664",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

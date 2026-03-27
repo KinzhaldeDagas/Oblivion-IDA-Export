@@ -1,0 +1,1 @@
+tagSTRRET_TYPE

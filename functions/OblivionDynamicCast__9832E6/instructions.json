@@ -1,0 +1,434 @@
+[
+  {
+    "ea": "0x9832E6",
+    "line": "push    18h",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9832E8",
+    "line": "push    offset stru_AFFA18",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9832ED",
+    "line": "call    __SEH_prolog4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9832F2",
+    "line": "mov     esi, [ebp+arg_0]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9832F5",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x9832F7",
+    "line": "jnz     short loc_983301",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x9832F9",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9832FB",
+    "line": "call    __SEH_epilog4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x983300",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x983301",
+    "line": "and     [ebp+ms_exc.registration.TryLevel], 0",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x983305",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x983307",
+    "line": "call    ?FindCompleteObject@@YAPAXPAPAX@Z; FindCompleteObject(void * *)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98330C",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x98330E",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x983310",
+    "line": "mov     eax, [eax-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x983313",
+    "line": "sub     esi, [ebp+arg_4]",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x983316",
+    "line": "sub     esi, edi",
+    "mnemonic": "sub",
+    "size": 2
+  },
+  {
+    "ea": "0x983318",
+    "line": "mov     ecx, [eax+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98331B",
+    "line": "mov     ecx, [ecx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98331E",
+    "line": "push    [ebp+arg_C]; int",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x983321",
+    "line": "test    cl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x983324",
+    "line": "jnz     short loc_983332",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x983326",
+    "line": "push    [ebp+arg_8]; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x983329",
+    "line": "call    ?FindSITargetTypeInstance@@YAPBU_s_RTTIBaseClassDescriptor@@PBU_s_RTTICompleteObjectLocator@@PAUTypeDescriptor@@1@Z; FindSITargetTypeInstance(_s_RTTICompleteObjectLocator const *,TypeDescriptor *,TypeDescriptor *)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98332E",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98332F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x983330",
+    "line": "jmp     short loc_98334B",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x983332",
+    "line": "push    esi; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x983333",
+    "line": "push    [ebp+arg_8]; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x983336",
+    "line": "push    edi; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x983337",
+    "line": "test    cl, 2",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x98333A",
+    "line": "jnz     short loc_983343",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x98333C",
+    "line": "call    ?FindMITargetTypeInstance@@YAPBU_s_RTTIBaseClassDescriptor@@PAXPBU_s_RTTICompleteObjectLocator@@PAUTypeDescriptor@@H2@Z; FindMITargetTypeInstance(void *,_s_RTTICompleteObjectLocator const *,TypeDescriptor *,int,TypeDescriptor *)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x983341",
+    "line": "jmp     short loc_983348",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x983343",
+    "line": "call    ?FindVITargetTypeInstance@@YAPBU_s_RTTIBaseClassDescriptor@@PAXPBU_s_RTTICompleteObjectLocator@@PAUTypeDescriptor@@H2@Z; FindVITargetTypeInstance(void *,_s_RTTICompleteObjectLocator const *,TypeDescriptor *,int,TypeDescriptor *)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x983348",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x98334B",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98334D",
+    "line": "jz      short loc_983367",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98334F",
+    "line": "add     eax, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x983352",
+    "line": "push    edi; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x983353",
+    "line": "call    ?PMDtoOffset@@YAHPAXABUPMD@@@Z; PMDtoOffset(void *,PMD const &)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x983358",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x983359",
+    "line": "add     eax, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x98335B",
+    "line": "mov     [ebp+var_1C], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98335E",
+    "line": "mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x983365",
+    "line": "jmp     short loc_9832FB",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x983367",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x983369",
+    "line": "mov     [ebp+var_1C], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98336C",
+    "line": "cmp     [ebp+arg_10], eax",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x98336F",
+    "line": "jz      short loc_98335E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x983371",
+    "line": "push    offset aBadDynamic_cas; \"Bad dynamic_cast!\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x983376",
+    "line": "lea     ecx, [ebp+var_28]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x983379",
+    "line": "call    ??0bad_cast@std@@QAE@PBD@Z; std::bad_cast::bad_cast(char const *)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98337E",
+    "line": "push    offset __TI2?AVbad_cast@std@@; throw info for 'class std::bad_cast'",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x983383",
+    "line": "lea     eax, [ebp+var_28]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x983386",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x983387",
+    "line": "call    ThrowException??",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98338C",
+    "line": "mov     eax, [ebp+ms_exc.exc_ptr]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98338F",
+    "line": "mov     eax, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x983391",
+    "line": "mov     eax, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x983393",
+    "line": "xor     ecx, ecx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x983395",
+    "line": "cmp     eax, 0C0000005h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x98339A",
+    "line": "setz    cl",
+    "mnemonic": "setz",
+    "size": 3
+  },
+  {
+    "ea": "0x98339D",
+    "line": "mov     eax, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x98339F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9833A0",
+    "line": "mov     esp, [ebp+ms_exc.old_esp]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9833A3",
+    "line": "and     [ebp+var_1C], 0",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9833A7",
+    "line": "push    offset aAccessViolatio; \"Access violation - no RTTI data!\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9833AC",
+    "line": "lea     ecx, [ebp+var_28]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9833AF",
+    "line": "call    ??0__non_rtti_object@std@@QAE@PBD@Z; std::__non_rtti_object::__non_rtti_object(char const *)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9833B4",
+    "line": "push    offset __TI3?AV__non_rtti_object@std@@; throw info for 'class std::__non_rtti_object'",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9833B9",
+    "line": "jmp     short loc_983383",
+    "mnemonic": "jmp",
+    "size": 2
+  }
+]

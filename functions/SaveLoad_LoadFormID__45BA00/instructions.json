@@ -1,0 +1,140 @@
+[
+  {
+    "ea": "0x45BA00",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x45BA01",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x45BA02",
+    "line": "mov     ebx, [esp+8+Dst]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x45BA06",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x45BA07",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x45BA08",
+    "line": "mov     edi, [esp+10h+Size]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x45BA0C",
+    "line": "mov     ebp, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x45BA0E",
+    "line": "mov     eax, [ebp+14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x45BA11",
+    "line": "push    edi; Size",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x45BA12",
+    "line": "push    eax; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x45BA13",
+    "line": "push    ebx; Dst",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x45BA14",
+    "line": "mov     [esp+1Ch+var_1], 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x45BA19",
+    "line": "call    _memcpy",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x45BA1E",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x45BA21",
+    "line": "cmp     byte ptr [ebp+7Dh], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x45BA25",
+    "line": "jz      short SaveLoad_LoadFormID___AdvanceBuffer",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x45BA27",
+    "line": "mov     eax, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x45BA29",
+    "line": "shr     eax, 2",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x45BA2C",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x45BA2D",
+    "line": "mov     [esp+14h+Dst], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x45BA31",
+    "line": "mov     esi, 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x45BA36",
+    "line": "jz      short SaveLoad_LoadFormID___AdvanceBuffer_",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x45BA38",
+    "line": "jmp     short SaveLoad_LoadFormID___IrefLoop_Top",
+    "mnemonic": "jmp",
+    "size": 2
+  }
+]

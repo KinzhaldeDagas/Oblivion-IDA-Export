@@ -1,0 +1,104 @@
+[
+  {
+    "ea": "0x624F90",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x624F91",
+    "line": "push    0; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x624F93",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x624F95",
+    "line": "call    Actor_GetActorBaseForm",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x624F9A",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x624F9B",
+    "line": "call    TESAttackDamageForm_GetDamageForForm",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x624FA0",
+    "line": "movzx   eax, ax",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x624FA3",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x624FA6",
+    "line": "push    eax; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x624FA7",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x624FA9",
+    "line": "call    Actor_GetFatigueFraction",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x624FAE",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x624FAF",
+    "line": "fstp    [esp+0Ch+var_C]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x624FB2",
+    "line": "call    Calc_CreatureAttackDamage",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x624FB7",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x624FBA",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x624FBB",
+    "line": "jmp     Double_To_SInt32",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

@@ -1,0 +1,1 @@
+__frame_IEnumMoniker_RemoteNext_Stub

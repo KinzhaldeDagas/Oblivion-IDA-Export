@@ -1,0 +1,656 @@
+[
+  {
+    "ea": "0x98C22E",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98C22F",
+    "line": "push    offset aKernel32_dll",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98C234",
+    "line": "call    ds:GetModuleHandleA",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x98C23A",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x98C23C",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98C23E",
+    "line": "jnz     short loc_98C249",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x98C240",
+    "line": "call    __mtterm",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C245",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x98C247",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98C248",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x98C249",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98C24A",
+    "line": "mov     esi, ds:GetProcAddress",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x98C250",
+    "line": "push    offset aFlsalloc",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98C255",
+    "line": "push    edi; hModule",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98C256",
+    "line": "call    esi ; GetProcAddress",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x98C258",
+    "line": "push    offset aFlsgetvalue",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98C25D",
+    "line": "push    edi; hModule",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98C25E",
+    "line": "mov     FlsAlloc, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C263",
+    "line": "call    esi ; GetProcAddress",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x98C265",
+    "line": "push    offset aFlssetvalue",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98C26A",
+    "line": "push    edi; hModule",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98C26B",
+    "line": "mov     lpTlsValue, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C270",
+    "line": "call    esi ; GetProcAddress",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x98C272",
+    "line": "push    offset aFlsfree",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98C277",
+    "line": "push    edi; hModule",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98C278",
+    "line": "mov     FlsSetValue, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C27D",
+    "line": "call    esi ; GetProcAddress",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x98C27F",
+    "line": "cmp     FlsAlloc, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x98C286",
+    "line": "mov     esi, ds:TlsSetValue",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x98C28C",
+    "line": "mov     dword_BA9E24, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C291",
+    "line": "jz      short loc_98C2A9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98C293",
+    "line": "cmp     lpTlsValue, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x98C29A",
+    "line": "jz      short loc_98C2A9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98C29C",
+    "line": "cmp     FlsSetValue, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x98C2A3",
+    "line": "jz      short loc_98C2A9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98C2A5",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98C2A7",
+    "line": "jnz     short loc_98C2CD",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x98C2A9",
+    "line": "mov     eax, ds:TlsGetValue",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C2AE",
+    "line": "mov     lpTlsValue, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C2B3",
+    "line": "mov     eax, ds:TlsFree",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C2B8",
+    "line": "mov     FlsAlloc, offset ___crtTlsAlloc@4",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x98C2C2",
+    "line": "mov     FlsSetValue, esi",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x98C2C8",
+    "line": "mov     dword_BA9E24, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C2CD",
+    "line": "call    ds:TlsAlloc",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x98C2D3",
+    "line": "cmp     eax, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x98C2D6",
+    "line": "mov     dwTlsIndex, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C2DB",
+    "line": "jz      loc_98C3AD",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x98C2E1",
+    "line": "push    lpTlsValue; lpTlsValue",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98C2E7",
+    "line": "push    eax; dwTlsIndex",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98C2E8",
+    "line": "call    esi ; TlsSetValue",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x98C2EA",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98C2EC",
+    "line": "jz      loc_98C3AD",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x98C2F2",
+    "line": "call    __init_pointers",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C2F7",
+    "line": "push    FlsAlloc",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98C2FD",
+    "line": "call    __encode_pointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C302",
+    "line": "push    lpTlsValue",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98C308",
+    "line": "mov     FlsAlloc, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C30D",
+    "line": "call    __encode_pointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C312",
+    "line": "push    FlsSetValue",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98C318",
+    "line": "mov     lpTlsValue, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C31D",
+    "line": "call    __encode_pointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C322",
+    "line": "push    dword_BA9E24",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98C328",
+    "line": "mov     FlsSetValue, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C32D",
+    "line": "call    __encode_pointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C332",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x98C335",
+    "line": "mov     dword_BA9E24, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C33A",
+    "line": "call    __mtinitlocks",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C33F",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98C341",
+    "line": "jz      short loc_98C3A8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98C343",
+    "line": "push    offset __freefls@4",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98C348",
+    "line": "push    FlsAlloc",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98C34E",
+    "line": "call    __decode_pointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C353",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98C354",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x98C356",
+    "line": "cmp     eax, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x98C359",
+    "line": "mov     dword_B310AC, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98C35E",
+    "line": "jz      short loc_98C3A8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98C360",
+    "line": "push    214h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98C365",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x98C367",
+    "line": "call    unknown_libname_74",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C36C",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x98C36E",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98C370",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98C371",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98C372",
+    "line": "jz      short loc_98C3A8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98C374",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98C375",
+    "line": "push    dword_B310AC",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98C37B",
+    "line": "push    FlsSetValue",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98C381",
+    "line": "call    __decode_pointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C386",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98C387",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x98C389",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98C38B",
+    "line": "jz      short loc_98C3A8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98C38D",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x98C38F",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98C390",
+    "line": "call    __initptd",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C395",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98C396",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98C397",
+    "line": "call    ds:GetCurrentThreadId",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x98C39D",
+    "line": "or      dword ptr [esi+4], 0FFFFFFFFh",
+    "mnemonic": "or",
+    "size": 4
+  },
+  {
+    "ea": "0x98C3A1",
+    "line": "mov     [esi], eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x98C3A3",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x98C3A5",
+    "line": "inc     eax",
+    "mnemonic": "inc",
+    "size": 1
+  },
+  {
+    "ea": "0x98C3A6",
+    "line": "jmp     short loc_98C3AF",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x98C3A8",
+    "line": "call    __mtterm",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C3AD",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x98C3AF",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98C3B0",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98C3B1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

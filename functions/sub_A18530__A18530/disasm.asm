@@ -1,0 +1,3 @@
+0xA18530: mov     off_B06164, offset ??_7?$BSTCaseInsensitiveStringMap@PAVTESForm@@@@6B@; const BSTCaseInsensitiveStringMap<TESForm *>::`vftable' ...
+0xA1853A: mov     ecx, offset off_B06164
+0xA1853F: jmp     ??1?$NiTStringTemplateMap@V?$NiTMap@PBDPAVTESForm@@@@PAVTESForm@@@@UAE@XZ; NiTStringTemplateMap<NiTMap<char const *,TESForm *>,TESForm *>::~NiTStringTemplateMap<NiTMap<char const *,TESForm *>,TESForm *>(void)

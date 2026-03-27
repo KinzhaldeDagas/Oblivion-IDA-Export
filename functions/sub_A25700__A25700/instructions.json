@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA25700",
+    "line": "push    offset flt_B14CCC",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA25705",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA2570A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA2570F",
+    "line": "mov     eax, off_B14CD0; \"fHealthBarFadeOutSpeed:GamePlay\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA25714",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA25716",
+    "line": "jz      short locret_A25724",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA25718",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA2571B",
+    "line": "jnz     short locret_A25724",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA2571D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA2571E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA25723",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA25724",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

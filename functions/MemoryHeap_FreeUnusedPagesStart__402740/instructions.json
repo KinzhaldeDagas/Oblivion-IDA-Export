@@ -1,0 +1,122 @@
+[
+  {
+    "ea": "0x402740",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x402741",
+    "line": "push    offset aMemorypoolFree; \"MemoryPool::FreeUnusedPagesForAllPools(\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x402746",
+    "line": "mov     ecx, offset HeapCriticalSection",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x40274B",
+    "line": "call    NiEnterCriticalSection",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x402750",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x402752",
+    "line": "cmp     g_HeapPoolsBySize[esi], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x402759",
+    "line": "jz      short loc_40277F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x40275B",
+    "line": "push    offset aFreeunusedpage; lpCriticalSection",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x402760",
+    "line": "mov     ecx, offset HeapCriticalSection",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x402765",
+    "line": "call    NiEnterCriticalSection",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x40276A",
+    "line": "mov     ecx, g_HeapPoolsBySize[esi]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x402770",
+    "line": "call    sub_402640",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x402775",
+    "line": "mov     ecx, offset HeapCriticalSection; lpCriticalSection",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x40277A",
+    "line": "call    NiLeaveCriticalSection_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x40277F",
+    "line": "add     esi, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x402782",
+    "line": "cmp     esi, 204h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x402788",
+    "line": "jb      short loc_402752",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x40278A",
+    "line": "mov     ecx, offset HeapCriticalSection; lpCriticalSection",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x40278F",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x402790",
+    "line": "jmp     NiLeaveCriticalSection_0",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

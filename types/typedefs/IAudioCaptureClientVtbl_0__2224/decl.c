@@ -1,0 +1,1 @@
+IAudioCaptureClientVtbl_0

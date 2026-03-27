@@ -1,0 +1,89 @@
+{
+  "decl": "queue_timer",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "q",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "timer_queue *"
+    },
+    {
+      "name": "entry",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 64,
+      "type": "list"
+    },
+    {
+      "name": "runcount",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "callback",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "RTL_WAITORTIMERCALLBACKFUNC"
+    },
+    {
+      "name": "param",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "period",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "flags",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "expire",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 64,
+      "type": "ULONGLONG"
+    },
+    {
+      "name": "destroy",
+      "offset_bits": 320,
+      "offset_bytes": 40,
+      "size_bits": 32,
+      "type": "BOOL"
+    },
+    {
+      "name": "event",
+      "offset_bits": 352,
+      "offset_bytes": 44,
+      "size_bits": 32,
+      "type": "HANDLE"
+    }
+  ],
+  "name": "queue_timer",
+  "ordinal": 9049,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

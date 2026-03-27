@@ -1,0 +1,314 @@
+[
+  {
+    "ea": "0x4B0C70",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B0C71",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B0C72",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0C74",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B0C77",
+    "line": "shr     eax, 3",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x4B0C7A",
+    "line": "test    al, 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0C7C",
+    "line": "jnz     loc_4B0D06",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x4B0C82",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B0C83",
+    "line": "lea     ecx, [esi+54h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B0C86",
+    "line": "call    TESScriptableForm_Link",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B0C8B",
+    "line": "mov     eax, [esi+8Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4B0C91",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0C93",
+    "line": "jz      short loc_4B0CFD",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0C95",
+    "line": "push    0FFFFFFFFh; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0C97",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0C99",
+    "line": "mov     dword ptr [esp+0Ch+ArgList], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4B0C9D",
+    "line": "call    TESForm_GetOverrideFile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B0CA2",
+    "line": "push    eax; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B0CA3",
+    "line": "lea     ecx, [esp+0Ch+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4B0CA7",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B0CA8",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B0CAD",
+    "line": "mov     edx, dword ptr [esp+10h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4B0CB1",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B0CB4",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0CB6",
+    "line": "push    offset ??_R0?AVTESSound@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B0CBB",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B0CC0",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0CC2",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B0CC3",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B0CC8",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B0CCB",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B0CCC",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B0CD1",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B0CD4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0CD6",
+    "line": "mov     [esi+8Ch], eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4B0CDC",
+    "line": "jnz     short loc_4B0CFD",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0CDE",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0CE0",
+    "line": "mov     edx, [eax+0D4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4B0CE6",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0CE8",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0CEA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B0CEB",
+    "line": "mov     eax, dword ptr [esp+0Ch+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4B0CEF",
+    "line": "push    eax; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B0CF0",
+    "line": "push    offset aUnableToFindSo; \"Unable to find sound (%08X) on object '\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B0CF5",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B0CFA",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B0CFD",
+    "line": "push    1; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0CFF",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B0D01",
+    "line": "call    TESForm_SetIsLinked",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B0D06",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4B0D07",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4B0D08",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

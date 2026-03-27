@@ -1,0 +1,440 @@
+[
+  {
+    "ea": "0x4F03F0",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4F03F1",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4F03F2",
+    "line": "mov     edi, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4F03F6",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4F03F8",
+    "line": "mov     ebx, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4F03FA",
+    "line": "jz      loc_4F04BD",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4F0400",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4F0401",
+    "line": "push    offset unk_A2F830; lpCriticalSection",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4F0406",
+    "line": "mov     ecx, offset stru_B36100",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4F040B",
+    "line": "call    NiEnterCriticalSection",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4F0410",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0412",
+    "line": "call    TESObjectCELL_GetYCoordinate",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4F0417",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0419",
+    "line": "movzx   esi, ax",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x4F041C",
+    "line": "call    TESObjectCELL_GetXCoordinate",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4F0421",
+    "line": "movsx   eax, ax",
+    "mnemonic": "movsx",
+    "size": 3
+  },
+  {
+    "ea": "0x4F0424",
+    "line": "movzx   edx, si",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x4F0427",
+    "line": "shl     eax, 10h",
+    "mnemonic": "shl",
+    "size": 3
+  },
+  {
+    "ea": "0x4F042A",
+    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4F042E",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4F042F",
+    "line": "or      edx, eax",
+    "mnemonic": "or",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0431",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4F0432",
+    "line": "lea     ecx, [ebx+64h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4F0435",
+    "line": "mov     [esp+14h+arg_0], 0",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4F043D",
+    "line": "call    NiTMap_GetAt",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4F0442",
+    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4F0446",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0448",
+    "line": "jz      short loc_4F046C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F044A",
+    "line": "lea     ebx, [ebx+0]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x4F0450",
+    "line": "cmp     dword ptr [esi+4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4F0454",
+    "line": "jnz     short loc_4F045B",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0456",
+    "line": "cmp     dword ptr [esi], 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x4F0459",
+    "line": "jz      short loc_4F046C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F045B",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4F045D",
+    "line": "push    eax; Concurrency::details::SchedulerBase *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4F045E",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0460",
+    "line": "call    sub_4D35D0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4F0465",
+    "line": "mov     esi, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4F0468",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4F046A",
+    "line": "jnz     short loc_4F0450",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F046C",
+    "line": "lea     esi, [ebx+74h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4F046F",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0471",
+    "line": "jz      short loc_4F04B2",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0473",
+    "line": "cmp     dword ptr [esi+4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4F0477",
+    "line": "jnz     short loc_4F047E",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0479",
+    "line": "cmp     dword ptr [esi], 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x4F047C",
+    "line": "jz      short loc_4F04B2",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F047E",
+    "line": "mov     ebx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0480",
+    "line": "mov     ecx, ebx; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0482",
+    "line": "call    TESObjectREFR_GetParentCell",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4F0487",
+    "line": "cmp     eax, edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0489",
+    "line": "jz      short loc_4F04AB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F048B",
+    "line": "mov     edx, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4F048D",
+    "line": "mov     eax, [edx+174h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4F0493",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0495",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4F0497",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4F0498",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4F049A",
+    "line": "call    sub_4CC540",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4F049F",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4F04A1",
+    "line": "jz      short loc_4F04AB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F04A3",
+    "line": "push    ebx; Concurrency::details::SchedulerBase *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4F04A4",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4F04A6",
+    "line": "call    sub_4D35D0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4F04AB",
+    "line": "mov     esi, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4F04AE",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4F04B0",
+    "line": "jnz     short loc_4F0473",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F04B2",
+    "line": "mov     ecx, offset stru_B36100; lpCriticalSection",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4F04B7",
+    "line": "call    NiLeaveCriticalSection_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4F04BC",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4F04BD",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4F04BE",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4F04BF",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

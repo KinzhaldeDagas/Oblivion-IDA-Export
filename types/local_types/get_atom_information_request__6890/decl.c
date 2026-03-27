@@ -1,0 +1,1 @@
+get_atom_information_request

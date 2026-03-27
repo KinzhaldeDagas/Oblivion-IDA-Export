@@ -1,0 +1,86 @@
+[
+  {
+    "ea": "0x43F8C0",
+    "line": "mov     eax, [esp+a1]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x43F8C4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x43F8C6",
+    "line": "jz      short def_43F8D4; jumptable 0043F8D4 default case",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x43F8C8",
+    "line": "movsx   eax, byte ptr [eax+26h]",
+    "mnemonic": "movsx",
+    "size": 4
+  },
+  {
+    "ea": "0x43F8CC",
+    "line": "add     eax, 0FFFFFFFEh; switch 5 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x43F8CF",
+    "line": "cmp     eax, 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x43F8D2",
+    "line": "ja      short def_43F8D4; jumptable 0043F8D4 default case",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x43F8D4",
+    "line": "jmp     ds:jpt_43F8D4[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x43F8DB",
+    "line": "cmp     [esp+a2], 0; jumptable 0043F8D4 cases 2-4",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x43F8E0",
+    "line": "jnz     short def_43F8D4; jumptable 0043F8D4 default case",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x43F8E2",
+    "line": "mov     al, 1; jumptable 0043F8D4 cases 5,6",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x43F8E4",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x43F8E7",
+    "line": "xor     al, al; jumptable 0043F8D4 default case",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x43F8E9",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

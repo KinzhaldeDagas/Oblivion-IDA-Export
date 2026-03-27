@@ -1,0 +1,1 @@
+sysparam_rgb_entry

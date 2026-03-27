@@ -1,0 +1,1 @@
+__frame_IClassActivator_GetClassObject_Stub

@@ -1,0 +1,53 @@
+_DWORD *sub_416900()
+{
+  int v0; // eax
+  _DWORD *result; // eax
+  _DWORD *i; // esi
+  int v3; // edi
+  unsigned int v4; // eax
+
+  v0 = 0;
+  if ( dword_B3350C )
+  {
+    while ( !*(_DWORD *)(dword_B33510 + 4 * v0) )
+    {
+      if ( ++v0 >= (unsigned int)dword_B3350C )
+        goto LABEL_4;
+    }
+    result = *(_DWORD **)(dword_B33510 + 4 * v0);
+  }
+  else
+  {
+LABEL_4:
+    result = 0;
+  }
+  for ( i = result; i; result = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)v3 + 0x6C))(v3) )
+  {
+    v3 = i[2];
+    if ( *i )
+    {
+      i = (_DWORD *)*i;
+    }
+    else
+    {
+      v4 = (*(int (__thiscall **)(int *, _DWORD))(EffectSettingCollection + 4))(&EffectSettingCollection, i[1]) + 1;
+      if ( v4 >= dword_B3350C )
+      {
+LABEL_12:
+        i = 0;
+      }
+      else
+      {
+        while ( 1 )
+        {
+          i = *(_DWORD **)(dword_B33510 + 4 * v4);
+          if ( i )
+            break;
+          if ( ++v4 >= dword_B3350C )
+            goto LABEL_12;
+        }
+      }
+    }
+  }
+  return result;
+}

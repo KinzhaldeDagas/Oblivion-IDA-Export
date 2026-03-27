@@ -1,0 +1,1 @@
+get_directory_entry_request

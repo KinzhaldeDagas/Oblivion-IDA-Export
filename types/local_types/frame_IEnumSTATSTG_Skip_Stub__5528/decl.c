@@ -1,0 +1,1 @@
+__frame_IEnumSTATSTG_Skip_Stub

@@ -1,0 +1,416 @@
+[
+  {
+    "ea": "0x7009A0",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7009A1",
+    "line": "mov     eax, ds:0B3F684h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x7009A6",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7009A7",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7009A8",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7009A9",
+    "line": "push    eax; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7009AA",
+    "line": "mov     ebx, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7009AC",
+    "line": "call    TESOutput_PrintString",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7009B1",
+    "line": "mov     esi, [esp+14h+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7009B5",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x7009B9",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x7009BD",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7009C0",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7009C2",
+    "line": "mov     [esp+10h+var_4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7009C6",
+    "line": "jb      short loc_7009D6",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x7009C8",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x7009CC",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x7009CE",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7009CF",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7009D1",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7009D6",
+    "line": "lea     eax, [esp+10h+var_4]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7009DA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7009DB",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7009DC",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7009DE",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7009E3",
+    "line": "push    ebx; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7009E4",
+    "line": "push    offset aThis; \"this\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x7009E9",
+    "line": "call    TESOutput_PrintLabeledPointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7009EE",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x7009F2",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x7009F6",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7009F9",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7009FB",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7009FF",
+    "line": "jb      short loc_700A0F",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x700A01",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x700A05",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x700A07",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x700A08",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x700A0A",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x700A0F",
+    "line": "lea     eax, [esp+10h+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x700A13",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x700A14",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x700A15",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x700A17",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x700A1C",
+    "line": "mov     eax, [ebx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x700A1F",
+    "line": "push    eax; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x700A20",
+    "line": "push    offset aM_uirefcount; \"m_uiRefCount\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x700A25",
+    "line": "call    TESOutput_PrintLabeledUnsignedInt",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x700A2A",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x700A2E",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x700A32",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x700A35",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x700A37",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x700A3B",
+    "line": "jb      short loc_700A4B",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x700A3D",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x700A41",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x700A43",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x700A44",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x700A46",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x700A4B",
+    "line": "lea     eax, [esp+10h+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x700A4F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x700A50",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x700A51",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x700A53",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x700A58",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x700A59",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x700A5A",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x700A5B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x700A5C",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

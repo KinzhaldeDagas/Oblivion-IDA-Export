@@ -1,0 +1,122 @@
+[
+  {
+    "ea": "0x430E70",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430E71",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x430E73",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x430E76",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430E77",
+    "line": "push    eax; hThread",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430E78",
+    "line": "mov     dword ptr [esi], offset ??_7BSTaskThread@@6B@; const BSTaskThread::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x430E7E",
+    "line": "call    ds:SuspendThread",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x430E84",
+    "line": "mov     ecx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x430E87",
+    "line": "mov     edi, ds:CloseHandle",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x430E8D",
+    "line": "push    ecx; hObject",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430E8E",
+    "line": "call    edi ; CloseHandle",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x430E90",
+    "line": "mov     edx, [esi+20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x430E93",
+    "line": "push    edx; hObject",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430E94",
+    "line": "call    edi ; CloseHandle",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x430E96",
+    "line": "mov     eax, [esi+14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x430E99",
+    "line": "push    eax; hObject",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430E9A",
+    "line": "call    edi ; CloseHandle",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x430E9C",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x430E9D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x430E9E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

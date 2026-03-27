@@ -1,0 +1,1 @@
+__frame_IThumbnailExtractor_ExtractThumbnail_Stub

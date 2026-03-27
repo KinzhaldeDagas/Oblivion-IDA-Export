@@ -1,0 +1,34 @@
+0xA11790: fldz
+0xA11792: fst     flt_B46218
+0xA11798: fst     flt_B4621C
+0xA1179E: fst     flt_B46220
+0xA117A4: fst     flt_B46224
+0xA117AA: fst     flt_B46228
+0xA117B0: fst     flt_B4622C
+0xA117B6: fst     flt_B46230
+0xA117BC: fst     flt_B46234
+0xA117C2: fst     flt_B46238
+0xA117C8: fst     flt_B4623C
+0xA117CE: fst     flt_B46240
+0xA117D4: fst     flt_B46244
+0xA117DA: fst     flt_B46248
+0xA117E0: fst     flt_B4624C
+0xA117E6: fst     flt_B46250
+0xA117EC: fst     flt_B46254
+0xA117F2: fst     flt_B46258
+0xA117F8: fst     flt_B4625C
+0xA117FE: fst     flt_B46260
+0xA11804: fst     flt_B46264
+0xA1180A: fst     flt_B46268
+0xA11810: fst     flt_B4626C
+0xA11816: fst     flt_B46270
+0xA1181C: fst     flt_B46274
+0xA11822: fst     flt_B46278
+0xA11828: fst     flt_B4627C
+0xA1182E: fst     flt_B46280
+0xA11834: fst     flt_B46284
+0xA1183A: fst     flt_B46288
+0xA11840: fst     flt_B4628C
+0xA11846: fst     flt_B46290
+0xA1184C: fstp    flt_B46294
+0xA11852: retn

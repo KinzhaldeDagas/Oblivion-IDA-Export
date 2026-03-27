@@ -1,0 +1,146 @@
+[
+  {
+    "ea": "0x6034B0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6034B1",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6034B3",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6034B5",
+    "line": "mov     edx, [eax+198h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6034BB",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6034BD",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x6034BF",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6034C1",
+    "line": "jnz     short Actor_OnHealthDamage___Done",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6034C3",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6034C5",
+    "line": "mov     edx, [eax+288h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6034CB",
+    "line": "push    8",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6034CD",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6034CF",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x6034D1",
+    "line": "fcomp   dword ptr ds:0A2F948h",
+    "mnemonic": "fcomp",
+    "size": 6
+  },
+  {
+    "ea": "0x6034D7",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x6034D9",
+    "line": "test    ah, 5",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x6034DC",
+    "line": "jp      short Actor_OnHealthDamage___Done",
+    "mnemonic": "jp",
+    "size": 2
+  },
+  {
+    "ea": "0x6034DE",
+    "line": "fld     dword ptr [esp+0Ch]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x6034E2",
+    "line": "mov     eax, [esp+0Ch+var_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x6034E6",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6034E7",
+    "line": "fstp    [esp+10h+var_10]; int",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x6034EA",
+    "line": "push    eax; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6034EB",
+    "line": "mov     ecx, esi; int",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6034ED",
+    "line": "call    Actor_Kill",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

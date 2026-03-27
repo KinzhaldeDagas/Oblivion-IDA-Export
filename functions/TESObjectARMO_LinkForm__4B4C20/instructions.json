@@ -1,0 +1,158 @@
+[
+  {
+    "ea": "0x4B4C20",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B4C21",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B4C23",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B4C26",
+    "line": "shr     eax, 3",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x4B4C29",
+    "line": "test    al, 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4B4C2B",
+    "line": "jnz     short loc_4B4C67",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B4C2D",
+    "line": "cmp     word ptr [esi+68h], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x4B4C32",
+    "line": "jnz     short loc_4B4C4C",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B4C34",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B4C36",
+    "line": "mov     eax, [edx+0D4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4B4C3C",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4B4C3E",
+    "line": "push    eax; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B4C3F",
+    "line": "push    offset aArmorSNeedsToH; \"Armor '%s' needs to have biped slots se\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B4C44",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B4C49",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B4C4C",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B4C4D",
+    "line": "lea     ecx, [esi+30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B4C50",
+    "line": "call    TESScriptableForm_Link",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B4C55",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B4C56",
+    "line": "lea     ecx, [esi+3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B4C59",
+    "line": "call    TESEnchantableForm_LinkComponent",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B4C5E",
+    "line": "push    1; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4B4C60",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B4C62",
+    "line": "call    TESForm_SetIsLinked",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B4C67",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4B4C68",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

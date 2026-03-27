@@ -1,0 +1,4 @@
+void __cdecl sub_A22970()
+{
+  GameSetting_destr(&dword_B39128);
+}

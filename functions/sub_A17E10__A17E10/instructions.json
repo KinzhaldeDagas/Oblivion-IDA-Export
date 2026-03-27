@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA17E10",
+    "line": "push    offset unk_B05204",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA17E15",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA17E1A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA17E1F",
+    "line": "mov     eax, off_B05208; \"bHavokPick:HAVOK\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA17E24",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA17E26",
+    "line": "jz      short locret_A17E34",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA17E28",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA17E2B",
+    "line": "jnz     short locret_A17E34",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA17E2D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA17E2E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA17E33",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA17E34",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

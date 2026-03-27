@@ -1,0 +1,140 @@
+[
+  {
+    "ea": "0x484F20",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x484F21",
+    "line": "mov     esi, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484F23",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484F25",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x484F26",
+    "line": "jz      short loc_484F40",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x484F28",
+    "line": "mov     edi, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484F2A",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484F2C",
+    "line": "jz      short loc_484F40",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x484F2E",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484F30",
+    "line": "call    ExtraDataList_GetExtraScript",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x484F35",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484F37",
+    "line": "jnz     short loc_484F45",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x484F39",
+    "line": "mov     esi, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x484F3C",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484F3E",
+    "line": "jnz     short loc_484F28",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x484F40",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x484F41",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x484F43",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x484F44",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x484F45",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484F47",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x484F48",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x484F49",
+    "line": "jmp     ExtraDataList_GetExtraScript",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

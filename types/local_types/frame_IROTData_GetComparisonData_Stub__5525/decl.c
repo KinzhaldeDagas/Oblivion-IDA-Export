@@ -1,0 +1,1 @@
+__frame_IROTData_GetComparisonData_Stub

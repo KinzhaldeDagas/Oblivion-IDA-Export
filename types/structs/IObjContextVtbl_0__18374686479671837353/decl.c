@@ -1,0 +1,1 @@
+IObjContextVtbl_0

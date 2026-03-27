@@ -1,0 +1,1 @@
+IPropertySetStorageVtbl_0

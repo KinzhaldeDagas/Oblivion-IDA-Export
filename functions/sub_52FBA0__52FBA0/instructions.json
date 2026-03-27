@@ -1,0 +1,368 @@
+[
+  {
+    "ea": "0x52FBA0",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x52FBA1",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x52FBA2",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBA4",
+    "line": "mov     ecx, [esp+8+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x52FBA8",
+    "line": "movzx   eax, byte ptr [ecx+4]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x52FBAC",
+    "line": "xor     bl, bl",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBAE",
+    "line": "sub     eax, 39h ; '9'",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x52FBB1",
+    "line": "jz      short loc_52FC07",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBB3",
+    "line": "sub     eax, 1",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x52FBB6",
+    "line": "jz      short loc_52FBC5",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBB8",
+    "line": "push    ecx; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x52FBB9",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBBB",
+    "line": "call    TESForm_LessThan",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x52FBC0",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x52FBC1",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x52FBC2",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x52FBC5",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBC7",
+    "line": "push    offset ??_R0?AVTESTopicInfo@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x52FBCC",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x52FBD1",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBD3",
+    "line": "push    ecx; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x52FBD4",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x52FBD9",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x52FBDC",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBDE",
+    "line": "jz      short loc_52FC2C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBE0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x52FBE1",
+    "line": "call    TESTopic_static_GetTopicInfoParent?",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x52FBE6",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x52FBE9",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBEB",
+    "line": "jz      short loc_52FC2C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBED",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBEF",
+    "line": "jnz     short loc_52FBF8",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBF1",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x52FBF2",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBF4",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x52FBF5",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x52FBF8",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x52FBFA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x52FBFB",
+    "line": "mov     eax, [edx+34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x52FBFE",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x52FC00",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x52FC02",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x52FC03",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x52FC04",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x52FC07",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x52FC09",
+    "line": "push    offset ??_R0?AVTESTopic@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x52FC0E",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x52FC13",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x52FC15",
+    "line": "push    ecx; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x52FC16",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x52FC1B",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x52FC1E",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x52FC20",
+    "line": "jz      short loc_52FC2C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x52FC22",
+    "line": "mov     ecx, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x52FC25",
+    "line": "cmp     ecx, [eax+0Ch]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x52FC28",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x52FC2A",
+    "line": "jb      short loc_52FC2E",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x52FC2C",
+    "line": "mov     al, bl",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x52FC2E",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x52FC2F",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x52FC30",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

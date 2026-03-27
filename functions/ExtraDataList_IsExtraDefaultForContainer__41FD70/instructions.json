@@ -1,0 +1,218 @@
+[
+  {
+    "ea": "0x41FD70",
+    "line": "push    esi; lpCriticalSection",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41FD71",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41FD73",
+    "line": "push    offset aExtradatalistI",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x41FD78",
+    "line": "mov     ecx, offset BSExtraDataCS",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x41FD7D",
+    "line": "call    NiEnterCriticalSection",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41FD82",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41FD85",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41FD87",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x41FD88",
+    "line": "jz      short loc_41FDCF",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41FD8A",
+    "line": "mov     dl, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x41FD8E",
+    "line": "mov     edi, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41FD90",
+    "line": "test    dl, dl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41FD92",
+    "line": "jz      short loc_41FDAE",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41FD94",
+    "line": "movzx   ecx, byte ptr [eax+4]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x41FD98",
+    "line": "add     ecx, 0FFFFFFEEh; switch 68 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x41FD9B",
+    "line": "cmp     ecx, 43h",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x41FD9E",
+    "line": "ja      short ExtraDataList_IsExtraDefaultForContainer___def_41FDA7; jumptable 0041FDA7 default case, cases 19-26,28-33,35-37,40,41,43,44,46-53,56-84",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x41FDA0",
+    "line": "movzx   ecx, ds:kExtraOwnershipDefaultSetting2[ecx]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x41FDA7",
+    "line": "jmp     ds:jpt_41FDA7[ecx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x41FDAE",
+    "line": "movzx   ecx, byte ptr [eax+4]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x41FDB2",
+    "line": "add     ecx, 0FFFFFFEEh; switch 68 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x41FDB5",
+    "line": "cmp     ecx, 43h",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x41FDB8",
+    "line": "ja      short ExtraDataList_IsExtraDefaultForContainer___def_41FDA7; jumptable 0041FDA7 default case, cases 19-26,28-33,35-37,40,41,43,44,46-53,56-84",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x41FDBA",
+    "line": "movzx   ecx, ds:ExtraOwnerShipDefaultSetting[ecx]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x41FDC1",
+    "line": "jmp     ds:jpt_41FDC1[ecx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x41FDC8",
+    "line": "mov     eax, [eax+8]; jumptable 0041FDA7 cases 18,27,34,38,39,42,45,54,55,85",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41FDCB",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41FDCD",
+    "line": "jnz     short loc_41FD90",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x41FDCF",
+    "line": "mov     ecx, offset BSExtraDataCS; lpCriticalSection",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x41FDD4",
+    "line": "call    NiLeaveCriticalSection_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41FDD9",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41FDDB",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x41FDDE",
+    "line": "mov     ecx, offset BSExtraDataCS; jumptable 0041FDA7 default case, cases 19-26,28-33,35-37,40,41,43,44,46-53,56-84",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x41FDE3",
+    "line": "call    NiLeaveCriticalSection_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41FDE8",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x41FDEA",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

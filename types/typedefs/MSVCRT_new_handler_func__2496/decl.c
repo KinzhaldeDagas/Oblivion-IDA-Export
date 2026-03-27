@@ -1,0 +1,1 @@
+MSVCRT_new_handler_func

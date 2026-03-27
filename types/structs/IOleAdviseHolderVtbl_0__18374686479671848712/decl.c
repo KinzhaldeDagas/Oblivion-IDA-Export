@@ -1,0 +1,1 @@
+IOleAdviseHolderVtbl_0

@@ -1,0 +1,3 @@
+0x6A89FA: pop     esi
+0x6A89FB: pop     ecx
+0x6A89FC: retn

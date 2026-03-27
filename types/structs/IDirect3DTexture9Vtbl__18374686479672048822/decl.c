@@ -1,0 +1,1 @@
+IDirect3DTexture9Vtbl

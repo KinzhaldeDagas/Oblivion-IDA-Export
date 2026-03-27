@@ -1,0 +1,176 @@
+[
+  {
+    "ea": "0x42E790",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42E791",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42E793",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42E794",
+    "line": "mov     edi, [esi+15Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x42E79A",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42E79C",
+    "line": "mov     dword ptr [esi], offset ??_7CompressedArchiveFile@@6B@; const CompressedArchiveFile::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x42E7A2",
+    "line": "jz      short loc_42E7B3",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42E7A4",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42E7A5",
+    "line": "call    Zlib_inflateEnd",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42E7AA",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42E7AB",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42E7B0",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x42E7B3",
+    "line": "mov     eax, [esi+160h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x42E7B9",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42E7BB",
+    "line": "jz      short loc_42E7C6",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42E7BD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42E7BE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42E7C3",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x42E7C6",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42E7C8",
+    "line": "call    ??1ArchiveFile@@UAE@XZ; ArchiveFile::~ArchiveFile(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42E7CD",
+    "line": "test    [esp+8+arg_0], 1",
+    "mnemonic": "test",
+    "size": 5
+  },
+  {
+    "ea": "0x42E7D2",
+    "line": "jz      short loc_42E7DD",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42E7D4",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42E7D5",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42E7DA",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x42E7DD",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42E7DE",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42E7E0",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42E7E1",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

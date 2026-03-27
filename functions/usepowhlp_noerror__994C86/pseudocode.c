@@ -1,0 +1,4 @@
+void usepowhlp_::noerror()
+{
+  ;
+}

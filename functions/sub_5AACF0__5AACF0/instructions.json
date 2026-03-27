@@ -1,0 +1,386 @@
+[
+  {
+    "ea": "0x5AACF0",
+    "line": "fild    [esp+arg_0]",
+    "mnemonic": "fild",
+    "size": 4
+  },
+  {
+    "ea": "0x5AACF4",
+    "line": "push    esi; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5AACF5",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5AACF6",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AACF8",
+    "line": "mov     ecx, [esi+4]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5AACFB",
+    "line": "fstp    [esp+8+a2]; a3",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5AACFE",
+    "line": "push    0FAEh; a2",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5AAD03",
+    "line": "call    Tile_SetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AAD08",
+    "line": "push    1; arg1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD0A",
+    "line": "push    0; canCreate",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD0C",
+    "line": "call    InterfaceManager_GetSingleton",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AAD11",
+    "line": "mov     ecx, [esp+0Ch+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5AAD15",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5AAD18",
+    "line": "cmp     ecx, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5AAD1B",
+    "line": "mov     [eax+0Bh], cl",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5AAD1E",
+    "line": "jle     short loc_5AAD2F",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD20",
+    "line": "add     ecx, 0FFFFFFFEh",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5AAD23",
+    "line": "mov     eax, 1",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5AAD28",
+    "line": "shl     eax, cl",
+    "mnemonic": "shl",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD2A",
+    "line": "mov     [esi+40h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5AAD2D",
+    "line": "jmp     short loc_5AAD36",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD2F",
+    "line": "mov     dword ptr [esi+40h], 1Fh",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5AAD36",
+    "line": "mov     ecx, [esi+40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5AAD39",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5AAD3A",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD3C",
+    "line": "call    sub_5AA3A0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AAD41",
+    "line": "push    1; arg1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD43",
+    "line": "push    0; canCreate",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD45",
+    "line": "call    InterfaceManager_GetSingleton",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AAD4A",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5AAD4D",
+    "line": "cmp     byte ptr [eax+0B9h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x5AAD54",
+    "line": "jz      short loc_5AAD80",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD56",
+    "line": "fld     dword ptr ds:0A6B618h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5AAD5C",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5AAD5D",
+    "line": "mov     ecx, [esi+34h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5AAD60",
+    "line": "fstp    [esp+8+a2]; a3",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5AAD63",
+    "line": "push    0FB7h; a2",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5AAD68",
+    "line": "call    Tile_SetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AAD6D",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD6F",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5AAD70",
+    "line": "fstp    [esp+8+a2]; a3",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5AAD73",
+    "line": "mov     ecx, [esi+34h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5AAD76",
+    "line": "push    0FB7h; a2",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5AAD7B",
+    "line": "call    Tile_SetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AAD80",
+    "line": "push    1; arg1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD82",
+    "line": "push    0; canCreate",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD84",
+    "line": "call    InterfaceManager_GetSingleton",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AAD89",
+    "line": "mov     ecx, [eax+88h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5AAD8F",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5AAD92",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD94",
+    "line": "jz      short loc_5AADB2",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD96",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5AAD97",
+    "line": "mov     edi, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AAD99",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5AAD9A",
+    "line": "push    0FA8h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5AAD9F",
+    "line": "call    Tile_GetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AADA4",
+    "line": "call    Double_To_SInt32",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AADA9",
+    "line": "mov     edx, [edi+14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5AADAC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5AADAD",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AADAF",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5AADB1",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5AADB2",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5AADB3",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

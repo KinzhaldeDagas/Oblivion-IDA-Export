@@ -1,0 +1,332 @@
+[
+  {
+    "ea": "0x8A5280",
+    "line": "mov     eax, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8A5284",
+    "line": "add     eax, 0FFFFFFFFh; switch 7 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x8A5287",
+    "line": "cmp     eax, 6",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x8A528A",
+    "line": "ja      def_8A5290",
+    "mnemonic": "ja",
+    "size": 6
+  },
+  {
+    "ea": "0x8A5290",
+    "line": "jmp     ds:jpt_8A5290[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x8A5297",
+    "line": "push    offset aDynamic; jumptable 008A5290 case 1",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x8A529C",
+    "line": "push    offset aMotion; \"MOTION\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x8A52A1",
+    "line": "call    TESOutput_PrintLabeledString",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8A52A6",
+    "line": "mov     ecx, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8A52AA",
+    "line": "mov     [esp+8+arg_4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8A52AE",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x8A52B1",
+    "line": "lea     eax, [esp+arg_4]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x8A52B5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8A52B6",
+    "line": "call    NiTArray_Add",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8A52BB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8A52BC",
+    "line": "push    offset aSphere; jumptable 008A5290 cases 2,3",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x8A52C1",
+    "line": "push    offset aMotion; \"MOTION\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x8A52C6",
+    "line": "call    TESOutput_PrintLabeledString",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8A52CB",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x8A52CE",
+    "line": "lea     ecx, [esp+arg_4]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x8A52D2",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8A52D3",
+    "line": "mov     ecx, [esp+4+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8A52D7",
+    "line": "mov     [esp+4+arg_4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8A52DB",
+    "line": "call    NiTArray_Add",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8A52E0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8A52E1",
+    "line": "push    offset off_A97474; jumptable 008A5290 cases 4,5",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x8A52E6",
+    "line": "push    offset aMotion; \"MOTION\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x8A52EB",
+    "line": "call    TESOutput_PrintLabeledString",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8A52F0",
+    "line": "mov     ecx, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8A52F4",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x8A52F7",
+    "line": "lea     edx, [esp+arg_4]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x8A52FB",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8A52FC",
+    "line": "mov     [esp+4+arg_4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8A5300",
+    "line": "call    NiTArray_Add",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8A5305",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8A5306",
+    "line": "push    offset aKeyframed; jumptable 008A5290 case 6",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x8A530B",
+    "line": "push    offset aMotion; \"MOTION\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x8A5310",
+    "line": "call    TESOutput_PrintLabeledString",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8A5315",
+    "line": "mov     ecx, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8A5319",
+    "line": "mov     [esp+8+arg_4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8A531D",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x8A5320",
+    "line": "lea     eax, [esp+arg_4]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x8A5324",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8A5325",
+    "line": "call    NiTArray_Add",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8A532A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8A532B",
+    "line": "push    offset aFixed; jumptable 008A5290 case 7",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x8A5330",
+    "line": "push    offset aMotion; \"MOTION\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x8A5335",
+    "line": "call    TESOutput_PrintLabeledString",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8A533A",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x8A533D",
+    "line": "lea     ecx, [esp+arg_4]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x8A5341",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8A5342",
+    "line": "mov     ecx, [esp+4+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8A5346",
+    "line": "mov     [esp+4+arg_4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8A534A",
+    "line": "call    NiTArray_Add",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8A534F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

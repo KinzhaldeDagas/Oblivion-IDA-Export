@@ -1,0 +1,2 @@
+0x985AFA: fldz
+0x985AFC: retn

@@ -1,0 +1,1 @@
+STATSTG_0

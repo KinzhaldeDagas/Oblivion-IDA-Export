@@ -1,0 +1,1 @@
+_MIDL_STUB_DESC

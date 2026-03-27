@@ -1,0 +1,1 @@
+nsi_get_all_parameters_ex

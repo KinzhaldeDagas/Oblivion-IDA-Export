@@ -1,0 +1,956 @@
+[
+  {
+    "ea": "0x57DE50",
+    "line": "mov     eax, ds:0B33398h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x57DE55",
+    "line": "mov     ecx, [eax+24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x57DE58",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x57DE5A",
+    "line": "jz      def_57DE71; jumptable 0057DE71 default case",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x57DE60",
+    "line": "mov     eax, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x57DE64",
+    "line": "add     eax, 0FFFFFFFFh; switch 36 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x57DE67",
+    "line": "cmp     eax, 23h",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x57DE6A",
+    "line": "ja      def_57DE71; jumptable 0057DE71 default case",
+    "mnemonic": "ja",
+    "size": 6
+  },
+  {
+    "ea": "0x57DE70",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x57DE71",
+    "line": "jmp     ds:jpt_57DE71[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x57DE78",
+    "line": "push    1; jumptable 0057DE71 case 12",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DE7A",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DE7F",
+    "line": "push    offset aMenuend; \"MenuEnd\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DE84",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DE89",
+    "line": "push    1; jumptable 0057DE71 case 13",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DE8B",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DE90",
+    "line": "push    offset aMenustart; \"MenuStart\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DE95",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DE9A",
+    "line": "push    1; jumptable 0057DE71 case 14",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DE9C",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEA1",
+    "line": "push    offset aUimenubracket; \"UIMenuBracket\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEA6",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEAB",
+    "line": "push    1; jumptable 0057DE71 case 6",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DEAD",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEB2",
+    "line": "push    offset aItmbookpagetur; \"ITMBookPageTurn\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEB7",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEBC",
+    "line": "push    1; jumptable 0057DE71 case 4",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DEBE",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEC3",
+    "line": "push    offset aUimenufocus; \"UIMenuFocus\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEC8",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DECD",
+    "line": "push    1; jumptable 0057DE71 cases 11,20",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DECF",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DED4",
+    "line": "push    offset aUimessage; \"UIMessage\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DED9",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEDE",
+    "line": "push    1; jumptable 0057DE71 case 3",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DEE0",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEE5",
+    "line": "push    offset aUimenuprevnext; \"UIMenuPrevNext\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEEA",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEEF",
+    "line": "push    1; jumptable 0057DE71 case 1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DEF1",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEF6",
+    "line": "push    offset aUimenuok; \"UIMenuOK\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DEFB",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF00",
+    "line": "push    1; jumptable 0057DE71 case 9",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DF02",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF07",
+    "line": "push    offset aUiquestnew; \"UIQuestNew\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF0C",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF11",
+    "line": "push    1; jumptable 0057DE71 case 10",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DF13",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF18",
+    "line": "push    offset aUiquestupdate; \"UIQuestUpdate\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF1D",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF22",
+    "line": "push    1; jumptable 0057DE71 case 7",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DF24",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF29",
+    "line": "push    offset aUispeechrollov; \"UISpeechRollover\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF2E",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF33",
+    "line": "push    1; jumptable 0057DE71 case 8",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DF35",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF3A",
+    "line": "push    offset aUispeechrotate; \"UISpeechRotate\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF3F",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF44",
+    "line": "push    1; jumptable 0057DE71 case 5",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DF46",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF4B",
+    "line": "push    offset aUimenutabs; \"UIMenuTabs\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF50",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF55",
+    "line": "push    1; jumptable 0057DE71 case 15",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DF57",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF5C",
+    "line": "push    offset aUimessagefade; \"UIMessageFade\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF61",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF66",
+    "line": "push    1; jumptable 0057DE71 case 16",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DF68",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF6D",
+    "line": "push    offset aUiinventoryope; \"UIInventoryOpen\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF72",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF77",
+    "line": "push    1; jumptable 0057DE71 case 17",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DF79",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF7E",
+    "line": "push    offset aUiinventoryclo; \"UIInventoryClose\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF83",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF88",
+    "line": "push    1; jumptable 0057DE71 case 18",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DF8A",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF8F",
+    "line": "push    offset aUipotioncreate; \"UIPotionCreate\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF94",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DF99",
+    "line": "push    1; jumptable 0057DE71 case 19",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DF9B",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFA0",
+    "line": "push    offset aDrslocked; \"DRSLocked\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFA5",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFAA",
+    "line": "push    1; jumptable 0057DE71 cases 2,21",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DFAC",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFB1",
+    "line": "push    offset aUimenucancel; \"UIMenuCancel\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFB6",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFBB",
+    "line": "push    1; jumptable 0057DE71 case 22",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DFBD",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFC2",
+    "line": "push    offset aUistatsskillup; \"UIStatsSkillUp\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFC7",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFCC",
+    "line": "push    1; jumptable 0057DE71 case 23",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DFCE",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFD3",
+    "line": "push    offset aSplequip; \"SPLEquip\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFD8",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFDD",
+    "line": "push    1; jumptable 0057DE71 case 24",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DFDF",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFE4",
+    "line": "push    offset aItmwelkyndston; \"ITMWelkyndStoneUse\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFE9",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFEE",
+    "line": "push    1; jumptable 0057DE71 case 25",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57DFF0",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFF5",
+    "line": "push    offset aItmscrollopen; \"ITMScrollOpen\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFFA",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57DFFF",
+    "line": "push    1; jumptable 0057DE71 case 26",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57E001",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E006",
+    "line": "push    offset aItmscrollclose; \"ITMScrollClose\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E00B",
+    "line": "jmp     loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57E010",
+    "line": "push    1; jumptable 0057DE71 case 27",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57E012",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E017",
+    "line": "push    offset aItmbookopen; \"ITMBookOpen\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E01C",
+    "line": "jmp     short loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x57E01E",
+    "line": "push    1; jumptable 0057DE71 case 28",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57E020",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E025",
+    "line": "push    offset aItmbookclose; \"ITMBookClose\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E02A",
+    "line": "jmp     short loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x57E02C",
+    "line": "push    1; jumptable 0057DE71 case 29",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57E02E",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E033",
+    "line": "push    offset aItmtakeall; \"ITMTakeAll\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E038",
+    "line": "jmp     short loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x57E03A",
+    "line": "push    1; jumptable 0057DE71 case 30",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57E03C",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E041",
+    "line": "push    offset aItmingredientn; \"ITMIngredientNothing\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E046",
+    "line": "jmp     short loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x57E048",
+    "line": "push    1; jumptable 0057DE71 case 31",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57E04A",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E04F",
+    "line": "push    offset aItmingredientd; \"ITMIngredientDown\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E054",
+    "line": "jmp     short loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x57E056",
+    "line": "push    1; jumptable 0057DE71 case 32",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57E058",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E05D",
+    "line": "push    offset aItmsoultrap; \"ITMSoulTrap\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E062",
+    "line": "jmp     short loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x57E064",
+    "line": "push    1; jumptable 0057DE71 case 33",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57E066",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E06B",
+    "line": "push    offset aUiarmorweaponr; \"UIArmorWeaponRepairBreak\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E070",
+    "line": "jmp     short loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x57E072",
+    "line": "push    1; jumptable 0057DE71 case 34",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57E074",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E079",
+    "line": "push    offset aItmbounddisapp; \"ITMBoundDisappear\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E07E",
+    "line": "jmp     short loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x57E080",
+    "line": "push    1; jumptable 0057DE71 case 35",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57E082",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E087",
+    "line": "push    offset aItmgoldup; \"ITMGoldUp\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E08C",
+    "line": "jmp     short loc_57E09A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x57E08E",
+    "line": "push    1; jumptable 0057DE71 case 36",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57E090",
+    "line": "push    121h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E095",
+    "line": "push    offset aUiitemenchant; \"UIItemEnchant\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57E09A",
+    "line": "call    PlaySound???",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x57E09F",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x57E0A1",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x57E0A3",
+    "line": "jz      short loc_57E0BE",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x57E0A5",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57E0A7",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x57E0A9",
+    "line": "call    sub_6B7190",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x57E0AE",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x57E0B0",
+    "line": "call    sub_6B73E0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x57E0B5",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x57E0B6",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x57E0BB",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x57E0BE",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x57E0BF",
+    "line": "retn; jumptable 0057DE71 default case",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

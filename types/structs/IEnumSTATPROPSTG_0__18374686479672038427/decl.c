@@ -1,0 +1,1 @@
+IEnumSTATPROPSTG_0

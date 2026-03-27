@@ -1,0 +1,1 @@
+__frame_IDataObject_DAdvise_Stub

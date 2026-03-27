@@ -1,0 +1,2 @@
+0x6CE190: mov     ax, 1
+0x6CE194: retn

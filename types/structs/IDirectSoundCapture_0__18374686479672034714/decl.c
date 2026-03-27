@@ -1,0 +1,1 @@
+IDirectSoundCapture_0

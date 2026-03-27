@@ -1,0 +1,1 @@
+IDirectSoundFullDuplexImpl_0

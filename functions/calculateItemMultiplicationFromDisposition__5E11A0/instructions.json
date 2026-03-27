@@ -1,0 +1,182 @@
+[
+  {
+    "ea": "0x5E11A0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5E11A1",
+    "line": "mov     esi, [esp+4+targetNpc]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5E11A5",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5E11A7",
+    "line": "mov     edx, [eax+284h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5E11AD",
+    "line": "push    7",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5E11AF",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5E11B1",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5E11B3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5E11B4",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5E11B6",
+    "line": "mov     edx, [eax+284h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5E11BC",
+    "line": "push    1Dh",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5E11BE",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5E11C0",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5E11C2",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5E11C3",
+    "line": "call    Calc_LuckModifiedSkill",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5E11C8",
+    "line": "fstp    dword ptr [esp+10h]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x5E11CC",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5E11CE",
+    "line": "mov     edx, [eax+224h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5E11D4",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5E11D7",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5E11D8",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5E11DA",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5E11DC",
+    "line": "fld     [esp+4+targetNpc]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x5E11E0",
+    "line": "push    eax; disposition",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5E11E1",
+    "line": "call    Double_To_SInt32",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5E11E6",
+    "line": "push    eax; merchantileLuckLevelArg",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5E11E7",
+    "line": "call    calcMultiplierFromMerchantLevelDispo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5E11EC",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5E11EF",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5E11F0",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

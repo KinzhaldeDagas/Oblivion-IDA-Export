@@ -1,0 +1,50 @@
+[
+  {
+    "ea": "0x565E81",
+    "line": "mov     edi, [esi+24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x565E84",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x565E86",
+    "line": "jz      short TESPackage_SetLocation___Done",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x565E88",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x565E8A",
+    "line": "call    TESPackage_LocationData_destr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x565E8F",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x565E90",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x565E95",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  }
+]

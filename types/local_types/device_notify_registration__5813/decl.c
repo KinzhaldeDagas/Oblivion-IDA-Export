@@ -1,0 +1,1 @@
+device_notify_registration

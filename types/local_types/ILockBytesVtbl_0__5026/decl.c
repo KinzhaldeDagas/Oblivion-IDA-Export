@@ -1,0 +1,1 @@
+ILockBytesVtbl_0

@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA17DE0",
+    "line": "push    offset unk_B051FC",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA17DE5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA17DEA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA17DEF",
+    "line": "mov     eax, off_B05200; \"fAlphaReduce:Weather\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA17DF4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA17DF6",
+    "line": "jz      short locret_A17E04",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA17DF8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA17DFB",
+    "line": "jnz     short locret_A17E04",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA17DFD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA17DFE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA17E03",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA17E04",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

@@ -1,0 +1,548 @@
+[
+  {
+    "ea": "0x6171F0",
+    "line": "sub     esp, 110h",
+    "mnemonic": "sub",
+    "size": 6
+  },
+  {
+    "ea": "0x6171F6",
+    "line": "mov     eax, ds:0B30AACh",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x6171FB",
+    "line": "xor     eax, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x6171FD",
+    "line": "mov     [esp+110h+var_4], eax",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x617204",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x617205",
+    "line": "mov     esi, [esp+114h+arg_0]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x61720C",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x61720D",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x61720F",
+    "line": "cmp     dword ptr [edi+0A0h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x617216",
+    "line": "jz      CombatController_TransmitDisease?___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x61721C",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x61721E",
+    "line": "jz      CombatController_TransmitDisease?___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x617224",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x617226",
+    "line": "call    Actor_IsPlayer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x61722B",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x61722D",
+    "line": "jz      CombatController_TransmitDisease?___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x617233",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x617235",
+    "line": "mov     edx, [eax+284h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x61723B",
+    "line": "push    3Fh ; '?'",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x61723D",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x61723F",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x617241",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x617242",
+    "line": "call    Calc_DiseaseTransferPercent",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x617247",
+    "line": "fstp    [esp+120h+var_114]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x61724B",
+    "line": "fld     [esp+120h+var_114]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x61724F",
+    "line": "push    0; Seed",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x617251",
+    "line": "fstp    qword ptr [esp+124h+string]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x617255",
+    "line": "call    GetRandomLargeInteger?",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x61725A",
+    "line": "cdq",
+    "mnemonic": "cdq",
+    "size": 1
+  },
+  {
+    "ea": "0x61725B",
+    "line": "mov     ecx, 64h ; 'd'",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x617260",
+    "line": "idiv    ecx",
+    "mnemonic": "idiv",
+    "size": 2
+  },
+  {
+    "ea": "0x617262",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x617265",
+    "line": "mov     [esp+11Ch+var_114], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x617269",
+    "line": "fild    [esp+11Ch+var_114]",
+    "mnemonic": "fild",
+    "size": 4
+  },
+  {
+    "ea": "0x61726D",
+    "line": "fcomp   qword ptr [esp+11Ch+string]",
+    "mnemonic": "fcomp",
+    "size": 4
+  },
+  {
+    "ea": "0x617271",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x617273",
+    "line": "test    ah, 41h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x617276",
+    "line": "jz      CombatController_TransmitDisease?___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x61727C",
+    "line": "mov     edx, [edi+0A0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x617282",
+    "line": "mov     eax, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x617284",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x617285",
+    "line": "lea     ecx, [esi+68h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x617288",
+    "line": "call    MagicTarget_HasMagicItem",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x61728D",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x61728F",
+    "line": "jnz     CombatController_TransmitDisease?___Done",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x617295",
+    "line": "mov     ecx, [edi+0A0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x61729B",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x61729D",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x61729E",
+    "line": "mov     ebx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6172A0",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6172A2",
+    "line": "push    offset ??_R0?AVSpellItem@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x6172A7",
+    "line": "push    offset ??_R0?AVMagicItem@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x6172AC",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6172AE",
+    "line": "push    edx; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6172AF",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6172B4",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x6172B7",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6172B8",
+    "line": "mov     eax, [ebx+2DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6172BE",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6172C0",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x6172C2",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6172C4",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6172C5",
+    "line": "jz      short CombatController_TransmitDisease?___Done",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6172C7",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6172C9",
+    "line": "call    Actor_IsPlayer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6172CE",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6172D0",
+    "line": "jz      short CombatController_TransmitDisease?___Done",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6172D2",
+    "line": "mov     eax, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x6172D7",
+    "line": "add     dword ptr [eax+6C0h], 1",
+    "mnemonic": "add",
+    "size": 7
+  },
+  {
+    "ea": "0x6172DE",
+    "line": "mov     ecx, [edi+0A0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6172E4",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6172E6",
+    "line": "mov     eax, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6172E9",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6172EB",
+    "line": "jnz     short loc_6172F2",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6172ED",
+    "line": "mov     eax, offset EmptyString",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x6172F2",
+    "line": "mov     edx, ds:0B38DF8h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6172F8",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6172F9",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6172FA",
+    "line": "lea     eax, [esp+12Ch+string]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x6172FE",
+    "line": "push    offset aSS; \"%s %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x617303",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x617304",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x617309",
+    "line": "fld     dword ptr ds:0A46C30h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x61730F",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x617312",
+    "line": "fstp    [esp+128h+duration]; duration",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x617315",
+    "line": "push    1; unk2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x617317",
+    "line": "lea     ecx, [esp+12Ch+string]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x61731B",
+    "line": "push    0; unk1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x61731D",
+    "line": "push    ecx; string",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x61731E",
+    "line": "call    GameUI_QueueMessage",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x617323",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  }
+]

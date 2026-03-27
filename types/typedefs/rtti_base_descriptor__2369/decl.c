@@ -1,0 +1,1 @@
+rtti_base_descriptor

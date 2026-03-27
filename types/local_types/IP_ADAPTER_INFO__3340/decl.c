@@ -1,0 +1,1 @@
+_IP_ADAPTER_INFO

@@ -1,0 +1,122 @@
+[
+  {
+    "ea": "0x4511C0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4511C1",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4511C3",
+    "line": "cmp     dword ptr [esi+23Ch], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x4511CA",
+    "line": "jnz     short loc_4511F4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4511CC",
+    "line": "call    TESFile_LoadRecordHeader",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4511D1",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4511D3",
+    "line": "jnz     short loc_4511D9",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4511D5",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4511D7",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4511D8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4511D9",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4511DB",
+    "line": "mov     dword ptr [esi+250h], 0",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x4511E5",
+    "line": "mov     dword ptr [esi+254h], 0",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x4511EF",
+    "line": "call    TESFile_LoadChunkHeader",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4511F4",
+    "line": "mov     eax, [esi+23Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4511FA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4511FB",
+    "line": "call    TESForm_GetFormTypeFromChunkType",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x451200",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x451203",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x451204",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

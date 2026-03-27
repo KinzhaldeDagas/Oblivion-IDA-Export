@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA172D0",
+    "line": "push    offset g_DefaulFOV",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA172D5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA172DA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA172DF",
+    "line": "mov     eax, off_B03140; \"fDefaultFOV:Display\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA172E4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA172E6",
+    "line": "jz      short locret_A172F4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA172E8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA172EB",
+    "line": "jnz     short locret_A172F4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA172ED",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA172EE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA172F3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA172F4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

@@ -1,0 +1,140 @@
+[
+  {
+    "ea": "0x60E390",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x60E391",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x60E393",
+    "line": "cmp     dword ptr [esi+58h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x60E397",
+    "line": "jz      short loc_60E3B8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x60E399",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x60E39B",
+    "line": "mov     edx, [eax+284h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x60E3A1",
+    "line": "push    45h ; 'E'",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x60E3A3",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x60E3A5",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x60E3A7",
+    "line": "jz      short loc_60E3B8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x60E3A9",
+    "line": "mov     ecx, [esi+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x60E3AC",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x60E3AE",
+    "line": "mov     edx, [eax+31Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x60E3B4",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x60E3B6",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x60E3B8",
+    "line": "mov     eax, [esp+4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x60E3BC",
+    "line": "mov     ecx, [esp+4+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x60E3C0",
+    "line": "push    eax; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x60E3C1",
+    "line": "push    ecx; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x60E3C2",
+    "line": "mov     ecx, esi; Concurrency::details::SchedulerBase *",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x60E3C4",
+    "line": "call    Actor_LinkModifiedForm",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x60E3C9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x60E3CA",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

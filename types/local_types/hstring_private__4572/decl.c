@@ -1,0 +1,1 @@
+hstring_private

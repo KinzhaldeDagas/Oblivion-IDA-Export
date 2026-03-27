@@ -1,0 +1,1 @@
+localeinfo_struct_2

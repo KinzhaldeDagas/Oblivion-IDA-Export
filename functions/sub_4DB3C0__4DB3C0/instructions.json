@@ -1,0 +1,338 @@
+[
+  {
+    "ea": "0x4DB3C0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB3C1",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB3C2",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB3C4",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB3C6",
+    "line": "mov     edx, [eax+170h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4DB3CC",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB3CE",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB3D0",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB3D2",
+    "line": "jz      short loc_4DB452",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB3D4",
+    "line": "mov     eax, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB3D7",
+    "line": "add     eax, 0FFFFFFFCh; switch 56 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB3DA",
+    "line": "cmp     eax, 37h",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB3DD",
+    "line": "ja      short def_4DB3E6; jumptable 004DB3E6 default case, cases 7-15,19-51,53-58",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB3DF",
+    "line": "movzx   eax, ds:byte_4DB460[eax]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x4DB3E6",
+    "line": "jmp     ds:jpt_4DB3E6[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x4DB3ED",
+    "line": "pop     edi; jumptable 004DB3E6 cases 4-6,16-18,52,59",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB3EE",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB3F0",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB3F1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB3F2",
+    "line": "mov     al, [esi+4]; jumptable 004DB3E6 default case, cases 7-15,19-51,53-58",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB3F5",
+    "line": "cmp     al, 29h ; ')'",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB3F7",
+    "line": "jz      short loc_4DB3ED; jumptable 004DB3E6 cases 4-6,16-18,52,59",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB3F9",
+    "line": "movzx   ecx, al",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB3FC",
+    "line": "add     ecx, 0FFFFFFDDh",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB3FF",
+    "line": "cmp     ecx, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB402",
+    "line": "ja      short loc_4DB411",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB404",
+    "line": "mov     ecx, [esi+28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB407",
+    "line": "shr     ecx, 9",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB40A",
+    "line": "not     cl",
+    "mnemonic": "not",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB40C",
+    "line": "test    cl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB40F",
+    "line": "jnz     short loc_4DB3ED; jumptable 004DB3E6 cases 4-6,16-18,52,59",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB411",
+    "line": "cmp     al, 18h",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB413",
+    "line": "jnz     short loc_4DB42C",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB415",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB417",
+    "line": "call    sub_4B78E0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4DB41C",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB41E",
+    "line": "jnz     short loc_4DB3ED; jumptable 004DB3E6 cases 4-6,16-18,52,59",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB420",
+    "line": "lea     ecx, [edi+44h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB423",
+    "line": "call    ExtraDataList_GetTeleport",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4DB428",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB42A",
+    "line": "jnz     short loc_4DB3ED; jumptable 004DB3E6 cases 4-6,16-18,52,59",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB42C",
+    "line": "cmp     byte ptr [esi+4], 24h ; '$'",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4DB430",
+    "line": "jnz     short loc_4DB452",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB432",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB434",
+    "line": "push    offset ??_R0?AVTESCreature@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4DB439",
+    "line": "push    offset ??_R0?AVTESBoundObject@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4DB43E",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB440",
+    "line": "push    esi; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB441",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4DB446",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB449",
+    "line": "cmp     byte ptr [eax+104h], 4",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x4DB450",
+    "line": "jz      short loc_4DB3ED; jumptable 004DB3E6 cases 4-6,16-18,52,59",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB452",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB453",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB455",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB456",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

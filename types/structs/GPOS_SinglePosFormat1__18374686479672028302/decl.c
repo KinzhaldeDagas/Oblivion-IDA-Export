@@ -1,0 +1,1 @@
+GPOS_SinglePosFormat1

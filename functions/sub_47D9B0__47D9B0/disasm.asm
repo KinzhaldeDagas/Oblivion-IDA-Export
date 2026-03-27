@@ -1,0 +1,12 @@
+0x47D9B0: mov     edx, [esp+arg_4]
+0x47D9B4: fld     dword ptr [edx]
+0x47D9B6: mov     eax, [esp+arg_0]
+0x47D9BA: fadd    dword ptr [ecx]
+0x47D9BC: fstp    dword ptr [eax]
+0x47D9BE: fld     dword ptr [edx+4]
+0x47D9C1: fadd    dword ptr [ecx+4]
+0x47D9C4: fstp    dword ptr [eax+4]
+0x47D9C7: fld     dword ptr [edx+8]
+0x47D9CA: fadd    dword ptr [ecx+8]
+0x47D9CD: fstp    dword ptr [eax+8]
+0x47D9D0: retn    8

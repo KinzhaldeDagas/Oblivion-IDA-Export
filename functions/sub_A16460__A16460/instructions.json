@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA16460",
+    "line": "push    offset bBackgroundKey",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA16465",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1646A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1646F",
+    "line": "mov     eax, off_B02C38; \"bBackground Keyboard:Controls\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA16474",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA16476",
+    "line": "jz      short locret_A16484",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA16478",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1647B",
+    "line": "jnz     short locret_A16484",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1647D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1647E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA16483",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA16484",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

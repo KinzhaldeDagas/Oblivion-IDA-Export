@@ -1,0 +1,134 @@
+[
+  {
+    "ea": "0x435AB0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x435AB1",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x435AB3",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x435AB5",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x435AB6",
+    "line": "mov     edi, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x435ABA",
+    "line": "cmp     eax, edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x435ABC",
+    "line": "jz      short loc_435ADC",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x435ABE",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x435AC0",
+    "line": "jz      short loc_435ACC",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x435AC2",
+    "line": "add     eax, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x435AC5",
+    "line": "push    eax; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x435AC6",
+    "line": "call    ds:InterlockedDecrement",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x435ACC",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x435ACE",
+    "line": "mov     [esi], edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x435AD0",
+    "line": "jz      short loc_435ADC",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x435AD2",
+    "line": "add     edi, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x435AD5",
+    "line": "push    edi; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x435AD6",
+    "line": "call    ds:InterlockedIncrement",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x435ADC",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x435ADD",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x435ADF",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x435AE0",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

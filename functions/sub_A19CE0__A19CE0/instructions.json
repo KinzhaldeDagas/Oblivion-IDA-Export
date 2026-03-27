@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA19CE0",
+    "line": "push    offset unk_B06F4C",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA19CE5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA19CEA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA19CEF",
+    "line": "mov     eax, off_B06F50; \"uVideoDeviceIdentifierPart4:Display\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA19CF4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA19CF6",
+    "line": "jz      short locret_A19D04",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA19CF8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA19CFB",
+    "line": "jnz     short locret_A19D04",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA19CFD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA19CFE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA19D03",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA19D04",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

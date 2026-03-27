@@ -1,0 +1,1 @@
+IDirect3DQuery9Vtbl

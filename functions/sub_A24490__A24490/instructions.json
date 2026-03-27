@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA24490",
+    "line": "push    offset byte_B13220",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA24495",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA2449A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA2449F",
+    "line": "mov     eax, off_B13224; \"bSaveOnWait:GamePlay\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA244A4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA244A6",
+    "line": "jz      short locret_A244B4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA244A8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA244AB",
+    "line": "jnz     short locret_A244B4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA244AD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA244AE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA244B3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA244B4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

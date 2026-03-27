@@ -1,0 +1,1 @@
+IAudioRenderClientVtbl_0

@@ -1,0 +1,230 @@
+[
+  {
+    "ea": "0x500D90",
+    "line": "sub     esp, 8",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x500D93",
+    "line": "mov     edx, [esp+8+l]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x500D97",
+    "line": "lea     eax, [esp+8+var_8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x500D9A",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x500D9B",
+    "line": "mov     eax, [esp+0Ch+arg_10]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x500D9F",
+    "line": "lea     ecx, [esp+0Ch+var_4]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x500DA3",
+    "line": "push    ecx; UInt16",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x500DA4",
+    "line": "mov     ecx, [esp+10h+arg_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x500DA8",
+    "line": "push    edx; l",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x500DA9",
+    "line": "mov     edx, [esp+14h+a4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x500DAD",
+    "line": "push    eax; a6",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x500DAE",
+    "line": "mov     eax, [esp+18h+a3]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x500DB2",
+    "line": "push    ecx; a5",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x500DB3",
+    "line": "mov     ecx, [esp+1Ch+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x500DB7",
+    "line": "push    edx; a4",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x500DB8",
+    "line": "mov     edx, [esp+20h+a1]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x500DBC",
+    "line": "push    eax; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x500DBD",
+    "line": "push    ecx; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x500DBE",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x500DBF",
+    "line": "mov     dword ptr [esp+2Ch+var_4], 0",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x500DC7",
+    "line": "mov     [esp+2Ch+var_8], 0",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x500DCF",
+    "line": "call    Script_ExtractArgs",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x500DD4",
+    "line": "add     esp, 24h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x500DD7",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x500DD9",
+    "line": "jnz     short loc_500DDF",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x500DDB",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x500DDE",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x500DDF",
+    "line": "cmp     [esp+8+var_8], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x500DE3",
+    "line": "mov     ecx, dword ptr [esp+8+var_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x500DE7",
+    "line": "setnz   al",
+    "mnemonic": "setnz",
+    "size": 3
+  },
+  {
+    "ea": "0x500DEA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x500DEB",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x500DEC",
+    "line": "call    Sky_CreateOrGetGlobalObject",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x500DF1",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x500DF3",
+    "line": "call    ForceWeather",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x500DF8",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x500DFA",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x500DFD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

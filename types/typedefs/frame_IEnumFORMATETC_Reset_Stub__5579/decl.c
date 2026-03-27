@@ -1,0 +1,1 @@
+__frame_IEnumFORMATETC_Reset_Stub

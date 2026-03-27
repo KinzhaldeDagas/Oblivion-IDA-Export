@@ -1,0 +1,1 @@
+STORAGE_CreateOleStream::empty_1ole_stream

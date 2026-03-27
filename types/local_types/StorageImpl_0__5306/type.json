@@ -1,0 +1,222 @@
+{
+  "decl": "StorageImpl_0",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "base",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 512,
+      "type": "StorageBaseImpl"
+    },
+    {
+      "name": "bigBlockSizeBits",
+      "offset_bits": 512,
+      "offset_bytes": 64,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "smallBlockSizeBits",
+      "offset_bits": 528,
+      "offset_bytes": 66,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "bigBlockSize",
+      "offset_bits": 544,
+      "offset_bytes": 68,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "smallBlockSize",
+      "offset_bits": 576,
+      "offset_bytes": 72,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "bigBlockDepotCount",
+      "offset_bits": 608,
+      "offset_bytes": 76,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "rootStartBlock",
+      "offset_bits": 640,
+      "offset_bytes": 80,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "smallBlockLimit",
+      "offset_bits": 672,
+      "offset_bytes": 84,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "smallBlockDepotStart",
+      "offset_bits": 704,
+      "offset_bytes": 88,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "extBigBlockDepotStart",
+      "offset_bits": 736,
+      "offset_bytes": 92,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "extBigBlockDepotLocations",
+      "offset_bits": 768,
+      "offset_bytes": 96,
+      "size_bits": 32,
+      "type": "ULONG *"
+    },
+    {
+      "name": "extBigBlockDepotLocationsSize",
+      "offset_bits": 800,
+      "offset_bytes": 100,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "extBigBlockDepotCount",
+      "offset_bits": 832,
+      "offset_bytes": 104,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "bigBlockDepotStart",
+      "offset_bits": 864,
+      "offset_bytes": 108,
+      "size_bits": 3488,
+      "type": "ULONG[109]"
+    },
+    {
+      "name": "transactionSig",
+      "offset_bits": 4352,
+      "offset_bytes": 544,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "extBlockDepotCached",
+      "offset_bits": 4384,
+      "offset_bytes": 548,
+      "size_bits": 32768,
+      "type": "ULONG[1024]"
+    },
+    {
+      "name": "indexExtBlockDepotCached",
+      "offset_bits": 37152,
+      "offset_bytes": 4644,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "blockDepotCached",
+      "offset_bits": 37184,
+      "offset_bytes": 4648,
+      "size_bits": 32768,
+      "type": "ULONG[1024]"
+    },
+    {
+      "name": "indexBlockDepotCached",
+      "offset_bits": 69952,
+      "offset_bytes": 8744,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "prevFreeBlock",
+      "offset_bits": 69984,
+      "offset_bytes": 8748,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "firstFreeSmallBlock",
+      "offset_bits": 70016,
+      "offset_bytes": 8752,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "rootBlockChain",
+      "offset_bits": 70048,
+      "offset_bytes": 8756,
+      "size_bits": 32,
+      "type": "BlockChainStream_0 *"
+    },
+    {
+      "name": "smallBlockDepotChain",
+      "offset_bits": 70080,
+      "offset_bytes": 8760,
+      "size_bits": 32,
+      "type": "BlockChainStream_0 *"
+    },
+    {
+      "name": "smallBlockRootChain",
+      "offset_bits": 70112,
+      "offset_bytes": 8764,
+      "size_bits": 32,
+      "type": "BlockChainStream_0 *"
+    },
+    {
+      "name": "blockChainCache",
+      "offset_bits": 70144,
+      "offset_bytes": 8768,
+      "size_bits": 128,
+      "type": "BlockChainStream_0 *[4]"
+    },
+    {
+      "name": "blockChainToEvict",
+      "offset_bits": 70272,
+      "offset_bytes": 8784,
+      "size_bits": 32,
+      "type": "UINT"
+    },
+    {
+      "name": "locks_supported",
+      "offset_bits": 70304,
+      "offset_bytes": 8788,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "lockBytes",
+      "offset_bits": 70336,
+      "offset_bytes": 8792,
+      "size_bits": 32,
+      "type": "ILockBytes_0 *"
+    },
+    {
+      "name": "locked_bytes",
+      "offset_bits": 70368,
+      "offset_bytes": 8796,
+      "size_bits": 256,
+      "type": "ULONG[8]"
+    }
+  ],
+  "name": "StorageImpl_0",
+  "ordinal": 5306,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

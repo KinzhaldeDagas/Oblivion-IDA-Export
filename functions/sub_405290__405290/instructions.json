@@ -1,0 +1,152 @@
+[
+  {
+    "ea": "0x405290",
+    "line": "cmp     byte ptr [esp+arg_0], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x405295",
+    "line": "jz      short loc_4052AA",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x405297",
+    "line": "call    InterfaceManager_IsMenuMode",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x40529C",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x40529E",
+    "line": "jnz     short loc_4052A7",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4052A0",
+    "line": "fld     flt_B33E9C",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x4052A6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4052A7",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x4052A9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4052AA",
+    "line": "cmp     [esp+arg_4], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x4052AF",
+    "line": "jz      short loc_4052CE",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4052B1",
+    "line": "mov     ecx, offset TimeGlobals",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4052B6",
+    "line": "call    TimeGlobals_GetGameHour",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4052BB",
+    "line": "fld     ds:dbl_A2FCC8",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x4052C1",
+    "line": "fmul    st(1), st",
+    "mnemonic": "fmul",
+    "size": 2
+  },
+  {
+    "ea": "0x4052C3",
+    "line": "fmulp   st(1), st",
+    "mnemonic": "fmulp",
+    "size": 2
+  },
+  {
+    "ea": "0x4052C5",
+    "line": "fstp    [esp+arg_0]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x4052C9",
+    "line": "fld     [esp+arg_0]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x4052CD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4052CE",
+    "line": "mov     eax, Seed",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4052D3",
+    "line": "fild    Seed",
+    "mnemonic": "fild",
+    "size": 6
+  },
+  {
+    "ea": "0x4052D9",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4052DB",
+    "line": "jge     short locret_4052E3",
+    "mnemonic": "jge",
+    "size": 2
+  },
+  {
+    "ea": "0x4052DD",
+    "line": "fadd    ds:flt_A2FC78",
+    "mnemonic": "fadd",
+    "size": 6
+  },
+  {
+    "ea": "0x4052E3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

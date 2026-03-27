@@ -1,0 +1,1 @@
+__frame_IOleInPlaceObject_InPlaceDeactivate_Stub

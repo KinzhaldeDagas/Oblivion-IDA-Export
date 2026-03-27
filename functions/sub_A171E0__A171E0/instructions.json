@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA171E0",
+    "line": "push    offset dword_B030C4",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA171E5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA171EA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA171EF",
+    "line": "mov     eax, off_B030C8; \"iIntroSequencePriority:General\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA171F4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA171F6",
+    "line": "jz      short locret_A17204",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA171F8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA171FB",
+    "line": "jnz     short locret_A17204",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA171FD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA171FE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA17203",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA17204",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

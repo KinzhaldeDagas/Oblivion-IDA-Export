@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA1C3E0",
+    "line": "push    offset mp3String",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C3E5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C3EA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C3EF",
+    "line": "mov     eax, off_B10D64; \"sFileTypeGame:Voice\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C3F4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C3F6",
+    "line": "jz      short locret_A1C404",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C3F8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1C3FB",
+    "line": "jnz     short locret_A1C404",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C3FD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1C3FE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C403",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA1C404",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

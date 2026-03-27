@@ -1,0 +1,1 @@
+_NT_PRODUCT_TYPE

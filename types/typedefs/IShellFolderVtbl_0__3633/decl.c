@@ -1,0 +1,1 @@
+IShellFolderVtbl_0

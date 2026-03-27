@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA19E30",
+    "line": "push    offset bDynamicWindowsReflection",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA19E35",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA19E3A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA19E3F",
+    "line": "mov     eax, off_B06F88; \"bDynamicWindowReflections:Display\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA19E44",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA19E46",
+    "line": "jz      short locret_A19E54",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA19E48",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA19E4B",
+    "line": "jnz     short locret_A19E54",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA19E4D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA19E4E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA19E53",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA19E54",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

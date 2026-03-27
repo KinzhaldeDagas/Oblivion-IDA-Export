@@ -1,0 +1,128 @@
+[
+  {
+    "ea": "0x65C2A1",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x65C2A3",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x65C2A5",
+    "line": "jz      short AVCollection_Save___SaveMagickaNode",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x65C2A7",
+    "line": "mov     cl, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x65C2A9",
+    "line": "fld     dword ptr [eax+4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x65C2AC",
+    "line": "push    ebp; Size",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x65C2AD",
+    "line": "fstp    [esp+4+arg_14]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x65C2B1",
+    "line": "lea     edx, [esp+4+Src+3]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x65C2B5",
+    "line": "mov     byte ptr [esp+4+Src+3], cl",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x65C2B9",
+    "line": "mov     ecx, ds:0B33B00h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x65C2BF",
+    "line": "push    edx; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x65C2C0",
+    "line": "call    SaveLoad_SaveData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x65C2C5",
+    "line": "mov     ecx, ds:0B33B00h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x65C2CB",
+    "line": "push    4; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x65C2CD",
+    "line": "lea     eax, [esp+4+arg_14]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x65C2D1",
+    "line": "push    eax; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x65C2D2",
+    "line": "call    SaveLoad_SaveData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x65C2D7",
+    "line": "add     [esp+arg_10], ebp",
+    "mnemonic": "add",
+    "size": 4
+  },
+  {
+    "ea": "0x65C2DB",
+    "line": "mov     esi, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x65C2DE",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x65C2E0",
+    "line": "jnz     short AVCollection_Save___SaveListLoop",
+    "mnemonic": "jnz",
+    "size": 2
+  }
+]

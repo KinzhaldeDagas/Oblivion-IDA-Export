@@ -1,0 +1,62 @@
+[
+  {
+    "ea": "0x68F00A",
+    "line": "push    2; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x68F00C",
+    "line": "lea     ecx, [esp+4+Dst]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x68F010",
+    "line": "mov     dword ptr [ebx], 0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x68F016",
+    "line": "push    ecx; Dst",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x68F017",
+    "line": "mov     ecx, ds:0B33B00h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x68F01D",
+    "line": "call    SaveLoad_LoadData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x68F022",
+    "line": "xor     ebp, ebp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x68F024",
+    "line": "cmp     [esp+Dst], bp",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x68F029",
+    "line": "jbe     short loc_68F09B",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x68F02B",
+    "line": "jmp     short ActiveEffect_Base_LoadAEList?___LoadActiveEffects_Loop",
+    "mnemonic": "jmp",
+    "size": 2
+  }
+]

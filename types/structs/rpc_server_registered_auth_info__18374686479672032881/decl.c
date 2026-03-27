@@ -1,0 +1,1 @@
+rpc_server_registered_auth_info

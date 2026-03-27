@@ -1,0 +1,110 @@
+[
+  {
+    "ea": "0x760D70",
+    "line": "mov     edx, [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x760D74",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x760D76",
+    "line": "test    edx, edx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x760D78",
+    "line": "jz      short locret_760D98",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x760D7A",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x760D7B",
+    "line": "mov     esi, [edx+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x760D7E",
+    "line": "cmp     [ecx+78h], esi",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x760D81",
+    "line": "jz      short loc_760D85",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x760D83",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x760D85",
+    "line": "mov     [ecx+78h], esi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x760D88",
+    "line": "add     ecx, 6Ch ; 'l'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x760D8B",
+    "line": "cmp     [ecx], edx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x760D8D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x760D8E",
+    "line": "jz      short locret_760D98",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x760D90",
+    "line": "push    edx; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x760D91",
+    "line": "call    NiSmartPointer_Set??",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x760D96",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x760D98",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

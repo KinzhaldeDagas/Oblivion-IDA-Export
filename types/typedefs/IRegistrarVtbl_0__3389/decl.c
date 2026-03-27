@@ -1,0 +1,1 @@
+IRegistrarVtbl_0

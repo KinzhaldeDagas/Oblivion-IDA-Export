@@ -1,0 +1,116 @@
+[
+  {
+    "ea": "0x405B40",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x405B41",
+    "line": "mov     esi, g_Interface3DScenegraph",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x405B47",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x405B49",
+    "line": "jz      short loc_405B71",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x405B4B",
+    "line": "lea     eax, [esi+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x405B4E",
+    "line": "push    eax; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x405B4F",
+    "line": "call    ds:InterlockedDecrement",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x405B55",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x405B57",
+    "line": "jnz     short loc_405B67",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x405B59",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x405B5B",
+    "line": "jz      short loc_405B67",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x405B5D",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x405B5F",
+    "line": "mov     eax, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x405B61",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x405B63",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x405B65",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x405B67",
+    "line": "mov     g_Interface3DScenegraph, 0",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x405B71",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x405B72",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

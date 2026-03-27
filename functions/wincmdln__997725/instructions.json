@@ -1,0 +1,254 @@
+[
+  {
+    "ea": "0x997725",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x997726",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x997727",
+    "line": "xor     edi, edi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x997729",
+    "line": "cmp     dword_BABC14, edi",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x99772F",
+    "line": "jnz     short loc_997736",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x997731",
+    "line": "call    ___initmbctable",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x997736",
+    "line": "mov     esi, dword_BABC04",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x99773C",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x99773E",
+    "line": "jnz     short loc_997745",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x997740",
+    "line": "mov     esi, offset EmptyString",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x997745",
+    "line": "mov     al, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x997747",
+    "line": "cmp     al, 20h ; ' '",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x997749",
+    "line": "ja      short loc_997753",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x99774B",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x99774D",
+    "line": "jz      short loc_99777D",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x99774F",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x997751",
+    "line": "jz      short loc_997777",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x997753",
+    "line": "cmp     al, 22h ; '\"'",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x997755",
+    "line": "jnz     short loc_997760",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x997757",
+    "line": "xor     ecx, ecx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x997759",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x99775B",
+    "line": "setz    cl",
+    "mnemonic": "setz",
+    "size": 3
+  },
+  {
+    "ea": "0x99775E",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x997760",
+    "line": "movzx   eax, al",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x997763",
+    "line": "push    eax; unsigned int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x997764",
+    "line": "call    __ismbblead",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x997769",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x99776B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x99776C",
+    "line": "jz      short loc_99776F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x99776E",
+    "line": "inc     esi",
+    "mnemonic": "inc",
+    "size": 1
+  },
+  {
+    "ea": "0x99776F",
+    "line": "inc     esi",
+    "mnemonic": "inc",
+    "size": 1
+  },
+  {
+    "ea": "0x997770",
+    "line": "jmp     short loc_997745",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x997772",
+    "line": "cmp     al, 20h ; ' '",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x997774",
+    "line": "ja      short loc_99777D",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x997776",
+    "line": "inc     esi",
+    "mnemonic": "inc",
+    "size": 1
+  },
+  {
+    "ea": "0x997777",
+    "line": "mov     al, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x997779",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x99777B",
+    "line": "jnz     short loc_997772",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x99777D",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x99777E",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x997780",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x997781",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

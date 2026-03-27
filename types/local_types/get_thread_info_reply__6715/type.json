@@ -1,0 +1,103 @@
+{
+  "decl": "get_thread_info_reply",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "__header",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 64,
+      "type": "reply_header"
+    },
+    {
+      "name": "pid",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "process_id_t"
+    },
+    {
+      "name": "tid",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "thread_id_t"
+    },
+    {
+      "name": "teb",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 64,
+      "type": "client_ptr_t"
+    },
+    {
+      "name": "entry_point",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 64,
+      "type": "client_ptr_t"
+    },
+    {
+      "name": "affinity",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 64,
+      "type": "affinity_t"
+    },
+    {
+      "name": "exit_code",
+      "offset_bits": 320,
+      "offset_bytes": 40,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "priority",
+      "offset_bits": 352,
+      "offset_bytes": 44,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "last",
+      "offset_bits": 384,
+      "offset_bytes": 48,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "suspend_count",
+      "offset_bits": 416,
+      "offset_bytes": 52,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "dbg_hidden",
+      "offset_bits": 448,
+      "offset_bytes": 56,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "desc_len",
+      "offset_bits": 480,
+      "offset_bytes": 60,
+      "size_bits": 32,
+      "type": "data_size_t"
+    }
+  ],
+  "name": "get_thread_info_reply",
+  "ordinal": 6715,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

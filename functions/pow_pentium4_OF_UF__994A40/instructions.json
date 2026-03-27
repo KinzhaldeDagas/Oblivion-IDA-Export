@@ -1,0 +1,62 @@
+[
+  {
+    "ea": "0x994A40",
+    "line": "movlpd  xmm4, [esp+arg_0]",
+    "mnemonic": "movlpd",
+    "size": 6
+  },
+  {
+    "ea": "0x994A46",
+    "line": "pextrw  edx, xmm4, 3",
+    "mnemonic": "pextrw",
+    "size": 5
+  },
+  {
+    "ea": "0x994A4B",
+    "line": "and     edx, 7FF0h",
+    "mnemonic": "and",
+    "size": 6
+  },
+  {
+    "ea": "0x994A51",
+    "line": "sub     edx, 3FF0h",
+    "mnemonic": "sub",
+    "size": 6
+  },
+  {
+    "ea": "0x994A57",
+    "line": "pextrw  eax, xmm1, 3",
+    "mnemonic": "pextrw",
+    "size": 5
+  },
+  {
+    "ea": "0x994A5C",
+    "line": "xor     eax, edx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x994A5E",
+    "line": "and     eax, 8000h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x994A63",
+    "line": "cmp     eax, 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x994A66",
+    "line": "jnz     __pow_pentium4___RET_ZERO_UF",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x994A6C",
+    "line": "jmp     __pow_pentium4___RET_INF_OF",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

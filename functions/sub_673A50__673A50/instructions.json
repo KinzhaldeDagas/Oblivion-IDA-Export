@@ -1,0 +1,80 @@
+[
+  {
+    "ea": "0x673A50",
+    "line": "mov     eax, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x673A52",
+    "line": "mov     ecx, [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x673A56",
+    "line": "cmp     ecx, 3; switch 4 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x673A59",
+    "line": "ja      short def_673A5B; jumptable 00673A5B default case",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x673A5B",
+    "line": "jmp     ds:jpt_673A5B[ecx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x673A62",
+    "line": "add     eax, 68h ; 'h'; jumptable 00673A5B case 0",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x673A65",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x673A68",
+    "line": "add     eax, 0Ch; jumptable 00673A5B case 2",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x673A6B",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x673A6E",
+    "line": "add     eax, 18h; jumptable 00673A5B case 3",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x673A71",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x673A74",
+    "line": "xor     eax, eax; jumptable 00673A5B default case",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x673A76",
+    "line": "retn    4; jumptable 00673A5B case 1",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

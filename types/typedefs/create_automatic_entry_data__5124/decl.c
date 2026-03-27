@@ -1,0 +1,1 @@
+create_automatic_entry::data

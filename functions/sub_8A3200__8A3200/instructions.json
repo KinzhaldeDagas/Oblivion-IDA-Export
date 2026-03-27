@@ -1,0 +1,122 @@
+[
+  {
+    "ea": "0x8A3200",
+    "line": "movsx   ecx, byte ptr [ecx+0D3h]",
+    "mnemonic": "movsx",
+    "size": 7
+  },
+  {
+    "ea": "0x8A3207",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x8A3209",
+    "line": "cmp     ecx, 7; switch 8 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x8A320C",
+    "line": "ja      short def_8A320E",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x8A320E",
+    "line": "jmp     ds:jpt_8A320E[ecx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x8A3215",
+    "line": "mov     eax, offset aInvalid_0; jumptable 008A320E case 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8A321A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8A321B",
+    "line": "mov     eax, offset aFixed_0; jumptable 008A320E case 1",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8A3220",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8A3221",
+    "line": "mov     eax, offset aKeyframed_0; jumptable 008A320E case 2",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8A3226",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8A3227",
+    "line": "mov     eax, offset aDebris; jumptable 008A320E case 3",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8A322C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8A322D",
+    "line": "mov     eax, offset aMoving; jumptable 008A320E case 4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8A3232",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8A3233",
+    "line": "mov     eax, offset aCritical; jumptable 008A320E case 5",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8A3238",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8A3239",
+    "line": "mov     eax, offset aBullet; jumptable 008A320E case 6",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8A323E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8A323F",
+    "line": "mov     eax, offset aUser; jumptable 008A320E case 7",
+    "mnemonic": "mov",
+    "size": 5
+  }
+]

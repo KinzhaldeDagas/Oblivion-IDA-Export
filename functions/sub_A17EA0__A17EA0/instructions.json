@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA17EA0",
+    "line": "push    offset bBipedWhenKeyframed",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA17EA5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA17EAA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA17EAF",
+    "line": "mov     eax, off_B05220; \"bAddBipedWhenKeyframed:HAVOK\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA17EB4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA17EB6",
+    "line": "jz      short locret_A17EC4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA17EB8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA17EBB",
+    "line": "jnz     short locret_A17EC4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA17EBD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA17EBE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA17EC3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA17EC4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

@@ -1,0 +1,368 @@
+[
+  {
+    "ea": "0x415569",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x41556B",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x415570",
+    "line": "push    offset ??_R0?AVEffectItemList@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x415575",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x415577",
+    "line": "push    esi; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415578",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41557D",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41557F",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x415582",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x415584",
+    "line": "jz      short loc_4155CF",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x415586",
+    "line": "lea     eax, [esp+arg_1C]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x41558A",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41558B",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41558D",
+    "line": "call    EffectSetting_GetName",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x415592",
+    "line": "mov     ecx, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x415595",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x415597",
+    "line": "mov     edi, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x415599",
+    "line": "mov     eax, [edx+0D4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x41559F",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4155A0",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4155A2",
+    "line": "mov     [esp+4+arg_2C], 1",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4155AA",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4155AC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4155AD",
+    "line": "push    edi; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4155AE",
+    "line": "push    offset aUnableToLoadEf; \"Unable to load EffectItem '%s' in spell\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4155B3",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4155B8",
+    "line": "mov     ecx, dword ptr [esp+10h+arg_1C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4155BC",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4155BD",
+    "line": "mov     [esp+14h+arg_2C], 0FFFFFFFFh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4155C5",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4155CA",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4155CD",
+    "line": "jmp     short loc_415621",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4155CF",
+    "line": "test    ebp, ebp",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4155D1",
+    "line": "mov     esi, offset aUnknown_0; \"{unknown}\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4155D6",
+    "line": "jz      short loc_4155DA",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4155D8",
+    "line": "mov     esi, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4155DA",
+    "line": "lea     edx, [esp+arg_14]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4155DE",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4155DF",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4155E1",
+    "line": "call    EffectSetting_GetName",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4155E6",
+    "line": "mov     eax, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4155E8",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4155E9",
+    "line": "push    eax; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4155EA",
+    "line": "push    offset aUnableToLoad_0; \"Unable to load EffectItem '%s' in spell\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4155EF",
+    "line": "mov     [esp+0Ch+arg_2C], 2",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4155F7",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4155FC",
+    "line": "mov     eax, [esp+0Ch+arg_14]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x415600",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415601",
+    "line": "mov     [esp+10h+arg_2C], 0FFFFFFFFh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x415609",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41560E",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x415611",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x415613",
+    "line": "mov     [esp+arg_14], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x415617",
+    "line": "mov     word ptr [esp+arg_18+2], ax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x41561C",
+    "line": "mov     word ptr [esp+arg_18], ax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x415621",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x415623",
+    "line": "call    EffectItem_destr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x415628",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415629",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41562E",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x415631",
+    "line": "jmp     short EffectItemList_LoadItem___Done",
+    "mnemonic": "jmp",
+    "size": 2
+  }
+]

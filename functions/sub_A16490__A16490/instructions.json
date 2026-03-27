@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA16490",
+    "line": "push    offset bBackgroundMouse",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA16495",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1649A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1649F",
+    "line": "mov     eax, off_B02C40; \"bBackground Mouse:Controls\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA164A4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA164A6",
+    "line": "jz      short locret_A164B4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA164A8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA164AB",
+    "line": "jnz     short locret_A164B4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA164AD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA164AE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA164B3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA164B4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

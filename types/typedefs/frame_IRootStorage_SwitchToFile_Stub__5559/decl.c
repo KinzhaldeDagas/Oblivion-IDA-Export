@@ -1,0 +1,1 @@
+__frame_IRootStorage_SwitchToFile_Stub

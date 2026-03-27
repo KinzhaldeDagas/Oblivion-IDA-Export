@@ -1,0 +1,110 @@
+[
+  {
+    "ea": "0x985D03",
+    "line": "mov     eax, [esp+arg_8]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x985D07",
+    "line": "and     eax, 0FFFFFh",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x985D0C",
+    "line": "or      eax, [esp+arg_4]",
+    "mnemonic": "or",
+    "size": 4
+  },
+  {
+    "ea": "0x985D10",
+    "line": "jnz     start_3___base_is_not_zero",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x985D16",
+    "line": "fstp    st",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x985D18",
+    "line": "mov     eax, [esp+arg_10]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x985D1C",
+    "line": "and     eax, 7FFFFFFFh",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x985D21",
+    "line": "or      eax, [esp+arg_C]",
+    "mnemonic": "or",
+    "size": 4
+  },
+  {
+    "ea": "0x985D25",
+    "line": "jz      short start_3___zero_to_zero",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x985D27",
+    "line": "call    _test_whether_TOS_is_int",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x985D2C",
+    "line": "mov     ch, byte ptr [esp+arg_8+3]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x985D30",
+    "line": "shr     ch, 7",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x985D33",
+    "line": "test    [esp+arg_10+3], 80h",
+    "mnemonic": "test",
+    "size": 8
+  },
+  {
+    "ea": "0x985D3B",
+    "line": "jz      short start_3___exp_is_positive",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x985D3D",
+    "line": "fld     tbyte ptr ds:0B31CD0h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x985D43",
+    "line": "test    ch, cl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x985D45",
+    "line": "jz      short start_3___ret_inf",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x985D47",
+    "line": "fchs",
+    "mnemonic": "fchs",
+    "size": 2
+  }
+]

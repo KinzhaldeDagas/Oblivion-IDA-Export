@@ -1,0 +1,1 @@
+_SC_ENUM_TYPE

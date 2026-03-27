@@ -1,0 +1,176 @@
+[
+  {
+    "ea": "0x51D4C0",
+    "line": "call    TESActorBase_CanUseWeaponAndShield",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x51D4C5",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x51D4C7",
+    "line": "jz      short def_51D4E0; jumptable 0051D4E0 default case, cases 21-25,27-32",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x51D4C9",
+    "line": "mov     ecx, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x51D4CD",
+    "line": "movzx   eax, byte ptr [ecx+4]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x51D4D1",
+    "line": "add     eax, 0FFFFFFECh; switch 15 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x51D4D4",
+    "line": "cmp     eax, 0Eh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x51D4D7",
+    "line": "ja      short def_51D4E0; jumptable 0051D4E0 default case, cases 21-25,27-32",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x51D4D9",
+    "line": "movzx   eax, ds:byte_51D528[eax]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x51D4E0",
+    "line": "jmp     ds:jpt_51D4E0[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x51D4E7",
+    "line": "push    0; jumptable 0051D4E0 case 20",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x51D4E9",
+    "line": "push    offset ??_R0?AVTESObjectARMO@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x51D4EE",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x51D4F3",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x51D4F5",
+    "line": "push    ecx; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x51D4F6",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x51D4FB",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x51D4FE",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x51D500",
+    "line": "jz      short def_51D4E0; jumptable 0051D4E0 default case, cases 21-25,27-32",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x51D502",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x51D504",
+    "line": "push    0Dh",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x51D506",
+    "line": "lea     ecx, [eax+64h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x51D509",
+    "line": "call    TESBipedModelForm_CoversSlot",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x51D50E",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x51D510",
+    "line": "jz      short def_51D4E0; jumptable 0051D4E0 default case, cases 21-25,27-32",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x51D512",
+    "line": "mov     al, 1; jumptable 0051D4E0 cases 26,33,34",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x51D514",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x51D517",
+    "line": "xor     al, al; jumptable 0051D4E0 default case, cases 21-25,27-32",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x51D519",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

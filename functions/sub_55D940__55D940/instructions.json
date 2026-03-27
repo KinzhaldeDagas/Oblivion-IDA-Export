@@ -1,0 +1,3020 @@
+[
+  {
+    "ea": "0x55D940",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D941",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D942",
+    "line": "mov     esi, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55D946",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D947",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D948",
+    "line": "mov     ebp, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55D94A",
+    "line": "call    sub_70BAE0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55D94F",
+    "line": "mov     eax, ds:0B39DB8h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55D954",
+    "line": "push    eax; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D955",
+    "line": "call    TESOutput_PrintString",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55D95A",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55D95E",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55D962",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55D965",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55D967",
+    "line": "mov     [esp+0Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55D96B",
+    "line": "jb      short loc_55D97B",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55D96D",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55D971",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55D973",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D974",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55D976",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55D97B",
+    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55D97F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D980",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D981",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55D983",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55D988",
+    "line": "push    20h ; ' '; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55D98A",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55D98F",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55D992",
+    "line": "cmp     byte ptr [ebp+104h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x55D999",
+    "line": "mov     [esp+0Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55D99D",
+    "line": "mov     ecx, offset aTrue; \"true\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55D9A2",
+    "line": "jnz     short loc_55D9A9",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x55D9A4",
+    "line": "mov     ecx, offset aFalse; \"false\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55D9A9",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D9AA",
+    "line": "push    offset aBforcebasemorp; \"bForceBaseMorph = %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55D9AF",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D9B0",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55D9B5",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55D9B9",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55D9BD",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55D9C0",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55D9C2",
+    "line": "jb      short loc_55D9D2",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55D9C4",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55D9C8",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55D9CA",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D9CB",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55D9CD",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55D9D2",
+    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55D9D6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D9D7",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55D9D8",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55D9DA",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55D9DF",
+    "line": "push    20h ; ' '; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55D9E1",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55D9E6",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55D9E9",
+    "line": "cmp     byte ptr [ebp+105h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x55D9F0",
+    "line": "mov     [esp+0Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55D9F4",
+    "line": "mov     ecx, offset aTrue; \"true\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55D9F9",
+    "line": "jnz     short loc_55DA00",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x55D9FB",
+    "line": "mov     ecx, offset aFalse; \"false\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA00",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DA01",
+    "line": "push    offset aBfixednormalsS; \"bFixedNormals = %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA06",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DA07",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA0C",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DA10",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DA14",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DA17",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA19",
+    "line": "jb      short loc_55DA29",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA1B",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DA1F",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA21",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DA22",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA24",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA29",
+    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DA2D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DA2E",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DA2F",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA31",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA36",
+    "line": "push    20h ; ' '; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA38",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA3D",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DA40",
+    "line": "cmp     byte ptr [ebp+106h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x55DA47",
+    "line": "mov     [esp+0Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DA4B",
+    "line": "mov     ecx, offset aTrue; \"true\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA50",
+    "line": "jnz     short loc_55DA57",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA52",
+    "line": "mov     ecx, offset aFalse; \"false\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA57",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DA58",
+    "line": "push    offset aBanimationupda; \"bAnimationUpdate = %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA5D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DA5E",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA63",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DA67",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DA6B",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DA6E",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA70",
+    "line": "jb      short loc_55DA80",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA72",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DA76",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA78",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DA79",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA7B",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA80",
+    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DA84",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DA85",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DA86",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA88",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA8D",
+    "line": "push    20h ; ' '; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55DA8F",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DA94",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DA97",
+    "line": "cmp     byte ptr [ebp+107h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x55DA9E",
+    "line": "mov     [esp+0Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DAA2",
+    "line": "mov     ecx, offset aTrue; \"true\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DAA7",
+    "line": "jnz     short loc_55DAAE",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DAA9",
+    "line": "mov     ecx, offset aFalse; \"false\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DAAE",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DAAF",
+    "line": "push    offset aBrotatedlastup; \"bRotatedLastUpdate = %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55DAB4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DAB5",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DABA",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DABE",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DAC2",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DAC5",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DAC7",
+    "line": "jb      short loc_55DAD7",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DAC9",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DACD",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DACF",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DAD0",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DAD2",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DAD7",
+    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DADB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DADC",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DADD",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DADF",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DAE4",
+    "line": "push    20h ; ' '; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55DAE6",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DAEB",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DAEE",
+    "line": "cmp     byte ptr [ebp+108h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x55DAF5",
+    "line": "mov     [esp+0Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DAF9",
+    "line": "mov     ecx, offset aTrue; \"true\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DAFE",
+    "line": "jnz     short loc_55DB05",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB00",
+    "line": "mov     ecx, offset aFalse; \"false\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB05",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DB06",
+    "line": "push    offset aBapplyrotation; \"bApplyRotationToParent = %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB0B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DB0C",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB11",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DB15",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DB19",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DB1C",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB1E",
+    "line": "jb      short loc_55DB2E",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB20",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DB24",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB26",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DB27",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB29",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB2E",
+    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DB32",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DB33",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DB34",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB36",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB3B",
+    "line": "push    20h ; ' '; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB3D",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB42",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DB45",
+    "line": "cmp     byte ptr [ebp+110h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x55DB4C",
+    "line": "mov     [esp+0Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DB50",
+    "line": "mov     ecx, offset aTrue; \"true\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB55",
+    "line": "jnz     short loc_55DB5C",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB57",
+    "line": "mov     ecx, offset aFalse; \"false\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB5C",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DB5D",
+    "line": "push    offset aBusingloreshea; \"bUsingLoResHead = %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB62",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DB63",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB68",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DB6C",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DB70",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DB73",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB75",
+    "line": "jb      short loc_55DB85",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB77",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DB7B",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB7D",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DB7E",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB80",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB85",
+    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DB89",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DB8A",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DB8B",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB8D",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB92",
+    "line": "push    20h ; ' '; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55DB94",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DB99",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DB9C",
+    "line": "cmp     byte ptr [ebp+111h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x55DBA3",
+    "line": "mov     [esp+0Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DBA7",
+    "line": "mov     ecx, offset aTrue; \"true\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DBAC",
+    "line": "jnz     short loc_55DBB3",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DBAE",
+    "line": "mov     ecx, offset aFalse; \"false\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DBB3",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DBB4",
+    "line": "push    offset aBiamplayerchar; \"bIAmPlayerCharacter = %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55DBB9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DBBA",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DBBF",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DBC3",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DBC7",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DBCA",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DBCC",
+    "line": "jb      short loc_55DBDC",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DBCE",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DBD2",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DBD4",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DBD5",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DBD7",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DBDC",
+    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DBE0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DBE1",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DBE2",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DBE4",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DBE9",
+    "line": "push    20h ; ' '; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55DBEB",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DBF0",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DBF3",
+    "line": "cmp     byte ptr [ebp+112h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x55DBFA",
+    "line": "mov     [esp+0Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DBFE",
+    "line": "mov     ecx, offset aTrue; \"true\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC03",
+    "line": "jnz     short loc_55DC0A",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC05",
+    "line": "mov     ecx, offset aFalse; \"false\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC0A",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DC0B",
+    "line": "push    offset aBiamindialouge; \"bIAmInDialouge = %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC10",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DC11",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC16",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DC1A",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DC1E",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DC21",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC23",
+    "line": "jb      short loc_55DC33",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC25",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DC29",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC2B",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DC2C",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC2E",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC33",
+    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DC37",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DC38",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DC39",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC3B",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC40",
+    "line": "push    20h ; ' '; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC42",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC47",
+    "line": "fld     dword ptr [ebp+10Ch]",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x55DC4D",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DC4E",
+    "line": "fstp    qword ptr [esp+14h+var_14]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x55DC51",
+    "line": "push    offset aFlasttime0_3f; \"fLastTime = %0.3f\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC56",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DC57",
+    "line": "mov     [esp+1Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DC5B",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC60",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DC64",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DC68",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DC6B",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC6D",
+    "line": "jb      short loc_55DC7D",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC6F",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DC73",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC75",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DC76",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC78",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC7D",
+    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DC81",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DC82",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DC83",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC85",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC8A",
+    "line": "push    20h ; ' '; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55DC8C",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC91",
+    "line": "mov     ecx, [ebp+114h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x55DC97",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DC98",
+    "line": "push    offset aPactor08x; \"pActor = %08X\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55DC9D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DC9E",
+    "line": "mov     [esp+1Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DCA2",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DCA7",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DCAB",
+    "line": "movzx   edx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DCAF",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DCB2",
+    "line": "cmp     edi, edx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DCB4",
+    "line": "jb      short loc_55DCC4",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DCB6",
+    "line": "movzx   eax, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DCBA",
+    "line": "add     eax, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DCBC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DCBD",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DCBF",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DCC4",
+    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DCC8",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DCC9",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DCCA",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DCCC",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DCD1",
+    "line": "cmp     dword ptr [ebp+114h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x55DCD8",
+    "line": "jz      short loc_55DD24",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DCDA",
+    "line": "push    20h ; ' '; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55DCDC",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DCE1",
+    "line": "mov     edx, [ebp+114h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x55DCE7",
+    "line": "mov     ecx, [edx+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DCEA",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DCEB",
+    "line": "push    offset aPactorIformid0; \"pActor->iFormID = %08X\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55DCF0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DCF1",
+    "line": "mov     [esp+1Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DCF5",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DCFA",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DCFE",
+    "line": "movzx   edx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DD02",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DD05",
+    "line": "cmp     edi, edx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD07",
+    "line": "jb      short loc_55DD17",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD09",
+    "line": "movzx   eax, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DD0D",
+    "line": "add     eax, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD0F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DD10",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD12",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DD17",
+    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DD1B",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DD1C",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DD1D",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD1F",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DD24",
+    "line": "push    20h ; ' '; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD26",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DD2B",
+    "line": "mov     edx, [ebp+0DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x55DD31",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DD32",
+    "line": "push    offset aSpanimationdat; \"spAnimationData = %08X\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55DD37",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DD38",
+    "line": "mov     [esp+1Ch+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DD3C",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DD41",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DD45",
+    "line": "movzx   eax, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DD49",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DD4C",
+    "line": "cmp     edi, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD4E",
+    "line": "jb      short loc_55DD5E",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD50",
+    "line": "movzx   ecx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DD54",
+    "line": "add     ecx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD56",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DD57",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD59",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DD5E",
+    "line": "lea     edx, [esp+0Ch+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DD62",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DD63",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DD64",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD66",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DD6B",
+    "line": "cmp     dword ptr [ebp+0DCh], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x55DD72",
+    "line": "jz      loc_55DF63",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x55DD78",
+    "line": "xor     edi, edi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD7A",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DD7B",
+    "line": "jmp     short loc_55DD80",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD7D",
+    "line": "align 10h",
+    "mnemonic": null,
+    "size": 3
+  },
+  {
+    "ea": "0x55DD80",
+    "line": "mov     ecx, [ebp+0DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x55DD86",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD88",
+    "line": "mov     edx, [eax+54h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DD8B",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DD8C",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD8E",
+    "line": "fcomp   qword ptr ds:0A3A5B0h",
+    "mnemonic": "fcomp",
+    "size": 6
+  },
+  {
+    "ea": "0x55DD94",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD96",
+    "line": "test    ah, 44h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x55DD99",
+    "line": "jnp     short loc_55DDE8",
+    "mnemonic": "jnp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DD9B",
+    "line": "mov     ecx, [ebp+0DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x55DDA1",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DDA3",
+    "line": "mov     edx, [eax+54h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DDA6",
+    "line": "mov     ebx, ds:0B11FF0h[edi*4]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x55DDAD",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DDAE",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x55DDB0",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DDB1",
+    "line": "fstp    [esp+14h+var_14]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x55DDB4",
+    "line": "push    ebx; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DDB5",
+    "line": "call    TESOutput_PrintLabeledFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DDBA",
+    "line": "movzx   ebx, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DDBE",
+    "line": "mov     [esp+18h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DDC2",
+    "line": "movzx   eax, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DDC6",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DDC9",
+    "line": "cmp     ebx, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DDCB",
+    "line": "jb      short loc_55DDDB",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DDCD",
+    "line": "movzx   ecx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DDD1",
+    "line": "add     ecx, ebx",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DDD3",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DDD4",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DDD6",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DDDB",
+    "line": "lea     edx, [esp+10h+arg_0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DDDF",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DDE0",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DDE1",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DDE3",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DDE8",
+    "line": "add     edi, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DDEB",
+    "line": "cmp     edi, 0Dh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x55DDEE",
+    "line": "jl      short loc_55DD80",
+    "mnemonic": "jl",
+    "size": 2
+  },
+  {
+    "ea": "0x55DDF0",
+    "line": "xor     ebx, ebx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x55DDF2",
+    "line": "mov     ecx, [ebp+0DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x55DDF8",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DDFA",
+    "line": "mov     edx, [eax+5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DDFD",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DDFE",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE00",
+    "line": "fcomp   qword ptr ds:0A3A5B0h",
+    "mnemonic": "fcomp",
+    "size": 6
+  },
+  {
+    "ea": "0x55DE06",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE08",
+    "line": "test    ah, 44h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x55DE0B",
+    "line": "jnp     loc_55DE98",
+    "mnemonic": "jnp",
+    "size": 6
+  },
+  {
+    "ea": "0x55DE11",
+    "line": "mov     ecx, [ebp+0DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x55DE17",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE19",
+    "line": "mov     edx, [eax+5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DE1C",
+    "line": "mov     edi, ds:0B12028h[ebx*4]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x55DE23",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DE24",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE26",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DE27",
+    "line": "fstp    [esp+14h+var_14]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x55DE2A",
+    "line": "push    edi; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DE2B",
+    "line": "call    TESOutput_PrintLabeledFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DE30",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DE34",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DE38",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DE3B",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE3D",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DE41",
+    "line": "jb      short loc_55DE55",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE43",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DE47",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE49",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DE4A",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE4C",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DE51",
+    "line": "mov     eax, [esp+10h+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DE55",
+    "line": "movzx   ecx, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DE59",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE5B",
+    "line": "jb      short loc_55DE6F",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE5D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE5F",
+    "line": "lea     edx, [edi+1]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x55DE62",
+    "line": "mov     [esi+0Ah], dx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DE66",
+    "line": "jz      short loc_55DE92",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE68",
+    "line": "add     word ptr [esi+0Ch], 1",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x55DE6D",
+    "line": "jmp     short loc_55DE92",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE6F",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE71",
+    "line": "jz      short loc_55DE83",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE73",
+    "line": "mov     ecx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DE76",
+    "line": "cmp     dword ptr [ecx+edi*4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x55DE7A",
+    "line": "jnz     short loc_55DE92",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE7C",
+    "line": "add     word ptr [esi+0Ch], 1",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x55DE81",
+    "line": "jmp     short loc_55DE92",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE83",
+    "line": "mov     edx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DE86",
+    "line": "cmp     dword ptr [edx+edi*4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x55DE8A",
+    "line": "jz      short loc_55DE92",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DE8C",
+    "line": "add     word ptr [esi+0Ch], 0FFFFh",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x55DE92",
+    "line": "mov     ecx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DE95",
+    "line": "mov     [ecx+edi*4], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DE98",
+    "line": "add     ebx, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DE9B",
+    "line": "cmp     ebx, 11h",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x55DE9E",
+    "line": "jl      loc_55DDF2",
+    "mnemonic": "jl",
+    "size": 6
+  },
+  {
+    "ea": "0x55DEA4",
+    "line": "xor     ebx, ebx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x55DEA6",
+    "line": "jmp     short loc_55DEB0",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DEA8",
+    "line": "align 10h",
+    "mnemonic": null,
+    "size": 7
+  },
+  {
+    "ea": "0x55DEB0",
+    "line": "mov     ecx, [ebp+0DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x55DEB6",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DEB8",
+    "line": "mov     eax, [edx+68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DEBB",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DEBC",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x55DEBE",
+    "line": "fcomp   qword ptr ds:0A3A5B0h",
+    "mnemonic": "fcomp",
+    "size": 6
+  },
+  {
+    "ea": "0x55DEC4",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x55DEC6",
+    "line": "test    ah, 44h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x55DEC9",
+    "line": "jnp     loc_55DF56",
+    "mnemonic": "jnp",
+    "size": 6
+  },
+  {
+    "ea": "0x55DECF",
+    "line": "mov     ecx, [ebp+0DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x55DED5",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DED7",
+    "line": "mov     eax, [edx+68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DEDA",
+    "line": "mov     edi, ds:0B12070h[ebx*4]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x55DEE1",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DEE2",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x55DEE4",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DEE5",
+    "line": "fstp    [esp+14h+var_14]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x55DEE8",
+    "line": "push    edi; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DEE9",
+    "line": "call    TESOutput_PrintLabeledFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DEEE",
+    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DEF2",
+    "line": "movzx   ecx, word ptr [esi+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DEF6",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DEF9",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DEFB",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DEFF",
+    "line": "jb      short loc_55DF13",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF01",
+    "line": "movzx   edx, word ptr [esi+0Eh]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DF05",
+    "line": "add     edx, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF07",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DF08",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF0A",
+    "line": "call    NiTArray_SetSize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DF0F",
+    "line": "mov     eax, [esp+10h+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DF13",
+    "line": "movzx   ecx, word ptr [esi+0Ah]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x55DF17",
+    "line": "cmp     edi, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF19",
+    "line": "jb      short loc_55DF2D",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF1B",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF1D",
+    "line": "lea     edx, [edi+1]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x55DF20",
+    "line": "mov     [esi+0Ah], dx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DF24",
+    "line": "jz      short loc_55DF50",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF26",
+    "line": "add     word ptr [esi+0Ch], 1",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x55DF2B",
+    "line": "jmp     short loc_55DF50",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF2D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF2F",
+    "line": "jz      short loc_55DF41",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF31",
+    "line": "mov     ecx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DF34",
+    "line": "cmp     dword ptr [ecx+edi*4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x55DF38",
+    "line": "jnz     short loc_55DF50",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF3A",
+    "line": "add     word ptr [esi+0Ch], 1",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x55DF3F",
+    "line": "jmp     short loc_55DF50",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF41",
+    "line": "mov     edx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DF44",
+    "line": "cmp     dword ptr [edx+edi*4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x55DF48",
+    "line": "jz      short loc_55DF50",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DF4A",
+    "line": "add     word ptr [esi+0Ch], 0FFFFh",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x55DF50",
+    "line": "mov     ecx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DF53",
+    "line": "mov     [ecx+edi*4], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DF56",
+    "line": "add     ebx, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x55DF59",
+    "line": "cmp     ebx, 10h",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x55DF5C",
+    "line": "jl      loc_55DEB0",
+    "mnemonic": "jl",
+    "size": 6
+  },
+  {
+    "ea": "0x55DF62",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x55DF63",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x55DF64",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x55DF65",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x55DF66",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

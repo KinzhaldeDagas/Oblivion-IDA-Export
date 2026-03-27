@@ -1,0 +1,140 @@
+[
+  {
+    "ea": "0x47E0F0",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x47E0F1",
+    "line": "cmp     byte ptr ds:0B069C3h, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x47E0F8",
+    "line": "jz      short loc_47E111",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x47E0FA",
+    "line": "push    0; Time",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x47E0FC",
+    "line": "call    __time64",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x47E101",
+    "line": "push    eax; Seed",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x47E102",
+    "line": "call    _srand",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x47E107",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x47E10A",
+    "line": "mov     byte ptr ds:0B069C3h, 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x47E111",
+    "line": "call    _rand",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x47E116",
+    "line": "mov     [esp+4+var_4], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x47E119",
+    "line": "fild    [esp+4+var_4]",
+    "mnemonic": "fild",
+    "size": 3
+  },
+  {
+    "ea": "0x47E11C",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x47E11E",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x47E120",
+    "line": "fsub    st(1), st",
+    "mnemonic": "fsub",
+    "size": 2
+  },
+  {
+    "ea": "0x47E122",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x47E124",
+    "line": "fmulp   st(1), st",
+    "mnemonic": "fmulp",
+    "size": 2
+  },
+  {
+    "ea": "0x47E126",
+    "line": "fdiv    qword ptr ds:0A3D5A8h",
+    "mnemonic": "fdiv",
+    "size": 6
+  },
+  {
+    "ea": "0x47E12C",
+    "line": "faddp   st(1), st",
+    "mnemonic": "faddp",
+    "size": 2
+  },
+  {
+    "ea": "0x47E12E",
+    "line": "fstp    [esp+4+var_4]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x47E131",
+    "line": "fld     [esp+4+var_4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x47E134",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x47E135",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

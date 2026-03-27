@@ -1,0 +1,194 @@
+[
+  {
+    "ea": "0x693AEB",
+    "line": "mov     esi, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x693AED",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x693AEF",
+    "line": "jz      short DispelEffect_Apply___EffectLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x693AF1",
+    "line": "cmp     esi, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x693AF3",
+    "line": "jz      short DispelEffect_Apply___EffectLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x693AF5",
+    "line": "mov     edi, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x693AF8",
+    "line": "mov     edx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x693AFA",
+    "line": "mov     eax, [edx+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x693AFD",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x693AFF",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x693B01",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x693B03",
+    "line": "jnz     short DispelEffect_Apply___EffectLoop_Next",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x693B05",
+    "line": "mov     al, [esp+arg_F]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x693B09",
+    "line": "fld     dword ptr [ebp+18h]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x693B0C",
+    "line": "mov     edx, [edi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x693B0F",
+    "line": "fstp    [esp+arg_14]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x693B13",
+    "line": "mov     edx, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x693B15",
+    "line": "neg     al",
+    "mnemonic": "neg",
+    "size": 2
+  },
+  {
+    "ea": "0x693B17",
+    "line": "lea     ecx, [edi+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x693B1A",
+    "line": "sbb     eax, eax",
+    "mnemonic": "sbb",
+    "size": 2
+  },
+  {
+    "ea": "0x693B1C",
+    "line": "and     eax, [esp+arg_10]",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x693B20",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x693B21",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x693B23",
+    "line": "fld     dword ptr ds:0B380D8h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x693B29",
+    "line": "fmul    [esp+arg_14]",
+    "mnemonic": "fmul",
+    "size": 4
+  },
+  {
+    "ea": "0x693B2D",
+    "line": "fcompp",
+    "mnemonic": "fcompp",
+    "size": 2
+  },
+  {
+    "ea": "0x693B2F",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x693B31",
+    "line": "test    ah, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x693B34",
+    "line": "jnz     short DispelEffect_Apply___EffectLoop_Next",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x693B36",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x693B38",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x693B3A",
+    "line": "call    ActiveEffect_Base_Remove",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

@@ -1,0 +1,134 @@
+[
+  {
+    "ea": "0x4212F0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4212F1",
+    "line": "push    4Bh ; 'K'; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4212F3",
+    "line": "call    BaseExtraList_GetExtraData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4212F8",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4212FA",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4212FC",
+    "line": "jz      short loc_421332",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4212FE",
+    "line": "mov     eax, [esi+14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x421301",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x421303",
+    "line": "jz      short loc_421332",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x421305",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x421306",
+    "line": "mov     ecx, offset FormHeap",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x42130B",
+    "line": "call    MemoryHeap_Free_checked",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x421310",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x421312",
+    "line": "push    6",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x421314",
+    "line": "mov     ecx, offset FormHeap",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x421319",
+    "line": "call    j_MemoryHeap_Alloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42131E",
+    "line": "mov     [esi+14h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x421321",
+    "line": "mov     word ptr [eax], 4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x421326",
+    "line": "mov     word ptr [eax+2], 0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x42132C",
+    "line": "mov     word ptr [eax+4], 0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x421332",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x421333",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

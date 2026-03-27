@@ -1,0 +1,128 @@
+[
+  {
+    "ea": "0x628240",
+    "line": "movsx   eax, word ptr [ecx+1F4h]",
+    "mnemonic": "movsx",
+    "size": 7
+  },
+  {
+    "ea": "0x628247",
+    "line": "add     eax, 1; switch 8 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x62824A",
+    "line": "cmp     eax, 7",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x62824D",
+    "line": "ja      short def_628256; jumptable 00628256 default case, cases 0,1",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x62824F",
+    "line": "movzx   eax, ds:byte_62829C[eax]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x628256",
+    "line": "jmp     ds:jpt_628256[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x62825D",
+    "line": "mov     cl, [ecx+11Dh]; jumptable 00628256 cases -1,6",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x628263",
+    "line": "test    cl, cl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x628265",
+    "line": "jz      short loc_628271",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x628267",
+    "line": "cmp     cl, 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x62826A",
+    "line": "jz      short loc_628271",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x62826C",
+    "line": "cmp     cl, 9",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x62826F",
+    "line": "jnz     short def_628256; jumptable 00628256 default case, cases 0,1",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x628271",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x628273",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x628276",
+    "line": "mov     ecx, [esp+arg_0]; jumptable 00628256 cases 2-5",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x62827A",
+    "line": "cmp     ecx, ds:0B333C4h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x628280",
+    "line": "jnz     short def_628256; jumptable 00628256 default case, cases 0,1",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x628282",
+    "line": "mov     byte ptr ds:0B3BAEBh, 1",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x628289",
+    "line": "xor     al, al; jumptable 00628256 default case, cases 0,1",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x62828B",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

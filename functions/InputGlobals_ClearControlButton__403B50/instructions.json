@@ -1,0 +1,92 @@
+[
+  {
+    "ea": "0x403B50",
+    "line": "mov     edx, dword ptr [esp+whichScheme]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x403B54",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x403B56",
+    "line": "imul    edx, 1Dh",
+    "mnemonic": "imul",
+    "size": 3
+  },
+  {
+    "ea": "0x403B59",
+    "line": "lea     ecx, [edx+ecx+1B7Eh]",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x403B60",
+    "line": "mov     edx, dword ptr [esp+button]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x403B64",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403B65",
+    "line": "movzx   esi, byte ptr [ecx+eax]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x403B69",
+    "line": "cmp     esi, edx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x403B6B",
+    "line": "jnz     short loc_403B71",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x403B6D",
+    "line": "mov     byte ptr [ecx+eax], 0FFh",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x403B71",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x403B74",
+    "line": "cmp     eax, 1Dh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x403B77",
+    "line": "jl      short loc_403B65",
+    "mnemonic": "jl",
+    "size": 2
+  },
+  {
+    "ea": "0x403B79",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x403B7A",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

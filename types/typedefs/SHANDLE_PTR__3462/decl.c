@@ -1,0 +1,1 @@
+SHANDLE_PTR

@@ -1,0 +1,182 @@
+[
+  {
+    "ea": "0x5F474D",
+    "line": "mov     edx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5F474F",
+    "line": "mov     eax, [edx+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5F4752",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5F4754",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5F4756",
+    "line": "cmp     eax, 8; switch 9 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5F4759",
+    "line": "ja      Actor_MagicCaster_IsMagicItemUseable___ActorMagicCaster_IsAbleToCast_Return1; jumptable 005F475F default case, cases 1,4,7",
+    "mnemonic": "ja",
+    "size": 6
+  },
+  {
+    "ea": "0x5F475F",
+    "line": "jmp     ds:jpt_5F475F[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x5F4766",
+    "line": "push    0; jumptable 005F475F case 2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5F4768",
+    "line": "push    offset ??_R0?AVSpellItem@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5F476D",
+    "line": "push    offset ??_R0?AVMagicItem@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5F4772",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5F4774",
+    "line": "push    edi; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5F4775",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5F477A",
+    "line": "mov     ecx, [esp+14h+arg_10]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5F477E",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5F4781",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5F4782",
+    "line": "add     ecx, 0FFFFFFA4h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5F4785",
+    "line": "call    Actor_GetMagicItemCooldown",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5F478A",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5F478C",
+    "line": "jz      short Actor_MagicCaster_IsMagicItemUseable___Actor_MagicCaster_IsMagicItemUseable_LPW; jumptable 005F475F case 3",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5F478E",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5F4790",
+    "line": "jz      short loc_5F4798",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5F4792",
+    "line": "mov     dword ptr [esi], 4",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5F4798",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F4799",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F479A",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x5F479C",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F479D",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5F47A0",
+    "line": "retn    10h",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5F47A3",
+    "line": "cmp     byte ptr [esp+arg_18], 0; jumptable 005F475F case 3",
+    "mnemonic": "cmp",
+    "size": 5
+  }
+]

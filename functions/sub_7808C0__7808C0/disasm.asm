@@ -1,0 +1,42 @@
+0x7808C0: mov     eax, [esp+arg_0]
+0x7808C4: mov     edx, [eax+54h]
+0x7808C7: cmp     [ecx+44h], edx
+0x7808CA: jz      short loc_780938
+0x7808CC: mov     [ecx+44h], edx
+0x7808CF: fld     dword ptr [eax+50h]
+0x7808D2: fstp    [esp+arg_0]
+0x7808D6: fld     dword ptr [eax+40h]
+0x7808D9: fstp    dword ptr [ecx+30h]
+0x7808DC: fld     dword ptr [eax+44h]
+0x7808DF: fstp    dword ptr [ecx+34h]
+0x7808E2: fld     dword ptr [eax+48h]
+0x7808E5: fstp    dword ptr [ecx+38h]
+0x7808E8: fld     [esp+arg_0]
+0x7808EC: fst     dword ptr [ecx+3Ch]
+0x7808EF: fld     dword ptr [eax+1Ch]
+0x7808F2: fstp    dword ptr [ecx+10h]
+0x7808F5: fld     dword ptr [eax+20h]
+0x7808F8: fstp    dword ptr [ecx+14h]
+0x7808FB: fld     dword ptr [eax+24h]
+0x7808FE: fstp    dword ptr [ecx+18h]
+0x780901: fst     dword ptr [ecx+1Ch]
+0x780904: fld     dword ptr [eax+28h]
+0x780907: fstp    dword ptr [ecx]
+0x780909: fld     dword ptr [eax+2Ch]
+0x78090C: fstp    dword ptr [ecx+4]
+0x78090F: fld     dword ptr [eax+30h]
+0x780912: fstp    dword ptr [ecx+8]
+0x780915: fst     dword ptr [ecx+0Ch]
+0x780918: fld     dword ptr [eax+34h]
+0x78091B: fstp    dword ptr [ecx+20h]
+0x78091E: fld     dword ptr [eax+38h]
+0x780921: fstp    dword ptr [ecx+24h]
+0x780924: fld     dword ptr [eax+3Ch]
+0x780927: fstp    dword ptr [ecx+28h]
+0x78092A: fstp    dword ptr [ecx+2Ch]
+0x78092D: fld     dword ptr [eax+4Ch]
+0x780930: mov     al, 1
+0x780932: fstp    dword ptr [ecx+40h]
+0x780935: retn    4
+0x780938: xor     al, al
+0x78093A: retn    4

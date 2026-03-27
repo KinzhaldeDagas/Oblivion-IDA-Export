@@ -1,0 +1,170 @@
+[
+  {
+    "ea": "0x69BA03",
+    "line": "cmp     [esp+arg_13], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x69BA08",
+    "line": "jz      short MagicCaster_ApplyActiveMagicItem___ClearCasterState",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA0A",
+    "line": "mov     edx, [esp+arg_74]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x69BA0E",
+    "line": "test    edx, edx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA10",
+    "line": "jz      short MagicCaster_ApplyActiveMagicItem___ClearCasterState",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA12",
+    "line": "movzx   eax, word ptr [edx+20h]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x69BA16",
+    "line": "cmp     ax, 0FFFFh",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x69BA1A",
+    "line": "jnz     short loc_69BA2F",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA1C",
+    "line": "mov     eax, [edx+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69BA1F",
+    "line": "lea     edi, [eax+1]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x69BA22",
+    "line": "mov     cl, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA24",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x69BA27",
+    "line": "test    cl, cl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA29",
+    "line": "jnz     short loc_69BA22",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA2B",
+    "line": "sub     eax, edi",
+    "mnemonic": "sub",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA2D",
+    "line": "jmp     short loc_69BA32",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA2F",
+    "line": "movzx   eax, ax",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x69BA32",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA34",
+    "line": "jbe     short MagicCaster_ApplyActiveMagicItem___ClearCasterState",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA36",
+    "line": "mov     eax, [edx+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69BA39",
+    "line": "lea     ecx, [edx+18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x69BA3C",
+    "line": "mov     edx, [eax+14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69BA3F",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA41",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA43",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x69BA45",
+    "line": "mov     ecx, ds:0B33A1Ch",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x69BA4B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x69BA4C",
+    "line": "call    QueuedModelLoader_RemoveModel",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

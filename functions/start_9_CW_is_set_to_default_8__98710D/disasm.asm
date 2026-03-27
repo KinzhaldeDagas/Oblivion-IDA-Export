@@ -1,0 +1,2 @@
+0x98710D: fld1
+0x98710F: fpatan

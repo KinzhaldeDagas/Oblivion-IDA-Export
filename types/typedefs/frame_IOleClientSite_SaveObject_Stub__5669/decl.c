@@ -1,0 +1,1 @@
+__frame_IOleClientSite_SaveObject_Stub

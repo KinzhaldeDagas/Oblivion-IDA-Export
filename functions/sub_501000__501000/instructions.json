@@ -1,0 +1,86 @@
+[
+  {
+    "ea": "0x501000",
+    "line": "call    ToggleDebugText",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x501005",
+    "line": "cmp     byte ptr ds:0B361ACh, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x50100C",
+    "line": "jz      short loc_50102F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x50100E",
+    "line": "call    GetInterfaceSingleton0x50",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x501013",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x501015",
+    "line": "mov     eax, offset aOn_0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x50101A",
+    "line": "jnz     short loc_501021",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x50101C",
+    "line": "mov     eax, offset aOff",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x501021",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x501022",
+    "line": "push    offset aDebugTextS; \"Debug Text -> %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x501027",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x50102C",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x50102F",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x501031",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

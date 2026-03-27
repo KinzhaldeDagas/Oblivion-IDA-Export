@@ -1,0 +1,1 @@
+__frame_IDropTarget_Drop_Stub

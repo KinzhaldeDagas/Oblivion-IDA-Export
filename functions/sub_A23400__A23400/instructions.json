@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA23400",
+    "line": "push    offset bUSeMultithreadedFaceGen",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA23405",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA2340A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA2340F",
+    "line": "mov     eax, off_B120E0; \"bUseMultiThreadedFaceGen:BackgroundLoad\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA23414",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA23416",
+    "line": "jz      short locret_A23424",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA23418",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA2341B",
+    "line": "jnz     short locret_A23424",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA2341D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA2341E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA23423",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA23424",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

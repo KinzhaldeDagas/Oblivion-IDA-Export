@@ -1,0 +1,242 @@
+[
+  {
+    "ea": "0x5D41E0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D41E1",
+    "line": "push    418h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D41E6",
+    "line": "call    Menu_GetOpenMenuTile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D41EB",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D41ED",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5D41F0",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5D41F2",
+    "line": "jz      short loc_5D4255",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D41F4",
+    "line": "mov     ecx, ds:0B333C4h; Concurrency::details::SchedulerBase *",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5D41FA",
+    "line": "push    edi; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D41FB",
+    "line": "call    sub_668CC0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D4200",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5D4202",
+    "line": "push    offset ??_R0?AVSigilStoneMenu@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D4207",
+    "line": "push    offset ??_R0?AVMenu@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D420C",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5D420E",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D4210",
+    "line": "call    Tile_GetParentMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D4215",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D4216",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D421B",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D421D",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5D4220",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5D4222",
+    "line": "jz      short loc_5D4241",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D4224",
+    "line": "fld     dword ptr ds:0A379B4h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5D422A",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D422B",
+    "line": "fstp    [esp+0Ch+a2]; a3",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D422E",
+    "line": "push    1772h; a2",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D4233",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D4235",
+    "line": "call    Tile_SetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D423A",
+    "line": "mov     ecx, edi; int",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D423C",
+    "line": "call    sub_584740",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D4241",
+    "line": "mov     al, ds:0B3B720h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5D4246",
+    "line": "cmp     al, 3",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5D4248",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5D4249",
+    "line": "jz      short loc_5D424F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D424B",
+    "line": "cmp     al, 2",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5D424D",
+    "line": "jnz     short loc_5D4255",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D424F",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5D4250",
+    "line": "jmp     sub_57CAC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x5D4255",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5D4256",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

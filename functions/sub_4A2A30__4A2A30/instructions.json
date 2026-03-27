@@ -1,0 +1,80 @@
+[
+  {
+    "ea": "0x4A2A30",
+    "line": "mov     eax, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4A2A34",
+    "line": "movzx   eax, byte ptr [eax+4]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x4A2A38",
+    "line": "add     eax, 0FFFFFFEDh; switch 24 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4A2A3B",
+    "line": "cmp     eax, 17h",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x4A2A3E",
+    "line": "ja      short def_4A2A47; jumptable 004A2A47 default case, cases 23,24,26,28-32,37,41",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x4A2A40",
+    "line": "movzx   ecx, ds:byte_4A2A6C[eax]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x4A2A47",
+    "line": "jmp     ds:jpt_4A2A47[ecx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x4A2A4E",
+    "line": "mov     eax, 3; jumptable 004A2A47 cases 35,36",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4A2A53",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4A2A54",
+    "line": "mov     eax, 2; jumptable 004A2A47 cases 19-22,25,27,33,34,38-40,42",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4A2A59",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4A2A5A",
+    "line": "mov     eax, 1; jumptable 004A2A47 default case, cases 23,24,26,28-32,37,41",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4A2A5F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

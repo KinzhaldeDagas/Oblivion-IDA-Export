@@ -1,0 +1,1 @@
+get_window_layered_info_request

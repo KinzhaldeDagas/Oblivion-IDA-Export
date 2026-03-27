@@ -1,0 +1,1 @@
+IOleCacheControlVtbl_0

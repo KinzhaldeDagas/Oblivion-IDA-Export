@@ -1,0 +1,4 @@
+0x983FF9: cld
+0x983FFA: pop     edi
+0x983FFB: leave
+0x983FFC: retn

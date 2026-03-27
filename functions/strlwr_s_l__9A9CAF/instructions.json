@@ -1,0 +1,110 @@
+[
+  {
+    "ea": "0x9A9CAF",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9A9CB0",
+    "line": "mov     ebp, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x9A9CB2",
+    "line": "sub     esp, 10h",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9CB5",
+    "line": "push    [ebp+Locale]; struct localeinfo_struct *",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9CB8",
+    "line": "lea     ecx, [ebp+var_10]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9CBB",
+    "line": "call    ??0_LocaleUpdate@@QAE@PAUlocaleinfo_struct@@@Z",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9A9CC0",
+    "line": "lea     eax, [ebp+var_10]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9CC3",
+    "line": "push    eax; struct localeinfo_struct *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9A9CC4",
+    "line": "push    [ebp+Size]; MaxCount",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9CC7",
+    "line": "push    [ebp+Str]; Str",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9CCA",
+    "line": "call    ?_strlwr_s_l_stat@@YAHPADIPAUlocaleinfo_struct@@@Z",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9A9CCF",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9CD2",
+    "line": "cmp     [ebp+var_4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x9A9CD6",
+    "line": "jz      short locret_9A9CDF",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x9A9CD8",
+    "line": "mov     ecx, [ebp+var_8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9CDB",
+    "line": "and     dword ptr [ecx+70h], 0FFFFFFFDh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9A9CDF",
+    "line": "leave",
+    "mnemonic": "leave",
+    "size": 1
+  },
+  {
+    "ea": "0x9A9CE0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

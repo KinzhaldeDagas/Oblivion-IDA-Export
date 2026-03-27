@@ -1,0 +1,1 @@
+__frame_IOleLink_GetSourceMoniker_Stub

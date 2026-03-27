@@ -1,0 +1,200 @@
+[
+  {
+    "ea": "0x699C10",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x699C11",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x699C13",
+    "line": "mov     ecx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x699C16",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x699C18",
+    "line": "jz      short loc_699C60",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x699C1A",
+    "line": "fld     [esp+4+arg_0]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x699C1E",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x699C1F",
+    "line": "fstp    [esp+8+var_8]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x699C22",
+    "line": "call    MagicCaster_CastingVFX_UpdateTimes?",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x699C27",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x699C29",
+    "line": "mov     edx, [eax+30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x699C2C",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x699C2E",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x699C30",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x699C32",
+    "line": "jnz     short loc_699C60",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x699C34",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x699C36",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x699C37",
+    "line": "mov     edi, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x699C3A",
+    "line": "fcomp   dword ptr [edi+14h]",
+    "mnemonic": "fcomp",
+    "size": 3
+  },
+  {
+    "ea": "0x699C3D",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x699C3F",
+    "line": "test    ah, 5",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x699C42",
+    "line": "jnp     short loc_699C5F",
+    "mnemonic": "jnp",
+    "size": 2
+  },
+  {
+    "ea": "0x699C44",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x699C46",
+    "line": "jz      short loc_699C58",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x699C48",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x699C4A",
+    "line": "call    MagicCaster_CastingVFX_destr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x699C4F",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x699C50",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x699C55",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x699C58",
+    "line": "mov     dword ptr [esi+4], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x699C5F",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x699C60",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x699C61",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

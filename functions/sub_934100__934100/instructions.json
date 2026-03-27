@@ -1,0 +1,218 @@
+[
+  {
+    "ea": "0x934100",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x934101",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x934102",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x934103",
+    "line": "mov     ebp, [esp+0Ch+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x934107",
+    "line": "mov     eax, [ebp+0]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x93410A",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x93410B",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x93410C",
+    "line": "mov     edi, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x93410E",
+    "line": "mov     ecx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x934110",
+    "line": "lea     ebx, [ecx+edi+10h]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x934114",
+    "line": "mov     [esp+14h+var_4], 4",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x93411C",
+    "line": "lea     esi, [edi+10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x93411F",
+    "line": "nop",
+    "mnemonic": "nop",
+    "size": 1
+  },
+  {
+    "ea": "0x934120",
+    "line": "movzx   ecx, byte ptr [esi]",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x934123",
+    "line": "cmp     ecx, 6; switch 7 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x934126",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x934128",
+    "line": "ja      short def_93412A",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x93412A",
+    "line": "jmp     ds:jpt_93412A[ecx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x934131",
+    "line": "lea     ecx, [esi+10h]; jumptable 0093412A cases 2,3,6",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x934134",
+    "line": "movzx   edx, byte ptr [esi+3]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x934138",
+    "line": "mov     ebp, [esp+14h+arg_8]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x93413C",
+    "line": "add     esi, edx",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x93413E",
+    "line": "movzx   edx, byte ptr [eax+1]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x934142",
+    "line": "imul    edx, 34h ; '4'",
+    "mnemonic": "imul",
+    "size": 3
+  },
+  {
+    "ea": "0x934145",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x934146",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x934147",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x934148",
+    "line": "mov     eax, [esp+20h+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x93414C",
+    "line": "call    dword ptr [edx+eax+1698h]",
+    "mnemonic": "call",
+    "size": 7
+  },
+  {
+    "ea": "0x934153",
+    "line": "mov     ebp, [esp+20h+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x934157",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x93415A",
+    "line": "jmp     short def_93412A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x93415C",
+    "line": "lea     ecx, [esi+20h]; jumptable 0093412A cases 4,5",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x93415F",
+    "line": "jmp     short loc_934134",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x934161",
+    "line": "movzx   ecx, byte ptr [esi+3]; jumptable 0093412A case 0",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x934165",
+    "line": "add     esi, ecx",
+    "mnemonic": "add",
+    "size": 2
+  }
+]

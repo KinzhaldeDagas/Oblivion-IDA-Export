@@ -1,0 +1,212 @@
+[
+  {
+    "ea": "0x467961",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x467963",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x467965",
+    "line": "jz      short TESActorBaseData_GetFactionReactionAndRank___ThisFactionLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x467967",
+    "line": "cmp     byte ptr [eax+4], 0FFh",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x46796B",
+    "line": "mov     edi, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x46796D",
+    "line": "jle     short TESActorBaseData_GetFactionReactionAndRank___TargetFactionLoop_next",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x46796F",
+    "line": "movzx   ecx, byte ptr [edi+34h]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x467973",
+    "line": "shr     ecx, 3",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x467976",
+    "line": "test    cl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x467979",
+    "line": "jz      short loc_46798E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46797B",
+    "line": "mov     ecx, ds:0B333C4h; this",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x467981",
+    "line": "push    0; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x467983",
+    "line": "call    Actor_GetActorBaseForm",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x467988",
+    "line": "cmp     [esp+arg_20], eax",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x46798C",
+    "line": "jz      short TESActorBaseData_GetFactionReactionAndRank___TargetFactionLoop_next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46798E",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46798F",
+    "line": "lea     ecx, [ebp+24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x467992",
+    "line": "call    TESReactionForm_GetReactionToTarget",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x467997",
+    "line": "cmp     edi, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x467999",
+    "line": "jnz     short loc_4679AD",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x46799B",
+    "line": "cmp     ebx, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x46799D",
+    "line": "jge     short loc_4679AD",
+    "mnemonic": "jge",
+    "size": 2
+  },
+  {
+    "ea": "0x46799F",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4679A1",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4679A3",
+    "line": "movsx   eax, byte ptr [edx+4]",
+    "mnemonic": "movsx",
+    "size": 4
+  },
+  {
+    "ea": "0x4679A7",
+    "line": "mov     [esp+arg_14], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4679AB",
+    "line": "jmp     short TESActorBaseData_GetFactionReactionAndRank___TargetFactionLoop_next",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4679AD",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4679AF",
+    "line": "jz      short TESActorBaseData_GetFactionReactionAndRank___TargetFactionLoop_next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4679B1",
+    "line": "cmp     [esp+arg_10], eax",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4679B5",
+    "line": "jle     short TESActorBaseData_GetFactionReactionAndRank___TargetFactionLoop_next",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x4679B7",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4679B9",
+    "line": "movsx   edx, byte ptr [ecx+4]",
+    "mnemonic": "movsx",
+    "size": 4
+  },
+  {
+    "ea": "0x4679BD",
+    "line": "mov     [esp+arg_10], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4679C1",
+    "line": "mov     [esp+arg_18], edx",
+    "mnemonic": "mov",
+    "size": 4
+  }
+]

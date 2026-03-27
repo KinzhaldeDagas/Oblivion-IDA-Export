@@ -1,0 +1,1 @@
+IEnumFORMATETCVtbl_0

@@ -1,0 +1,98 @@
+[
+  {
+    "ea": "0x628DD0",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x628DD2",
+    "line": "mov     edx, [eax+4D0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x628DD8",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x628DDA",
+    "line": "cmp     eax, 4; switch 5 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x628DDD",
+    "line": "ja      short def_628DDF",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x628DDF",
+    "line": "jmp     ds:jpt_628DDF[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x628DE6",
+    "line": "mov     eax, offset aDefault_0; jumptable 00628DDF case 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x628DEB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x628DEC",
+    "line": "mov     eax, offset aAction; jumptable 00628DDF case 1",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x628DF1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x628DF2",
+    "line": "mov     eax, offset aScript_0; jumptable 00628DDF case 2",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x628DF7",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x628DF8",
+    "line": "mov     eax, offset aCombat; jumptable 00628DDF case 3",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x628DFD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x628DFE",
+    "line": "mov     eax, offset aDialog; jumptable 00628DDF case 4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x628E03",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

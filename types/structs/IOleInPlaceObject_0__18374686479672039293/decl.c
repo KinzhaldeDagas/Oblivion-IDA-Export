@@ -1,0 +1,1 @@
+IOleInPlaceObject_0

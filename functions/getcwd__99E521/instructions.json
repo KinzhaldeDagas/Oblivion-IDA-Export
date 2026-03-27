@@ -1,0 +1,134 @@
+[
+  {
+    "ea": "0x99E521",
+    "line": "push    0Ch",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x99E523",
+    "line": "push    offset stru_B00170",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x99E528",
+    "line": "call    __SEH_prolog4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99E52D",
+    "line": "push    7",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x99E52F",
+    "line": "call    __lock",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99E534",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x99E535",
+    "line": "and     [ebp+ms_exc.registration.TryLevel], 0",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x99E539",
+    "line": "push    [ebp+NumOfElements]; NumOfElements",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x99E53C",
+    "line": "push    [ebp+lpBuffer]; lpBuffer",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x99E53F",
+    "line": "push    0; nBufferLength",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x99E541",
+    "line": "call    __getdcwd_nolock",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99E546",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x99E549",
+    "line": "mov     [ebp+var_1C], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x99E54C",
+    "line": "mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x99E553",
+    "line": "call    loc_99E561",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99E558",
+    "line": "mov     eax, [ebp+var_1C]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x99E55B",
+    "line": "call    __SEH_epilog4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99E560",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x99E561",
+    "line": "push    7",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x99E563",
+    "line": "call    __unlock",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99E568",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x99E569",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

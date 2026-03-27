@@ -1,0 +1,1 @@
+IInternetSecurityManagerVtbl_0

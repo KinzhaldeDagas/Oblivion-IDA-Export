@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA187A0",
+    "line": "push    offset uGridsToLoad",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA187A5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA187AA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA187AF",
+    "line": "mov     eax, off_B06A30; \"uGridsToLoad:General\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA187B4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA187B6",
+    "line": "jz      short locret_A187C4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA187B8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA187BB",
+    "line": "jnz     short locret_A187C4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA187BD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA187BE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA187C3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA187C4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

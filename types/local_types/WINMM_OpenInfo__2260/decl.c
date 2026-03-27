@@ -1,0 +1,1 @@
+_WINMM_OpenInfo

@@ -1,0 +1,23 @@
+bool __thiscall sub_5B65F0(_DWORD *this)
+{
+  return *(this + 0xA)
+      && *(this + 0xB)
+      && *(this + 0xC)
+      && *(this + 0xD)
+      && *(this + 0xE)
+      && *(this + 0xF)
+      && *(this + 0x10)
+      && *(this + 0x11)
+      && *(this + 0x12)
+      && *(this + 0x13)
+      && *(this + 0x14)
+      && *(this + 0x15)
+      && *(this + 0x16)
+      && *(this + 0x17)
+      && *(this + 0x18)
+      && *(this + 0x19)
+      && *(this + 0x1A)
+      && *(this + 0x1B)
+      && *(this + 0x1C)
+      && *(this + 0x1D);
+}

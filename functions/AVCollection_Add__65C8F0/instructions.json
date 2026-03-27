@@ -1,0 +1,98 @@
+[
+  {
+    "ea": "0x65C8F0",
+    "line": "mov     eax, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x65C8F4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x65C8F6",
+    "line": "jz      short AVCollection_Add___Done",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x65C8F8",
+    "line": "mov     dl, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x65C8FA",
+    "line": "mov     byte ptr [esp+arg_0], dl",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x65C8FE",
+    "line": "movsx   edx, dl",
+    "mnemonic": "movsx",
+    "size": 3
+  },
+  {
+    "ea": "0x65C901",
+    "line": "cmp     edx, 38h; switch 57 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x65C904",
+    "line": "ja      short AVCollection_Add___AVCollection_Add_ToList; jumptable 0065C90D default case, cases 1-3,12,14-25,27-32,34,35,37-39,42-45,50-55",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x65C906",
+    "line": "movzx   edx, ds:byte_65C968[edx]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x65C90D",
+    "line": "jmp     ds:jpt_65C90D[edx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x65C914",
+    "line": "mov     ecx, [ecx+8]; jumptable 0065C90D case 9",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x65C917",
+    "line": "fld     dword ptr [eax+4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x65C91A",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x65C91B",
+    "line": "fstp    dword ptr [ecx+4]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x65C91E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x65C923",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  }
+]

@@ -1,0 +1,104 @@
+[
+  {
+    "ea": "0x784840",
+    "line": "push    30h ; '0'; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x784842",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x784847",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x78484A",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x78484C",
+    "line": "jz      short loc_784854",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x78484E",
+    "line": "mov     dword ptr [eax], 0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x784854",
+    "line": "lea     ecx, [eax+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x784857",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x784859",
+    "line": "jz      short loc_784861",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x78485B",
+    "line": "mov     dword ptr [ecx], 0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x784861",
+    "line": "lea     ecx, [eax+8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x784864",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x784866",
+    "line": "jz      short loc_78486E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x784868",
+    "line": "mov     dword ptr [ecx], 0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x78486E",
+    "line": "mov     byte ptr [eax+2Ch], 1",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x784872",
+    "line": "mov     byte ptr [eax+2Dh], 0",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x784876",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

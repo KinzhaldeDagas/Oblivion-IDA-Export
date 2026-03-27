@@ -1,0 +1,86 @@
+[
+  {
+    "ea": "0x68E708",
+    "line": "mov     eax, [eax+98h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x68E70E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x68E70F",
+    "line": "call    Magic_GetShieldType",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x68E714",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x68E717",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x68E719",
+    "line": "jz      ActiveEffect_Base_ProcessEffect___UpdateHUDActiveEffectList",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x68E71F",
+    "line": "fld     dword ptr [esi+18h]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x68E722",
+    "line": "fcomp   qword ptr ds:0A309F0h",
+    "mnemonic": "fcomp",
+    "size": 6
+  },
+  {
+    "ea": "0x68E728",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x68E72A",
+    "line": "test    ah, 5",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x68E72D",
+    "line": "jp      ActiveEffect_Base_ProcessEffect___UpdateHUDActiveEffectList",
+    "mnemonic": "jp",
+    "size": 6
+  },
+  {
+    "ea": "0x68E733",
+    "line": "cmp     dword ptr [esi+28h], 4",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x68E737",
+    "line": "jnz     short ActiveEffect_Base_ProcessEffect___TestIngred",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x68E739",
+    "line": "or      dword ptr [esi+14h], 4",
+    "mnemonic": "or",
+    "size": 4
+  }
+]

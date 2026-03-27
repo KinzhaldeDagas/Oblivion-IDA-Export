@@ -1,0 +1,254 @@
+[
+  {
+    "ea": "0x46B2C0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46B2C1",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x46B2C3",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x46B2C6",
+    "line": "shr     eax, 0Eh",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x46B2C9",
+    "line": "test    al, 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x46B2CB",
+    "line": "jnz     short loc_46B33D",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x46B2CD",
+    "line": "mov     ecx, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x46B2D0",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46B2D1",
+    "line": "mov     ecx, offset TESForm_FormIDMap",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x46B2D6",
+    "line": "call    NiTMap_RemoveAt",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x46B2DB",
+    "line": "mov     edx, ds:0B06158h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x46B2E1",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x46B2E3",
+    "line": "test    edx, edx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x46B2E5",
+    "line": "jbe     short loc_46B32A",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x46B2E7",
+    "line": "mov     ecx, ds:0B06150h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x46B2ED",
+    "line": "lea     ecx, [ecx+0]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x46B2F0",
+    "line": "cmp     [ecx+eax*4], esi",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x46B2F3",
+    "line": "jz      short loc_46B2FE",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46B2F5",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x46B2F8",
+    "line": "cmp     eax, edx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x46B2FA",
+    "line": "jb      short TESForm_RemoveFromGlobalLists___ActiveFileFormLoop",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x46B2FC",
+    "line": "jmp     short loc_46B32A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x46B2FE",
+    "line": "cmp     eax, edx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x46B300",
+    "line": "jnb     short loc_46B32A",
+    "mnemonic": "jnb",
+    "size": 2
+  },
+  {
+    "ea": "0x46B302",
+    "line": "mov     edx, [ecx+eax*4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x46B305",
+    "line": "test    edx, edx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x46B307",
+    "line": "mov     dword ptr [ecx+eax*4], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x46B30E",
+    "line": "jz      short loc_46B317",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46B310",
+    "line": "sub     dword ptr ds:0B0615Ch, 1",
+    "mnemonic": "sub",
+    "size": 7
+  },
+  {
+    "ea": "0x46B317",
+    "line": "mov     ecx, ds:0B06158h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x46B31D",
+    "line": "add     ecx, 0FFFFFFFFh",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x46B320",
+    "line": "cmp     eax, ecx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x46B322",
+    "line": "jnz     short loc_46B32A",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x46B324",
+    "line": "mov     ds:0B06158h, ecx",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x46B32A",
+    "line": "mov     ecx, ds:0B33A98h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x46B330",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x46B332",
+    "line": "jz      short loc_46B33D",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46B334",
+    "line": "mov     edx, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x46B337",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46B338",
+    "line": "call    TESDataHandler_ReleaseFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x46B33D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x46B33E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

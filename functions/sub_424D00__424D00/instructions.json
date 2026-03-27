@@ -1,0 +1,68 @@
+[
+  {
+    "ea": "0x424D00",
+    "line": "push    23h ; '#'; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x424D02",
+    "line": "call    BaseExtraList_GetExtraData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x424D07",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x424D09",
+    "line": "jz      short locret_424D23",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x424D0B",
+    "line": "mov     ecx, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x424D0F",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x424D10",
+    "line": "mov     ecx, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x424D13",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x424D18",
+    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x424D1E",
+    "line": "call    sub_45A500",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x424D23",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA1C040",
+    "line": "push    offset bCheckOffsetOnLoad",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C045",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C04A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C04F",
+    "line": "mov     eax, off_B09DBC; \"bCheckCellOffsetsOnInit:General\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C054",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C056",
+    "line": "jz      short locret_A1C064",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C058",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1C05B",
+    "line": "jnz     short locret_A1C064",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C05D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1C05E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C063",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA1C064",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

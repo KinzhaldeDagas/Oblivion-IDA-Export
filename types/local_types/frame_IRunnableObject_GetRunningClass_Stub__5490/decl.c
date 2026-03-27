@@ -1,0 +1,1 @@
+__frame_IRunnableObject_GetRunningClass_Stub

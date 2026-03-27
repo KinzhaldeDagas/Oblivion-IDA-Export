@@ -1,0 +1,128 @@
+[
+  {
+    "ea": "0x4F55C0",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F55C2",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4F55C3",
+    "line": "mov     esi, [esp+4+arg_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4F55C7",
+    "line": "fstp    qword ptr [esi]",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x4F55C9",
+    "line": "mov     ecx, ds:0B333C4h; this",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4F55CF",
+    "line": "call    PlayerCharacter__IsJailed; Check the meaning of JailedState",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4F55D4",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4F55D6",
+    "line": "jz      short loc_4F55DC",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F55D8",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x4F55DA",
+    "line": "fstp    qword ptr [esi]",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x4F55DC",
+    "line": "cmp     byte ptr ds:0B361ACh, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x4F55E3",
+    "line": "jz      short loc_4F55FA",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4F55E5",
+    "line": "fld     qword ptr [esi]",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x4F55E7",
+    "line": "sub     esp, 8",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x4F55EA",
+    "line": "fstp    [esp+0Ch+var_C]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x4F55ED",
+    "line": "push    offset aIsplayerinjail; \"IsPlayerInJail >> %0.2f\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4F55F2",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4F55F7",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4F55FA",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4F55FC",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4F55FD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

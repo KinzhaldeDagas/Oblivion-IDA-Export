@@ -1,0 +1,92 @@
+[
+  {
+    "ea": "0x991BAB",
+    "line": "mov     ax, [esp+0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x991BAF",
+    "line": "cmp     ax, 27Fh",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x991BB3",
+    "line": "jz      short CW_is_restored_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x991BB5",
+    "line": "and     ax, 20h",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x991BB9",
+    "line": "jz      short restore_CW",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x991BBB",
+    "line": "fstsw   ax",
+    "mnemonic": "fstsw",
+    "size": 3
+  },
+  {
+    "ea": "0x991BBE",
+    "line": "and     ax, 20h",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x991BC2",
+    "line": "jz      short restore_CW",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x991BC4",
+    "line": "mov     eax, 8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x991BC9",
+    "line": "call    unknown_libname_156",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991BCE",
+    "line": "pop     edx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x991BCF",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x991BD0",
+    "line": "fldcw   word ptr [esp+0]",
+    "mnemonic": "fldcw",
+    "size": 3
+  },
+  {
+    "ea": "0x991BD3",
+    "line": "pop     edx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x991BD4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

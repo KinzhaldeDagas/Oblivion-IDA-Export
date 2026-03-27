@@ -1,0 +1,170 @@
+[
+  {
+    "ea": "0x469AD0",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x469AD2",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x469AD4",
+    "line": "jz      short TESContainer_GetBestWeapon___ContentLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x469AD6",
+    "line": "mov     eax, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x469AD9",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x469ADB",
+    "line": "push    offset ??_R0?AVTESObjectWEAP@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x469AE0",
+    "line": "push    offset ??_R0?AVTESBoundObject@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x469AE5",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x469AE7",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x469AE8",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x469AED",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x469AEF",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x469AF2",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x469AF4",
+    "line": "jz      short TESContainer_GetBestWeapon___ContentLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x469AF6",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x469AF7",
+    "line": "mov     ecx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x469AF9",
+    "line": "call    TESActorBase_GetEquippableItemRating",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x469AFE",
+    "line": "fstp    [esp+arg_14]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x469B02",
+    "line": "fld     [esp+arg_14]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x469B06",
+    "line": "fld     [esp+arg_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x469B0A",
+    "line": "fcomp   st(1)",
+    "mnemonic": "fcomp",
+    "size": 2
+  },
+  {
+    "ea": "0x469B0C",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x469B0E",
+    "line": "test    ah, 5",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x469B11",
+    "line": "jp      short loc_469B1B",
+    "mnemonic": "jp",
+    "size": 2
+  },
+  {
+    "ea": "0x469B13",
+    "line": "fstp    [esp+arg_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x469B17",
+    "line": "mov     ebx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x469B19",
+    "line": "jmp     short TESContainer_GetBestWeapon___ContentLoop_Next",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x469B1B",
+    "line": "fstp    st",
+    "mnemonic": "fstp",
+    "size": 2
+  }
+]

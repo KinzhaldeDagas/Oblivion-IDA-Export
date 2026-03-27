@@ -1,0 +1,68 @@
+[
+  {
+    "ea": "0x68E792",
+    "line": "mov     ecx, [esi+20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x68E795",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x68E797",
+    "line": "mov     eax, [edx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x68E79A",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x68E79C",
+    "line": "cmp     eax, ds:0B333C4h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x68E7A2",
+    "line": "jnz     short ActiveEffect_Base_ProcessEffect___ClearHitEffectList",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x68E7A4",
+    "line": "call    InterfaceManager_IsMenuMode",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x68E7A9",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x68E7AB",
+    "line": "jz      short ActiveEffect_Base_ProcessEffect___ClearHitEffectList",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x68E7AD",
+    "line": "or      dword ptr [esi+14h], 40h",
+    "mnemonic": "or",
+    "size": 4
+  },
+  {
+    "ea": "0x68E7B1",
+    "line": "jmp     short ActiveEffect_Base_ProcessEffect___UpdateHUDActiveEffectList_",
+    "mnemonic": "jmp",
+    "size": 2
+  }
+]

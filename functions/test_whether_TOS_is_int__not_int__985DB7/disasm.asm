@@ -1,0 +1,2 @@
+0x985DB7: fstp    st
+0x985DB9: retn

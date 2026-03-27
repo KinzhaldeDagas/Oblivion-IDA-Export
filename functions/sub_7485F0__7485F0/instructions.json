@@ -1,0 +1,164 @@
+[
+  {
+    "ea": "0x7485F0",
+    "line": "sub     esp, 8",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x7485F3",
+    "line": "cmp     byte ptr ds:0B27EB2h, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x7485FA",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7485FB",
+    "line": "mov     esi, ds:0A28158h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x748601",
+    "line": "jz      short loc_74861C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x748603",
+    "line": "push    offset stru_B407B0; lpFrequency",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x748608",
+    "line": "call    dword ptr ds:0A2815Ch",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x74860E",
+    "line": "push    offset stru_B40790.SpinCount; lpPerformanceCount",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x748613",
+    "line": "call    esi ; QueryPerformanceCounter",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x748615",
+    "line": "mov     byte ptr ds:0B27EB2h, 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x74861C",
+    "line": "lea     eax, [esp+0Ch+PerformanceCount]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x748620",
+    "line": "push    eax; lpPerformanceCount",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x748621",
+    "line": "call    esi ; QueryPerformanceCounter",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x748623",
+    "line": "mov     ecx, dword ptr [esp+0Ch+PerformanceCount]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x748627",
+    "line": "sub     ecx, ds:0B407A8h",
+    "mnemonic": "sub",
+    "size": 6
+  },
+  {
+    "ea": "0x74862D",
+    "line": "mov     edx, dword ptr [esp+0Ch+PerformanceCount+4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x748631",
+    "line": "sbb     edx, ds:0B407ACh",
+    "mnemonic": "sbb",
+    "size": 6
+  },
+  {
+    "ea": "0x748637",
+    "line": "mov     dword ptr [esp+0Ch+PerformanceCount], ecx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x74863B",
+    "line": "mov     dword ptr [esp+0Ch+PerformanceCount+4], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x74863F",
+    "line": "fild    qword ptr [esp+0Ch+PerformanceCount]",
+    "mnemonic": "fild",
+    "size": 4
+  },
+  {
+    "ea": "0x748643",
+    "line": "fild    qword ptr ds:0B407B0h",
+    "mnemonic": "fild",
+    "size": 6
+  },
+  {
+    "ea": "0x748649",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x74864A",
+    "line": "fdivp   st(1), st",
+    "mnemonic": "fdivp",
+    "size": 2
+  },
+  {
+    "ea": "0x74864C",
+    "line": "fstp    dword ptr [esp+8+PerformanceCount]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x74864F",
+    "line": "fld     dword ptr [esp+8+PerformanceCount]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x748652",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x748655",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

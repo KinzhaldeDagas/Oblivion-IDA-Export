@@ -1,0 +1,140 @@
+[
+  {
+    "ea": "0x523F00",
+    "line": "movzx   eax, word ptr [ecx+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x523F04",
+    "line": "cmp     ax, 0FFFFh",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x523F08",
+    "line": "jnz     short loc_523F1F",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x523F0A",
+    "line": "mov     eax, [ecx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x523F0D",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x523F0E",
+    "line": "lea     esi, [eax+1]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x523F11",
+    "line": "mov     dl, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x523F13",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x523F16",
+    "line": "test    dl, dl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x523F18",
+    "line": "jnz     short loc_523F11",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x523F1A",
+    "line": "sub     eax, esi",
+    "mnemonic": "sub",
+    "size": 2
+  },
+  {
+    "ea": "0x523F1C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x523F1D",
+    "line": "jmp     short loc_523F22",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x523F1F",
+    "line": "movzx   eax, ax",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x523F22",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x523F24",
+    "line": "jz      short loc_523F33",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x523F26",
+    "line": "mov     eax, [ecx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x523F29",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x523F2B",
+    "line": "jnz     short locret_523F38",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x523F2D",
+    "line": "mov     eax, offset EmptyString",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x523F32",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x523F33",
+    "line": "mov     eax, offset aCharacters_mal; \"Characters\\\\_Male\\\\skeleton.nif\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x523F38",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

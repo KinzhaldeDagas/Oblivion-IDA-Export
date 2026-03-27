@@ -1,0 +1,494 @@
+[
+  {
+    "ea": "0x569840",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569841",
+    "line": "mov     esi, [esp+4+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569845",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x569847",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569848",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x56984A",
+    "line": "jz      TeSPackage_LocationData_CopyFrom___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x569850",
+    "line": "cmp     [esp+8+arg_4], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x569855",
+    "line": "jnz     short loc_569860",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x569857",
+    "line": "cmp     byte ptr [esi], 0FFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x56985A",
+    "line": "jz      TeSPackage_LocationData_CopyFrom___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x569860",
+    "line": "movsx   eax, byte ptr [esi]",
+    "mnemonic": "movsx",
+    "size": 3
+  },
+  {
+    "ea": "0x569863",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569864",
+    "line": "call    TESPackage_LocationData_SetType",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569869",
+    "line": "mov     cl, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x56986B",
+    "line": "movsx   eax, cl",
+    "mnemonic": "movsx",
+    "size": 3
+  },
+  {
+    "ea": "0x56986E",
+    "line": "cmp     eax, 5; switch 6 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569871",
+    "line": "ja      TeSPackage_LocationData_CopyFrom___Done",
+    "mnemonic": "ja",
+    "size": 6
+  },
+  {
+    "ea": "0x569877",
+    "line": "jmp     ds:jpt_569877[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x56987E",
+    "line": "mov     ecx, esi; jumptable 00569877 case 0",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569880",
+    "line": "call    TESPackage_LocationData_GetRadius",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x569885",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x569886",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569888",
+    "line": "call    TESPackage_LocationData_SetRadius",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x56988D",
+    "line": "cmp     byte ptr [esi], 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569890",
+    "line": "jnz     short loc_569897",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x569892",
+    "line": "mov     esi, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x569895",
+    "line": "jmp     short loc_569899",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x569897",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x569899",
+    "line": "cmp     byte ptr [edi], 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x56989C",
+    "line": "jnz     TeSPackage_LocationData_CopyFrom___Done",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x5698A2",
+    "line": "mov     [edi+8], esi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5698A5",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5698A6",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5698A7",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5698AA",
+    "line": "cmp     byte ptr [esi], 1; jumptable 00569877 case 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5698AD",
+    "line": "jnz     short loc_5698B4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5698AF",
+    "line": "mov     esi, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5698B2",
+    "line": "jmp     short loc_5698B6",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5698B4",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x5698B6",
+    "line": "cmp     cl, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5698B9",
+    "line": "jnz     short TeSPackage_LocationData_CopyFrom___Done",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5698BB",
+    "line": "mov     [edi+8], esi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5698BE",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5698BF",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5698C0",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5698C3",
+    "line": "mov     ecx, esi; jumptable 00569877 case 4",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5698C5",
+    "line": "call    TESPackage_LocationData_GetRadius",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5698CA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5698CB",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5698CD",
+    "line": "call    TESPackage_LocationData_SetRadius",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5698D2",
+    "line": "cmp     byte ptr [esi], 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5698D5",
+    "line": "jnz     short loc_5698DC",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5698D7",
+    "line": "mov     esi, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5698DA",
+    "line": "jmp     short loc_5698DE",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5698DC",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x5698DE",
+    "line": "cmp     byte ptr [edi], 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5698E1",
+    "line": "jnz     short TeSPackage_LocationData_CopyFrom___Done",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5698E3",
+    "line": "mov     [edi+8], esi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5698E6",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5698E7",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5698E8",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5698EB",
+    "line": "mov     ecx, esi; jumptable 00569877 case 5",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5698ED",
+    "line": "call    TESPackage_LocationData_GetRadius",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5698F2",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5698F3",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5698F5",
+    "line": "call    TESPackage_LocationData_SetRadius",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5698FA",
+    "line": "cmp     byte ptr [esi], 5",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5698FD",
+    "line": "jnz     short loc_569904",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5698FF",
+    "line": "mov     esi, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x569902",
+    "line": "jmp     short loc_569906",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x569904",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x569906",
+    "line": "cmp     byte ptr [edi], 5",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569909",
+    "line": "jnz     short TeSPackage_LocationData_CopyFrom___Done",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x56990B",
+    "line": "mov     [edi+8], esi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x56990E",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x56990F",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x569910",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x569913",
+    "line": "mov     ecx, esi; jumptable 00569877 cases 2,3",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x569915",
+    "line": "call    TESPackage_LocationData_GetRadius",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x56991A",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x56991B",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x56991D",
+    "line": "call    TESPackage_LocationData_SetRadius",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

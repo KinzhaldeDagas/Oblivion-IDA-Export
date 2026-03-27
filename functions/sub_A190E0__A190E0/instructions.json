@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA190E0",
+    "line": "push    offset flt_B06D4C",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA190E5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA190EA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA190EF",
+    "line": "mov     eax, off_B06D50; \"fBlurRadius:BlurShader\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA190F4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA190F6",
+    "line": "jz      short locret_A19104",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA190F8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA190FB",
+    "line": "jnz     short locret_A19104",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA190FD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA190FE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA19103",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA19104",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

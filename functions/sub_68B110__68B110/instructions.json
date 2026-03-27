@@ -1,0 +1,254 @@
+[
+  {
+    "ea": "0x68B110",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x68B111",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x68B113",
+    "line": "mov     cl, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x68B116",
+    "line": "movsx   eax, cl",
+    "mnemonic": "movsx",
+    "size": 3
+  },
+  {
+    "ea": "0x68B119",
+    "line": "sub     eax, 0",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x68B11C",
+    "line": "jz      short loc_68B137",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x68B11E",
+    "line": "sub     eax, 1",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x68B121",
+    "line": "jnz     short loc_68B130",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x68B123",
+    "line": "cmp     cl, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x68B126",
+    "line": "jnz     short loc_68B130",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x68B128",
+    "line": "mov     esi, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x68B12A",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x68B12C",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x68B12E",
+    "line": "jnz     short loc_68B135",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x68B130",
+    "line": "mov     eax, offset Vector3_InitValue?",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x68B135",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x68B136",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x68B137",
+    "line": "test    cl, cl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x68B139",
+    "line": "jnz     short loc_68B130",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x68B13B",
+    "line": "mov     ecx, [esi]; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x68B13D",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x68B13F",
+    "line": "jz      short loc_68B130",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x68B141",
+    "line": "call    GetTeleportExtraData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x68B146",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x68B148",
+    "line": "jz      short loc_68B160",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x68B14A",
+    "line": "cmp     byte ptr [esi+4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x68B14E",
+    "line": "jnz     short loc_68B158",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x68B150",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x68B152",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x68B153",
+    "line": "jmp     sub_4D76F0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x68B158",
+    "line": "xor     ecx, ecx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x68B15A",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x68B15B",
+    "line": "jmp     sub_4D76F0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x68B160",
+    "line": "cmp     byte ptr [esi+4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x68B164",
+    "line": "jnz     short loc_68B16A",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x68B166",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x68B168",
+    "line": "jmp     short loc_68B16C",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x68B16A",
+    "line": "xor     ecx, ecx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x68B16C",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x68B16E",
+    "line": "mov     edx, [eax+174h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x68B174",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x68B175",
+    "line": "jmp     edx",
+    "mnemonic": "jmp",
+    "size": 2
+  }
+]

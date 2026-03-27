@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA24430",
+    "line": "push    offset byte_B13210",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA24435",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA2443A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA2443F",
+    "line": "mov     eax, off_B13214; \"bCrossHair:GamePlay\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA24444",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA24446",
+    "line": "jz      short locret_A24454",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA24448",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA2444B",
+    "line": "jnz     short locret_A24454",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA2444D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA2444E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA24453",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA24454",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

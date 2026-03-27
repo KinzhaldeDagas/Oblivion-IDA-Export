@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0x987AF6",
+    "line": "push    ebp; Locale",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x987AF7",
+    "line": "mov     ebp, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x987AF9",
+    "line": "push    [ebp+ArgList]; Format",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x987AFC",
+    "line": "push    0; Locale",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x987AFE",
+    "line": "push    [ebp+Format]; MaxCount",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x987B01",
+    "line": "push    [ebp+MaxCount]; MaxCount",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x987B04",
+    "line": "push    [ebp+SizeInBytes]; DstSize",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x987B07",
+    "line": "push    [ebp+DstBuf]; DstBuf",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x987B0A",
+    "line": "call    __vsnprintf_s_l",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x987B0F",
+    "line": "add     esp, 18h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x987B12",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x987B13",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

@@ -1,0 +1,943 @@
+{
+  "decl": "gdi_dc_funcs",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "pAbortDoc",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV)"
+    },
+    {
+      "name": "pAbortPath",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV)"
+    },
+    {
+      "name": "pAlphaBlend",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, bitblt_coords *, PHYSDEV, bitblt_coords *, BLENDFUNCTION)"
+    },
+    {
+      "name": "pAngleArc",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, DWORD, FLOAT, FLOAT)"
+    },
+    {
+      "name": "pArc",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT)"
+    },
+    {
+      "name": "pArcTo",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT)"
+    },
+    {
+      "name": "pBeginPath",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV)"
+    },
+    {
+      "name": "pBlendImage",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 32,
+      "type": "DWORD (*)(PHYSDEV, BITMAPINFO *, const gdi_image_bits *, bitblt_coords *, bitblt_coords *, BLENDFUNCTION)"
+    },
+    {
+      "name": "pChord",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT)"
+    },
+    {
+      "name": "pCloseFigure",
+      "offset_bits": 288,
+      "offset_bytes": 36,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV)"
+    },
+    {
+      "name": "pCreateCompatibleDC",
+      "offset_bits": 320,
+      "offset_bytes": 40,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, PHYSDEV *)"
+    },
+    {
+      "name": "pCreateDC",
+      "offset_bits": 352,
+      "offset_bytes": 44,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV *, LPCWSTR, LPCWSTR, LPCWSTR, const DEVMODEW *)"
+    },
+    {
+      "name": "pDeleteDC",
+      "offset_bits": 384,
+      "offset_bytes": 48,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV)"
+    },
+    {
+      "name": "pDeleteObject",
+      "offset_bits": 416,
+      "offset_bytes": 52,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, HGDIOBJ)"
+    },
+    {
+      "name": "pDeviceCapabilities",
+      "offset_bits": 448,
+      "offset_bytes": 56,
+      "size_bits": 32,
+      "type": "DWORD (*)(LPSTR, LPCSTR, LPCSTR, WORD, LPSTR, LPDEVMODEA)"
+    },
+    {
+      "name": "pEllipse",
+      "offset_bits": 480,
+      "offset_bytes": 60,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT)"
+    },
+    {
+      "name": "pEndDoc",
+      "offset_bits": 512,
+      "offset_bytes": 64,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV)"
+    },
+    {
+      "name": "pEndPage",
+      "offset_bits": 544,
+      "offset_bytes": 68,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV)"
+    },
+    {
+      "name": "pEndPath",
+      "offset_bits": 576,
+      "offset_bytes": 72,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV)"
+    },
+    {
+      "name": "pEnumFonts",
+      "offset_bits": 608,
+      "offset_bytes": 76,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, LPLOGFONTW, FONTENUMPROCW, LPARAM_0)"
+    },
+    {
+      "name": "pEnumICMProfiles",
+      "offset_bits": 640,
+      "offset_bytes": 80,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, ICMENUMPROCW, LPARAM_0)"
+    },
+    {
+      "name": "pExcludeClipRect",
+      "offset_bits": 672,
+      "offset_bytes": 84,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT, INT, INT, INT)"
+    },
+    {
+      "name": "pExtDeviceMode",
+      "offset_bits": 704,
+      "offset_bytes": 88,
+      "size_bits": 32,
+      "type": "INT (*)(LPSTR, HWND, LPDEVMODEA, LPSTR, LPSTR, LPDEVMODEA, LPSTR, DWORD)"
+    },
+    {
+      "name": "pExtEscape",
+      "offset_bits": 736,
+      "offset_bytes": 92,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT, INT, LPCVOID, INT, LPVOID)"
+    },
+    {
+      "name": "pExtFloodFill",
+      "offset_bits": 768,
+      "offset_bytes": 96,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, COLORREF, UINT)"
+    },
+    {
+      "name": "pExtSelectClipRgn",
+      "offset_bits": 800,
+      "offset_bytes": 100,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, HRGN, INT)"
+    },
+    {
+      "name": "pExtTextOut",
+      "offset_bits": 832,
+      "offset_bytes": 104,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, UINT, const RECT *, LPCWSTR, UINT, const INT *)"
+    },
+    {
+      "name": "pFillPath",
+      "offset_bits": 864,
+      "offset_bytes": 108,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV)"
+    },
+    {
+      "name": "pFillRgn",
+      "offset_bits": 896,
+      "offset_bytes": 112,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, HRGN, HBRUSH)"
+    },
+    {
+      "name": "pFlattenPath",
+      "offset_bits": 928,
+      "offset_bytes": 116,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV)"
+    },
+    {
+      "name": "pFontIsLinked",
+      "offset_bits": 960,
+      "offset_bytes": 120,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV)"
+    },
+    {
+      "name": "pFrameRgn",
+      "offset_bits": 992,
+      "offset_bytes": 124,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, HRGN, HBRUSH, INT, INT)"
+    },
+    {
+      "name": "pGdiComment",
+      "offset_bits": 1024,
+      "offset_bytes": 128,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, UINT, const BYTE *)"
+    },
+    {
+      "name": "pGetBoundsRect",
+      "offset_bits": 1056,
+      "offset_bytes": 132,
+      "size_bits": 32,
+      "type": "UINT (*)(PHYSDEV, RECT *, UINT)"
+    },
+    {
+      "name": "pGetCharABCWidths",
+      "offset_bits": 1088,
+      "offset_bytes": 136,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, UINT, UINT, LPABC)"
+    },
+    {
+      "name": "pGetCharABCWidthsI",
+      "offset_bits": 1120,
+      "offset_bytes": 140,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, UINT, UINT, WORD *, LPABC)"
+    },
+    {
+      "name": "pGetCharWidth",
+      "offset_bits": 1152,
+      "offset_bytes": 144,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, UINT, UINT, LPINT)"
+    },
+    {
+      "name": "pGetCharWidthInfo",
+      "offset_bits": 1184,
+      "offset_bytes": 148,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, void *)"
+    },
+    {
+      "name": "pGetDeviceCaps",
+      "offset_bits": 1216,
+      "offset_bytes": 152,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT)"
+    },
+    {
+      "name": "pGetDeviceGammaRamp",
+      "offset_bits": 1248,
+      "offset_bytes": 156,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, LPVOID)"
+    },
+    {
+      "name": "pGetFontData",
+      "offset_bits": 1280,
+      "offset_bytes": 160,
+      "size_bits": 32,
+      "type": "DWORD (*)(PHYSDEV, DWORD, DWORD, LPVOID, DWORD)"
+    },
+    {
+      "name": "pGetFontRealizationInfo",
+      "offset_bits": 1312,
+      "offset_bytes": 164,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, void *)"
+    },
+    {
+      "name": "pGetFontUnicodeRanges",
+      "offset_bits": 1344,
+      "offset_bytes": 168,
+      "size_bits": 32,
+      "type": "DWORD (*)(PHYSDEV, LPGLYPHSET)"
+    },
+    {
+      "name": "pGetGlyphIndices",
+      "offset_bits": 1376,
+      "offset_bytes": 172,
+      "size_bits": 32,
+      "type": "DWORD (*)(PHYSDEV, LPCWSTR, INT, LPWORD, DWORD)"
+    },
+    {
+      "name": "pGetGlyphOutline",
+      "offset_bits": 1408,
+      "offset_bytes": 176,
+      "size_bits": 32,
+      "type": "DWORD (*)(PHYSDEV, UINT, UINT, LPGLYPHMETRICS, DWORD, LPVOID, const MAT2 *)"
+    },
+    {
+      "name": "pGetICMProfile",
+      "offset_bits": 1440,
+      "offset_bytes": 180,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, LPDWORD, LPWSTR)"
+    },
+    {
+      "name": "pGetImage",
+      "offset_bits": 1472,
+      "offset_bytes": 184,
+      "size_bits": 32,
+      "type": "DWORD (*)(PHYSDEV, BITMAPINFO *, gdi_image_bits *, bitblt_coords *)"
+    },
+    {
+      "name": "pGetKerningPairs",
+      "offset_bits": 1504,
+      "offset_bytes": 188,
+      "size_bits": 32,
+      "type": "DWORD (*)(PHYSDEV, DWORD, LPKERNINGPAIR)"
+    },
+    {
+      "name": "pGetNearestColor",
+      "offset_bits": 1536,
+      "offset_bytes": 192,
+      "size_bits": 32,
+      "type": "COLORREF (*)(PHYSDEV, COLORREF)"
+    },
+    {
+      "name": "pGetOutlineTextMetrics",
+      "offset_bits": 1568,
+      "offset_bytes": 196,
+      "size_bits": 32,
+      "type": "UINT (*)(PHYSDEV, UINT, LPOUTLINETEXTMETRICW)"
+    },
+    {
+      "name": "pGetPixel",
+      "offset_bits": 1600,
+      "offset_bytes": 200,
+      "size_bits": 32,
+      "type": "COLORREF (*)(PHYSDEV, INT, INT)"
+    },
+    {
+      "name": "pGetSystemPaletteEntries",
+      "offset_bits": 1632,
+      "offset_bytes": 204,
+      "size_bits": 32,
+      "type": "UINT (*)(PHYSDEV, UINT, UINT, LPPALETTEENTRY)"
+    },
+    {
+      "name": "pGetTextCharsetInfo",
+      "offset_bits": 1664,
+      "offset_bytes": 208,
+      "size_bits": 32,
+      "type": "UINT (*)(PHYSDEV, LPFONTSIGNATURE, DWORD)"
+    },
+    {
+      "name": "pGetTextExtentExPoint",
+      "offset_bits": 1696,
+      "offset_bytes": 212,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, LPCWSTR, INT, LPINT)"
+    },
+    {
+      "name": "pGetTextExtentExPointI",
+      "offset_bits": 1728,
+      "offset_bytes": 216,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, const WORD *, INT, LPINT)"
+    },
+    {
+      "name": "pGetTextFace",
+      "offset_bits": 1760,
+      "offset_bytes": 220,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT, LPWSTR)"
+    },
+    {
+      "name": "pGetTextMetrics",
+      "offset_bits": 1792,
+      "offset_bytes": 224,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, TEXTMETRICW *)"
+    },
+    {
+      "name": "pGradientFill",
+      "offset_bits": 1824,
+      "offset_bytes": 228,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, TRIVERTEX *, ULONG, void *, ULONG, ULONG)"
+    },
+    {
+      "name": "pIntersectClipRect",
+      "offset_bits": 1856,
+      "offset_bytes": 232,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT, INT, INT, INT)"
+    },
+    {
+      "name": "pInvertRgn",
+      "offset_bits": 1888,
+      "offset_bytes": 236,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, HRGN)"
+    },
+    {
+      "name": "pLineTo",
+      "offset_bits": 1920,
+      "offset_bytes": 240,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT)"
+    },
+    {
+      "name": "pModifyWorldTransform",
+      "offset_bits": 1952,
+      "offset_bytes": 244,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, const XFORM *, DWORD)"
+    },
+    {
+      "name": "pMoveTo",
+      "offset_bits": 1984,
+      "offset_bytes": 248,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT)"
+    },
+    {
+      "name": "pOffsetClipRgn",
+      "offset_bits": 2016,
+      "offset_bytes": 252,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT, INT)"
+    },
+    {
+      "name": "pOffsetViewportOrgEx",
+      "offset_bits": 2048,
+      "offset_bytes": 256,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, POINT *)"
+    },
+    {
+      "name": "pOffsetWindowOrgEx",
+      "offset_bits": 2080,
+      "offset_bytes": 260,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, POINT *)"
+    },
+    {
+      "name": "pPaintRgn",
+      "offset_bits": 2112,
+      "offset_bytes": 264,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, HRGN)"
+    },
+    {
+      "name": "pPatBlt",
+      "offset_bits": 2144,
+      "offset_bytes": 268,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, bitblt_coords *, DWORD)"
+    },
+    {
+      "name": "pPie",
+      "offset_bits": 2176,
+      "offset_bytes": 272,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT)"
+    },
+    {
+      "name": "pPolyBezier",
+      "offset_bits": 2208,
+      "offset_bytes": 276,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, DWORD)"
+    },
+    {
+      "name": "pPolyBezierTo",
+      "offset_bits": 2240,
+      "offset_bytes": 280,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, DWORD)"
+    },
+    {
+      "name": "pPolyDraw",
+      "offset_bits": 2272,
+      "offset_bytes": 284,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, const BYTE *, DWORD)"
+    },
+    {
+      "name": "pPolyPolygon",
+      "offset_bits": 2304,
+      "offset_bytes": 288,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, const INT *, UINT)"
+    },
+    {
+      "name": "pPolyPolyline",
+      "offset_bits": 2336,
+      "offset_bytes": 292,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, const DWORD *, DWORD)"
+    },
+    {
+      "name": "pPolygon",
+      "offset_bits": 2368,
+      "offset_bytes": 296,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, INT)"
+    },
+    {
+      "name": "pPolyline",
+      "offset_bits": 2400,
+      "offset_bytes": 300,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, INT)"
+    },
+    {
+      "name": "pPolylineTo",
+      "offset_bits": 2432,
+      "offset_bytes": 304,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, INT)"
+    },
+    {
+      "name": "pPutImage",
+      "offset_bits": 2464,
+      "offset_bytes": 308,
+      "size_bits": 32,
+      "type": "DWORD (*)(PHYSDEV, HRGN, BITMAPINFO *, const gdi_image_bits *, bitblt_coords *, bitblt_coords *, DWORD)"
+    },
+    {
+      "name": "pRealizeDefaultPalette",
+      "offset_bits": 2496,
+      "offset_bytes": 312,
+      "size_bits": 32,
+      "type": "UINT (*)(PHYSDEV)"
+    },
+    {
+      "name": "pRealizePalette",
+      "offset_bits": 2528,
+      "offset_bytes": 316,
+      "size_bits": 32,
+      "type": "UINT (*)(PHYSDEV, HPALETTE, BOOL)"
+    },
+    {
+      "name": "pRectangle",
+      "offset_bits": 2560,
+      "offset_bytes": 320,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT)"
+    },
+    {
+      "name": "pResetDC",
+      "offset_bits": 2592,
+      "offset_bytes": 324,
+      "size_bits": 32,
+      "type": "HDC (*)(PHYSDEV, const DEVMODEW *)"
+    },
+    {
+      "name": "pRestoreDC",
+      "offset_bits": 2624,
+      "offset_bytes": 328,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT)"
+    },
+    {
+      "name": "pRoundRect",
+      "offset_bits": 2656,
+      "offset_bytes": 332,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, INT, INT)"
+    },
+    {
+      "name": "pSaveDC",
+      "offset_bits": 2688,
+      "offset_bytes": 336,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV)"
+    },
+    {
+      "name": "pScaleViewportExtEx",
+      "offset_bits": 2720,
+      "offset_bytes": 340,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, SIZE *)"
+    },
+    {
+      "name": "pScaleWindowExtEx",
+      "offset_bits": 2752,
+      "offset_bytes": 344,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, SIZE *)"
+    },
+    {
+      "name": "pSelectBitmap",
+      "offset_bits": 2784,
+      "offset_bytes": 348,
+      "size_bits": 32,
+      "type": "HBITMAP (*)(PHYSDEV, HBITMAP)"
+    },
+    {
+      "name": "pSelectBrush",
+      "offset_bits": 2816,
+      "offset_bytes": 352,
+      "size_bits": 32,
+      "type": "HBRUSH (*)(PHYSDEV, HBRUSH, const brush_pattern *)"
+    },
+    {
+      "name": "pSelectClipPath",
+      "offset_bits": 2848,
+      "offset_bytes": 356,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT)"
+    },
+    {
+      "name": "pSelectFont",
+      "offset_bits": 2880,
+      "offset_bytes": 360,
+      "size_bits": 32,
+      "type": "HFONT (*)(PHYSDEV, HFONT, UINT *)"
+    },
+    {
+      "name": "pSelectPalette",
+      "offset_bits": 2912,
+      "offset_bytes": 364,
+      "size_bits": 32,
+      "type": "HPALETTE (*)(PHYSDEV, HPALETTE, BOOL)"
+    },
+    {
+      "name": "pSelectPen",
+      "offset_bits": 2944,
+      "offset_bytes": 368,
+      "size_bits": 32,
+      "type": "HPEN (*)(PHYSDEV, HPEN, const brush_pattern *)"
+    },
+    {
+      "name": "pSetArcDirection",
+      "offset_bits": 2976,
+      "offset_bytes": 372,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT)"
+    },
+    {
+      "name": "pSetBkColor",
+      "offset_bits": 3008,
+      "offset_bytes": 376,
+      "size_bits": 32,
+      "type": "COLORREF (*)(PHYSDEV, COLORREF)"
+    },
+    {
+      "name": "pSetBkMode",
+      "offset_bits": 3040,
+      "offset_bytes": 380,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT)"
+    },
+    {
+      "name": "pSetBoundsRect",
+      "offset_bits": 3072,
+      "offset_bytes": 384,
+      "size_bits": 32,
+      "type": "UINT (*)(PHYSDEV, RECT *, UINT)"
+    },
+    {
+      "name": "pSetDCBrushColor",
+      "offset_bits": 3104,
+      "offset_bytes": 388,
+      "size_bits": 32,
+      "type": "COLORREF (*)(PHYSDEV, COLORREF)"
+    },
+    {
+      "name": "pSetDCPenColor",
+      "offset_bits": 3136,
+      "offset_bytes": 392,
+      "size_bits": 32,
+      "type": "COLORREF (*)(PHYSDEV, COLORREF)"
+    },
+    {
+      "name": "pSetDIBitsToDevice",
+      "offset_bits": 3168,
+      "offset_bytes": 396,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT, INT, DWORD, DWORD, INT, INT, UINT, UINT, LPCVOID, BITMAPINFO *, UINT)"
+    },
+    {
+      "name": "pSetDeviceClipping",
+      "offset_bits": 3200,
+      "offset_bytes": 400,
+      "size_bits": 32,
+      "type": "void (*)(PHYSDEV, HRGN)"
+    },
+    {
+      "name": "pSetDeviceGammaRamp",
+      "offset_bits": 3232,
+      "offset_bytes": 404,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, LPVOID)"
+    },
+    {
+      "name": "pSetLayout",
+      "offset_bits": 3264,
+      "offset_bytes": 408,
+      "size_bits": 32,
+      "type": "DWORD (*)(PHYSDEV, DWORD)"
+    },
+    {
+      "name": "pSetMapMode",
+      "offset_bits": 3296,
+      "offset_bytes": 412,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT)"
+    },
+    {
+      "name": "pSetMapperFlags",
+      "offset_bits": 3328,
+      "offset_bytes": 416,
+      "size_bits": 32,
+      "type": "DWORD (*)(PHYSDEV, DWORD)"
+    },
+    {
+      "name": "pSetPixel",
+      "offset_bits": 3360,
+      "offset_bytes": 420,
+      "size_bits": 32,
+      "type": "COLORREF (*)(PHYSDEV, INT, INT, COLORREF)"
+    },
+    {
+      "name": "pSetPolyFillMode",
+      "offset_bits": 3392,
+      "offset_bytes": 424,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT)"
+    },
+    {
+      "name": "pSetROP2",
+      "offset_bits": 3424,
+      "offset_bytes": 428,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT)"
+    },
+    {
+      "name": "pSetRelAbs",
+      "offset_bits": 3456,
+      "offset_bytes": 432,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT)"
+    },
+    {
+      "name": "pSetStretchBltMode",
+      "offset_bits": 3488,
+      "offset_bytes": 436,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT)"
+    },
+    {
+      "name": "pSetTextAlign",
+      "offset_bits": 3520,
+      "offset_bytes": 440,
+      "size_bits": 32,
+      "type": "UINT (*)(PHYSDEV, UINT)"
+    },
+    {
+      "name": "pSetTextCharacterExtra",
+      "offset_bits": 3552,
+      "offset_bytes": 444,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT)"
+    },
+    {
+      "name": "pSetTextColor",
+      "offset_bits": 3584,
+      "offset_bytes": 448,
+      "size_bits": 32,
+      "type": "COLORREF (*)(PHYSDEV, COLORREF)"
+    },
+    {
+      "name": "pSetTextJustification",
+      "offset_bits": 3616,
+      "offset_bytes": 452,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT)"
+    },
+    {
+      "name": "pSetViewportExtEx",
+      "offset_bits": 3648,
+      "offset_bytes": 456,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, SIZE *)"
+    },
+    {
+      "name": "pSetViewportOrgEx",
+      "offset_bits": 3680,
+      "offset_bytes": 460,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, POINT *)"
+    },
+    {
+      "name": "pSetWindowExtEx",
+      "offset_bits": 3712,
+      "offset_bytes": 464,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, SIZE *)"
+    },
+    {
+      "name": "pSetWindowOrgEx",
+      "offset_bits": 3744,
+      "offset_bytes": 468,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, POINT *)"
+    },
+    {
+      "name": "pSetWorldTransform",
+      "offset_bits": 3776,
+      "offset_bytes": 472,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, const XFORM *)"
+    },
+    {
+      "name": "pStartDoc",
+      "offset_bits": 3808,
+      "offset_bytes": 476,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, const DOCINFOW *)"
+    },
+    {
+      "name": "pStartPage",
+      "offset_bits": 3840,
+      "offset_bytes": 480,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV)"
+    },
+    {
+      "name": "pStretchBlt",
+      "offset_bits": 3872,
+      "offset_bytes": 484,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV, bitblt_coords *, PHYSDEV, bitblt_coords *, DWORD)"
+    },
+    {
+      "name": "pStretchDIBits",
+      "offset_bits": 3904,
+      "offset_bytes": 488,
+      "size_bits": 32,
+      "type": "INT (*)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT, const void *, BITMAPINFO *, UINT, DWORD)"
+    },
+    {
+      "name": "pStrokeAndFillPath",
+      "offset_bits": 3936,
+      "offset_bytes": 492,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV)"
+    },
+    {
+      "name": "pStrokePath",
+      "offset_bits": 3968,
+      "offset_bytes": 496,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV)"
+    },
+    {
+      "name": "pUnrealizePalette",
+      "offset_bits": 4000,
+      "offset_bytes": 500,
+      "size_bits": 32,
+      "type": "BOOL (*)(HPALETTE)"
+    },
+    {
+      "name": "pWidenPath",
+      "offset_bits": 4032,
+      "offset_bytes": 504,
+      "size_bits": 32,
+      "type": "BOOL (*)(PHYSDEV)"
+    },
+    {
+      "name": "pD3DKMTCheckVidPnExclusiveOwnership",
+      "offset_bits": 4064,
+      "offset_bytes": 508,
+      "size_bits": 32,
+      "type": "NTSTATUS (*)(const D3DKMT_CHECKVIDPNEXCLUSIVEOWNERSHIP *)"
+    },
+    {
+      "name": "pD3DKMTSetVidPnSourceOwner",
+      "offset_bits": 4096,
+      "offset_bytes": 512,
+      "size_bits": 32,
+      "type": "NTSTATUS (*)(const D3DKMT_SETVIDPNSOURCEOWNER *)"
+    },
+    {
+      "name": "wine_get_wgl_driver",
+      "offset_bits": 4128,
+      "offset_bytes": 516,
+      "size_bits": 32,
+      "type": "opengl_funcs *(*)(PHYSDEV, UINT)"
+    },
+    {
+      "name": "wine_get_vulkan_driver",
+      "offset_bits": 4160,
+      "offset_bytes": 520,
+      "size_bits": 32,
+      "type": "const vulkan_funcs *(*)(PHYSDEV, UINT)"
+    },
+    {
+      "name": "priority",
+      "offset_bits": 4192,
+      "offset_bytes": 524,
+      "size_bits": 32,
+      "type": "UINT"
+    }
+  ],
+  "name": "gdi_dc_funcs",
+  "ordinal": 974,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

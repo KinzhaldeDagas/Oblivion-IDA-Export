@@ -1,0 +1,1 @@
+IMMDeviceCollectionVtbl_0

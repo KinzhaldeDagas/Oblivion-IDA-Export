@@ -1,0 +1,1 @@
+tagRID_DEVICE_INFO_HID

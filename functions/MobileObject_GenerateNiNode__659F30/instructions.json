@@ -1,0 +1,212 @@
+[
+  {
+    "ea": "0x659F30",
+    "line": "push    esi; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x659F31",
+    "line": "push    edi; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x659F32",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659F34",
+    "line": "call    TESObjectREFR_GenerateNiNode",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x659F39",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659F3B",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x659F3D",
+    "line": "jz      short loc_659F63",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x659F3F",
+    "line": "cmp     dword ptr [esi+58h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x659F43",
+    "line": "jz      short loc_659F63",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x659F45",
+    "line": "push    offset off_A7D2CC",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x659F4A",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659F4C",
+    "line": "call    NiObjectNET_GetExtraData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x659F51",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x659F53",
+    "line": "jz      short loc_659F63",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x659F55",
+    "line": "mov     ecx, [esi+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x659F58",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659F5A",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x659F5B",
+    "line": "mov     eax, [edx+470h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x659F61",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x659F63",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659F65",
+    "line": "mov     eax, [edx+190h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x659F6B",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659F6D",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x659F6F",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x659F71",
+    "line": "jz      short loc_659F85",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x659F73",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x659F74",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x659F76",
+    "line": "call    GetShadowSceneNode",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x659F7B",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x659F7E",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659F80",
+    "line": "call    ShadowSceneNodeAddShadowCaster",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x659F85",
+    "line": "mov     eax, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659F87",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x659F88",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x659F89",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

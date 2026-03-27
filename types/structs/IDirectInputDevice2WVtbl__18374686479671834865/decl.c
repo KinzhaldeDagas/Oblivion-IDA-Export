@@ -1,0 +1,1 @@
+IDirectInputDevice2WVtbl

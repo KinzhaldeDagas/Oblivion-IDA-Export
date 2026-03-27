@@ -1,0 +1,1 @@
+_beginthread_trampoline_t

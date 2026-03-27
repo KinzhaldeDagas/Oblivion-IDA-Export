@@ -1,0 +1,116 @@
+[
+  {
+    "ea": "0x47E020",
+    "line": "cmp     byte ptr ds:0B069C3h, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x47E027",
+    "line": "jz      short loc_47E040",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x47E029",
+    "line": "push    0; Time",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x47E02B",
+    "line": "call    __time64",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x47E030",
+    "line": "push    eax; Seed",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x47E031",
+    "line": "call    _srand",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x47E036",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x47E039",
+    "line": "mov     byte ptr ds:0B069C3h, 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x47E040",
+    "line": "call    _rand",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x47E045",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x47E047",
+    "line": "imul    ecx, [esp+arg_0]",
+    "mnemonic": "imul",
+    "size": 5
+  },
+  {
+    "ea": "0x47E04C",
+    "line": "mov     eax, 80010003h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x47E051",
+    "line": "imul    ecx",
+    "mnemonic": "imul",
+    "size": 2
+  },
+  {
+    "ea": "0x47E053",
+    "line": "add     edx, ecx",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x47E055",
+    "line": "sar     edx, 0Eh",
+    "mnemonic": "sar",
+    "size": 3
+  },
+  {
+    "ea": "0x47E058",
+    "line": "mov     eax, edx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x47E05A",
+    "line": "shr     eax, 1Fh",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x47E05D",
+    "line": "add     eax, edx",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x47E05F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "ea": "0x68E5CA",
+    "line": "cmp     al, 41h ; 'A'",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x68E5CC",
+    "line": "jb      short ActiveEffect_Base_LoadEffect___Epilogue",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x68E5CE",
+    "line": "push    1; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x68E5D0",
+    "line": "lea     edx, [esp+4+Dst]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x68E5D4",
+    "line": "push    edx; Dst",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x68E5D5",
+    "line": "call    SaveLoad_LoadData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x68E5DA",
+    "line": "cmp     [esp+Dst], bl",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x68E5DE",
+    "line": "jz      short ActiveEffect_Base_LoadEffect___Epilogue",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x68E5E0",
+    "line": "or      dword ptr [ebp+14h], 6",
+    "mnemonic": "or",
+    "size": 4
+  }
+]

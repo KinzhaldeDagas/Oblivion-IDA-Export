@@ -1,0 +1,1 @@
+IEnumGUIDVtbl_0

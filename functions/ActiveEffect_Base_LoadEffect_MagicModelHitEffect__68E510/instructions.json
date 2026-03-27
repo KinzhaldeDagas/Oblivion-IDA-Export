@@ -1,0 +1,62 @@
+[
+  {
+    "ea": "0x68E510",
+    "line": "push    38h ; '8'; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x68E512",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x68E517",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x68E51A",
+    "line": "mov     [esp+arg_24], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x68E51E",
+    "line": "cmp     eax, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x68E520",
+    "line": "mov     [esp+arg_30], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x68E524",
+    "line": "jz      short ActiveEffect_Base_LoadEffect___FailedAlloc",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x68E526",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x68E528",
+    "line": "call    MagicModelHitEffect_constr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x68E52D",
+    "line": "jmp     short ActiveEffect_Base_LoadEffect___LoadHitEffect_",
+    "mnemonic": "jmp",
+    "size": 2
+  }
+]

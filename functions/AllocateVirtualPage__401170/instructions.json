@@ -1,0 +1,44 @@
+[
+  {
+    "ea": "0x401170",
+    "line": "mov     eax, [esp+dwSize]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x401174",
+    "line": "push    4; flAllocationType",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x401176",
+    "line": "push    1000h; flAllocationType",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x40117B",
+    "line": "push    eax; dwSize",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x40117C",
+    "line": "push    0; lpAddress",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x40117E",
+    "line": "call    ds:VirtualAlloc",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x401184",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

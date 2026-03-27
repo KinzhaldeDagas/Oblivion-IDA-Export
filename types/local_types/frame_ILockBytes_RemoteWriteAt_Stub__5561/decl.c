@@ -1,0 +1,1 @@
+__frame_ILockBytes_RemoteWriteAt_Stub

@@ -1,0 +1,152 @@
+[
+  {
+    "ea": "0x643640",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x643641",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x643642",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x643643",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x643645",
+    "line": "mov     ecx, offset TimeGlobals",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x64364A",
+    "line": "call    TimeGlobals_GetGameHour",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x64364F",
+    "line": "fstp    dword ptr [edi+14h]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x643652",
+    "line": "mov     ecx, offset TimeGlobals",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x643657",
+    "line": "call    TimeGlobals_GetGameYear",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x64365C",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x64365E",
+    "line": "mov     ecx, offset TimeGlobals",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x643663",
+    "line": "shl     ebx, 4",
+    "mnemonic": "shl",
+    "size": 3
+  },
+  {
+    "ea": "0x643666",
+    "line": "call    TimeGlobals_GetGameMonth",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x64366B",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x64366D",
+    "line": "or      esi, ebx",
+    "mnemonic": "or",
+    "size": 2
+  },
+  {
+    "ea": "0x64366F",
+    "line": "mov     ecx, offset TimeGlobals",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x643674",
+    "line": "shl     esi, 9",
+    "mnemonic": "shl",
+    "size": 3
+  },
+  {
+    "ea": "0x643677",
+    "line": "call    TimeGlobals_GetGameDay",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x64367C",
+    "line": "movsx   eax, al",
+    "mnemonic": "movsx",
+    "size": 3
+  },
+  {
+    "ea": "0x64367F",
+    "line": "or      eax, esi",
+    "mnemonic": "or",
+    "size": 2
+  },
+  {
+    "ea": "0x643681",
+    "line": "mov     [edi+18h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x643684",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x643685",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x643686",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x643687",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

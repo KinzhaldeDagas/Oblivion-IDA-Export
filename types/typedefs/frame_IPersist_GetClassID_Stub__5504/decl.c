@@ -1,0 +1,1 @@
+__frame_IPersist_GetClassID_Stub

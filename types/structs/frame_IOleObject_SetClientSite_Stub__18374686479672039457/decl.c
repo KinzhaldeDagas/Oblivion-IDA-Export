@@ -1,0 +1,1 @@
+__frame_IOleObject_SetClientSite_Stub

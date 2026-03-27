@@ -1,0 +1,1163 @@
+{
+  "decl": "request",
+  "kind": "enum",
+  "members": [
+    {
+      "name": "REQ_new_process",
+      "value": 0
+    },
+    {
+      "name": "REQ_get_new_process_info",
+      "value": 1
+    },
+    {
+      "name": "REQ_new_thread",
+      "value": 2
+    },
+    {
+      "name": "REQ_get_startup_info",
+      "value": 3
+    },
+    {
+      "name": "REQ_init_process_done",
+      "value": 4
+    },
+    {
+      "name": "REQ_init_first_thread",
+      "value": 5
+    },
+    {
+      "name": "REQ_init_thread",
+      "value": 6
+    },
+    {
+      "name": "REQ_terminate_process",
+      "value": 7
+    },
+    {
+      "name": "REQ_terminate_thread",
+      "value": 8
+    },
+    {
+      "name": "REQ_get_process_info",
+      "value": 9
+    },
+    {
+      "name": "REQ_get_process_debug_info",
+      "value": 10
+    },
+    {
+      "name": "REQ_get_process_image_name",
+      "value": 11
+    },
+    {
+      "name": "REQ_get_process_vm_counters",
+      "value": 12
+    },
+    {
+      "name": "REQ_set_process_info",
+      "value": 13
+    },
+    {
+      "name": "REQ_get_thread_info",
+      "value": 14
+    },
+    {
+      "name": "REQ_get_thread_times",
+      "value": 15
+    },
+    {
+      "name": "REQ_set_thread_info",
+      "value": 16
+    },
+    {
+      "name": "REQ_suspend_thread",
+      "value": 17
+    },
+    {
+      "name": "REQ_resume_thread",
+      "value": 18
+    },
+    {
+      "name": "REQ_queue_apc",
+      "value": 19
+    },
+    {
+      "name": "REQ_get_apc_result",
+      "value": 20
+    },
+    {
+      "name": "REQ_close_handle",
+      "value": 21
+    },
+    {
+      "name": "REQ_set_handle_info",
+      "value": 22
+    },
+    {
+      "name": "REQ_dup_handle",
+      "value": 23
+    },
+    {
+      "name": "REQ_make_temporary",
+      "value": 24
+    },
+    {
+      "name": "REQ_open_process",
+      "value": 25
+    },
+    {
+      "name": "REQ_open_thread",
+      "value": 26
+    },
+    {
+      "name": "REQ_select",
+      "value": 27
+    },
+    {
+      "name": "REQ_create_event",
+      "value": 28
+    },
+    {
+      "name": "REQ_event_op",
+      "value": 29
+    },
+    {
+      "name": "REQ_query_event",
+      "value": 30
+    },
+    {
+      "name": "REQ_open_event",
+      "value": 31
+    },
+    {
+      "name": "REQ_create_keyed_event",
+      "value": 32
+    },
+    {
+      "name": "REQ_open_keyed_event",
+      "value": 33
+    },
+    {
+      "name": "REQ_create_mutex",
+      "value": 34
+    },
+    {
+      "name": "REQ_release_mutex",
+      "value": 35
+    },
+    {
+      "name": "REQ_open_mutex",
+      "value": 36
+    },
+    {
+      "name": "REQ_query_mutex",
+      "value": 37
+    },
+    {
+      "name": "REQ_create_semaphore",
+      "value": 38
+    },
+    {
+      "name": "REQ_release_semaphore",
+      "value": 39
+    },
+    {
+      "name": "REQ_query_semaphore",
+      "value": 40
+    },
+    {
+      "name": "REQ_open_semaphore",
+      "value": 41
+    },
+    {
+      "name": "REQ_create_file",
+      "value": 42
+    },
+    {
+      "name": "REQ_open_file_object",
+      "value": 43
+    },
+    {
+      "name": "REQ_alloc_file_handle",
+      "value": 44
+    },
+    {
+      "name": "REQ_get_handle_unix_name",
+      "value": 45
+    },
+    {
+      "name": "REQ_get_handle_fd",
+      "value": 46
+    },
+    {
+      "name": "REQ_get_directory_cache_entry",
+      "value": 47
+    },
+    {
+      "name": "REQ_flush",
+      "value": 48
+    },
+    {
+      "name": "REQ_get_file_info",
+      "value": 49
+    },
+    {
+      "name": "REQ_get_volume_info",
+      "value": 50
+    },
+    {
+      "name": "REQ_lock_file",
+      "value": 51
+    },
+    {
+      "name": "REQ_unlock_file",
+      "value": 52
+    },
+    {
+      "name": "REQ_recv_socket",
+      "value": 53
+    },
+    {
+      "name": "REQ_poll_socket",
+      "value": 54
+    },
+    {
+      "name": "REQ_send_socket",
+      "value": 55
+    },
+    {
+      "name": "REQ_get_next_console_request",
+      "value": 56
+    },
+    {
+      "name": "REQ_read_directory_changes",
+      "value": 57
+    },
+    {
+      "name": "REQ_read_change",
+      "value": 58
+    },
+    {
+      "name": "REQ_create_mapping",
+      "value": 59
+    },
+    {
+      "name": "REQ_open_mapping",
+      "value": 60
+    },
+    {
+      "name": "REQ_get_mapping_info",
+      "value": 61
+    },
+    {
+      "name": "REQ_map_view",
+      "value": 62
+    },
+    {
+      "name": "REQ_unmap_view",
+      "value": 63
+    },
+    {
+      "name": "REQ_get_mapping_committed_range",
+      "value": 64
+    },
+    {
+      "name": "REQ_add_mapping_committed_range",
+      "value": 65
+    },
+    {
+      "name": "REQ_is_same_mapping",
+      "value": 66
+    },
+    {
+      "name": "REQ_get_mapping_filename",
+      "value": 67
+    },
+    {
+      "name": "REQ_list_processes",
+      "value": 68
+    },
+    {
+      "name": "REQ_create_debug_obj",
+      "value": 69
+    },
+    {
+      "name": "REQ_wait_debug_event",
+      "value": 70
+    },
+    {
+      "name": "REQ_queue_exception_event",
+      "value": 71
+    },
+    {
+      "name": "REQ_get_exception_status",
+      "value": 72
+    },
+    {
+      "name": "REQ_continue_debug_event",
+      "value": 73
+    },
+    {
+      "name": "REQ_debug_process",
+      "value": 74
+    },
+    {
+      "name": "REQ_set_debug_obj_info",
+      "value": 75
+    },
+    {
+      "name": "REQ_read_process_memory",
+      "value": 76
+    },
+    {
+      "name": "REQ_write_process_memory",
+      "value": 77
+    },
+    {
+      "name": "REQ_create_key",
+      "value": 78
+    },
+    {
+      "name": "REQ_open_key",
+      "value": 79
+    },
+    {
+      "name": "REQ_delete_key",
+      "value": 80
+    },
+    {
+      "name": "REQ_flush_key",
+      "value": 81
+    },
+    {
+      "name": "REQ_enum_key",
+      "value": 82
+    },
+    {
+      "name": "REQ_set_key_value",
+      "value": 83
+    },
+    {
+      "name": "REQ_get_key_value",
+      "value": 84
+    },
+    {
+      "name": "REQ_enum_key_value",
+      "value": 85
+    },
+    {
+      "name": "REQ_delete_key_value",
+      "value": 86
+    },
+    {
+      "name": "REQ_load_registry",
+      "value": 87
+    },
+    {
+      "name": "REQ_unload_registry",
+      "value": 88
+    },
+    {
+      "name": "REQ_save_registry",
+      "value": 89
+    },
+    {
+      "name": "REQ_set_registry_notification",
+      "value": 90
+    },
+    {
+      "name": "REQ_create_timer",
+      "value": 91
+    },
+    {
+      "name": "REQ_open_timer",
+      "value": 92
+    },
+    {
+      "name": "REQ_set_timer",
+      "value": 93
+    },
+    {
+      "name": "REQ_cancel_timer",
+      "value": 94
+    },
+    {
+      "name": "REQ_get_timer_info",
+      "value": 95
+    },
+    {
+      "name": "REQ_get_thread_context",
+      "value": 96
+    },
+    {
+      "name": "REQ_set_thread_context",
+      "value": 97
+    },
+    {
+      "name": "REQ_get_selector_entry",
+      "value": 98
+    },
+    {
+      "name": "REQ_add_atom",
+      "value": 99
+    },
+    {
+      "name": "REQ_delete_atom",
+      "value": 100
+    },
+    {
+      "name": "REQ_find_atom",
+      "value": 101
+    },
+    {
+      "name": "REQ_get_atom_information",
+      "value": 102
+    },
+    {
+      "name": "REQ_get_msg_queue",
+      "value": 103
+    },
+    {
+      "name": "REQ_set_queue_fd",
+      "value": 104
+    },
+    {
+      "name": "REQ_set_queue_mask",
+      "value": 105
+    },
+    {
+      "name": "REQ_get_queue_status",
+      "value": 106
+    },
+    {
+      "name": "REQ_get_process_idle_event",
+      "value": 107
+    },
+    {
+      "name": "REQ_send_message",
+      "value": 108
+    },
+    {
+      "name": "REQ_post_quit_message",
+      "value": 109
+    },
+    {
+      "name": "REQ_send_hardware_message",
+      "value": 110
+    },
+    {
+      "name": "REQ_get_message",
+      "value": 111
+    },
+    {
+      "name": "REQ_reply_message",
+      "value": 112
+    },
+    {
+      "name": "REQ_accept_hardware_message",
+      "value": 113
+    },
+    {
+      "name": "REQ_get_message_reply",
+      "value": 114
+    },
+    {
+      "name": "REQ_set_win_timer",
+      "value": 115
+    },
+    {
+      "name": "REQ_kill_win_timer",
+      "value": 116
+    },
+    {
+      "name": "REQ_is_window_hung",
+      "value": 117
+    },
+    {
+      "name": "REQ_get_serial_info",
+      "value": 118
+    },
+    {
+      "name": "REQ_set_serial_info",
+      "value": 119
+    },
+    {
+      "name": "REQ_register_async",
+      "value": 120
+    },
+    {
+      "name": "REQ_cancel_async",
+      "value": 121
+    },
+    {
+      "name": "REQ_get_async_result",
+      "value": 122
+    },
+    {
+      "name": "REQ_read",
+      "value": 123
+    },
+    {
+      "name": "REQ_write",
+      "value": 124
+    },
+    {
+      "name": "REQ_ioctl",
+      "value": 125
+    },
+    {
+      "name": "REQ_set_irp_result",
+      "value": 126
+    },
+    {
+      "name": "REQ_create_named_pipe",
+      "value": 127
+    },
+    {
+      "name": "REQ_set_named_pipe_info",
+      "value": 128
+    },
+    {
+      "name": "REQ_create_window",
+      "value": 129
+    },
+    {
+      "name": "REQ_destroy_window",
+      "value": 130
+    },
+    {
+      "name": "REQ_get_desktop_window",
+      "value": 131
+    },
+    {
+      "name": "REQ_set_window_owner",
+      "value": 132
+    },
+    {
+      "name": "REQ_get_window_info",
+      "value": 133
+    },
+    {
+      "name": "REQ_set_window_info",
+      "value": 134
+    },
+    {
+      "name": "REQ_set_parent",
+      "value": 135
+    },
+    {
+      "name": "REQ_get_window_parents",
+      "value": 136
+    },
+    {
+      "name": "REQ_get_window_children",
+      "value": 137
+    },
+    {
+      "name": "REQ_get_window_children_from_point",
+      "value": 138
+    },
+    {
+      "name": "REQ_get_window_tree",
+      "value": 139
+    },
+    {
+      "name": "REQ_set_window_pos",
+      "value": 140
+    },
+    {
+      "name": "REQ_get_window_rectangles",
+      "value": 141
+    },
+    {
+      "name": "REQ_get_window_text",
+      "value": 142
+    },
+    {
+      "name": "REQ_set_window_text",
+      "value": 143
+    },
+    {
+      "name": "REQ_get_windows_offset",
+      "value": 144
+    },
+    {
+      "name": "REQ_get_visible_region",
+      "value": 145
+    },
+    {
+      "name": "REQ_get_surface_region",
+      "value": 146
+    },
+    {
+      "name": "REQ_get_window_region",
+      "value": 147
+    },
+    {
+      "name": "REQ_set_window_region",
+      "value": 148
+    },
+    {
+      "name": "REQ_set_layer_region",
+      "value": 149
+    },
+    {
+      "name": "REQ_get_update_region",
+      "value": 150
+    },
+    {
+      "name": "REQ_update_window_zorder",
+      "value": 151
+    },
+    {
+      "name": "REQ_redraw_window",
+      "value": 152
+    },
+    {
+      "name": "REQ_set_window_property",
+      "value": 153
+    },
+    {
+      "name": "REQ_remove_window_property",
+      "value": 154
+    },
+    {
+      "name": "REQ_get_window_property",
+      "value": 155
+    },
+    {
+      "name": "REQ_get_window_properties",
+      "value": 156
+    },
+    {
+      "name": "REQ_create_winstation",
+      "value": 157
+    },
+    {
+      "name": "REQ_open_winstation",
+      "value": 158
+    },
+    {
+      "name": "REQ_close_winstation",
+      "value": 159
+    },
+    {
+      "name": "REQ_get_process_winstation",
+      "value": 160
+    },
+    {
+      "name": "REQ_set_process_winstation",
+      "value": 161
+    },
+    {
+      "name": "REQ_enum_winstation",
+      "value": 162
+    },
+    {
+      "name": "REQ_create_desktop",
+      "value": 163
+    },
+    {
+      "name": "REQ_open_desktop",
+      "value": 164
+    },
+    {
+      "name": "REQ_open_input_desktop",
+      "value": 165
+    },
+    {
+      "name": "REQ_close_desktop",
+      "value": 166
+    },
+    {
+      "name": "REQ_get_thread_desktop",
+      "value": 167
+    },
+    {
+      "name": "REQ_set_thread_desktop",
+      "value": 168
+    },
+    {
+      "name": "REQ_enum_desktop",
+      "value": 169
+    },
+    {
+      "name": "REQ_set_user_object_info",
+      "value": 170
+    },
+    {
+      "name": "REQ_register_hotkey",
+      "value": 171
+    },
+    {
+      "name": "REQ_unregister_hotkey",
+      "value": 172
+    },
+    {
+      "name": "REQ_attach_thread_input",
+      "value": 173
+    },
+    {
+      "name": "REQ_get_thread_input",
+      "value": 174
+    },
+    {
+      "name": "REQ_get_last_input_time",
+      "value": 175
+    },
+    {
+      "name": "REQ_get_key_state",
+      "value": 176
+    },
+    {
+      "name": "REQ_set_key_state",
+      "value": 177
+    },
+    {
+      "name": "REQ_set_foreground_window",
+      "value": 178
+    },
+    {
+      "name": "REQ_set_focus_window",
+      "value": 179
+    },
+    {
+      "name": "REQ_set_active_window",
+      "value": 180
+    },
+    {
+      "name": "REQ_set_capture_window",
+      "value": 181
+    },
+    {
+      "name": "REQ_set_caret_window",
+      "value": 182
+    },
+    {
+      "name": "REQ_set_caret_info",
+      "value": 183
+    },
+    {
+      "name": "REQ_set_hook",
+      "value": 184
+    },
+    {
+      "name": "REQ_remove_hook",
+      "value": 185
+    },
+    {
+      "name": "REQ_start_hook_chain",
+      "value": 186
+    },
+    {
+      "name": "REQ_finish_hook_chain",
+      "value": 187
+    },
+    {
+      "name": "REQ_get_hook_info",
+      "value": 188
+    },
+    {
+      "name": "REQ_create_class",
+      "value": 189
+    },
+    {
+      "name": "REQ_destroy_class",
+      "value": 190
+    },
+    {
+      "name": "REQ_set_class_info",
+      "value": 191
+    },
+    {
+      "name": "REQ_open_clipboard",
+      "value": 192
+    },
+    {
+      "name": "REQ_close_clipboard",
+      "value": 193
+    },
+    {
+      "name": "REQ_empty_clipboard",
+      "value": 194
+    },
+    {
+      "name": "REQ_set_clipboard_data",
+      "value": 195
+    },
+    {
+      "name": "REQ_get_clipboard_data",
+      "value": 196
+    },
+    {
+      "name": "REQ_get_clipboard_formats",
+      "value": 197
+    },
+    {
+      "name": "REQ_enum_clipboard_formats",
+      "value": 198
+    },
+    {
+      "name": "REQ_release_clipboard",
+      "value": 199
+    },
+    {
+      "name": "REQ_get_clipboard_info",
+      "value": 200
+    },
+    {
+      "name": "REQ_set_clipboard_viewer",
+      "value": 201
+    },
+    {
+      "name": "REQ_add_clipboard_listener",
+      "value": 202
+    },
+    {
+      "name": "REQ_remove_clipboard_listener",
+      "value": 203
+    },
+    {
+      "name": "REQ_open_token",
+      "value": 204
+    },
+    {
+      "name": "REQ_set_global_windows",
+      "value": 205
+    },
+    {
+      "name": "REQ_adjust_token_privileges",
+      "value": 206
+    },
+    {
+      "name": "REQ_get_token_privileges",
+      "value": 207
+    },
+    {
+      "name": "REQ_check_token_privileges",
+      "value": 208
+    },
+    {
+      "name": "REQ_duplicate_token",
+      "value": 209
+    },
+    {
+      "name": "REQ_filter_token",
+      "value": 210
+    },
+    {
+      "name": "REQ_access_check",
+      "value": 211
+    },
+    {
+      "name": "REQ_get_token_sid",
+      "value": 212
+    },
+    {
+      "name": "REQ_get_token_groups",
+      "value": 213
+    },
+    {
+      "name": "REQ_get_token_default_dacl",
+      "value": 214
+    },
+    {
+      "name": "REQ_set_token_default_dacl",
+      "value": 215
+    },
+    {
+      "name": "REQ_set_security_object",
+      "value": 216
+    },
+    {
+      "name": "REQ_get_security_object",
+      "value": 217
+    },
+    {
+      "name": "REQ_get_system_handles",
+      "value": 218
+    },
+    {
+      "name": "REQ_create_mailslot",
+      "value": 219
+    },
+    {
+      "name": "REQ_set_mailslot_info",
+      "value": 220
+    },
+    {
+      "name": "REQ_create_directory",
+      "value": 221
+    },
+    {
+      "name": "REQ_open_directory",
+      "value": 222
+    },
+    {
+      "name": "REQ_get_directory_entry",
+      "value": 223
+    },
+    {
+      "name": "REQ_create_symlink",
+      "value": 224
+    },
+    {
+      "name": "REQ_open_symlink",
+      "value": 225
+    },
+    {
+      "name": "REQ_query_symlink",
+      "value": 226
+    },
+    {
+      "name": "REQ_get_object_info",
+      "value": 227
+    },
+    {
+      "name": "REQ_get_object_name",
+      "value": 228
+    },
+    {
+      "name": "REQ_get_object_type",
+      "value": 229
+    },
+    {
+      "name": "REQ_get_object_types",
+      "value": 230
+    },
+    {
+      "name": "REQ_allocate_locally_unique_id",
+      "value": 231
+    },
+    {
+      "name": "REQ_create_device_manager",
+      "value": 232
+    },
+    {
+      "name": "REQ_create_device",
+      "value": 233
+    },
+    {
+      "name": "REQ_delete_device",
+      "value": 234
+    },
+    {
+      "name": "REQ_get_next_device_request",
+      "value": 235
+    },
+    {
+      "name": "REQ_get_kernel_object_ptr",
+      "value": 236
+    },
+    {
+      "name": "REQ_set_kernel_object_ptr",
+      "value": 237
+    },
+    {
+      "name": "REQ_grab_kernel_object",
+      "value": 238
+    },
+    {
+      "name": "REQ_release_kernel_object",
+      "value": 239
+    },
+    {
+      "name": "REQ_get_kernel_object_handle",
+      "value": 240
+    },
+    {
+      "name": "REQ_make_process_system",
+      "value": 241
+    },
+    {
+      "name": "REQ_get_token_info",
+      "value": 242
+    },
+    {
+      "name": "REQ_create_linked_token",
+      "value": 243
+    },
+    {
+      "name": "REQ_create_completion",
+      "value": 244
+    },
+    {
+      "name": "REQ_open_completion",
+      "value": 245
+    },
+    {
+      "name": "REQ_add_completion",
+      "value": 246
+    },
+    {
+      "name": "REQ_remove_completion",
+      "value": 247
+    },
+    {
+      "name": "REQ_query_completion",
+      "value": 248
+    },
+    {
+      "name": "REQ_set_completion_info",
+      "value": 249
+    },
+    {
+      "name": "REQ_add_fd_completion",
+      "value": 250
+    },
+    {
+      "name": "REQ_set_fd_completion_mode",
+      "value": 251
+    },
+    {
+      "name": "REQ_set_fd_disp_info",
+      "value": 252
+    },
+    {
+      "name": "REQ_set_fd_name_info",
+      "value": 253
+    },
+    {
+      "name": "REQ_set_fd_eof_info",
+      "value": 254
+    },
+    {
+      "name": "REQ_get_window_layered_info",
+      "value": 255
+    },
+    {
+      "name": "REQ_set_window_layered_info",
+      "value": 256
+    },
+    {
+      "name": "REQ_alloc_user_handle",
+      "value": 257
+    },
+    {
+      "name": "REQ_free_user_handle",
+      "value": 258
+    },
+    {
+      "name": "REQ_set_cursor",
+      "value": 259
+    },
+    {
+      "name": "REQ_get_cursor_history",
+      "value": 260
+    },
+    {
+      "name": "REQ_get_rawinput_buffer",
+      "value": 261
+    },
+    {
+      "name": "REQ_update_rawinput_devices",
+      "value": 262
+    },
+    {
+      "name": "REQ_get_rawinput_devices",
+      "value": 263
+    },
+    {
+      "name": "REQ_create_job",
+      "value": 264
+    },
+    {
+      "name": "REQ_open_job",
+      "value": 265
+    },
+    {
+      "name": "REQ_assign_job",
+      "value": 266
+    },
+    {
+      "name": "REQ_process_in_job",
+      "value": 267
+    },
+    {
+      "name": "REQ_set_job_limits",
+      "value": 268
+    },
+    {
+      "name": "REQ_set_job_completion_port",
+      "value": 269
+    },
+    {
+      "name": "REQ_get_job_info",
+      "value": 270
+    },
+    {
+      "name": "REQ_terminate_job",
+      "value": 271
+    },
+    {
+      "name": "REQ_suspend_process",
+      "value": 272
+    },
+    {
+      "name": "REQ_resume_process",
+      "value": 273
+    },
+    {
+      "name": "REQ_get_next_thread",
+      "value": 274
+    },
+    {
+      "name": "REQ_create_esync",
+      "value": 275
+    },
+    {
+      "name": "REQ_open_esync",
+      "value": 276
+    },
+    {
+      "name": "REQ_get_esync_fd",
+      "value": 277
+    },
+    {
+      "name": "REQ_esync_msgwait",
+      "value": 278
+    },
+    {
+      "name": "REQ_get_esync_apc_fd",
+      "value": 279
+    },
+    {
+      "name": "REQ_create_fsync",
+      "value": 280
+    },
+    {
+      "name": "REQ_open_fsync",
+      "value": 281
+    },
+    {
+      "name": "REQ_get_fsync_idx",
+      "value": 282
+    },
+    {
+      "name": "REQ_fsync_msgwait",
+      "value": 283
+    },
+    {
+      "name": "REQ_get_fsync_apc_idx",
+      "value": 284
+    },
+    {
+      "name": "REQ_NB_REQUESTS",
+      "value": 285
+    }
+  ],
+  "name": "request",
+  "ordinal": 7257,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": true,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": true,
+    "is_struct": false,
+    "is_union": false,
+    "is_void": false
+  }
+}

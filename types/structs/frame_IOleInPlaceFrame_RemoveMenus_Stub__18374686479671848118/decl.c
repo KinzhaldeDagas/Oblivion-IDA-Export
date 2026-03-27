@@ -1,0 +1,1 @@
+__frame_IOleInPlaceFrame_RemoveMenus_Stub

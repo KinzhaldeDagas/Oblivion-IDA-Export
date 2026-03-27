@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA192F0",
+    "line": "push    offset bAllowSM20Hair",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA192F5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA192FA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA192FF",
+    "line": "mov     eax, off_B06DA8; \"bAllow20HairShader:Display\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA19304",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA19306",
+    "line": "jz      short locret_A19314",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA19308",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1930B",
+    "line": "jnz     short locret_A19314",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1930D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1930E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA19313",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA19314",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

@@ -1,0 +1,1 @@
+__frame_IPersistFile_IsDirty_Stub

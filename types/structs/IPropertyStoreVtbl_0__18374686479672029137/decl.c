@@ -1,0 +1,1 @@
+IPropertyStoreVtbl_0

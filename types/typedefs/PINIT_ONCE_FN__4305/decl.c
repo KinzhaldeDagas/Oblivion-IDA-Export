@@ -1,0 +1,1 @@
+PINIT_ONCE_FN

@@ -1,0 +1,218 @@
+[
+  {
+    "ea": "0x430E00",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430E01",
+    "line": "push    edi; lpThreadId",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430E02",
+    "line": "mov     edi, ds:CreateSemaphoreA",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x430E08",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x430E0A",
+    "line": "mov     dword ptr [esi], offset ??_7BSTaskThread@@6B@; const BSTaskThread::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x430E10",
+    "line": "push    0; lpName",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x430E12",
+    "line": "mov     dword ptr [esi+0Ch], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x430E19",
+    "line": "mov     eax, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x430E1C",
+    "line": "push    1; lMaximumCount",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x430E1E",
+    "line": "push    eax; lInitialCount",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430E1F",
+    "line": "push    0; lpSemaphoreAttributes",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x430E21",
+    "line": "mov     dword ptr [esi+10h], 1",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x430E28",
+    "line": "call    edi ; CreateSemaphoreA",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x430E2A",
+    "line": "mov     [esi+14h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x430E2D",
+    "line": "push    0; lpName",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x430E2F",
+    "line": "mov     dword ptr [esi+18h], 1",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x430E36",
+    "line": "mov     ecx, [esi+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x430E39",
+    "line": "push    1; lMaximumCount",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x430E3B",
+    "line": "push    ecx; lInitialCount",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430E3C",
+    "line": "push    0; lpSemaphoreAttributes",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x430E3E",
+    "line": "mov     dword ptr [esi+1Ch], 1",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x430E45",
+    "line": "call    edi ; CreateSemaphoreA",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x430E47",
+    "line": "lea     edx, [esi+8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x430E4A",
+    "line": "push    edx; dwCreationFlags",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430E4B",
+    "line": "push    4; lpParameter",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x430E4D",
+    "line": "push    esi; lpStartAddress",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430E4E",
+    "line": "push    offset BSTaskThread_Runnable; lpStartAddress",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x430E53",
+    "line": "push    0; dwStackSize",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x430E55",
+    "line": "push    0; lpThreadAttributes",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x430E57",
+    "line": "mov     [esi+20h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x430E5A",
+    "line": "call    ds:CreateThread",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x430E60",
+    "line": "mov     [esi+4], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x430E63",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x430E64",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x430E66",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x430E67",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

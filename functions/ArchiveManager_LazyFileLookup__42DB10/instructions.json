@@ -1,0 +1,98 @@
+[
+  {
+    "ea": "0x42DB10",
+    "line": "mov     edx, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42DB14",
+    "line": "mov     ecx, FirstLoadedArchiveByType[edx*4]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x42DB1B",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x42DB1D",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42DB1F",
+    "line": "jnz     short loc_42DB2C",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x42DB21",
+    "line": "mov     ecx, dword_B3390C[edx*4]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x42DB28",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42DB2A",
+    "line": "jz      short locret_42DB40",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42DB2C",
+    "line": "mov     eax, [esp+arg_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42DB30",
+    "line": "mov     edx, [esp+arg_8]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42DB34",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42DB35",
+    "line": "mov     eax, [esp+4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42DB39",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42DB3A",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42DB3B",
+    "line": "call    Archive_GetFileEntry",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42DB40",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

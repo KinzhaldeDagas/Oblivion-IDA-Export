@@ -1,0 +1,134 @@
+[
+  {
+    "ea": "0x68E92B",
+    "line": "mov     eax, [esi+28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x68E92E",
+    "line": "cmp     eax, 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x68E931",
+    "line": "jz      short ActiveEffect_Base_ProcessEffect___CheckForTargetDeath",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x68E933",
+    "line": "cmp     eax, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x68E936",
+    "line": "jz      short ActiveEffect_Base_ProcessEffect___CheckForTargetDeath",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x68E938",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x68E93A",
+    "line": "call    ActiveEffect_Base_IsBoundObjWearable",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x68E93F",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x68E941",
+    "line": "jnz     short ActiveEffect_Base_ProcessEffect___CheckForTargetDeath",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x68E943",
+    "line": "mov     ecx, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x68E946",
+    "line": "mov     edx, [ecx+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x68E949",
+    "line": "mov     eax, [edx+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x68E94C",
+    "line": "shr     eax, 7",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x68E94F",
+    "line": "test    al, 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x68E951",
+    "line": "jnz     short loc_68E962",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x68E953",
+    "line": "fld     dword ptr [esi+4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x68E956",
+    "line": "fld     dword ptr [esi+1Ch]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x68E959",
+    "line": "fcompp",
+    "mnemonic": "fcompp",
+    "size": 2
+  },
+  {
+    "ea": "0x68E95B",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x68E95D",
+    "line": "test    ah, 41h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x68E960",
+    "line": "jp      short ActiveEffect_Base_ProcessEffect___CheckForTargetDeath",
+    "mnemonic": "jp",
+    "size": 2
+  },
+  {
+    "ea": "0x68E962",
+    "line": "mov     byte ptr [esi+11h], 1",
+    "mnemonic": "mov",
+    "size": 4
+  }
+]

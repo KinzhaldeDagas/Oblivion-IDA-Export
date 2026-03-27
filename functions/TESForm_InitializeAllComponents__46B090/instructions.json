@@ -1,0 +1,260 @@
+[
+  {
+    "ea": "0x46B090",
+    "line": "push    0FFFFFFFFh",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x46B092",
+    "line": "push    offset TESForm_ClearAllComponentReferences_SEH",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x46B097",
+    "line": "mov     eax, large fs:0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x46B09D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46B09E",
+    "line": "sub     esp, 68h",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x46B0A1",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46B0A2",
+    "line": "mov     eax, ds:0B30AACh",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x46B0A7",
+    "line": "xor     eax, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x46B0A9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46B0AA",
+    "line": "lea     eax, [esp+7Ch+var_C]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x46B0AE",
+    "line": "mov     large fs:0, eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x46B0B4",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x46B0B6",
+    "line": "movzx   eax, byte ptr [esi+4]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x46B0BA",
+    "line": "add     eax, 0FFFFFFF3h; switch 49 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x46B0BD",
+    "line": "cmp     eax, 30h",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x46B0C0",
+    "line": "ja      short TESForm_InitializeAllComponents___def_46B0C9; jumptable 0046B0C9 default case, cases 14-47,53,55-60",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x46B0C2",
+    "line": "movzx   eax, ds:byte_46B13C[eax]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x46B0C9",
+    "line": "jmp     ds:jpt_46B0C9[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x46B0D0",
+    "line": "lea     ecx, [esi+18h]; jumptable 0046B0C9 case 48",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x46B0D3",
+    "line": "call    TESFullName_Initialize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x46B0D8",
+    "line": "mov     ecx, [esp+7Ch+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x46B0DC",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x46B0E3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x46B0E4",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x46B0E5",
+    "line": "add     esp, 74h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x46B0E8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x46B0E9",
+    "line": "lea     ecx, [esp+7Ch+var_74]; jumptable 0046B0C9 default case, cases 14-47,53,55-60",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x46B0ED",
+    "line": "call    FormComponentList_ZeroInit",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x46B0F2",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46B0F3",
+    "line": "lea     ecx, [esp+80h+var_74]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x46B0F7",
+    "line": "mov     [esp+80h+var_4], 0",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x46B0FF",
+    "line": "call    FormComponentList_Build",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x46B104",
+    "line": "lea     ecx, [esp+7Ch+var_74]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x46B108",
+    "line": "call    FormComponentList_Initialize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x46B10D",
+    "line": "lea     ecx, [esp+7Ch+var_74]; void *",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x46B111",
+    "line": "mov     [esp+7Ch+var_4], 0FFFFFFFFh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x46B119",
+    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x46B11E",
+    "line": "mov     ecx, [esp+7Ch+var_C]; jumptable 0046B0C9 cases 13,49-52,54,61",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x46B122",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x46B129",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x46B12A",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x46B12B",
+    "line": "add     esp, 74h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x46B12E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

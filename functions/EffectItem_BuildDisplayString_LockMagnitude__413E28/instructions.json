@@ -1,0 +1,92 @@
+[
+  {
+    "ea": "0x413E28",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x413E29",
+    "line": "call    GetLockLevel",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x413E2E",
+    "line": "mov     eax, LockLevelNames[eax*4]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x413E35",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x413E38",
+    "line": "cmp     eax, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x413E3A",
+    "line": "jz      short loc_413E40",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x413E3C",
+    "line": "mov     eax, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x413E3E",
+    "line": "jmp     short loc_413E42",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x413E40",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x413E42",
+    "line": "mov     ecx, sMagicEffectItemLock",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x413E48",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x413E49",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x413E4A",
+    "line": "push    offset aSS_4; \" %s %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x413E4F",
+    "line": "lea     edx, [esp+0Ch+arg_20]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x413E53",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  }
+]

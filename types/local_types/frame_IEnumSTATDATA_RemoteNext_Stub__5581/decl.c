@@ -1,0 +1,1 @@
+__frame_IEnumSTATDATA_RemoteNext_Stub

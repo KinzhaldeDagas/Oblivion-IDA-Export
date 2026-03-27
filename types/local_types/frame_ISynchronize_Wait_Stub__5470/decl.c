@@ -1,0 +1,1 @@
+__frame_ISynchronize_Wait_Stub

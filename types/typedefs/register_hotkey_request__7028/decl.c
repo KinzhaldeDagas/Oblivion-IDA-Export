@@ -1,0 +1,1 @@
+register_hotkey_request

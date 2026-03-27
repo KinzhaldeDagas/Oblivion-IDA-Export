@@ -1,0 +1,590 @@
+[
+  {
+    "ea": "0x501540",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x501541",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x501542",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x501543",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x501544",
+    "line": "push    offset aConsoleCommand; \"----CONSOLE COMMANDS-------------------\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x501549",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x50154E",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x501551",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x501553",
+    "line": "mov     edi, ds:Script_ConsoleCommandList.helpText[esi]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x501559",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x50155B",
+    "line": "jz      short loc_5015BA",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x50155D",
+    "line": "mov     eax, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x50155F",
+    "line": "lea     edx, [eax+1]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x501562",
+    "line": "mov     cl, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x501564",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x501567",
+    "line": "test    cl, cl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x501569",
+    "line": "jnz     short loc_501562",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x50156B",
+    "line": "sub     eax, edx",
+    "mnemonic": "sub",
+    "size": 2
+  },
+  {
+    "ea": "0x50156D",
+    "line": "jz      short loc_5015BA",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x50156F",
+    "line": "mov     edx, ds:Script_ConsoleCommandList.shortName[esi]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x501575",
+    "line": "test    edx, edx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x501577",
+    "line": "jz      short loc_5015A5",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x501579",
+    "line": "mov     eax, edx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x50157B",
+    "line": "lea     ebx, [eax+1]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x50157E",
+    "line": "mov     edi, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x501580",
+    "line": "mov     cl, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x501582",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x501585",
+    "line": "test    cl, cl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x501587",
+    "line": "jnz     short loc_501580",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x501589",
+    "line": "sub     eax, ebx",
+    "mnemonic": "sub",
+    "size": 2
+  },
+  {
+    "ea": "0x50158B",
+    "line": "jz      short loc_5015A5",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x50158D",
+    "line": "mov     eax, dword ptr ds:Script_ConsoleCommandList.longName[esi]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x501593",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x501594",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x501595",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x501596",
+    "line": "push    offset aSSS_5; \"%s (%s) -> %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x50159B",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5015A0",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5015A3",
+    "line": "jmp     short loc_5015BA",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5015A5",
+    "line": "mov     ecx, dword ptr ds:Script_ConsoleCommandList.longName[esi]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5015AB",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5015AC",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5015AD",
+    "line": "push    offset aSS_9; \"%s -> %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5015B2",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5015B7",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5015BA",
+    "line": "add     esi, 28h ; '('",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5015BD",
+    "line": "cmp     esi, 1478h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x5015C3",
+    "line": "jb      short loc_501553",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x5015C5",
+    "line": "push    offset aScriptFunction; \"----SCRIPT FUNCTIONS-------------------\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5015CA",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5015CF",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5015D2",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x5015D4",
+    "line": "mov     edi, ds:Script_CommandList?.helpText[esi]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5015DA",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5015DC",
+    "line": "jz      short loc_50163A",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5015DE",
+    "line": "mov     eax, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5015E0",
+    "line": "lea     edx, [eax+1]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x5015E3",
+    "line": "mov     cl, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5015E5",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5015E8",
+    "line": "test    cl, cl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5015EA",
+    "line": "jnz     short loc_5015E3",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5015EC",
+    "line": "sub     eax, edx",
+    "mnemonic": "sub",
+    "size": 2
+  },
+  {
+    "ea": "0x5015EE",
+    "line": "jz      short loc_50163A",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5015F0",
+    "line": "mov     edx, ds:Script_CommandList?.shortName[esi]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5015F6",
+    "line": "test    edx, edx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5015F8",
+    "line": "jz      short loc_501625",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5015FA",
+    "line": "mov     eax, edx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5015FC",
+    "line": "lea     ebx, [eax+1]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x5015FF",
+    "line": "nop",
+    "mnemonic": "nop",
+    "size": 1
+  },
+  {
+    "ea": "0x501600",
+    "line": "mov     cl, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x501602",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x501605",
+    "line": "test    cl, cl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x501607",
+    "line": "jnz     short loc_501600",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x501609",
+    "line": "sub     eax, ebx",
+    "mnemonic": "sub",
+    "size": 2
+  },
+  {
+    "ea": "0x50160B",
+    "line": "jz      short loc_501625",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x50160D",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x50160E",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x50160F",
+    "line": "mov     edx, dword ptr ds:Script_CommandList?.longName[esi]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x501615",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x501616",
+    "line": "push    offset aSSS_5; \"%s (%s) -> %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x50161B",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x501620",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x501623",
+    "line": "jmp     short loc_50163A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x501625",
+    "line": "mov     eax, dword ptr ds:Script_CommandList?.longName[esi]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x50162B",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x50162C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x50162D",
+    "line": "push    offset aSS_9; \"%s -> %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x501632",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x501637",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x50163A",
+    "line": "add     esi, 28h ; '('",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x50163D",
+    "line": "cmp     esi, 39A8h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x501643",
+    "line": "jb      short loc_5015D4",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x501645",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x501646",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x501647",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x501649",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x50164A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x50164B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

@@ -1,0 +1,1 @@
+__frame_IStream_Stat_Stub

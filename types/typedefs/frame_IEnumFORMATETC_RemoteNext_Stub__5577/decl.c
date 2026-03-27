@@ -1,0 +1,1 @@
+__frame_IEnumFORMATETC_RemoteNext_Stub

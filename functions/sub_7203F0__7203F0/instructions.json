@@ -1,0 +1,128 @@
+[
+  {
+    "ea": "0x7203F0",
+    "line": "cmp     byte ptr ds:0B256CCh, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x7203F7",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7203F8",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7203FA",
+    "line": "jz      short loc_720444",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7203FC",
+    "line": "push    offset stru_B3FC00; lpCriticalSection",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x720401",
+    "line": "call    dword ptr ds:0A2806Ch",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x720407",
+    "line": "call    dword ptr ds:0A2808Ch",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x72040D",
+    "line": "add     dword ptr ds:0B3FC7Ch, 1",
+    "mnemonic": "add",
+    "size": 7
+  },
+  {
+    "ea": "0x720414",
+    "line": "mov     ds:0B3FC78h, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x720419",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x72041B",
+    "line": "mov     edx, [eax+5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x72041E",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x720420",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x720422",
+    "line": "sub     dword ptr ds:0B3FC7Ch, 1",
+    "mnemonic": "sub",
+    "size": 7
+  },
+  {
+    "ea": "0x720429",
+    "line": "jnz     short loc_720435",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x72042B",
+    "line": "mov     dword ptr ds:0B3FC78h, 0",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x720435",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x720436",
+    "line": "mov     [esp+arg_0], offset stru_B3FC00",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x72043E",
+    "line": "jmp     dword ptr ds:0A28074h",
+    "mnemonic": "jmp",
+    "size": 6
+  },
+  {
+    "ea": "0x720444",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x720445",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

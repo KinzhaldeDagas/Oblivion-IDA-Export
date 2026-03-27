@@ -1,0 +1,80 @@
+[
+  {
+    "ea": "0x99D569",
+    "line": "cmp     [ebp-1Ch], ebx",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x99D56C",
+    "line": "jz      short loc_99D58B",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x99D56E",
+    "line": "mov     eax, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x99D570",
+    "line": "sar     eax, 5",
+    "mnemonic": "sar",
+    "size": 3
+  },
+  {
+    "ea": "0x99D573",
+    "line": "and     edi, 1Fh",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x99D576",
+    "line": "imul    edi, 28h ; '('",
+    "mnemonic": "imul",
+    "size": 3
+  },
+  {
+    "ea": "0x99D579",
+    "line": "mov     eax, dword_BAAAC0[eax*4]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x99D580",
+    "line": "lea     eax, [eax+edi+0Ch]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x99D584",
+    "line": "push    eax; lpCriticalSection",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x99D585",
+    "line": "call    ds:EnterCriticalSection",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x99D58B",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x99D58E",
+    "line": "call    __SEH_epilog4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99D593",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

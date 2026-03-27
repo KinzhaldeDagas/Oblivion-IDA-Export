@@ -1,0 +1,1 @@
+__frame_IAdviseSink_RemoteOnRename_Stub

@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA26090",
+    "line": "push    offset flt_B16198",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA26095",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA2609A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA2609F",
+    "line": "mov     eax, off_B1619C; \"fDefaultFootVolume:Audio\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA260A4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA260A6",
+    "line": "jz      short locret_A260B4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA260A8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA260AB",
+    "line": "jnz     short locret_A260B4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA260AD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA260AE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA260B3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA260B4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

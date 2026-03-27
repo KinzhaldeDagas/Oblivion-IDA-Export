@@ -1,0 +1,266 @@
+[
+  {
+    "ea": "0x5E526C",
+    "line": "mov     eax, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5E526E",
+    "line": "mov     edx, [eax+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5E5271",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5E5272",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5E5274",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5E5276",
+    "line": "cmp     eax, 7",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5E5279",
+    "line": "jnz     short Actor_MagicTarget_CalcResFactor___NotAlchemyItem",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5E527B",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5E527D",
+    "line": "push    offset ??_R0?AVAlchemyItem@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5E5282",
+    "line": "push    offset ??_R0?AVMagicItem@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5E5287",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5E5289",
+    "line": "push    ebx; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5E528A",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5E528F",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5E5291",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5E5294",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5E5296",
+    "line": "jz      short loc_5E52A9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5E5298",
+    "line": "lea     ecx, [esi+30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x5E529B",
+    "line": "call    EffectItemList_AllEffectsHostile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5E52A0",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52A2",
+    "line": "mov     [esp+4+arg_10], 1",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5E52A7",
+    "line": "jnz     short loc_5E52AE",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52A9",
+    "line": "mov     [esp+4+arg_10], 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5E52AE",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52B0",
+    "line": "jz      short loc_5E52B9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52B2",
+    "line": "cmp     [esp+4+arg_10], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x5E52B7",
+    "line": "jz      short Actor_MagicTarget_CalcResFactor___Return_1f_",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52B9",
+    "line": "mov     eax, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52BB",
+    "line": "mov     edx, [eax+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5E52BE",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52C0",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52C2",
+    "line": "cmp     eax, 8",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5E52C5",
+    "line": "jnz     short Actor_MagicTarget_CalcResFactor___GetCasterSkill",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52C7",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52C9",
+    "line": "push    offset ??_R0?AVIngredientItem@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5E52CE",
+    "line": "push    offset ??_R0?AVMagicItem@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5E52D3",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52D5",
+    "line": "push    ebx; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5E52D6",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5E52DB",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5E52DE",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52E0",
+    "line": "jz      short Actor_MagicTarget_CalcResFactor___GetCasterSkill",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5E52E2",
+    "line": "test    byte ptr [eax+7Ch], 2",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x5E52E6",
+    "line": "jz      short Actor_MagicTarget_CalcResFactor___GetCasterSkill",
+    "mnemonic": "jz",
+    "size": 2
+  }
+]

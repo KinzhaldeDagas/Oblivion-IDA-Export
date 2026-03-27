@@ -1,0 +1,56 @@
+[
+  {
+    "ea": "0x567770",
+    "line": "movsx   ecx, byte ptr [ecx+20h]",
+    "mnemonic": "movsx",
+    "size": 4
+  },
+  {
+    "ea": "0x567774",
+    "line": "add     ecx, 0FFFFFFF4h; switch 21 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x567777",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x567779",
+    "line": "cmp     ecx, 14h",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x56777C",
+    "line": "ja      short def_567785; jumptable 00567785 default case, cases 21,25,26,29,31",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x56777E",
+    "line": "movzx   ecx, ds:byte_567798[ecx]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x567785",
+    "line": "jmp     ds:jpt_567785[ecx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x56778C",
+    "line": "mov     al, 1; jumptable 00567785 cases 12-20,22-24,27,28,30,32",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x56778E",
+    "line": "retn; jumptable 00567785 default case, cases 21,25,26,29,31",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

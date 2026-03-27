@@ -1,0 +1,40 @@
+int __cdecl sub_8BBC60(int *a1)
+{
+  sub_90B980(a1);
+  sub_90B8F0(a1);
+  sub_90A720(a1);
+  sub_8DA3E0(a1, 0);
+  sub_909560(a1);
+  sub_906400(a1);
+  sub_8F7180(a1);
+  sub_905FD0(a1);
+  sub_8DA3E0(a1, 1);
+  sub_8DA3E0(a1, 0);
+  sub_905E50(a1);
+  sub_8DA3E0(a1, 1);
+  sub_904DA0(a1);
+  sub_903EE0(a1);
+  sub_8DA3E0(a1, 0);
+  sub_903C90(a1);
+  sub_8DA3E0(a1, 1);
+  sub_9029A0(a1);
+  sub_8F7210(a1);
+  sub_901A80(a1);
+  sub_8FFC20(a1);
+  sub_8FFB30((int)a1, 1, 1);
+  sub_8FEFD0((int)a1);
+  sub_8FE230(a1);
+  sub_8FD9C0((int)a1);
+  sub_8FD680(a1);
+  sub_8FCE90(a1);
+  sub_8FC130(a1);
+  sub_8FFB30((int)a1, 6, 4);
+  sub_8FFB30((int)a1, 4, 6);
+  sub_8FB650(a1);
+  sub_8FA950(a1);
+  sub_8FA040(a1);
+  sub_8F9250((int)a1);
+  sub_8F8C90(a1);
+  sub_8F7F60(a1);
+  return sub_8F72A0(a1);
+}

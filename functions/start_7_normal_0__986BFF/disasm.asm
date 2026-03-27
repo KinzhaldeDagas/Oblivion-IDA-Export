@@ -1,0 +1,3 @@
+0x986BFF: fldln2
+0x986C01: fxch    st(1)
+0x986C03: fyl2x

@@ -1,0 +1,1 @@
+IEnumSTATDATAVtbl_0

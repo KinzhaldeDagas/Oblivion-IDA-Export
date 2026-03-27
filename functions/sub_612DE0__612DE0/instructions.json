@@ -1,0 +1,356 @@
+[
+  {
+    "ea": "0x612DE0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x612DE1",
+    "line": "mov     esi, [esp+4+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x612DE5",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x612DE6",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x612DE8",
+    "line": "cmp     esi, [edi+70h]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x612DEB",
+    "line": "jz      loc_612E98",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x612DF1",
+    "line": "cmp     byte ptr ds:0B3B908h, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x612DF8",
+    "line": "jz      loc_612E8C",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x612DFE",
+    "line": "cmp     esi, 0Dh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x612E01",
+    "line": "jz      loc_612E8C",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x612E07",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x612E09",
+    "line": "jnz     short loc_612E12",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x612E0B",
+    "line": "mov     eax, offset aFightHandToHan; \"fight Hand-to-Hand\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x612E10",
+    "line": "jmp     short loc_612E75",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x612E12",
+    "line": "cmp     esi, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x612E15",
+    "line": "jnz     short loc_612E1E",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x612E17",
+    "line": "mov     eax, offset aFightWithAMele; \"fight with a Melee Weapon\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x612E1C",
+    "line": "jmp     short loc_612E75",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x612E1E",
+    "line": "cmp     esi, 2",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x612E21",
+    "line": "jnz     short loc_612E2A",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x612E23",
+    "line": "mov     eax, offset aFightWithARang; \"fight with a Ranged Weapon\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x612E28",
+    "line": "jmp     short loc_612E75",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x612E2A",
+    "line": "cmp     esi, 3",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x612E2D",
+    "line": "jnz     short loc_612E36",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x612E2F",
+    "line": "mov     eax, offset aCastTouchSpell; \"cast Touch spells\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x612E34",
+    "line": "jmp     short loc_612E75",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x612E36",
+    "line": "cmp     esi, 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x612E39",
+    "line": "jnz     short loc_612E42",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x612E3B",
+    "line": "mov     eax, offset aCastRangedSpel; \"cast Ranged spells\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x612E40",
+    "line": "jmp     short loc_612E75",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x612E42",
+    "line": "cmp     esi, 5",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x612E45",
+    "line": "jnz     short loc_612E4E",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x612E47",
+    "line": "mov     eax, offset aAttemptToYield; \"attempt to Yield\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x612E4C",
+    "line": "jmp     short loc_612E75",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x612E4E",
+    "line": "cmp     esi, 0Ah",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x612E51",
+    "line": "jnz     short loc_612E5A",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x612E53",
+    "line": "mov     eax, offset aSwitchWeapons; \"Switch weapons\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x612E58",
+    "line": "jmp     short loc_612E75",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x612E5A",
+    "line": "cmp     esi, 0Ch",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x612E5D",
+    "line": "jnz     short loc_612E66",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x612E5F",
+    "line": "mov     eax, offset aGetOutOfTheWat; \"Get out of the water\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x612E64",
+    "line": "jmp     short loc_612E75",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x612E66",
+    "line": "cmp     esi, 7",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x612E69",
+    "line": "mov     eax, offset aAttemptToFlee; \"attempt to Flee\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x612E6E",
+    "line": "jz      short loc_612E75",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x612E70",
+    "line": "mov     eax, offset a___justKindaSt; \"...just kinda stand around\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x612E75",
+    "line": "mov     ecx, [edi+3Ch]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x612E78",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x612E79",
+    "line": "call    TESObjectREFR_GetName",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x612E7E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x612E7F",
+    "line": "push    offset a_20sIsGoingToS; \"%.20s is going to %s!\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x612E84",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x612E89",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x612E8C",
+    "line": "fld     dword ptr ds:0A30634h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x612E92",
+    "line": "fstp    dword ptr [edi+188h]",
+    "mnemonic": "fstp",
+    "size": 6
+  },
+  {
+    "ea": "0x612E98",
+    "line": "mov     [edi+70h], esi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x612E9B",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x612E9C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x612E9D",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

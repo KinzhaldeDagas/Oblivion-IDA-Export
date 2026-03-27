@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0x415960",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415961",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415962",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x415964",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x415967",
+    "line": "shr     eax, 3",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x41596A",
+    "line": "test    al, 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41596C",
+    "line": "jnz     EffectSetting_LinkForm___Done",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x415972",
+    "line": "mov     eax, [esi+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x415975",
+    "line": "test    eax, 70000h",
+    "mnemonic": "test",
+    "size": 5
+  },
+  {
+    "ea": "0x41597A",
+    "line": "jz      short EffectSetting_LinkForm___ResolveLight",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41597C",
+    "line": "test    eax, 180000h",
+    "mnemonic": "test",
+    "size": 5
+  },
+  {
+    "ea": "0x415981",
+    "line": "jnz     short EffectSetting_LinkForm___ResolveLight",
+    "mnemonic": "jnz",
+    "size": 2
+  }
+]

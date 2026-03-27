@@ -1,0 +1,98 @@
+[
+  {
+    "ea": "0x54AFB0",
+    "line": "mov     eax, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x54AFB4",
+    "line": "cmp     eax, 3; switch 4 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x54AFB7",
+    "line": "ja      short def_54AFB9",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x54AFB9",
+    "line": "jmp     ds:jpt_54AFB9[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x54AFC0",
+    "line": "cmp     dword ptr [ecx+30h], 0; jumptable 0054AFB9 case 1",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x54AFC4",
+    "line": "setz    al",
+    "mnemonic": "setz",
+    "size": 3
+  },
+  {
+    "ea": "0x54AFC7",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x54AFCA",
+    "line": "cmp     dword ptr [ecx+0E8h], 0; jumptable 0054AFB9 case 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x54AFD1",
+    "line": "setz    al",
+    "mnemonic": "setz",
+    "size": 3
+  },
+  {
+    "ea": "0x54AFD4",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x54AFD7",
+    "line": "cmp     dword ptr [ecx+8Ch], 0; jumptable 0054AFB9 case 2",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x54AFDE",
+    "line": "setz    al",
+    "mnemonic": "setz",
+    "size": 3
+  },
+  {
+    "ea": "0x54AFE1",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x54AFE4",
+    "line": "cmp     dword ptr [ecx+144h], 0; jumptable 0054AFB9 case 3",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x54AFEB",
+    "line": "setz    al",
+    "mnemonic": "setz",
+    "size": 3
+  },
+  {
+    "ea": "0x54AFEE",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

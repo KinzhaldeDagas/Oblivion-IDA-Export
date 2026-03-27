@@ -1,0 +1,1 @@
+__frame_IOleObject_GetClipboardData_Stub

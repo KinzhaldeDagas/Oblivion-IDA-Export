@@ -1,0 +1,1 @@
+IOleCommandTargetVtbl_0

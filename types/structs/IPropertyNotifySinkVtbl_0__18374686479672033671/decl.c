@@ -1,0 +1,1 @@
+IPropertyNotifySinkVtbl_0

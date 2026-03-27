@@ -1,0 +1,1 @@
+__frame_IRunningObjectTable_GetTimeOfLastChange_Stub

@@ -1,0 +1,68 @@
+[
+  {
+    "ea": "0x98BF57",
+    "line": "push    dwTlsIndex; dwTlsIndex",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98BF5D",
+    "line": "call    ds:TlsGetValue",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x98BF63",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF65",
+    "line": "jnz     short locret_98BF80",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF67",
+    "line": "push    lpTlsValue",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98BF6D",
+    "line": "call    __decode_pointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98BF72",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98BF73",
+    "line": "push    eax; lpTlsValue",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98BF74",
+    "line": "push    dwTlsIndex; dwTlsIndex",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98BF7A",
+    "line": "call    ds:TlsSetValue",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x98BF80",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

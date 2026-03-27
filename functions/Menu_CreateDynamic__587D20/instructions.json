@@ -1,0 +1,4052 @@
+[
+  {
+    "ea": "0x587D20",
+    "line": "push    0FFFFFFFFh",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x587D22",
+    "line": "push    offset Menu_CreateDynamic_SEH",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x587D27",
+    "line": "mov     eax, large fs:0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x587D2D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x587D2E",
+    "line": "mov     eax, ds:0B30AACh",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x587D33",
+    "line": "xor     eax, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x587D35",
+    "line": "push    eax; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x587D36",
+    "line": "lea     eax, [esp+10h+var_C]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x587D3A",
+    "line": "mov     large fs:0, eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x587D40",
+    "line": "mov     eax, [esp+10h+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587D44",
+    "line": "add     eax, 0FFFFFC17h; switch 51 cases",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x587D49",
+    "line": "cmp     eax, 32h",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x587D4C",
+    "line": "ja      Menu_CreateDynamic___def_587D52; jumptable 00587D52 default case, cases 1029,1031,1033,1050",
+    "mnemonic": "ja",
+    "size": 6
+  },
+  {
+    "ea": "0x587D52",
+    "line": "jmp     ds:jpt_587D52[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x587D59",
+    "line": "push    64h ; 'd'; jumptable 00587D52 case 1001",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x587D5B",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587D60",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587D63",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587D67",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x587D69",
+    "line": "mov     [esp+10h+var_4], 0",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x587D71",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x587D77",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x587D79",
+    "line": "call    ??0MessageMenu@@QAE@XZ; MessageMenu::MessageMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587D7E",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587D82",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x587D89",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x587D8A",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587D8D",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x587D90",
+    "line": "push    100h; jumptable 00587D52 case 1023",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x587D95",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587D9A",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587D9D",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587DA1",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x587DA3",
+    "line": "mov     [esp+10h+var_4], 1",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x587DAB",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x587DB1",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x587DB3",
+    "line": "call    ??0MapMenu@@QAE@XZ; MapMenu::MapMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587DB8",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587DBC",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x587DC3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x587DC4",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587DC7",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x587DCA",
+    "line": "push    5Ch ; '\\'; jumptable 00587D52 case 1022",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x587DCC",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587DD1",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587DD4",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587DD8",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x587DDA",
+    "line": "mov     [esp+10h+var_4], 2",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x587DE2",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x587DE8",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x587DEA",
+    "line": "call    ??0MagicMenu@@QAE@XZ; MagicMenu::MagicMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587DEF",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587DF3",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x587DFA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x587DFB",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587DFE",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x587E01",
+    "line": "push    58h ; 'X'; jumptable 00587D52 case 1002",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x587E03",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587E08",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587E0B",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587E0F",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x587E11",
+    "line": "mov     [esp+10h+var_4], 3",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x587E19",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x587E1F",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x587E21",
+    "line": "call    InventoryMenu_constr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587E26",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587E2A",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x587E31",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x587E32",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587E35",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x587E38",
+    "line": "push    0B4h ; '´'; jumptable 00587D52 case 1003",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x587E3D",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587E42",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587E45",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587E49",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x587E4B",
+    "line": "mov     [esp+10h+var_4], 4",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x587E53",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x587E59",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x587E5B",
+    "line": "call    StatsMenu_constr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587E60",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587E64",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x587E6B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x587E6C",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587E6F",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x587E72",
+    "line": "push    94h ; '”'; jumptable 00587D52 case 1004",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x587E77",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587E7C",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587E7F",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587E83",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x587E85",
+    "line": "mov     [esp+10h+var_4], 5",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x587E8D",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x587E93",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x587E95",
+    "line": "call    ??0HUDMainMenu@@QAE@XZ; HUDMainMenu::HUDMainMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587E9A",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587E9E",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x587EA5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x587EA6",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587EA9",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x587EAC",
+    "line": "push    5Ch ; '\\'; jumptable 00587D52 case 1005",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x587EAE",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587EB3",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587EB6",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587EBA",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x587EBC",
+    "line": "mov     [esp+10h+var_4], 6",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x587EC4",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x587ECA",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x587ECC",
+    "line": "call    sub_5A4660",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587ED1",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587ED5",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x587EDC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x587EDD",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587EE0",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x587EE3",
+    "line": "push    74h ; 't'; jumptable 00587D52 case 1007",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x587EE5",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587EEA",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587EED",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587EF1",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x587EF3",
+    "line": "mov     [esp+10h+var_4], 7",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x587EFB",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x587F01",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x587F03",
+    "line": "call    ??0LoadingMenu@@QAE@XZ; LoadingMenu::LoadingMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587F08",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587F0C",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x587F13",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x587F14",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587F17",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x587F1A",
+    "line": "push    68h ; 'h'; jumptable 00587D52 case 1008",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x587F1C",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587F21",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587F24",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587F28",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x587F2A",
+    "line": "mov     [esp+10h+var_4], 8",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x587F32",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x587F38",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x587F3A",
+    "line": "call    ??0ContainerMenu@@QAE@XZ; ContainerMenu::ContainerMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587F3F",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587F43",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x587F4A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x587F4B",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587F4E",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x587F51",
+    "line": "push    98h ; '˜'; jumptable 00587D52 case 1009",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x587F56",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587F5B",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587F5E",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587F62",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x587F64",
+    "line": "mov     [esp+10h+var_4], 9",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x587F6C",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x587F72",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x587F74",
+    "line": "call    ??0DialogMenu@@QAE@XZ; DialogMenu::DialogMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587F79",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587F7D",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x587F84",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x587F85",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587F88",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x587F8B",
+    "line": "push    44h ; 'D'; jumptable 00587D52 case 1010",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x587F8D",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587F92",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587F95",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587F99",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x587F9B",
+    "line": "mov     [esp+10h+var_4], 0Ah",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x587FA3",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x587FA9",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x587FAB",
+    "line": "call    ??0HUDSubtitleMenu@@QAE@XZ; HUDSubtitleMenu::HUDSubtitleMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587FB0",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587FB4",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x587FBB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x587FBC",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587FBF",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x587FC2",
+    "line": "push    38h ; '8'; jumptable 00587D52 case 1011",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x587FC4",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587FC9",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587FCC",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587FD0",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x587FD2",
+    "line": "mov     [esp+10h+var_4], 0Bh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x587FDA",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x587FE0",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x587FE2",
+    "line": "call    ??0GenericMenu@@QAE@XZ; GenericMenu::GenericMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x587FE7",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x587FEB",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x587FF2",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x587FF3",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x587FF6",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x587FF9",
+    "line": "push    50h ; 'P'; jumptable 00587D52 case 1012",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x587FFB",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588000",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588003",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588007",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588009",
+    "line": "mov     [esp+10h+var_4], 0Ch",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588011",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x588017",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588019",
+    "line": "call    ??0SleepWaitMenu@@QAE@XZ; SleepWaitMenu::SleepWaitMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58801E",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588022",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588029",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x58802A",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58802D",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588030",
+    "line": "push    3Ch ; '<'; jumptable 00587D52 case 1013",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588032",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588037",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58803A",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58803E",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588040",
+    "line": "mov     [esp+10h+var_4], 0Dh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588048",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x58804E",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588050",
+    "line": "call    sub_5BD960",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588055",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588059",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588060",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588061",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588064",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588067",
+    "line": "push    180h; jumptable 00587D52 case 1014",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x58806C",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588071",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588074",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588078",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x58807A",
+    "line": "mov     [esp+10h+var_4], 0Eh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588082",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x588088",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x58808A",
+    "line": "call    sub_5AF310",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58808F",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588093",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x58809A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x58809B",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58809E",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5880A1",
+    "line": "push    40h ; '@'; jumptable 00587D52 case 1015",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5880A3",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5880A8",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5880AB",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5880AF",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5880B1",
+    "line": "mov     [esp+10h+var_4], 0Fh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5880B9",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5880BF",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5880C1",
+    "line": "call    sub_5BD580",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5880C6",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5880CA",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5880D1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5880D2",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5880D5",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5880D8",
+    "line": "push    58h ; 'X'; jumptable 00587D52 case 1016",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5880DA",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5880DF",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5880E2",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5880E6",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5880E8",
+    "line": "mov     [esp+10h+var_4], 10h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5880F0",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5880F6",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5880F8",
+    "line": "call    sub_5C04F0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5880FD",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588101",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588108",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588109",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58810C",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x58810F",
+    "line": "push    54h ; 'T'; jumptable 00587D52 case 1017",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588111",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588116",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588119",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58811D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x58811F",
+    "line": "mov     [esp+10h+var_4], 11h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588127",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x58812D",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x58812F",
+    "line": "call    sub_595150",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588134",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588138",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x58813F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588140",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588143",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588146",
+    "line": "push    48h ; 'H'; jumptable 00587D52 case 1019",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588148",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58814D",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588150",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588154",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588156",
+    "line": "mov     [esp+10h+var_4], 12h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x58815E",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x588164",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588166",
+    "line": "call    sub_5DD960",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58816B",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58816F",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588176",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588177",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58817A",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x58817D",
+    "line": "push    118h; jumptable 00587D52 case 1018",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x588182",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588187",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58818A",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58818E",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588190",
+    "line": "mov     [esp+10h+var_4], 13h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588198",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x58819E",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5881A0",
+    "line": "call    ??0VideoMenu@@QAE@XZ; VideoMenu::VideoMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5881A5",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5881A9",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5881B0",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5881B1",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5881B4",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5881B7",
+    "line": "push    4Ch ; 'L'; jumptable 00587D52 case 1020",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5881B9",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5881BE",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5881C1",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5881C5",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5881C7",
+    "line": "mov     [esp+10h+var_4], 14h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5881CF",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5881D5",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5881D7",
+    "line": "call    sub_5A3310",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5881DC",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5881E0",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5881E7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5881E8",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5881EB",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5881EE",
+    "line": "push    0E8h ; 'è'; jumptable 00587D52 case 1021",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5881F3",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5881F8",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5881FB",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5881FF",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588201",
+    "line": "mov     [esp+10h+var_4], 15h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588209",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x58820F",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588211",
+    "line": "call    sub_5874A0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588216",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58821A",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588221",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588222",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588225",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588228",
+    "line": "push    68h ; 'h'; jumptable 00587D52 case 1025",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x58822A",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58822F",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588232",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588236",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588238",
+    "line": "mov     [esp+10h+var_4], 16h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588240",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x588246",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588248",
+    "line": "call    sub_5BCE40",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58824D",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588251",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588258",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588259",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58825C",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x58825F",
+    "line": "push    60h ; '`'; jumptable 00587D52 case 1024",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588261",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588266",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588269",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58826D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x58826F",
+    "line": "mov     [esp+10h+var_4], 17h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588277",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x58827D",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x58827F",
+    "line": "call    MagicPopupMenu_constr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588284",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588288",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x58828F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588290",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588293",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588296",
+    "line": "push    3Ch ; '<'; jumptable 00587D52 case 1026",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588298",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58829D",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5882A0",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5882A4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5882A6",
+    "line": "mov     [esp+10h+var_4], 18h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5882AE",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5882B4",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5882B6",
+    "line": "call    sub_595BE0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5882BB",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5882BF",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5882C6",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5882C7",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5882CA",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5882CD",
+    "line": "push    80h ; '€'; jumptable 00587D52 case 1048",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5882D2",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5882D7",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5882DA",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5882DE",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5882E0",
+    "line": "mov     [esp+10h+var_4], 19h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5882E8",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5882EE",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5882F0",
+    "line": "call    ??0SigilStoneMenu@@QAE@XZ; SigilStoneMenu::SigilStoneMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5882F5",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5882F9",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588300",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588301",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588304",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588307",
+    "line": "push    28h ; '('; jumptable 00587D52 case 1006",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588309",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58830E",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588311",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588315",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588317",
+    "line": "mov     [esp+10h+var_4], 1Ah",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x58831F",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x588325",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588327",
+    "line": "call    sub_5A7FE0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58832C",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588330",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588337",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588338",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58833B",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x58833E",
+    "line": "push    34h ; '4'; jumptable 00587D52 case 1027",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588340",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588345",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588348",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58834C",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x58834E",
+    "line": "mov     [esp+10h+var_4], 1Bh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588356",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x58835C",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x58835E",
+    "line": "call    sub_5AC550",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588363",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588367",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x58836E",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x58836F",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588372",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588375",
+    "line": "push    64h ; 'd'; jumptable 00587D52 case 1028",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588377",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58837C",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58837F",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588383",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588385",
+    "line": "mov     [esp+10h+var_4], 1Ch",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x58838D",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x588393",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588395",
+    "line": "call    sub_5DD200",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58839A",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58839E",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5883A5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5883A6",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5883A9",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5883AC",
+    "line": "push    8Ch ; 'Œ'; jumptable 00587D52 case 1030",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5883B1",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5883B6",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5883B9",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5883BD",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5883BF",
+    "line": "mov     [esp+10h+var_4], 1Dh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5883C7",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5883CD",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5883CF",
+    "line": "call    ??0ClassMenu@@QAE@XZ; ClassMenu::ClassMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5883D4",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5883D8",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5883DF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5883E0",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5883E3",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5883E6",
+    "line": "push    50h ; 'P'; jumptable 00587D52 case 1032",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5883E8",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5883ED",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5883F0",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5883F4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5883F6",
+    "line": "mov     [esp+10h+var_4], 1Eh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5883FE",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x588404",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588406",
+    "line": "call    sub_5D5610",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58840B",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58840F",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588416",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588417",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58841A",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x58841D",
+    "line": "push    0FCh ; 'ü'; jumptable 00587D52 case 1034",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x588422",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588427",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58842A",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58842E",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588430",
+    "line": "mov     [esp+10h+var_4], 1Fh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588438",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x58843E",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588440",
+    "line": "call    sub_5BDFF0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588445",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588449",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588450",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588451",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588454",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588457",
+    "line": "push    9B0h; jumptable 00587D52 case 1036",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x58845C",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588461",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588464",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588468",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x58846A",
+    "line": "mov     [esp+10h+var_4], 20h ; ' '",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588472",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x588478",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x58847A",
+    "line": "call    ??0RaceSexMenu@@QAE@XZ; RaceSexMenu::RaceSexMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58847F",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588483",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x58848A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x58848B",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58848E",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588491",
+    "line": "push    78h ; 'x'; jumptable 00587D52 case 1035",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588493",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588498",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58849B",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58849F",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5884A1",
+    "line": "mov     [esp+10h+var_4], 21h ; '!'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5884A9",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5884AF",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5884B1",
+    "line": "call    ??0RepairMenu@@QAE@XZ; RepairMenu::RepairMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5884B6",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5884BA",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5884C1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5884C2",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5884C5",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5884C8",
+    "line": "push    54h ; 'T'; jumptable 00587D52 case 1049",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5884CA",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5884CF",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5884D2",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5884D6",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5884D8",
+    "line": "mov     [esp+10h+var_4], 22h ; '\"'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5884E0",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5884E6",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5884E8",
+    "line": "call    ??0RechargeMenu@@QAE@XZ; RechargeMenu::RechargeMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5884ED",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5884F1",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5884F8",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5884F9",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5884FC",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5884FF",
+    "line": "push    68h ; 'h'; jumptable 00587D52 case 1037",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588501",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588506",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588509",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58850D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x58850F",
+    "line": "mov     [esp+10h+var_4], 23h ; '#'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588517",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x58851D",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x58851F",
+    "line": "call    sub_5D8900",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588524",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588528",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x58852F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588530",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588533",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588536",
+    "line": "push    60h ; '`'; jumptable 00587D52 case 1039",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588538",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58853D",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588540",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588544",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588546",
+    "line": "mov     [esp+10h+var_4], 24h ; '$'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x58854E",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x588554",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588556",
+    "line": "call    ??0SaveMenu@@QAE@XZ; SaveMenu::SaveMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58855B",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58855F",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588566",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588567",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58856A",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x58856D",
+    "line": "push    68h ; 'h'; jumptable 00587D52 case 1038",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x58856F",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588574",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588577",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58857B",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x58857D",
+    "line": "mov     [esp+10h+var_4], 25h ; '%'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588585",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x58858B",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x58858D",
+    "line": "call    ??0LoadgameMenu@@QAE@XZ; LoadgameMenu::LoadgameMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588592",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588596",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x58859D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x58859E",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5885A1",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5885A4",
+    "line": "push    9Ch ; 'œ'; jumptable 00587D52 case 1043",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5885A9",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5885AE",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5885B1",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5885B5",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5885B7",
+    "line": "mov     [esp+10h+var_4], 26h ; '&'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5885BF",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5885C5",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5885C7",
+    "line": "call    EffectSettingMenu_constr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5885CC",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5885D0",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5885D7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5885D8",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5885DB",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5885DE",
+    "line": "push    78h ; 'x'; jumptable 00587D52 case 1041",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5885E0",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5885E5",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5885E8",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5885EC",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5885EE",
+    "line": "mov     [esp+10h+var_4], 27h ; '''",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5885F6",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5885FC",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5885FE",
+    "line": "call    ??0SpellMakingMenu@@QAE@XZ; SpellMakingMenu::SpellMakingMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588603",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588607",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x58860E",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x58860F",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588612",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588615",
+    "line": "push    0A0h ; ' '; jumptable 00587D52 case 1042",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x58861A",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58861F",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588622",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588626",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588628",
+    "line": "mov     [esp+10h+var_4], 28h ; '('",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588630",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x588636",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588638",
+    "line": "call    ??0EnchantmentMenu@@QAE@XZ; EnchantmentMenu::EnchantmentMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58863D",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588641",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588648",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588649",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58864C",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x58864F",
+    "line": "push    0C0h ; 'À'; jumptable 00587D52 case 1040",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x588654",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588659",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58865C",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588660",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588662",
+    "line": "mov     [esp+10h+var_4], 29h ; ')'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x58866A",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x588670",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588672",
+    "line": "call    ??0AlchemyMenu@@QAE@XZ; AlchemyMenu::AlchemyMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588677",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58867B",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588682",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588683",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588686",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588689",
+    "line": "push    50h ; 'P'; jumptable 00587D52 case 1044",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x58868B",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588690",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588693",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588697",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588699",
+    "line": "mov     [esp+10h+var_4], 2Ah ; '*'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5886A1",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5886A7",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5886A9",
+    "line": "call    ??0MainMenu@@QAE@XZ; MainMenu::MainMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5886AE",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5886B2",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5886B9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5886BA",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5886BD",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5886C0",
+    "line": "push    34h ; '4'; jumptable 00587D52 case 1045",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5886C2",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5886C7",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5886CA",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5886CE",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5886D0",
+    "line": "mov     [esp+10h+var_4], 2Bh ; '+'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5886D8",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5886DE",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5886E0",
+    "line": "call    sub_596420",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5886E5",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5886E9",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5886F0",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5886F1",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5886F4",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5886F7",
+    "line": "push    50h ; 'P'; jumptable 00587D52 case 1046",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5886F9",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5886FE",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588701",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588705",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588707",
+    "line": "mov     [esp+10h+var_4], 2Ch ; ','",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x58870F",
+    "line": "jz      Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x588715",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x588717",
+    "line": "call    sub_5C0B50",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58871C",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588720",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x588727",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x588728",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58872B",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x58872E",
+    "line": "push    5Ch ; '\\'; jumptable 00587D52 case 1047",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588730",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588735",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588738",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58873C",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x58873E",
+    "line": "mov     [esp+10h+var_4], 2Dh ; '-'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588746",
+    "line": "jz      short Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x588748",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x58874A",
+    "line": "call    ??0CreditsMenu@@QAE@XZ; CreditsMenu::CreditsMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58874F",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588753",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x58875A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x58875B",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58875E",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588761",
+    "line": "push    5Ch ; '\\'; jumptable 00587D52 case 1051",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x588763",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588768",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x58876B",
+    "line": "mov     [esp+10h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x58876F",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x588771",
+    "line": "mov     [esp+10h+var_4], 2Eh ; '.'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x588779",
+    "line": "jz      short Menu_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x58877B",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x58877D",
+    "line": "call    ??0TextEditMenu@@QAE@XZ; TextEditMenu::TextEditMenu(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x588782",
+    "line": "mov     ecx, [esp+10h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x588786",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x58878D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x58878E",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x588791",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x588794",
+    "line": "push    offset aUnknownMenuCla; jumptable 00587D52 default case, cases 1029,1031,1033,1050",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x588799",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x58879E",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  }
+]

@@ -1,0 +1,1 @@
+IEnumSTATDATA_0

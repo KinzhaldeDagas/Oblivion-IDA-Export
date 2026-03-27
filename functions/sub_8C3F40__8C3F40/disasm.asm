@@ -1,0 +1,30 @@
+0x8C3F40: mov     eax, ecx
+0x8C3F42: mov     dword ptr [eax], 0
+0x8C3F48: fld     dword ptr ds:0B2EFC4h
+0x8C3F4E: fstp    dword ptr [eax+4]
+0x8C3F51: fldz
+0x8C3F53: fst     dword ptr [eax+10h]
+0x8C3F56: fst     dword ptr [eax+14h]
+0x8C3F59: fst     dword ptr [eax+18h]
+0x8C3F5C: fst     dword ptr [eax+1Ch]
+0x8C3F5F: fst     dword ptr [eax+20h]
+0x8C3F62: fst     dword ptr [eax+24h]
+0x8C3F65: fst     dword ptr [eax+28h]
+0x8C3F68: fst     dword ptr [eax+2Ch]
+0x8C3F6B: fst     dword ptr [eax+30h]
+0x8C3F6E: fst     dword ptr [eax+34h]
+0x8C3F71: fst     dword ptr [eax+38h]
+0x8C3F74: fst     dword ptr [eax+3Ch]
+0x8C3F77: fst     dword ptr [eax+10h]
+0x8C3F7A: fst     dword ptr [eax+14h]
+0x8C3F7D: fst     dword ptr [eax+18h]
+0x8C3F80: fst     dword ptr [eax+1Ch]
+0x8C3F83: fst     dword ptr [eax+20h]
+0x8C3F86: fst     dword ptr [eax+24h]
+0x8C3F89: fst     dword ptr [eax+28h]
+0x8C3F8C: fst     dword ptr [eax+2Ch]
+0x8C3F8F: fst     dword ptr [eax+30h]
+0x8C3F92: fst     dword ptr [eax+34h]
+0x8C3F95: fst     dword ptr [eax+38h]
+0x8C3F98: fstp    dword ptr [eax+3Ch]
+0x8C3F9B: retn

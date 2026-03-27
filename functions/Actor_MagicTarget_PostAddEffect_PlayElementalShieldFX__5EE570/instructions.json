@@ -1,0 +1,194 @@
+[
+  {
+    "ea": "0x5EE570",
+    "line": "mov     ecx, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE573",
+    "line": "mov     edx, [ecx+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE576",
+    "line": "mov     eax, [edx+98h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5EE57C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE57D",
+    "line": "call    Magic_GetDamageShieldType",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE582",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE584",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE587",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE589",
+    "line": "jz      short Actor_MagicTarget_PostAddEffect___PlayPainFX",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE58B",
+    "line": "mov     eax, [edi-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE58E",
+    "line": "mov     edx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE590",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE591",
+    "line": "mov     ebp, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE593",
+    "line": "mov     eax, [edx+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE596",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE597",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE599",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE59B",
+    "line": "mov     ecx, [edi-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE59E",
+    "line": "mov     edx, [ebp+44Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5EE5A4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE5A5",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5A7",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5A9",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE5AA",
+    "line": "jz      short Actor_MagicTarget_PostAddEffect___PlayPainFX",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5AC",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE5AD",
+    "line": "lea     eax, [edi-68h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE5B0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE5B1",
+    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE5B6",
+    "line": "call    TemporaryObjects_PlayMagicShieldShader",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE5BB",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5BD",
+    "line": "jz      short Actor_MagicTarget_PostAddEffect___PlayPainFX",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5BF",
+    "line": "or      dword ptr [esi+14h], 6",
+    "mnemonic": "or",
+    "size": 4
+  }
+]

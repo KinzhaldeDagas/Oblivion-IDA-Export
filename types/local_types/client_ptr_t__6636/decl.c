@@ -1,0 +1,1 @@
+client_ptr_t

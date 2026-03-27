@@ -1,0 +1,1 @@
+__frame_IOleInPlaceActiveObject_OnFrameWindowActivate_Stub

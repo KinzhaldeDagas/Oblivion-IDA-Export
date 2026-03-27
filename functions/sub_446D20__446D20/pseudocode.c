@@ -1,0 +1,11 @@
+unsigned int *__thiscall sub_446D20(unsigned int *this, char a2)
+{
+  unsigned int v4; // [esp-4h] [ebp-8h]
+
+  v4 = *(this + 1);
+  *this = (unsigned int)&NiTLargeArray<TESForm *>::`vftable';
+  FormHeapFree(v4);
+  if ( (a2 & 1) != 0 )
+    FormHeapFree((unsigned int)this);
+  return this;
+}

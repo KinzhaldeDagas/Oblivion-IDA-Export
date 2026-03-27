@@ -1,0 +1,152 @@
+[
+  {
+    "ea": "0x403B80",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403B81",
+    "line": "mov     bl, [esp+4+newButton]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x403B85",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403B86",
+    "line": "mov     esi, dword ptr [esp+8+whichScheme]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x403B8A",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x403B8C",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403B8D",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x403B8F",
+    "line": "jnz     short loc_403BA0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x403B91",
+    "line": "cmp     bl, 0B7h ; '·'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x403B94",
+    "line": "jz      short loc_403BB8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x403B96",
+    "line": "cmp     bl, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x403B99",
+    "line": "jz      short loc_403BB8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x403B9B",
+    "line": "cmp     bl, 29h ; ')'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x403B9E",
+    "line": "jz      short loc_403BB8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x403BA0",
+    "line": "movzx   eax, bl",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x403BA3",
+    "line": "push    eax; button",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403BA4",
+    "line": "push    esi; whichScheme",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403BA5",
+    "line": "call    InputGlobals__ClearControlButton",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x403BAA",
+    "line": "imul    esi, 1Dh",
+    "mnemonic": "imul",
+    "size": 3
+  },
+  {
+    "ea": "0x403BAD",
+    "line": "add     esi, dword ptr [esp+0Ch+whichCtrl]",
+    "mnemonic": "add",
+    "size": 4
+  },
+  {
+    "ea": "0x403BB1",
+    "line": "mov     [esi+edi+1B7Eh], bl",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x403BB8",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x403BB9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x403BBA",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x403BBB",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

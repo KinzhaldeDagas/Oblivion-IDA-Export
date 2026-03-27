@@ -1,0 +1,1 @@
+_locale_tstruct_0

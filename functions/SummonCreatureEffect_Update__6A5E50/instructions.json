@@ -1,0 +1,326 @@
+[
+  {
+    "ea": "0x6A5E50",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A5E51",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E53",
+    "line": "mov     ecx, [esi+20h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A5E56",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E58",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A5E59",
+    "line": "jz      SummonCreatureEffect_Update___DispelThis",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x6A5E5F",
+    "line": "call    MagicTarget_GetParentActor",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A5E64",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E66",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E68",
+    "line": "jz      short SummonCreatureEffect_Update___DispelThis",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E6A",
+    "line": "cmp     byte ptr [esi+60h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x6A5E6E",
+    "line": "jz      short loc_6A5E87",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E70",
+    "line": "mov     ecx, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A5E73",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E75",
+    "line": "jz      short SummonCreatureEffect_Update___DispelThis",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E77",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E79",
+    "line": "mov     edx, [eax+198h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6A5E7F",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E81",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E83",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E85",
+    "line": "jnz     short SummonCreatureEffect_Update___DispelThis",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E87",
+    "line": "fld     dword ptr [esi+4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x6A5E8A",
+    "line": "fld     dword ptr [esi+44h]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x6A5E8D",
+    "line": "fcompp",
+    "mnemonic": "fcompp",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E8F",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E91",
+    "line": "test    ah, 41h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x6A5E94",
+    "line": "jp      short loc_6A5EB7",
+    "mnemonic": "jp",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E96",
+    "line": "cmp     byte ptr [esi+60h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x6A5E9A",
+    "line": "jnz     short loc_6A5EB7",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E9C",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A5E9D",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5E9F",
+    "line": "call    SummonCreatureEffect_PlaceSummon",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A5EA4",
+    "line": "cmp     edi, ds:0B333C4h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x6A5EAA",
+    "line": "jnz     short loc_6A5EB3",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5EAC",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5EAE",
+    "line": "call    SummonCreatureEffect_DispelOtherSummons",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A5EB3",
+    "line": "mov     byte ptr [esi+60h], 1",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x6A5EB7",
+    "line": "mov     ecx, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A5EBA",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5EBC",
+    "line": "jz      short SummonCreatureEffect_Update___Done",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5EBE",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5EC0",
+    "line": "mov     edx, [eax+198h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6A5EC6",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5EC8",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5ECA",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5ECC",
+    "line": "jnz     short SummonCreatureEffect_Update___Done",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5ECE",
+    "line": "mov     eax, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A5ED1",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A5ED2",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A5ED3",
+    "line": "call    sub_6925C0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A5ED8",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x6A5EDB",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6A5EDC",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6A5EDD",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

@@ -1,0 +1,296 @@
+[
+  {
+    "ea": "0x50A050",
+    "line": "mov     ecx, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x50A056",
+    "line": "cmp     byte ptr [ecx+588h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x50A05D",
+    "line": "jz      loc_50A0FB",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x50A063",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x50A065",
+    "line": "call    PlayerCharacter_GetPlayerNode",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x50A06A",
+    "line": "test    byte ptr [eax+18h], 1",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x50A06E",
+    "line": "jz      short loc_50A099",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x50A070",
+    "line": "mov     eax, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x50A075",
+    "line": "mov     byte ptr [eax+588h], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x50A07C",
+    "line": "cmp     byte ptr ds:0B361ACh, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x50A083",
+    "line": "jz      loc_50A118",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x50A089",
+    "line": "push    offset aNormal1stPerso; \"Normal 1st person mode.\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x50A08E",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x50A093",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x50A096",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x50A098",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x50A099",
+    "line": "mov     ecx, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x50A09F",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x50A0A1",
+    "line": "call    PlayerCharacter_GetPlayerNode",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x50A0A6",
+    "line": "test    byte ptr [eax+18h], 1",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x50A0AA",
+    "line": "mov     ecx, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x50A0B0",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x50A0B2",
+    "line": "jnz     short loc_50A0D7",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x50A0B4",
+    "line": "call    PlayerCharacter_GetPlayerNode",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x50A0B9",
+    "line": "or      word ptr [eax+18h], 1",
+    "mnemonic": "or",
+    "size": 5
+  },
+  {
+    "ea": "0x50A0BE",
+    "line": "cmp     byte ptr ds:0B361ACh, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x50A0C5",
+    "line": "jz      short loc_50A118",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x50A0C7",
+    "line": "push    offset aNormal3rdPerso; \"Normal 3rd person mode.\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x50A0CC",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x50A0D1",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x50A0D4",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x50A0D6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x50A0D7",
+    "line": "call    PlayerCharacter_GetPlayerNode",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x50A0DC",
+    "line": "and     word ptr [eax+18h], 0FFFEh",
+    "mnemonic": "and",
+    "size": 6
+  },
+  {
+    "ea": "0x50A0E2",
+    "line": "cmp     byte ptr ds:0B361ACh, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x50A0E9",
+    "line": "jz      short loc_50A118",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x50A0EB",
+    "line": "push    offset aShowing1stAnd3; \"Showing 1st and 3rd person models.\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x50A0F0",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x50A0F5",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x50A0F8",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x50A0FA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x50A0FB",
+    "line": "mov     byte ptr [ecx+588h], 1",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x50A102",
+    "line": "cmp     byte ptr ds:0B361ACh, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x50A109",
+    "line": "jz      short loc_50A118",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x50A10B",
+    "line": "push    offset aShowing1stPers; \"Showing 1st person model in 3rd person \"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x50A110",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x50A115",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x50A118",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x50A11A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

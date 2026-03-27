@@ -1,0 +1,1 @@
+__frame_IOleInPlaceUIWindow_GetBorder_Stub

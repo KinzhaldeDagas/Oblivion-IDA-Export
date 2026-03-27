@@ -1,0 +1,254 @@
+[
+  {
+    "ea": "0x42FC20",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42FC21",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC23",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC25",
+    "line": "jnz     short loc_42FC2D",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC27",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC29",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42FC2A",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC2D",
+    "line": "mov     eax, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC30",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC32",
+    "line": "jz      short loc_42FC89",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC34",
+    "line": "push    ebx; lpCriticalSection",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42FC35",
+    "line": "mov     bl, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42FC39",
+    "line": "test    bl, bl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC3B",
+    "line": "jz      short loc_42FC4A",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC3D",
+    "line": "mov     ecx, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC40",
+    "line": "push    offset unk_A2F830",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x42FC45",
+    "line": "call    NiEnterCriticalSection",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42FC4A",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC4D",
+    "line": "cmp     eax, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC50",
+    "line": "jz      short loc_42FC57",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC52",
+    "line": "cmp     eax, 2",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC55",
+    "line": "jnz     short loc_42FC79",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC57",
+    "line": "mov     eax, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC5A",
+    "line": "add     eax, 2Ch ; ','",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC5D",
+    "line": "cmp     dword ptr [eax], 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC60",
+    "line": "jle     short loc_42FC79",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC62",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC64",
+    "line": "call    sub_42FBF0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42FC69",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC6B",
+    "line": "mov     edx, [eax+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC6E",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC70",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC72",
+    "line": "mov     dword ptr [esi+8], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x42FC79",
+    "line": "test    bl, bl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC7B",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42FC7C",
+    "line": "jz      short loc_42FC89",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC7E",
+    "line": "mov     eax, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC81",
+    "line": "mov     ecx, [eax+4]; lpCriticalSection",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC84",
+    "line": "call    NiLeaveCriticalSection_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42FC89",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42FC8C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42FC8D",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

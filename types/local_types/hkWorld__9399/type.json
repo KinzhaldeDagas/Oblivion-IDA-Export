@@ -1,0 +1,334 @@
+{
+  "decl": "hkWorld",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 64,
+      "type": "hkRefObject"
+    },
+    {
+      "name": "m_simulation",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "hkSimulation *"
+    },
+    {
+      "name": "unk00C",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "name": "unk010",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 128,
+      "type": "hkVector4"
+    },
+    {
+      "name": "m_gravity",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 128,
+      "type": "hkVector4"
+    },
+    {
+      "name": "m_fixedIsland",
+      "offset_bits": 384,
+      "offset_bytes": 48,
+      "size_bits": 32,
+      "type": "hkSimulationIsland *"
+    },
+    {
+      "name": "m_fixedRigidBody",
+      "offset_bits": 416,
+      "offset_bytes": 52,
+      "size_bits": 32,
+      "type": "hkRigidBody *"
+    },
+    {
+      "name": "m_activeSimulationIslands",
+      "offset_bits": 448,
+      "offset_bytes": 56,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_inactiveSimulationIslands",
+      "offset_bits": 544,
+      "offset_bytes": 68,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_dirtySimulationIslands",
+      "offset_bits": 640,
+      "offset_bytes": 80,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_maintenanceMgr",
+      "offset_bits": 736,
+      "offset_bytes": 92,
+      "size_bits": 32,
+      "type": "hkWorldMaintenanceManager *"
+    },
+    {
+      "name": "m_memoryWatchDog",
+      "offset_bits": 768,
+      "offset_bytes": 96,
+      "size_bits": 32,
+      "type": "hkWorldMemoryAvailableWatchDog *"
+    },
+    {
+      "name": "m_broadPhase",
+      "offset_bits": 800,
+      "offset_bytes": 100,
+      "size_bits": 32,
+      "type": "hkBroadPhase *"
+    },
+    {
+      "name": "m_broadPhaseDispatcher",
+      "offset_bits": 832,
+      "offset_bytes": 104,
+      "size_bits": 32,
+      "type": "hkTypedBroadPhaseDispatcher *"
+    },
+    {
+      "name": "m_phantomBroadPhaseListener",
+      "offset_bits": 864,
+      "offset_bytes": 108,
+      "size_bits": 32,
+      "type": "hkPhantomBroadPhaseListener *"
+    },
+    {
+      "name": "m_entityEntityBroadPhaseListener",
+      "offset_bits": 896,
+      "offset_bytes": 112,
+      "size_bits": 32,
+      "type": "hkEntityEntityBroadPhaseListener *"
+    },
+    {
+      "name": "m_collisionInput",
+      "offset_bits": 928,
+      "offset_bytes": 116,
+      "size_bits": 32,
+      "type": "hkProcessCollisionInput *"
+    },
+    {
+      "name": "m_collisionFilter",
+      "offset_bits": 960,
+      "offset_bytes": 120,
+      "size_bits": 32,
+      "type": "hkCollisionFilter *"
+    },
+    {
+      "name": "m_collisionDispatcher",
+      "offset_bits": 992,
+      "offset_bytes": 124,
+      "size_bits": 32,
+      "type": "hkCollisionDispatcher *"
+    },
+    {
+      "name": "m_pendingOperations",
+      "offset_bits": 1024,
+      "offset_bytes": 128,
+      "size_bits": 32,
+      "type": "hkWorldOperationQueue *"
+    },
+    {
+      "name": "m_pendingOperationsCount",
+      "offset_bits": 1056,
+      "offset_bytes": 132,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "m_lockCount",
+      "offset_bits": 1088,
+      "offset_bytes": 136,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "m_lockCountForPhantoms",
+      "offset_bits": 1120,
+      "offset_bytes": 140,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "m_blockExecutingPendingOperations",
+      "offset_bits": 1152,
+      "offset_bytes": 144,
+      "size_bits": 8,
+      "type": "UInt8"
+    },
+    {
+      "name": "m_criticalOperationsAllowed",
+      "offset_bits": 1160,
+      "offset_bytes": 145,
+      "size_bits": 8,
+      "type": "UInt8"
+    },
+    {
+      "name": "m_pad092",
+      "offset_bits": 1168,
+      "offset_bytes": 146,
+      "size_bits": 16,
+      "type": "UInt8[2]"
+    },
+    {
+      "name": "m_unk094",
+      "offset_bits": 1184,
+      "offset_bytes": 148,
+      "size_bits": 96,
+      "type": "UInt32[3]"
+    },
+    {
+      "name": "m_unk0A0",
+      "offset_bits": 1280,
+      "offset_bytes": 160,
+      "size_bits": 32,
+      "type": "CRITICAL_SECTION *"
+    },
+    {
+      "name": "m_unk0A4",
+      "offset_bits": 1312,
+      "offset_bytes": 164,
+      "size_bits": 8,
+      "type": "UInt8"
+    },
+    {
+      "name": "m_unk0A5",
+      "offset_bits": 1320,
+      "offset_bytes": 165,
+      "size_bits": 24,
+      "type": "UInt8[3]"
+    },
+    {
+      "name": "m_unk0A8",
+      "offset_bits": 1344,
+      "offset_bytes": 168,
+      "size_bits": 128,
+      "type": "UInt32[4]"
+    },
+    {
+      "name": "m_phantoms",
+      "offset_bits": 1472,
+      "offset_bytes": 184,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_actionListeners",
+      "offset_bits": 1568,
+      "offset_bytes": 196,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_entityListeners",
+      "offset_bits": 1664,
+      "offset_bytes": 208,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_phantomListeners",
+      "offset_bits": 1760,
+      "offset_bytes": 220,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_constraintListeners",
+      "offset_bits": 1856,
+      "offset_bytes": 232,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_worldDeletionListeners",
+      "offset_bits": 1952,
+      "offset_bytes": 244,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_islandActivationListeners",
+      "offset_bits": 2048,
+      "offset_bytes": 256,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_worldPostSimulationListeners",
+      "offset_bits": 2144,
+      "offset_bytes": 268,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_worldPostIntegrateListeners",
+      "offset_bits": 2240,
+      "offset_bytes": 280,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_worldPostCollideListeners",
+      "offset_bits": 2336,
+      "offset_bytes": 292,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_islandPostIntegrateListeners",
+      "offset_bits": 2432,
+      "offset_bytes": 304,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_islandPostCollideListeners",
+      "offset_bits": 2528,
+      "offset_bytes": 316,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_collisionListeners",
+      "offset_bits": 2624,
+      "offset_bytes": 328,
+      "size_bits": 96,
+      "type": "hkArray"
+    },
+    {
+      "name": "m_unk154",
+      "offset_bits": 2720,
+      "offset_bytes": 340,
+      "size_bits": 32,
+      "type": "void *"
+    }
+  ],
+  "name": "hkWorld",
+  "ordinal": 9399,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

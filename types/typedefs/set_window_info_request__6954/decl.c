@@ -1,0 +1,1 @@
+set_window_info_request

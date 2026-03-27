@@ -1,0 +1,1 @@
+__frame_IOleItemContainer_IsRunning_Stub

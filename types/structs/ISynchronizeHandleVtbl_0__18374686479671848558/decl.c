@@ -1,0 +1,1 @@
+ISynchronizeHandleVtbl_0

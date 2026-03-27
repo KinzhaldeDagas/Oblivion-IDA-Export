@@ -1,0 +1,1 @@
+__frame_IOleInPlaceSite_OnUIDeactivate_Stub

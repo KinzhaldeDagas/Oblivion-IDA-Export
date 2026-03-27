@@ -1,0 +1,92 @@
+[
+  {
+    "ea": "0x419B34",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x419B36",
+    "line": "mov     edx, [eax+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x419B39",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x419B3B",
+    "line": "cmp     eax, 5",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x419B3E",
+    "line": "jz      MagicItem_GetFXEffect___Return_POSN",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x419B44",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x419B46",
+    "line": "mov     edx, [eax+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x419B49",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x419B4B",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x419B4D",
+    "line": "cmp     eax, 7",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x419B50",
+    "line": "jnz     short MagicItem_GetFXEffect___CheckDISE",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x419B52",
+    "line": "lea     ecx, [esi+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x419B55",
+    "line": "call    EffectItemList_AllEffectsHostile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x419B5A",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x419B5C",
+    "line": "jnz     MagicItem_GetFXEffect___Return_POSN",
+    "mnemonic": "jnz",
+    "size": 6
+  }
+]

@@ -1,0 +1,166 @@
+{
+  "decl": "connection_ops",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "name",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "const char *"
+    },
+    {
+      "name": "epm_protocols",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 16,
+      "type": "unsigned __int8[2]"
+    },
+    {
+      "name": "alloc",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "RpcConnection *(*)(void)"
+    },
+    {
+      "name": "open_connection_client",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "RPC_STATUS (*)(RpcConnection *)"
+    },
+    {
+      "name": "handoff",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "RPC_STATUS (*)(RpcConnection *, RpcConnection *)"
+    },
+    {
+      "name": "read",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 32,
+      "type": "int (*)(RpcConnection *, void *, unsigned int)"
+    },
+    {
+      "name": "write",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "int (*)(RpcConnection *, const void *, unsigned int)"
+    },
+    {
+      "name": "close",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 32,
+      "type": "int (*)(RpcConnection *)"
+    },
+    {
+      "name": "close_read",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 32,
+      "type": "void (*)(RpcConnection *)"
+    },
+    {
+      "name": "cancel_call",
+      "offset_bits": 288,
+      "offset_bytes": 36,
+      "size_bits": 32,
+      "type": "void (*)(RpcConnection *)"
+    },
+    {
+      "name": "is_server_listening",
+      "offset_bits": 320,
+      "offset_bytes": 40,
+      "size_bits": 32,
+      "type": "RPC_STATUS (*)(const char *)"
+    },
+    {
+      "name": "wait_for_incoming_data",
+      "offset_bits": 352,
+      "offset_bytes": 44,
+      "size_bits": 32,
+      "type": "int (*)(RpcConnection *)"
+    },
+    {
+      "name": "get_top_of_tower",
+      "offset_bits": 384,
+      "offset_bytes": 48,
+      "size_bits": 32,
+      "type": "size_t (*)(unsigned __int8 *, const char *, const char *)"
+    },
+    {
+      "name": "parse_top_of_tower",
+      "offset_bits": 416,
+      "offset_bytes": 52,
+      "size_bits": 32,
+      "type": "RPC_STATUS (*)(const unsigned __int8 *, size_t, char **, char **)"
+    },
+    {
+      "name": "receive_fragment",
+      "offset_bits": 448,
+      "offset_bytes": 56,
+      "size_bits": 32,
+      "type": "RPC_STATUS (*)(RpcConnection *, RpcPktHdr **, void **)"
+    },
+    {
+      "name": "is_authorized",
+      "offset_bits": 480,
+      "offset_bytes": 60,
+      "size_bits": 32,
+      "type": "BOOL (*)(RpcConnection *)"
+    },
+    {
+      "name": "authorize",
+      "offset_bits": 512,
+      "offset_bytes": 64,
+      "size_bits": 32,
+      "type": "RPC_STATUS (*)(RpcConnection *, BOOL, unsigned __int8 *, unsigned int, unsigned __int8 *, unsigned int *)"
+    },
+    {
+      "name": "secure_packet",
+      "offset_bits": 544,
+      "offset_bytes": 68,
+      "size_bits": 32,
+      "type": "RPC_STATUS (*)(RpcConnection *, secure_packet_direction, RpcPktHdr *, unsigned int, unsigned __int8 *, unsigned int, RpcAuthVerifier *, unsigned __int8 *, unsigned int)"
+    },
+    {
+      "name": "impersonate_client",
+      "offset_bits": 576,
+      "offset_bytes": 72,
+      "size_bits": 32,
+      "type": "RPC_STATUS (*)(RpcConnection *)"
+    },
+    {
+      "name": "revert_to_self",
+      "offset_bits": 608,
+      "offset_bytes": 76,
+      "size_bits": 32,
+      "type": "RPC_STATUS (*)(RpcConnection *)"
+    },
+    {
+      "name": "inquire_auth_client",
+      "offset_bits": 640,
+      "offset_bytes": 80,
+      "size_bits": 32,
+      "type": "RPC_STATUS (*)(RpcConnection *, RPC_AUTHZ_HANDLE *, RPC_WSTR *, ULONG *, ULONG *, ULONG *, ULONG)"
+    }
+  ],
+  "name": "connection_ops",
+  "ordinal": 3073,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

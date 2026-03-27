@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA250B0",
+    "line": "push    offset flt_B14854",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA250B5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA250BA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA250BF",
+    "line": "mov     eax, off_B14858; \"fObjectLODMax:LOD\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA250C4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA250C6",
+    "line": "jz      short locret_A250D4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA250C8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA250CB",
+    "line": "jnz     short locret_A250D4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA250CD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA250CE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA250D3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA250D4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

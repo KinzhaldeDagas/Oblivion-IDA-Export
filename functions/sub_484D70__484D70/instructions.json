@@ -1,0 +1,296 @@
+[
+  {
+    "ea": "0x484D70",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x484D71",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x484D72",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x484D73",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484D75",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484D77",
+    "line": "or      ebx, 0FFFFFFFFh",
+    "mnemonic": "or",
+    "size": 3
+  },
+  {
+    "ea": "0x484D7A",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484D7C",
+    "line": "jz      short loc_484DA6",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x484D7E",
+    "line": "mov     esi, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484D80",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484D82",
+    "line": "jz      short loc_484DA6",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x484D84",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484D86",
+    "line": "call    ExtraDataList_GetExtraSoul",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x484D8B",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484D8D",
+    "line": "jz      short loc_484DA6",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x484D8F",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484D91",
+    "line": "call    ExtraDataList_GetExtraSoul",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x484D96",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x484D97",
+    "line": "call    Actor__GetSoulValueFromLevel",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x484D9C",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484D9E",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x484DA1",
+    "line": "cmp     ebx, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x484DA4",
+    "line": "jnz     short loc_484DDD",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x484DA6",
+    "line": "mov     eax, [edi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x484DA9",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x484DAB",
+    "line": "push    offset ??_R0?AVTESSoulGem@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x484DB0",
+    "line": "push    offset ??_R0?AVTESBoundObject@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x484DB5",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x484DB7",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x484DB8",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x484DBD",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x484DC0",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484DC2",
+    "line": "jz      short loc_484DDB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x484DC4",
+    "line": "mov     al, [eax+70h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x484DC7",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484DC9",
+    "line": "jz      short loc_484DDB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x484DCB",
+    "line": "movzx   eax, al",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x484DCE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x484DCF",
+    "line": "call    Actor__GetSoulValueFromLevel",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x484DD4",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x484DD7",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x484DD8",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x484DD9",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x484DDA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x484DDB",
+    "line": "mov     eax, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484DDD",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x484DDE",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x484DDF",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x484DE0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

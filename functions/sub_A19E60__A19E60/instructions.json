@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA19E60",
+    "line": "push    offset dword_B06F8C",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA19E65",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA19E6A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA19E6F",
+    "line": "mov     eax, off_B06F90; \"iMaxLandscapeTextures:Display\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA19E74",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA19E76",
+    "line": "jz      short locret_A19E84",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA19E78",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA19E7B",
+    "line": "jnz     short locret_A19E84",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA19E7D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA19E7E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA19E83",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA19E84",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

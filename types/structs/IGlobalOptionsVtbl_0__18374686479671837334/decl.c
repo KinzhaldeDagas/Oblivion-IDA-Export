@@ -1,0 +1,1 @@
+IGlobalOptionsVtbl_0

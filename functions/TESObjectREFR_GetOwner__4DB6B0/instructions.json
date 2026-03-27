@@ -1,0 +1,374 @@
+[
+  {
+    "ea": "0x4DB6B0",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB6B1",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB6B2",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6B4",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB6B5",
+    "line": "lea     edi, [esi+44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB6B8",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6BA",
+    "line": "call    ExtraDataList_GetOwner",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4DB6BF",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6C1",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6C3",
+    "line": "mov     edx, [eax+190h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4DB6C9",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6CB",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6CD",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6CF",
+    "line": "jnz     short TESObjectREFR_GetOwner___Return",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6D1",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6D3",
+    "line": "jnz     short TESObjectREFR_GetOwner___Return",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6D5",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6D7",
+    "line": "call    ExtraDataList_GetTeleport",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4DB6DC",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6DE",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6E0",
+    "line": "jz      short TESObjectREFR_GetOwner___GetParentCellOwner",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6E2",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6E4",
+    "line": "call    sub_42B410",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4DB6E9",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6EB",
+    "line": "jz      short TESObjectREFR_GetOwner___GetParentCellOwner",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6ED",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6EF",
+    "line": "call    sub_42B410",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4DB6F4",
+    "line": "lea     ecx, [eax+44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB6F7",
+    "line": "call    ExtraDataList_GetOwner",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4DB6FC",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB6FE",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB700",
+    "line": "jnz     short TESObjectREFR_GetOwner___Return",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB702",
+    "line": "cmp     dword ptr [esi+1Ch], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4DB706",
+    "line": "jz      short loc_4DB71A",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB708",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB70A",
+    "line": "mov     edx, [eax+170h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4DB710",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB712",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB714",
+    "line": "cmp     byte ptr [eax+4], 20h ; ' '",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4DB718",
+    "line": "jz      short TESObjectREFR_GetOwner___Return",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB71A",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB71C",
+    "line": "mov     edx, [eax+170h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4DB722",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB724",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB726",
+    "line": "cmp     byte ptr [eax+4], 18h",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4DB72A",
+    "line": "jz      short TESObjectREFR_GetOwner___Return",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB72C",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB72E",
+    "line": "mov     edx, [eax+170h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4DB734",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB736",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB738",
+    "line": "cmp     byte ptr [eax+4], 12h",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4DB73C",
+    "line": "jz      short TESObjectREFR_GetOwner___Return",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB73E",
+    "line": "mov     ecx, [esi+40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4DB741",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB743",
+    "line": "jz      short TESObjectREFR_GetOwner___Return",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB745",
+    "line": "call    TESObjectCELL_GetOwner",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4DB74A",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB74C",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB74D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB74E",
+    "line": "mov     eax, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4DB750",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4DB751",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

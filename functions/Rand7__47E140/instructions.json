@@ -1,0 +1,116 @@
+[
+  {
+    "ea": "0x47E140",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x47E141",
+    "line": "cmp     byte ptr ds:0B069C3h, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x47E148",
+    "line": "jz      short loc_47E161",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x47E14A",
+    "line": "push    0; Time",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x47E14C",
+    "line": "call    __time64",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x47E151",
+    "line": "push    eax; Seed",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x47E152",
+    "line": "call    _srand",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x47E157",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x47E15A",
+    "line": "mov     byte ptr ds:0B069C3h, 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x47E161",
+    "line": "call    _rand",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x47E166",
+    "line": "mov     [esp+4+var_4], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x47E169",
+    "line": "fild    [esp+4+var_4]",
+    "mnemonic": "fild",
+    "size": 3
+  },
+  {
+    "ea": "0x47E16C",
+    "line": "fadd    st, st",
+    "mnemonic": "fadd",
+    "size": 2
+  },
+  {
+    "ea": "0x47E16E",
+    "line": "fdiv    qword ptr ds:0A3D5A8h",
+    "mnemonic": "fdiv",
+    "size": 6
+  },
+  {
+    "ea": "0x47E174",
+    "line": "fsub    qword ptr ds:0A2F928h",
+    "mnemonic": "fsub",
+    "size": 6
+  },
+  {
+    "ea": "0x47E17A",
+    "line": "fstp    [esp+4+var_4]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x47E17D",
+    "line": "fld     [esp+4+var_4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x47E180",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x47E181",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

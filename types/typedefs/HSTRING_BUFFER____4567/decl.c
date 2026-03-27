@@ -1,0 +1,1 @@
+HSTRING_BUFFER__

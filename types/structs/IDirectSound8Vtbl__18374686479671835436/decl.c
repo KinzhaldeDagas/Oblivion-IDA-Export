@@ -1,0 +1,1 @@
+IDirectSound8Vtbl

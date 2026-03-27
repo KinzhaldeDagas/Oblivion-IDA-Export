@@ -1,0 +1,1 @@
+IInitializeSpyVtbl_0

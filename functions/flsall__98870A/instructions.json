@@ -1,0 +1,332 @@
+[
+  {
+    "ea": "0x98870A",
+    "line": "push    14h",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x98870C",
+    "line": "push    offset stru_AFFBA0",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x988711",
+    "line": "call    __SEH_prolog4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x988716",
+    "line": "xor     edi, edi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x988718",
+    "line": "mov     [ebp+var_1C], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98871B",
+    "line": "mov     [ebp+var_24], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98871E",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x988720",
+    "line": "call    __lock",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x988725",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x988726",
+    "line": "mov     [ebp+ms_exc.registration.TryLevel], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x988729",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x98872B",
+    "line": "mov     [ebp+var_20], esi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98872E",
+    "line": "cmp     esi, dword_BABC00",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x988734",
+    "line": "jge     loc_9887BD",
+    "mnemonic": "jge",
+    "size": 6
+  },
+  {
+    "ea": "0x98873A",
+    "line": "mov     eax, dword_BAABE4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98873F",
+    "line": "lea     eax, [eax+esi*4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x988742",
+    "line": "cmp     [eax], edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x988744",
+    "line": "jz      short _flsall___$LN25",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x988746",
+    "line": "mov     eax, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x988748",
+    "line": "test    byte ptr [eax+0Ch], 83h",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x98874C",
+    "line": "jz      short _flsall___$LN25",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98874E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98874F",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x988750",
+    "line": "call    __lock_file2",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x988755",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x988756",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x988757",
+    "line": "xor     edx, edx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x988759",
+    "line": "inc     edx",
+    "mnemonic": "inc",
+    "size": 1
+  },
+  {
+    "ea": "0x98875A",
+    "line": "mov     [ebp+ms_exc.registration.TryLevel], edx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98875D",
+    "line": "mov     eax, dword_BAABE4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x988762",
+    "line": "mov     eax, [eax+esi*4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x988765",
+    "line": "mov     ecx, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x988768",
+    "line": "test    cl, 83h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x98876B",
+    "line": "jz      short loc_98879C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98876D",
+    "line": "cmp     [ebp+arg_0], edx",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x988770",
+    "line": "jnz     short loc_988783",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x988772",
+    "line": "push    eax; File",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x988773",
+    "line": "call    __fflush_nolock",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x988778",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x988779",
+    "line": "cmp     eax, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x98877C",
+    "line": "jz      short loc_98879C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98877E",
+    "line": "inc     [ebp+var_1C]",
+    "mnemonic": "inc",
+    "size": 3
+  },
+  {
+    "ea": "0x988781",
+    "line": "jmp     short loc_98879C",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x988783",
+    "line": "cmp     [ebp+arg_0], edi",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x988786",
+    "line": "jnz     short loc_98879C",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x988788",
+    "line": "test    cl, 2",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x98878B",
+    "line": "jz      short loc_98879C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98878D",
+    "line": "push    eax; File",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98878E",
+    "line": "call    __fflush_nolock",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x988793",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x988794",
+    "line": "cmp     eax, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x988797",
+    "line": "jnz     short loc_98879C",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x988799",
+    "line": "or      [ebp+var_24], eax",
+    "mnemonic": "or",
+    "size": 3
+  },
+  {
+    "ea": "0x98879C",
+    "line": "mov     [ebp+ms_exc.registration.TryLevel], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98879F",
+    "line": "call    _flsall___$LN24_0",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

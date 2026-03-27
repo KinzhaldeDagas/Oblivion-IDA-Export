@@ -1,0 +1,68 @@
+[
+  {
+    "ea": "0x45BA40",
+    "line": "mov     edi, [ebx+esi*4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x45BA43",
+    "line": "mov     ecx, ds:0B33A98h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x45BA49",
+    "line": "push    edi; _DWORD",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x45BA4A",
+    "line": "call    TESDataHandler_IsFormIDCreated?",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x45BA4F",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x45BA51",
+    "line": "jnz     short SaveLoad_LoadFormID___IrefLoop_CheckFormID",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x45BA53",
+    "line": "mov     eax, [ebp+74h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x45BA56",
+    "line": "cmp     edi, [eax+0Ch]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x45BA59",
+    "line": "jbe     short SaveLoad_LoadFormID___IrefLoop_IrefToFormID",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x45BA5B",
+    "line": "xor     edi, edi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x45BA5D",
+    "line": "jmp     short SaveLoad_LoadFormID___IrefLoop_CheckFormID",
+    "mnemonic": "jmp",
+    "size": 2
+  }
+]

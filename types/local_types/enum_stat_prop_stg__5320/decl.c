@@ -1,0 +1,1 @@
+enum_stat_prop_stg

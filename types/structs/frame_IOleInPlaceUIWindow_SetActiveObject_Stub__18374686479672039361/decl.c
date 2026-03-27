@@ -1,0 +1,1 @@
+__frame_IOleInPlaceUIWindow_SetActiveObject_Stub

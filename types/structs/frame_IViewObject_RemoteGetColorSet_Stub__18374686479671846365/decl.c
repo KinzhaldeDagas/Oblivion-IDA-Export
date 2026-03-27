@@ -1,0 +1,1 @@
+__frame_IViewObject_RemoteGetColorSet_Stub

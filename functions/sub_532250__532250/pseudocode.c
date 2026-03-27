@@ -1,0 +1,44 @@
+_DWORD *__thiscall sub_532250(_DWORD *this)
+{
+  *(this + 5) = 0x80000000;
+  *(this + 3) = 0;
+  *(this + 4) = 0;
+  *this = 0;
+  *(this + 1) = 0;
+  *((_BYTE *)this + 8) = 2;
+  *((float *)this + 8) = 0.0;
+  *((float *)this + 9) = 0.0;
+  *((float *)this + 0xA) = 0.0;
+  *((float *)this + 0xB) = 0.0;
+  *((float *)this + 0xC) = 0.0;
+  *((float *)this + 0xD) = 0.0;
+  *((float *)this + 0xE) = 0.0;
+  *((float *)this + 0xF) = 0.0;
+  *((float *)this + 0x10) = 0.0;
+  *((float *)this + 0x11) = 0.0;
+  *((float *)this + 0x12) = 0.0;
+  *((float *)this + 0x13) = 0.0;
+  *((float *)this + 0x14) = 0.0;
+  *((float *)this + 0x15) = 0.0;
+  *((float *)this + 0x16) = 0.0;
+  *((float *)this + 0x17) = 0.0;
+  *((float *)this + 9) = 0.0;
+  *((float *)this + 0xA) = 0.0;
+  *((float *)this + 0xB) = 0.0;
+  *((float *)this + 0xC) = 0.0;
+  *((float *)this + 0xD) = 0.0;
+  *((float *)this + 0xE) = 0.0;
+  *((float *)this + 0xF) = 0.0;
+  *((float *)this + 0x10) = 0.0;
+  *((float *)this + 0x11) = 0.0;
+  *((float *)this + 0x12) = 0.0;
+  *((float *)this + 0x13) = 0.0;
+  *((float *)this + 8) = 1.0;
+  *((float *)this + 0xD) = 1.0;
+  *((float *)this + 0x12) = 1.0;
+  *((float *)this + 0x14) = 0.0;
+  *((float *)this + 0x15) = 0.0;
+  *((float *)this + 0x16) = 0.0;
+  *((float *)this + 0x17) = 0.0;
+  return this;
+}

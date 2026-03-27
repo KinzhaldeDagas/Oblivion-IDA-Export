@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA248E0",
+    "line": "push    offset unk_B13618",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA248E5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA248EA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA248EF",
+    "line": "mov     eax, off_B1361C; \"fXenonMenuStickSpeedMaxMod:Controls\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA248F4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA248F6",
+    "line": "jz      short locret_A24904",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA248F8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA248FB",
+    "line": "jnz     short locret_A24904",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA248FD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA248FE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA24903",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA24904",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

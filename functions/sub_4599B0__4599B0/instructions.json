@@ -1,0 +1,164 @@
+[
+  {
+    "ea": "0x4599B0",
+    "line": "mov     ecx, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4599B6",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4599B7",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4599B9",
+    "line": "call    PlayerCharacter_SetCurrentMagicItem",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4599BE",
+    "line": "call    sub_57AFB0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4599C3",
+    "line": "mov     eax, ds:0B33398h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4599C8",
+    "line": "mov     esi, [eax+24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4599CB",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4599CD",
+    "line": "jz      short loc_4599DF",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4599CF",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4599D1",
+    "line": "call    sub_6AC210",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4599D6",
+    "line": "push    0FFFFFFFFh",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4599D8",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4599DA",
+    "line": "call    sub_6AC330",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4599DF",
+    "line": "call    InterfaceManager__IsOpenedMenuDialogue",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4599E4",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4599E6",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4599E7",
+    "line": "jz      short locret_459A02",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4599E9",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x4599EB",
+    "line": "push    1; a5",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4599ED",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4599EE",
+    "line": "fstp    [esp+8+a4]; a4",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x4599F1",
+    "line": "call    Dialogue_GetSpeaker",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4599F6",
+    "line": "mov     ecx, ds:0B333C4h; a1",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4599FC",
+    "line": "push    eax; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4599FD",
+    "line": "call    SetDialogueCamera",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x459A02",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

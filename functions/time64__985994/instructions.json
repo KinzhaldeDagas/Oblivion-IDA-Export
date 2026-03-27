@@ -1,0 +1,140 @@
+[
+  {
+    "ea": "0x985994",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x985995",
+    "line": "mov     ebp, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x985997",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x985998",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x985999",
+    "line": "lea     eax, [ebp+SystemTimeAsFileTime]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x98599C",
+    "line": "push    eax; lpSystemTimeAsFileTime",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98599D",
+    "line": "call    dword ptr ds:0A281BCh",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x9859A3",
+    "line": "mov     eax, [ebp+SystemTimeAsFileTime.dwLowDateTime]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9859A6",
+    "line": "mov     ecx, [ebp+SystemTimeAsFileTime.dwHighDateTime]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9859A9",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9859AB",
+    "line": "add     eax, 2AC18000h",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x9859B0",
+    "line": "push    (offset loc_98967F+1)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9859B5",
+    "line": "adc     ecx, 0FE624E21h",
+    "mnemonic": "adc",
+    "size": 6
+  },
+  {
+    "ea": "0x9859BB",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9859BC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9859BD",
+    "line": "call    __aulldiv",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9859C2",
+    "line": "mov     ecx, [ebp+Time]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9859C5",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x9859C7",
+    "line": "jz      short locret_9859CE",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x9859C9",
+    "line": "mov     [ecx], eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x9859CB",
+    "line": "mov     [ecx+4], edx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9859CE",
+    "line": "leave",
+    "mnemonic": "leave",
+    "size": 1
+  },
+  {
+    "ea": "0x9859CF",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

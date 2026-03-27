@@ -1,0 +1,164 @@
+[
+  {
+    "ea": "0x8BB600",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BB601",
+    "line": "mov     ebx, [esp+4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8BB605",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BB606",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8BB608",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8BB60A",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BB60B",
+    "line": "lea     ecx, [esp+0Ch+arg_4]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x8BB60F",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BB610",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8BB612",
+    "line": "call    dword ptr [eax+10h]",
+    "mnemonic": "call",
+    "size": 3
+  },
+  {
+    "ea": "0x8BB615",
+    "line": "cmp     byte ptr [eax], 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x8BB618",
+    "line": "jz      short loc_8BB67D",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8BB61A",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BB61B",
+    "line": "mov     edi, [esp+14h+var_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8BB61F",
+    "line": "cmp     edi, 3; switch 4 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x8BB622",
+    "line": "mov     eax, offset EmptyString",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8BB627",
+    "line": "mov     byte ptr [esp+14h], 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8BB62C",
+    "line": "ja      short def_8BB62E",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x8BB62E",
+    "line": "jmp     ds:jpt_8BB62E[edi*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x8BB635",
+    "line": "mov     eax, offset aReport; jumptable 008BB62E case 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8BB63A",
+    "line": "jmp     short def_8BB62E",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x8BB63C",
+    "line": "mov     eax, offset aWarning; jumptable 008BB62E case 1",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8BB641",
+    "line": "jmp     short def_8BB62E",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x8BB643",
+    "line": "mov     eax, offset aAssert; jumptable 008BB62E case 2",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8BB648",
+    "line": "jmp     short loc_8BB64F",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x8BB64A",
+    "line": "mov     eax, offset aError; jumptable 008BB62E case 3",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8BB64F",
+    "line": "mov     byte ptr [esp+14h], 1",
+    "mnemonic": "mov",
+    "size": 5
+  }
+]

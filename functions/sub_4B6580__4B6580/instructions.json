@@ -1,0 +1,230 @@
+[
+  {
+    "ea": "0x4B6580",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B6581",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B6583",
+    "line": "call    TESForm_InitializeFormRecord",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B6588",
+    "line": "lea     ecx, [esi+34h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B658B",
+    "line": "call    TESFullName_Save",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B6590",
+    "line": "push    54444F4Dh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B6595",
+    "line": "push    42444F4Dh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B659A",
+    "line": "push    4C444F4Dh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B659F",
+    "line": "lea     ecx, [esi+40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B65A2",
+    "line": "call    TESModel_Save",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B65A7",
+    "line": "lea     ecx, [esi+58h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B65AA",
+    "line": "call    TESScriptableForm_Save",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B65AF",
+    "line": "lea     ecx, [esi+24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B65B2",
+    "line": "call    TESContainer_SaveComponent",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B65B7",
+    "line": "push    1; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4B65B9",
+    "line": "lea     eax, [esi+78h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B65BC",
+    "line": "push    eax; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B65BD",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B65BF",
+    "line": "call    TESForm_SaveGenericComponents",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B65C4",
+    "line": "mov     eax, [esi+70h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B65C7",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4B65C9",
+    "line": "jz      short loc_4B65DC",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B65CB",
+    "line": "mov     ecx, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B65CE",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B65CF",
+    "line": "push    4D414E53h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B65D4",
+    "line": "call    TESForm_PutCurrentChunkData4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B65D9",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B65DC",
+    "line": "mov     eax, [esi+74h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B65DF",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4B65E1",
+    "line": "jz      short loc_4B65F4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B65E3",
+    "line": "mov     edx, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B65E6",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B65E7",
+    "line": "push    4D414E51h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B65EC",
+    "line": "call    TESForm_PutCurrentChunkData4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B65F1",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B65F4",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B65F6",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4B65F7",
+    "line": "jmp     TESForm_FinalizeFormRecord",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

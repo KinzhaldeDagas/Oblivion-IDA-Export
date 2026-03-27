@@ -1,0 +1,248 @@
+[
+  {
+    "ea": "0x415DC0",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415DC1",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415DC2",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x415DC4",
+    "line": "cmp     word ptr [esi+6Ch], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x415DC9",
+    "line": "jle     short loc_415DEC",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x415DCB",
+    "line": "mov     eax, [esi+9Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x415DD1",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415DD2",
+    "line": "mov     ecx, offset FormHeap",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x415DD7",
+    "line": "call    MemoryHeap_Free_checked",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x415DDC",
+    "line": "mov     dword ptr [esi+9Ch], 0",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x415DE6",
+    "line": "mov     word ptr [esi+6Ch], 0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x415DEC",
+    "line": "mov     bx, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x415DF1",
+    "line": "test    bx, bx",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x415DF4",
+    "line": "jbe     short loc_415E44",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x415DF6",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415DF7",
+    "line": "movzx   edi, bx",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x415DFA",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x415DFC",
+    "line": "lea     ecx, ds:0[edi*4]",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x415E03",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415E04",
+    "line": "mov     ecx, offset FormHeap",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x415E09",
+    "line": "call    j_MemoryHeap_Alloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x415E0E",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x415E10",
+    "line": "mov     [esi+9Ch], eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x415E16",
+    "line": "jz      short loc_415E43",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x415E18",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x415E1A",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x415E1C",
+    "line": "mov     [esi+6Ch], bx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x415E20",
+    "line": "jle     short loc_415E43",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x415E22",
+    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x415E26",
+    "line": "jmp     short loc_415E30",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x415E28",
+    "line": "align 10h",
+    "mnemonic": null,
+    "size": 7
+  },
+  {
+    "ea": "0x415E30",
+    "line": "mov     ebx, [ecx+eax*4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x415E33",
+    "line": "mov     edx, [esi+9Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x415E39",
+    "line": "mov     [edx+eax*4], ebx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x415E3C",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x415E3F",
+    "line": "cmp     eax, edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x415E41",
+    "line": "jl      short loc_415E30",
+    "mnemonic": "jl",
+    "size": 2
+  },
+  {
+    "ea": "0x415E43",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x415E44",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x415E45",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x415E46",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

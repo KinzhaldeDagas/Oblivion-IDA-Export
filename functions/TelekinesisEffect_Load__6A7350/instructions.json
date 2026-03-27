@@ -1,0 +1,158 @@
+[
+  {
+    "ea": "0x6A7350",
+    "line": "mov     eax, [esp+Dst]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x6A7354",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A7355",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A7356",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A7358",
+    "line": "call    ActiveEffect_Base_LoadEffect",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A735D",
+    "line": "push    4; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6A735F",
+    "line": "lea     ecx, [esp+0Ch]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x6A7363",
+    "line": "push    ecx; Dst",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A7364",
+    "line": "mov     ecx, ds:0B33B00h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6A736A",
+    "line": "call    SaveLoad_LoadFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A736F",
+    "line": "mov     edx, [esp+10h+var_8]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x6A7373",
+    "line": "mov     [esi+48h], edx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A7376",
+    "line": "mov     ecx, ds:0B33B00h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6A737C",
+    "line": "cmp     byte ptr [ecx+7Ch], 40h ; '@'",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x6A7380",
+    "line": "jb      short loc_6A739E",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x6A7382",
+    "line": "push    4; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6A7384",
+    "line": "lea     eax, [esi+40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x6A7387",
+    "line": "push    eax; Dst",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A7388",
+    "line": "call    SaveLoad_LoadData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A738D",
+    "line": "mov     ecx, ds:0B33B00h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6A7393",
+    "line": "push    4; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6A7395",
+    "line": "add     esi, 44h ; 'D'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x6A7398",
+    "line": "push    esi; Dst",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A7399",
+    "line": "call    SaveLoad_LoadData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A739E",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6A739F",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

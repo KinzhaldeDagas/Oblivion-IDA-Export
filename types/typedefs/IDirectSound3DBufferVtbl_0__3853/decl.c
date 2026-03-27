@@ -1,0 +1,1 @@
+IDirectSound3DBufferVtbl_0

@@ -1,0 +1,1 @@
+__frame_IOleInPlaceFrame_InsertMenus_Stub

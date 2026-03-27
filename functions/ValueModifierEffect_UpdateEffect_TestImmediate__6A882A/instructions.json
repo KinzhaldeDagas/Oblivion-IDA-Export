@@ -1,0 +1,68 @@
+[
+  {
+    "ea": "0x6A882A",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A882C",
+    "line": "call    ActiveEffect_Base_IsBoundObjWearable",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A8831",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8833",
+    "line": "jnz     short ValueModifierEffect_UpdateEffect___ApplyEffect",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8835",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8837",
+    "line": "fcomp   dword ptr [esi+1Ch]",
+    "mnemonic": "fcomp",
+    "size": 3
+  },
+  {
+    "ea": "0x6A883A",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x6A883C",
+    "line": "test    ah, 5",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x6A883F",
+    "line": "jnp     short ValueModifierEffect_UpdateEffect___ApplyEffect",
+    "mnemonic": "jnp",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8841",
+    "line": "cmp     dword ptr [esi+28h], 4",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x6A8845",
+    "line": "jnz     short ValueModifierEffect_UpdateEffect___Done_",
+    "mnemonic": "jnz",
+    "size": 2
+  }
+]

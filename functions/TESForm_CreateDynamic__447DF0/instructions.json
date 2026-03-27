@@ -1,0 +1,5840 @@
+[
+  {
+    "ea": "0x447DF0",
+    "line": "push    0FFFFFFFFh",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x447DF2",
+    "line": "push    offset TESForm_CreateDynamic_SEH",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x447DF7",
+    "line": "mov     eax, large fs:0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x447DFD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x447DFE",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x447DFF",
+    "line": "mov     eax, ds:0B30AACh",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x447E04",
+    "line": "xor     eax, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x447E06",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x447E07",
+    "line": "lea     eax, [esp+14h+var_C]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x447E0B",
+    "line": "mov     large fs:0, eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x447E11",
+    "line": "mov     dl, byte ptr [esp+14h+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447E15",
+    "line": "movzx   eax, dl",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x447E18",
+    "line": "lea     ecx, [eax-4]; switch 64 cases",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x447E1B",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x447E1D",
+    "line": "cmp     ecx, 3Fh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x447E20",
+    "line": "ja      TESForm_CreateDynamic___def_447E26; jumptable 00447E26 default case, cases 44,50,51,55,57,58",
+    "mnemonic": "ja",
+    "size": 6
+  },
+  {
+    "ea": "0x447E26",
+    "line": "jmp     ds:jpt_447E26[ecx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x447E2D",
+    "line": "push    58h ; 'X'; jumptable 00447E26 case 18",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x447E2F",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447E34",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447E37",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447E3B",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x447E3D",
+    "line": "mov     [esp+14h+var_4], esi",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447E41",
+    "line": "jz      short TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x447E43",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447E45",
+    "line": "call    ??0TESObjectACTI@@QAE@XZ; TESObjectACTI::TESObjectACTI(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447E4A",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447E4C",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447E50",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x447E57",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447E58",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447E59",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447E5C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x447E5D",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x447E5F",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447E61",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447E65",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x447E6C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447E6D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447E6E",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447E71",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x447E72",
+    "line": "push    7Ch ; '|'; jumptable 00447E26 case 19",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x447E74",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447E79",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447E7C",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447E80",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x447E82",
+    "line": "mov     [esp+14h+var_4], 1",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x447E8A",
+    "line": "jz      short TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x447E8C",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447E8E",
+    "line": "call    ??0TESObjectAPPA@@QAE@XZ; TESObjectAPPA::TESObjectAPPA(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447E93",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447E95",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447E99",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x447EA0",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447EA1",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447EA2",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447EA5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x447EA6",
+    "line": "push    0E8h ; 'è'; jumptable 00447E26 case 20",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x447EAB",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447EB0",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447EB3",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447EB7",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x447EB9",
+    "line": "mov     [esp+14h+var_4], 2",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x447EC1",
+    "line": "jz      short TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x447EC3",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447EC5",
+    "line": "call    ??0TESObjectARMO@@QAE@XZ; TESObjectARMO::TESObjectARMO(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447ECA",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447ECC",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447ED0",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x447ED7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447ED8",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447ED9",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447EDC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x447EDD",
+    "line": "push    8Ch ; 'Œ'; jumptable 00447E26 case 21",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x447EE2",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447EE7",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447EEA",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447EEE",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x447EF0",
+    "line": "mov     [esp+14h+var_4], 3",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x447EF8",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x447EFE",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447F00",
+    "line": "call    ??0TESObjectBOOK@@QAE@XZ; TESObjectBOOK::TESObjectBOOK(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447F05",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447F07",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447F0B",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x447F12",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447F13",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447F14",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447F17",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x447F18",
+    "line": "push    0DCh ; 'Ü'; jumptable 00447E26 case 22",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x447F1D",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447F22",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447F25",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447F29",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x447F2B",
+    "line": "mov     [esp+14h+var_4], 4",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x447F33",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x447F39",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447F3B",
+    "line": "call    ??0TESObjectCLOT@@QAE@XZ; TESObjectCLOT::TESObjectCLOT(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447F40",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447F42",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447F46",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x447F4D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447F4E",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447F4F",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447F52",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x447F53",
+    "line": "push    7Ch ; '|'; jumptable 00447E26 case 23",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x447F55",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447F5A",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447F5D",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447F61",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x447F63",
+    "line": "mov     [esp+14h+var_4], 5",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x447F6B",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x447F71",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447F73",
+    "line": "call    ??0TESObjectCONT@@QAE@XZ; TESObjectCONT::TESObjectCONT(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447F78",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447F7A",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447F7E",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x447F85",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447F86",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447F87",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447F8A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x447F8B",
+    "line": "push    70h ; 'p'; jumptable 00447E26 case 24",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x447F8D",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447F92",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447F95",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447F99",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x447F9B",
+    "line": "mov     [esp+14h+var_4], 6",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x447FA3",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x447FA9",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447FAB",
+    "line": "call    ??0TESObjectDOOR@@QAE@XZ; TESObjectDOOR::TESObjectDOOR(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447FB0",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447FB2",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447FB6",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x447FBD",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447FBE",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447FBF",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447FC2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x447FC3",
+    "line": "push    80h ; '€'; jumptable 00447E26 case 25",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x447FC8",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447FCD",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447FD0",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447FD4",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x447FD6",
+    "line": "mov     [esp+14h+var_4], 7",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x447FDE",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x447FE4",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447FE6",
+    "line": "call    ??0IngredientItem@@QAE@XZ; IngredientItem::IngredientItem(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x447FEB",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x447FED",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x447FF1",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x447FF8",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447FF9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x447FFA",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x447FFD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x447FFE",
+    "line": "push    90h; jumptable 00447E26 case 26",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x448003",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448008",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44800B",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44800F",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448011",
+    "line": "mov     [esp+14h+var_4], 8",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448019",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44801F",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448021",
+    "line": "call    ??0TESObjectLIGH@@QAE@XZ; TESObjectLIGH::TESObjectLIGH(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448026",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448028",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44802C",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448033",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448034",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448035",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448038",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448039",
+    "line": "push    70h ; 'p'; jumptable 00447E26 case 27",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x44803B",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448040",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448043",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448047",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448049",
+    "line": "mov     [esp+14h+var_4], 9",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448051",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448057",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448059",
+    "line": "call    ??0TESObjectMISC@@QAE@XZ; TESObjectMISC::TESObjectMISC(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44805E",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448060",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448064",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x44806B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44806C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44806D",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448070",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448071",
+    "line": "push    70h ; 'p'; jumptable 00447E26 case 39",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448073",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448078",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44807B",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44807F",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448081",
+    "line": "mov     [esp+14h+var_4], 0Ah",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448089",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44808F",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448091",
+    "line": "call    ??0TESKey@@QAE@XZ; TESKey::TESKey(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448096",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448098",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44809C",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4480A3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4480A4",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4480A5",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4480A8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4480A9",
+    "line": "push    74h ; 't'; jumptable 00447E26 case 38",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4480AB",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4480B0",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4480B3",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4480B7",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4480B9",
+    "line": "mov     [esp+14h+var_4], 0Bh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4480C1",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4480C7",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4480C9",
+    "line": "call    ??0TESSoulGem@@QAE@XZ; TESSoulGem::TESSoulGem(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4480CE",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4480D0",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4480D4",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4480DB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4480DC",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4480DD",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4480E0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4480E1",
+    "line": "push    3Ch ; '<'; jumptable 00447E26 case 28",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4480E3",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4480E8",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4480EB",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4480EF",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4480F1",
+    "line": "mov     [esp+14h+var_4], 0Ch",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4480F9",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4480FF",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448101",
+    "line": "call    ??0TESObjectSTAT@@QAE@XZ; TESObjectSTAT::TESObjectSTAT(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448106",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448108",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44810C",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448113",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448114",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448115",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448118",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448119",
+    "line": "push    5Ch ; '\\'; jumptable 00447E26 case 29",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x44811B",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448120",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448123",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448127",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448129",
+    "line": "mov     [esp+14h+var_4], 0Dh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448131",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448137",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448139",
+    "line": "call    ??0TESGrass@@QAE@XZ; TESGrass::TESGrass(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44813E",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448140",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448144",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x44814B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44814C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44814D",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448150",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448151",
+    "line": "push    48h ; 'H'; jumptable 00447E26 case 60",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448153",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448158",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44815B",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44815F",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448161",
+    "line": "mov     [esp+14h+var_4], 0Eh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448169",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44816F",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448171",
+    "line": "call    ??0TESIdleForm@@QAE@XZ; TESIdleForm::TESIdleForm(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448176",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448178",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44817C",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448183",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448184",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448185",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448188",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448189",
+    "line": "push    3Ch ; '<'; jumptable 00447E26 case 61",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x44818B",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448190",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448193",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448197",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448199",
+    "line": "mov     [esp+14h+var_4], 0Fh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4481A1",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4481A7",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4481A9",
+    "line": "call    ??0TESPackage@@QAE@XZ; TESPackage::TESPackage(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4481AE",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4481B0",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4481B4",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4481BB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4481BC",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4481BD",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4481C0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4481C1",
+    "line": "push    80h ; '€'; jumptable 00447E26 case 30",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4481C6",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4481CB",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4481CE",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4481D2",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4481D4",
+    "line": "mov     [esp+14h+var_4], 10h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4481DC",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4481E2",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4481E4",
+    "line": "call    ??0TESObjectTREE@@QAE@XZ; TESObjectTREE::TESObjectTREE(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4481E9",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4481EB",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4481EF",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4481F6",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4481F7",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4481F8",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4481FB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4481FC",
+    "line": "push    64h ; 'd'; jumptable 00447E26 case 31",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4481FE",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448203",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448206",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44820A",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x44820C",
+    "line": "mov     [esp+14h+var_4], 11h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448214",
+    "line": "jz      loc_448B4A",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44821A",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44821C",
+    "line": "call    ??0TESFlora@@QAE@XZ; TESFlora::TESFlora(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448221",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448223",
+    "line": "jz      loc_448B4A",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448229",
+    "line": "lea     esi, [eax+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x44822C",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44822E",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448232",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448239",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44823A",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44823B",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44823E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x44823F",
+    "line": "push    5Ch ; '\\'; jumptable 00447E26 case 32",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448241",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448246",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448249",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44824D",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x44824F",
+    "line": "mov     [esp+14h+var_4], 12h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448257",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44825D",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44825F",
+    "line": "call    ??0TESFurniture@@QAE@XZ; TESFurniture::TESFurniture(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448264",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448266",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44826A",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448271",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448272",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448273",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448276",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448277",
+    "line": "push    0A0h ; ' '; jumptable 00447E26 case 33",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x44827C",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448281",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448284",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448288",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x44828A",
+    "line": "mov     [esp+14h+var_4], 13h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448292",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448298",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44829A",
+    "line": "call    ??0TESObjectWEAP@@QAE@XZ; TESObjectWEAP::TESObjectWEAP(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44829F",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4482A1",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4482A5",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4482AC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4482AD",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4482AE",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4482B1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4482B2",
+    "line": "push    84h ; '„'; jumptable 00447E26 case 34",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4482B7",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4482BC",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4482BF",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4482C3",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4482C5",
+    "line": "mov     [esp+14h+var_4], 14h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4482CD",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4482D3",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4482D5",
+    "line": "call    ??0TESAmmo@@QAE@XZ; TESAmmo::TESAmmo(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4482DA",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4482DC",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4482E0",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4482E7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4482E8",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4482E9",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4482EC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4482ED",
+    "line": "push    200h; jumptable 00447E26 case 35",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4482F2",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4482F7",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4482FA",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4482FE",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448300",
+    "line": "mov     [esp+14h+var_4], 15h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448308",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44830E",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448310",
+    "line": "call    TESNPC_constr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448315",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448317",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44831B",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448322",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448323",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448324",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448327",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448328",
+    "line": "push    140h; jumptable 00447E26 case 36",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x44832D",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448332",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448335",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448339",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x44833B",
+    "line": "mov     [esp+14h+var_4], 16h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448343",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448349",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44834B",
+    "line": "call    TESCreature_constr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448350",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448352",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448356",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x44835D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44835E",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44835F",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448362",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448363",
+    "line": "push    44h ; 'D'; jumptable 00447E26 case 37",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448365",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44836A",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44836D",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448371",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448373",
+    "line": "mov     [esp+14h+var_4], 17h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x44837B",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448381",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448383",
+    "line": "call    ??0TESLevCreature@@QAE@XZ; TESLevCreature::TESLevCreature(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448388",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44838A",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44838E",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448395",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448396",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448397",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44839A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x44839B",
+    "line": "push    44h ; 'D'; jumptable 00447E26 case 16",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x44839D",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4483A2",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4483A5",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4483A9",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4483AB",
+    "line": "mov     [esp+14h+var_4], 18h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4483B3",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4483B9",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4483BB",
+    "line": "call    ??0SpellItem@@QAE@XZ; SpellItem::SpellItem(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4483C0",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4483C2",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4483C6",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4483CD",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4483CE",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4483CF",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4483D2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4483D3",
+    "line": "push    44h ; 'D'; jumptable 00447E26 case 15",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4483D5",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4483DA",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4483DD",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4483E1",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4483E3",
+    "line": "mov     [esp+14h+var_4], 19h",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4483EB",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4483F1",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4483F3",
+    "line": "call    ??0EnchantmentItem@@QAE@XZ; EnchantmentItem::EnchantmentItem(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4483F8",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4483FA",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4483FE",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448405",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448406",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448407",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44840A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x44840B",
+    "line": "push    80h ; '€'; jumptable 00447E26 case 40",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x448410",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448415",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448418",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44841C",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x44841E",
+    "line": "mov     [esp+14h+var_4], 1Ah",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448426",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44842C",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44842E",
+    "line": "call    ??0AlchemyItem@@QAE@XZ; AlchemyItem::AlchemyItem(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448433",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448435",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448439",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448440",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448441",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448442",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448445",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448446",
+    "line": "push    34h ; '4'; jumptable 00447E26 case 43",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448448",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44844D",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448450",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448454",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448456",
+    "line": "mov     [esp+14h+var_4], 1Bh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x44845E",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448464",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448466",
+    "line": "call    TESLevItem_constr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44846B",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44846D",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448471",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448478",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448479",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44847A",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44847D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x44847E",
+    "line": "push    58h ; 'X'; jumptable 00447E26 case 49",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448480",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448485",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448488",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44848C",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x44848E",
+    "line": "mov     [esp+14h+var_4], 1Ch",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448496",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44849C",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44849E",
+    "line": "call    TESObjectREFR_constr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4484A3",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4484A5",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4484A9",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4484B0",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4484B1",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4484B2",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4484B5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4484B6",
+    "line": "push    4Ch ; 'L'; jumptable 00447E26 case 7",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4484B8",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4484BD",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4484C0",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4484C4",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4484C6",
+    "line": "mov     [esp+14h+var_4], 1Dh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4484CE",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4484D4",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4484D6",
+    "line": "call    ??0TESHair@@QAE@XZ; TESHair::TESHair(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4484DB",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4484DD",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4484E1",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4484E8",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4484E9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4484EA",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4484ED",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4484EE",
+    "line": "push    34h ; '4'; jumptable 00447E26 case 8",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4484F0",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4484F5",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4484F8",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4484FC",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4484FE",
+    "line": "mov     [esp+14h+var_4], 1Eh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448506",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44850C",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44850E",
+    "line": "call    ??0TESEyes@@QAE@XZ; TESEyes::TESEyes(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448513",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448515",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448519",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448520",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448521",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448522",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448525",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448526",
+    "line": "push    318h; jumptable 00447E26 case 9",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x44852B",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448530",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448533",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448537",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448539",
+    "line": "mov     [esp+14h+var_4], 1Fh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448541",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448547",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448549",
+    "line": "call    ??0TESRace@@QAE@XZ; TESRace::TESRace(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44854E",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448550",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448554",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x44855B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44855C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44855D",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448560",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448561",
+    "line": "push    6Ch ; 'l'; jumptable 00447E26 case 5",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448563",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448568",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44856B",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44856F",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448571",
+    "line": "mov     [esp+14h+var_4], 20h ; ' '",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448579",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44857F",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448581",
+    "line": "call    ??0TESClass@@QAE@XZ; TESClass::TESClass(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448586",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448588",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44858C",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448593",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448594",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448595",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448598",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448599",
+    "line": "push    4Ch ; 'L'; jumptable 00447E26 case 17",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x44859B",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4485A0",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4485A3",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4485A7",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4485A9",
+    "line": "mov     [esp+14h+var_4], 21h ; '!'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4485B1",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4485B7",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4485B9",
+    "line": "call    ??0BirthSign@@QAE@XZ; BirthSign::BirthSign(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4485BE",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4485C0",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4485C4",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4485CB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4485CC",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4485CD",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4485D0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4485D1",
+    "line": "push    44h ; 'D'; jumptable 00447E26 case 6",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4485D3",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4485D8",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4485DB",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4485DF",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4485E1",
+    "line": "mov     [esp+14h+var_4], 22h ; '\"'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4485E9",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4485EF",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4485F1",
+    "line": "call    sub_51F820",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4485F6",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4485F8",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4485FC",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448603",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448604",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448605",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448608",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448609",
+    "line": "push    44h ; 'D'; jumptable 00447E26 case 10",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x44860B",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448610",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448613",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448617",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448619",
+    "line": "mov     [esp+14h+var_4], 23h ; '#'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448621",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448627",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448629",
+    "line": "call    ??0TESSound@@QAE@XZ; TESSound::TESSound(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44862E",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448630",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448634",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x44863B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44863C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44863D",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448640",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448641",
+    "line": "push    28h ; '('; jumptable 00447E26 case 4",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448643",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448648",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44864B",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44864F",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448651",
+    "line": "mov     [esp+14h+var_4], 24h ; '$'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448659",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44865F",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448661",
+    "line": "call    ??0TESGlobal@@QAE@XZ; TESGlobal::TESGlobal(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448666",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448668",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44866C",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448673",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448674",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448675",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448678",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448679",
+    "line": "push    0A8h ; '¨'; jumptable 00447E26 case 12",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x44867E",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448683",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448686",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44868A",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x44868C",
+    "line": "mov     [esp+14h+var_4], 25h ; '%'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448694",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44869A",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44869C",
+    "line": "call    ??0EffectSetting@@QAE@XZ; EffectSetting::EffectSetting(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4486A1",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4486A3",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4486A7",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4486AE",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4486AF",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4486B0",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4486B3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4486B4",
+    "line": "push    58h ; 'X'; jumptable 00447E26 case 46",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4486B6",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4486BB",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4486BE",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4486C2",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4486C4",
+    "line": "mov     [esp+14h+var_4], 26h ; '&'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4486CC",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4486D2",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4486D4",
+    "line": "call    ??0TESClimate@@QAE@XZ; TESClimate::TESClimate(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4486D9",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4486DB",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4486DF",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4486E6",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4486E7",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4486E8",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4486EB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4486EC",
+    "line": "push    148h; jumptable 00447E26 case 45",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4486F1",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4486F6",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4486F9",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4486FD",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4486FF",
+    "line": "mov     [esp+14h+var_4], 27h ; '''",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448707",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44870D",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44870F",
+    "line": "call    ??0TESWeather@@QAE@XZ; TESWeather::TESWeather(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448714",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448716",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44871A",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448721",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448722",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448723",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448726",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448727",
+    "line": "push    0E0h ; 'à'; jumptable 00447E26 case 53",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x44872C",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448731",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448734",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448738",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x44873A",
+    "line": "mov     [esp+14h+var_4], 28h ; '('",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448742",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448748",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44874A",
+    "line": "call    ??0TESWorldSpace@@QAE@XZ; TESWorldSpace::TESWorldSpace(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44874F",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448751",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448755",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x44875C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44875D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44875E",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448761",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448762",
+    "line": "push    58h ; 'X'; jumptable 00447E26 case 48",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448764",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448769",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44876C",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448770",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448772",
+    "line": "mov     [esp+14h+var_4], 29h ; ')'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x44877A",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448780",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448782",
+    "line": "call    TESObjectCELL_constr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448787",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448789",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44878D",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448794",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448795",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448796",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448799",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x44879A",
+    "line": "push    60h ; '`'; jumptable 00447E26 case 11",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x44879C",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4487A1",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4487A4",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4487A8",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4487AA",
+    "line": "mov     [esp+14h+var_4], 2Ah ; '*'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4487B2",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4487B8",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4487BA",
+    "line": "call    ??0TESSkill@@QAE@XZ; TESSkill::TESSkill(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4487BF",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4487C1",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4487C5",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4487CC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4487CD",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4487CE",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4487D1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4487D2",
+    "line": "push    34h ; '4'; jumptable 00447E26 case 14",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4487D4",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4487D9",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4487DC",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4487E0",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4487E2",
+    "line": "mov     [esp+14h+var_4], 2Bh ; '+'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4487EA",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4487F0",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4487F2",
+    "line": "call    sub_4C93D0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4487F7",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4487F9",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4487FD",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448804",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448805",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448806",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448809",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x44880A",
+    "line": "push    68h ; 'h'; jumptable 00447E26 case 59",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x44880C",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448811",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448814",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448818",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x44881A",
+    "line": "mov     [esp+14h+var_4], 2Ch ; ','",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448822",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448828",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44882A",
+    "line": "call    sub_52AA00",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44882F",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448831",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448835",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x44883C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44883D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44883E",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448841",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448842",
+    "line": "push    2Ch ; ','; jumptable 00447E26 case 47",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448844",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448849",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44884C",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448850",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448852",
+    "line": "mov     [esp+14h+var_4], 2Dh ; '-'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x44885A",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448860",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448862",
+    "line": "call    ??0TESRegion@@QAE@XZ; TESRegion::TESRegion(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448867",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448869",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44886D",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448874",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448875",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448876",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448879",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x44887A",
+    "line": "push    50h ; 'P'; jumptable 00447E26 case 13",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x44887C",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448881",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448884",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448888",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x44888A",
+    "line": "mov     [esp+14h+var_4], 2Eh ; '.'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448892",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448898",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44889A",
+    "line": "call    Script_Constructor",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44889F",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4488A1",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4488A5",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4488AC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4488AD",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4488AE",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4488B1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4488B2",
+    "line": "push    98h ; '˜'; jumptable 00447E26 case 62",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4488B7",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4488BC",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4488BF",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4488C3",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4488C5",
+    "line": "mov     [esp+14h+var_4], 2Fh ; '/'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4488CD",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4488D3",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4488D5",
+    "line": "call    sub_4ABB40",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4488DA",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4488DC",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4488E0",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4488E7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4488E8",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4488E9",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4488EC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4488ED",
+    "line": "push    3Ch ; '<'; jumptable 00447E26 case 63",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4488EF",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4488F4",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4488F7",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4488FB",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4488FD",
+    "line": "mov     [esp+14h+var_4], 30h ; '0'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448905",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44890B",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44890D",
+    "line": "call    ??0TESLoadScreen@@QAE@XZ; TESLoadScreen::TESLoadScreen(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448912",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448914",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448918",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x44891F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448920",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448921",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448924",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448925",
+    "line": "push    0ACh ; '¬'; jumptable 00447E26 case 66",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x44892A",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44892F",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448932",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448936",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448938",
+    "line": "mov     [esp+14h+var_4], 31h ; '1'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448940",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448946",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448948",
+    "line": "call    ??0TESWaterForm@@QAE@XZ; TESWaterForm::TESWaterForm(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44894D",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44894F",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448953",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x44895A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44895B",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x44895C",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44895F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448960",
+    "line": "push    34h ; '4'; jumptable 00447E26 case 64",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448962",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448967",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x44896A",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44896E",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448970",
+    "line": "mov     [esp+14h+var_4], 32h ; '2'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448978",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44897E",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448980",
+    "line": "call    ??0TESLevSpell@@QAE@XZ; TESLevSpell::TESLevSpell(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448985",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448987",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44898B",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448992",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448993",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448994",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448997",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448998",
+    "line": "push    34h ; '4'; jumptable 00447E26 case 65",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x44899A",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44899F",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4489A2",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4489A6",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4489A8",
+    "line": "mov     [esp+14h+var_4], 33h ; '3'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4489B0",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4489B6",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4489B8",
+    "line": "call    ??0TESObjectANIO@@QAE@XZ; TESObjectANIO::TESObjectANIO(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4489BD",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4489BF",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4489C3",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4489CA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4489CB",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4489CC",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4489CF",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x4489D0",
+    "line": "push    28h ; '('; jumptable 00447E26 case 54",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4489D2",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4489D7",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4489DA",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4489DE",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4489E0",
+    "line": "mov     [esp+14h+var_4], 34h ; '4'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x4489E8",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4489EE",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4489F0",
+    "line": "call    ??0TESObjectLAND@@QAE@XZ; TESObjectLAND::TESObjectLAND(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4489F5",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4489F7",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4489FB",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448A02",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448A03",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448A04",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448A07",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448A08",
+    "line": "push    54h ; 'T'; jumptable 00447E26 case 52",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448A0A",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448A0F",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448A12",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448A16",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448A18",
+    "line": "mov     [esp+14h+var_4], 35h ; '5'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448A20",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448A26",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448A28",
+    "line": "call    ??0TESPathGrid@@QAE@XZ; TESPathGrid::TESPathGrid(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448A2D",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448A2F",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448A33",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448A3A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448A3B",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448A3C",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448A3F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448A40",
+    "line": "push    30h ; '0'; jumptable 00447E26 case 56",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448A42",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448A47",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448A4A",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448A4E",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448A50",
+    "line": "mov     [esp+14h+var_4], 36h ; '6'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448A58",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448A5E",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448A60",
+    "line": "call    ??0TESRoad@@QAE@XZ; TESRoad::TESRoad(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448A65",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448A67",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448A6B",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448A72",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448A73",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448A74",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448A77",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448A78",
+    "line": "push    30h ; '0'; jumptable 00447E26 case 41",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x448A7A",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448A7F",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448A82",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448A86",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448A88",
+    "line": "mov     [esp+14h+var_4], 37h ; '7'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448A90",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448A96",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448A98",
+    "line": "call    ??0TESSubSpace@@QAE@XZ; TESSubSpace::TESSubSpace(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448A9D",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448A9F",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448AA3",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448AAA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448AAB",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448AAC",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448AAF",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448AB0",
+    "line": "push    110h; jumptable 00447E26 case 67",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x448AB5",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448ABA",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448ABD",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448AC1",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448AC3",
+    "line": "mov     [esp+14h+var_4], 38h ; '8'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448ACB",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448AD1",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448AD3",
+    "line": "call    ??0TESEffectShader@@QAE@XZ; TESEffectShader::TESEffectShader(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448AD8",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448ADA",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448ADE",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448AE5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448AE6",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448AE7",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448AEA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448AEB",
+    "line": "push    88h ; 'ˆ'; jumptable 00447E26 case 42",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x448AF0",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448AF5",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448AF8",
+    "line": "mov     [esp+14h+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448AFC",
+    "line": "cmp     eax, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448AFE",
+    "line": "mov     [esp+14h+var_4], 39h ; '9'",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x448B06",
+    "line": "jz      TESForm_CreateDynamic___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x448B0C",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448B0E",
+    "line": "call    ??0TESSigilStone@@QAE@XZ; TESSigilStone::TESSigilStone(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448B13",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448B15",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448B19",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448B20",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448B21",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448B22",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448B25",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x448B26",
+    "line": "cmp     dl, 45h ; 'E'; jumptable 00447E26 default case, cases 44,50,51,55,57,58",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x448B29",
+    "line": "jnb     short loc_448B37",
+    "mnemonic": "jnb",
+    "size": 2
+  },
+  {
+    "ea": "0x448B2B",
+    "line": "lea     eax, [eax+eax*2]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x448B2E",
+    "line": "mov     eax, ds:0B05E04h[eax*4]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448B35",
+    "line": "jmp     short loc_448B3C",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x448B37",
+    "line": "mov     eax, offset EmptyString",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x448B3C",
+    "line": "push    eax; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x448B3D",
+    "line": "push    offset aTesdatahandler; \"TESDataHandler trying to create TESForm\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x448B42",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x448B47",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448B4A",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x448B4C",
+    "line": "mov     ecx, [esp+14h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x448B50",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x448B57",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448B58",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x448B59",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x448B5C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

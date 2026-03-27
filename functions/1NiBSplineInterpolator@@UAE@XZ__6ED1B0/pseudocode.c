@@ -1,0 +1,22 @@
+void __thiscall NiBSplineInterpolator::~NiBSplineInterpolator(NiBSplineInterpolator *this)
+{
+  int v2; // esi
+  LONG (__stdcall *v3)(volatile LONG *); // ebx
+  int v4; // esi
+
+  *(_DWORD *)this = &NiBSplineInterpolator::`vftable';
+  v2 = *((_DWORD *)this + 6);
+  v3 = InterlockedDecrement;
+  if ( v2 )
+  {
+    if ( !v3((volatile LONG *)(v2 + 4)) )
+      (**(void (__thiscall ***)(int, int))v2)(v2, 1);
+  }
+  v4 = *((_DWORD *)this + 5);
+  if ( v4 )
+  {
+    if ( !v3((volatile LONG *)(v4 + 4)) )
+      (**(void (__thiscall ***)(int, int))v4)(v4, 1);
+  }
+  sub_6EBA30(this);
+}

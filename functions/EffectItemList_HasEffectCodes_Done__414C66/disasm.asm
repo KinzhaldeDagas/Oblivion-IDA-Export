@@ -1,0 +1,3 @@
+0x414C66: pop     edi
+0x414C67: pop     ebx
+0x414C68: retn

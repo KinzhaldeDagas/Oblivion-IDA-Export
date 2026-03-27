@@ -1,0 +1,80 @@
+[
+  {
+    "ea": "0x414A30",
+    "line": "mov     edi, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x414A33",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x414A35",
+    "line": "jz      short EffectItemList_Save___LoopContinue",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x414A37",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x414A39",
+    "line": "push    4; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x414A3B",
+    "line": "lea     ecx, [esp+4+Src]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x414A3F",
+    "line": "push    ecx; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x414A40",
+    "line": "push    44494645h; int",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x414A45",
+    "line": "mov     [esp+0Ch+Src], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x414A49",
+    "line": "call    TESForm_PutFormRecordChunkData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x414A4E",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x414A51",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x414A53",
+    "line": "call    EffectItem_Save",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

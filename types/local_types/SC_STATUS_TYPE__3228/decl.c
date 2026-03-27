@@ -1,0 +1,1 @@
+SC_STATUS_TYPE

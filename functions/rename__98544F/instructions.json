@@ -1,0 +1,104 @@
+[
+  {
+    "ea": "0x98544F",
+    "line": "push    [esp+NewFilename]; lpNewFileName",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x985453",
+    "line": "push    [esp+4+OldFilename]; lpExistingFileName",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x985457",
+    "line": "call    dword ptr ds:0A281C0h",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x98545D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98545F",
+    "line": "jnz     short loc_985469",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x985461",
+    "line": "call    dword ptr ds:0A281ECh",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x985467",
+    "line": "jmp     short loc_98546B",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x985469",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x98546B",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98546D",
+    "line": "jz      short loc_98547A",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98546F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x985470",
+    "line": "call    __dosmaperr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x985475",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x985476",
+    "line": "or      eax, 0FFFFFFFFh",
+    "mnemonic": "or",
+    "size": 3
+  },
+  {
+    "ea": "0x985479",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x98547A",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x98547C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

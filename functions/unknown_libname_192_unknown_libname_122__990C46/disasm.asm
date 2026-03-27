@@ -1,0 +1,3 @@
+0x990C46: fstp    st
+0x990C48: fldz
+0x990C4A: retn

@@ -1,0 +1,296 @@
+[
+  {
+    "ea": "0x510580",
+    "line": "sub     esp, 0Ch",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x510583",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x510584",
+    "line": "mov     esi, [esp+10h+arg_8]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x510588",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x51058A",
+    "line": "jz      short loc_510590",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x51058C",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x51058E",
+    "line": "jmp     short loc_5105A9",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x510590",
+    "line": "mov     ecx, ds:0B333A0h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x510596",
+    "line": "cmp     dword ptr [ecx+34h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x51059A",
+    "line": "jz      short loc_5105A3",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x51059C",
+    "line": "call    TES_GetCurrentCell",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5105A1",
+    "line": "jmp     short loc_5105AE",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5105A3",
+    "line": "mov     ecx, ds:0B333C4h; this",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5105A9",
+    "line": "call    TESObjectREFR_GetParentCell",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5105AE",
+    "line": "mov     ecx, ds:0B333CCh",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5105B4",
+    "line": "mov     edx, [ecx+0DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5105BA",
+    "line": "fld     dword ptr [edx+64h]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x5105BD",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5105BF",
+    "line": "push    0FFFFFFFFh; float",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5105C1",
+    "line": "fstp    [esp+18h+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x5105C5",
+    "line": "fld     dword ptr [edx+70h]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x5105C8",
+    "line": "mov     ecx, [esp+18h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5105CC",
+    "line": "push    esi; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5105CD",
+    "line": "fstp    [esp+1Ch+var_8]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x5105D1",
+    "line": "fld     dword ptr [edx+7Ch]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x5105D4",
+    "line": "push    offset aEffectsBloodde; \"Effects\\\\blooddecal.dds\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5105D9",
+    "line": "sub     esp, 0Ch",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x5105DC",
+    "line": "fstp    [esp+2Ch+var_4]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x5105E0",
+    "line": "mov     esi, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5105E2",
+    "line": "mov     [esi], ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5105E4",
+    "line": "mov     ecx, [esp+2Ch+var_8]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5105E8",
+    "line": "mov     [esi+4], ecx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5105EB",
+    "line": "mov     ecx, [esp+2Ch+var_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5105EF",
+    "line": "mov     [esi+8], ecx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5105F2",
+    "line": "mov     ecx, [edx+88h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5105F8",
+    "line": "add     edx, 88h ; 'ˆ'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x5105FE",
+    "line": "sub     esp, 0Ch",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x510601",
+    "line": "mov     esi, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x510603",
+    "line": "mov     [esi], ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x510605",
+    "line": "mov     ecx, [edx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x510608",
+    "line": "mov     edx, [edx+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x51060B",
+    "line": "mov     [esi+4], ecx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x51060E",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x510610",
+    "line": "mov     [esi+8], edx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x510613",
+    "line": "call    ??0?$NiTPointerListBase@V?$NiTPointerAllocator@I@@PAVNiAVObject@@@@QAE@XZ; NiTPointerListBase<NiTPointerAllocator<uint>,NiAVObject *>::NiTPointerListBase<NiTPointerAllocator<uint>,NiAVObject *>(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x510618",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x51061A",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x51061B",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x51061E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

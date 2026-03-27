@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA1B900",
+    "line": "push    offset dword_B08B64",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B905",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B90A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B90F",
+    "line": "mov     eax, off_B08B68; \"iGrassDensityEvalSize:Grass\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B914",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA1B916",
+    "line": "jz      short locret_A1B924",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1B918",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1B91B",
+    "line": "jnz     short locret_A1B924",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1B91D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1B91E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B923",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA1B924",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

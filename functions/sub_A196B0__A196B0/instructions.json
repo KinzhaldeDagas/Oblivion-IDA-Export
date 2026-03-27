@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA196B0",
+    "line": "push    offset flt_B06E44",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA196B5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA196BA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA196BF",
+    "line": "mov     eax, off_B06E48; \"fEmissiveHDRMult:BlurShaderHDR\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA196C4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA196C6",
+    "line": "jz      short locret_A196D4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA196C8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA196CB",
+    "line": "jnz     short locret_A196D4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA196CD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA196CE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA196D3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA196D4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

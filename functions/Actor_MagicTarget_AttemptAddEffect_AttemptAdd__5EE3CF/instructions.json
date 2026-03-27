@@ -1,0 +1,584 @@
+[
+  {
+    "ea": "0x5EE3CF",
+    "line": "mov     eax, [esp+arg_14]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5EE3D3",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE3D4",
+    "line": "mov     edi, [esp+4+arg_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5EE3D8",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE3DA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE3DB",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE3DC",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE3DD",
+    "line": "mov     ecx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE3DF",
+    "line": "call    MagicTarget_AttemptAddEffect",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE3E4",
+    "line": "lea     ecx, [esi+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE3E7",
+    "line": "mov     [esp+4+arg_10], al",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5EE3EB",
+    "line": "call    EffectItemList_HasHostile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE3F0",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE3F2",
+    "line": "jz      Actor_MagicTarget_AttemptAddEffect___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5EE3F8",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE3FA",
+    "line": "mov     eax, [edx+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE3FD",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE3FF",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE401",
+    "line": "cmp     eax, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE404",
+    "line": "jz      Actor_MagicTarget_AttemptAddEffect___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5EE40A",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE40C",
+    "line": "mov     eax, [edx+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE40F",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE411",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE413",
+    "line": "cmp     eax, 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE416",
+    "line": "jz      Actor_MagicTarget_AttemptAddEffect___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5EE41C",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE41E",
+    "line": "push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE423",
+    "line": "push    offset ??_R0?AVMagicCaster@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE428",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE42A",
+    "line": "push    edi; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE42B",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE430",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE432",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE435",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE437",
+    "line": "jz      Actor_MagicTarget_AttemptAddEffect___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5EE43D",
+    "line": "mov     edx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE43F",
+    "line": "mov     eax, [edx+170h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5EE445",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE446",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE448",
+    "line": "add     ebp, 0FFFFFF98h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE44B",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE44D",
+    "line": "mov     edx, [ebp+0]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE450",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE452",
+    "line": "mov     eax, [edx+170h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5EE458",
+    "line": "mov     ecx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE45A",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE45C",
+    "line": "cmp     ebx, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE45E",
+    "line": "jz      Actor_MagicTarget_AttemptAddEffect___Done_",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5EE464",
+    "line": "mov     ecx, [esp+8+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5EE468",
+    "line": "push    80h ; '€'",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE46D",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE46E",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE46F",
+    "line": "call    Script_AddEventToExtraScript",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE474",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE476",
+    "line": "mov     eax, [edx+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE479",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE47C",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE47E",
+    "line": "mov     bl, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE480",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE482",
+    "line": "cmp     eax, 6",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE485",
+    "line": "jnz     short loc_5EE4C2",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE487",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE489",
+    "line": "push    offset ??_R0?AVEnchantmentItem@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE48E",
+    "line": "push    offset ??_R0?AVMagicItem@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE493",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE495",
+    "line": "push    esi; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE496",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE49B",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE49E",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4A0",
+    "line": "jz      short loc_5EE4C2",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4A2",
+    "line": "cmp     dword ptr [eax+34h], 2",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x5EE4A6",
+    "line": "jnz     short loc_5EE4C2",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4A8",
+    "line": "mov     ecx, [esp+8+arg_14]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5EE4AC",
+    "line": "mov     eax, [ecx+30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE4AF",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4B1",
+    "line": "jz      short loc_5EE4C0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4B3",
+    "line": "cmp     byte ptr [eax+4], 22h ; '\"'",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x5EE4B7",
+    "line": "jnz     short loc_5EE4C0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4B9",
+    "line": "cmp     [esp+8+arg_18], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE4BE",
+    "line": "jnz     short loc_5EE4C2",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4C0",
+    "line": "xor     bl, bl",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4C2",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4C4",
+    "line": "mov     eax, [edx+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE4C7",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4C9",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4CB",
+    "line": "cmp     eax, 7",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE4CE",
+    "line": "jz      short Actor_MagicTarget_AttemptAddEffect___UpdateHUDHealthBar",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4D0",
+    "line": "test    bl, bl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4D2",
+    "line": "jz      short Actor_MagicTarget_AttemptAddEffect___UpdateHUDHealthBar",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4D4",
+    "line": "mov     eax, [esp+8+arg_14]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5EE4D8",
+    "line": "mov     edx, [ebp+0]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE4DB",
+    "line": "mov     edx, [edx+3A8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5EE4E1",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE4E2",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE4E3",
+    "line": "mov     ecx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE4E5",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  }
+]

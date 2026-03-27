@@ -1,0 +1,170 @@
+[
+  {
+    "ea": "0x634D10",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x634D11",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x634D13",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x634D15",
+    "line": "mov     edx, [eax+2D0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x634D1B",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x634D1D",
+    "line": "add     eax, 1; switch 8 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x634D20",
+    "line": "cmp     eax, 7",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x634D23",
+    "line": "ja      short def_634D2C; jumptable 00634D2C default case, cases 0,1",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x634D25",
+    "line": "movzx   eax, ds:byte_634D6C[eax]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x634D2C",
+    "line": "jmp     ds:jpt_634D2C[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x634D33",
+    "line": "mov     ecx, [esi+17Ch]; jumptable 00634D2C cases 2,4,5",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x634D39",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x634D3B",
+    "line": "jz      short loc_634D58; jumptable 00634D2C cases -1,3,6",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x634D3D",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x634D3F",
+    "line": "call    sub_4706E0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x634D44",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x634D46",
+    "line": "jz      short loc_634D58; jumptable 00634D2C cases -1,3,6",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x634D48",
+    "line": "mov     ecx, [eax+68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x634D4B",
+    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x634D50",
+    "line": "add     eax, 0FFFFFFDEh",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x634D53",
+    "line": "cmp     eax, 5",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x634D56",
+    "line": "jbe     short def_634D2C; jumptable 00634D2C default case, cases 0,1",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x634D58",
+    "line": "mov     al, 1; jumptable 00634D2C cases -1,3,6",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x634D5A",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x634D5B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x634D5C",
+    "line": "xor     al, al; jumptable 00634D2C default case, cases 0,1",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x634D5E",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x634D5F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

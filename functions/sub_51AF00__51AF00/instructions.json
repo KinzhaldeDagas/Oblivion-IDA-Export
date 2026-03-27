@@ -1,0 +1,62 @@
+[
+  {
+    "ea": "0x51AF00",
+    "line": "movzx   eax, byte ptr [ecx+8]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x51AF04",
+    "line": "and     eax, 0FFh",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x51AF09",
+    "line": "cmp     eax, 21h; switch 34 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x51AF0C",
+    "line": "ja      short def_51AF15; jumptable 0051AF15 default case, cases 2-26,28-32",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x51AF0E",
+    "line": "movzx   eax, ds:byte_51AF2C[eax]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x51AF15",
+    "line": "jmp     ds:jpt_51AF15[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x51AF1C",
+    "line": "mov     al, 1; jumptable 0051AF15 cases 0,1,27,33",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x51AF1E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x51AF1F",
+    "line": "xor     al, al; jumptable 0051AF15 default case, cases 2-26,28-32",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x51AF21",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

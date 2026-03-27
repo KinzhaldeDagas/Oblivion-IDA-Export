@@ -1,0 +1,1 @@
+__frame_IDataObject_QueryGetData_Stub

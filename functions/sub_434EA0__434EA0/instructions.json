@@ -1,0 +1,524 @@
+[
+  {
+    "ea": "0x434EA0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434EA1",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x434EA3",
+    "line": "mov     eax, [esi+24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x434EA6",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x434EA8",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434EA9",
+    "line": "jz      short loc_434EBB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x434EAB",
+    "line": "mov     ecx, dword_B35300",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x434EB1",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x434EB3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434EB4",
+    "line": "call    sub_4A1ED0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x434EB9",
+    "line": "jmp     short loc_434ED2",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x434EBB",
+    "line": "mov     eax, [esi+20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x434EBE",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x434EC0",
+    "line": "jz      short loc_434EDB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x434EC2",
+    "line": "mov     ecx, dword_B35300",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x434EC8",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x434ECA",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x434ECC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434ECD",
+    "line": "mov     eax, [edx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x434ED0",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x434ED2",
+    "line": "push    eax; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434ED3",
+    "line": "lea     ecx, [esi+28h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x434ED6",
+    "line": "call    NiSmartPointer_Set??",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x434EDB",
+    "line": "cmp     dword ptr [esi+28h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x434EDF",
+    "line": "lea     edi, [esi+28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x434EE2",
+    "line": "jnz     loc_434F81",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x434EE8",
+    "line": "mov     eax, [esi+20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x434EEB",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x434EED",
+    "line": "jz      short loc_434F0A",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x434EEF",
+    "line": "push    1; char",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x434EF1",
+    "line": "push    offset dword_B256D0; int",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x434EF6",
+    "line": "push    eax; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434EF7",
+    "line": "call    NiSourceTexture__LoadTextureByFilename",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x434EFC",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x434EFF",
+    "line": "push    eax; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434F00",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x434F02",
+    "line": "call    NiSmartPointer_Set??",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x434F07",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x434F08",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x434F09",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x434F0A",
+    "line": "mov     eax, [esi+24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x434F0D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x434F0F",
+    "line": "jz      short loc_434F3F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x434F11",
+    "line": "push    0; ArgList",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x434F13",
+    "line": "push    0FFFFFFFFh; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x434F15",
+    "line": "push    eax; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434F16",
+    "line": "push    1; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x434F18",
+    "line": "call    sub_42EBC0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x434F1D",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x434F20",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x434F22",
+    "line": "jz      short loc_434F3F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x434F24",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x434F26",
+    "line": "push    offset dword_B256D0",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x434F2B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434F2C",
+    "line": "call    NiSourceTexture__LoadTextureNothing",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x434F31",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x434F34",
+    "line": "push    eax; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434F35",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x434F37",
+    "line": "call    NiSmartPointer_Set??",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x434F3C",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x434F3D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x434F3E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x434F3F",
+    "line": "cmp     dword ptr [esi+24h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x434F43",
+    "line": "jz      short loc_434F6C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x434F45",
+    "line": "mov     esi, [esi+24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x434F48",
+    "line": "mov     ecx, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x434F4B",
+    "line": "mov     edx, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x434F4E",
+    "line": "and     ecx, 3FFFFFFFh",
+    "mnemonic": "and",
+    "size": 6
+  },
+  {
+    "ea": "0x434F54",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434F55",
+    "line": "and     edx, 7FFFFFFFh",
+    "mnemonic": "and",
+    "size": 6
+  },
+  {
+    "ea": "0x434F5B",
+    "line": "push    edx; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434F5C",
+    "line": "push    offset aCouldNotGetFil; \"Could not get file for texture with fil\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x434F61",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x434F66",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x434F69",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x434F6A",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x434F6B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x434F6C",
+    "line": "mov     esi, [esi+20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x434F6F",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x434F71",
+    "line": "jz      short loc_434F81",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x434F73",
+    "line": "push    esi; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434F74",
+    "line": "push    offset aCouldNotGetF_0; \"Could not get file for texture %s.\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x434F79",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x434F7E",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x434F81",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x434F82",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x434F83",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

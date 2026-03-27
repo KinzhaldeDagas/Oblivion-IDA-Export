@@ -1,0 +1,1 @@
+IEnumConnectionsVtbl_0

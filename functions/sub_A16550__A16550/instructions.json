@@ -1,0 +1,110 @@
+[
+  {
+    "ea": "0xA16550",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA16551",
+    "line": "mov     esi, g_InterfaceScenegraph",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0xA16557",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA16559",
+    "line": "jz      short loc_A16577",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1655B",
+    "line": "lea     eax, [esi+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0xA1655E",
+    "line": "push    eax; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1655F",
+    "line": "call    ds:InterlockedDecrement",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0xA16565",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA16567",
+    "line": "jnz     short loc_A16577",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA16569",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA1656B",
+    "line": "jz      short loc_A16577",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1656D",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0xA1656F",
+    "line": "mov     eax, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0xA16571",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0xA16573",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0xA16575",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0xA16577",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA16578",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

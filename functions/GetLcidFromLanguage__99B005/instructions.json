@@ -1,0 +1,134 @@
+[
+  {
+    "ea": "0x99B005",
+    "line": "push    dword ptr [esi]; Str",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x99B007",
+    "line": "call    _strlen",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99B00C",
+    "line": "sub     eax, 3",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x99B00F",
+    "line": "neg     eax",
+    "mnemonic": "neg",
+    "size": 2
+  },
+  {
+    "ea": "0x99B011",
+    "line": "sbb     eax, eax",
+    "mnemonic": "sbb",
+    "size": 2
+  },
+  {
+    "ea": "0x99B013",
+    "line": "inc     eax",
+    "mnemonic": "inc",
+    "size": 1
+  },
+  {
+    "ea": "0x99B014",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x99B015",
+    "line": "mov     [esi+10h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x99B018",
+    "line": "jz      short loc_99B01F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x99B01A",
+    "line": "push    2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x99B01C",
+    "line": "pop     eax",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x99B01D",
+    "line": "jmp     short loc_99B026",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x99B01F",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x99B021",
+    "line": "call    _GetPrimaryLen",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99B026",
+    "line": "push    1; dwFlags",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x99B028",
+    "line": "push    offset _LanguageEnumProc@4; lpLocaleEnumProc",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x99B02D",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x99B030",
+    "line": "call    ds:EnumSystemLocalesA",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x99B036",
+    "line": "test    byte ptr [esi+8], 4",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x99B03A",
+    "line": "jnz     short locret_99B040",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x99B03C",
+    "line": "and     dword ptr [esi+8], 0",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x99B040",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

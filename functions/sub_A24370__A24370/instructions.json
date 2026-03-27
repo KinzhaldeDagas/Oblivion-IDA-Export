@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA24370",
+    "line": "push    offset off_B12E34; \"Data\\\\Fonts\\\\Daedric_Font.fnt\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA24375",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA2437A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA2437F",
+    "line": "mov     eax, off_B12E38; \"sFontFile_4:Fonts\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA24384",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA24386",
+    "line": "jz      short locret_A24394",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA24388",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA2438B",
+    "line": "jnz     short locret_A24394",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA2438D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA2438E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA24393",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA24394",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

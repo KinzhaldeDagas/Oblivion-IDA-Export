@@ -1,0 +1,5 @@
+0x99DD9C: pop     edi
+0x99DD9D: pop     esi
+0x99DD9E: pop     ebx
+0x99DD9F: leave
+0x99DDA0: retn

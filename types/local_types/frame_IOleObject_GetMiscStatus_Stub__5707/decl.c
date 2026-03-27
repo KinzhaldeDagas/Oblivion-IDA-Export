@@ -1,0 +1,1 @@
+__frame_IOleObject_GetMiscStatus_Stub

@@ -1,0 +1,1 @@
+register_dll_info

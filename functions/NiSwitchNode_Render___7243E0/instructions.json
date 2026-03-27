@@ -1,0 +1,224 @@
+[
+  {
+    "ea": "0x7243E0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7243E1",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7243E3",
+    "line": "mov     eax, [esi+0E0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x7243E9",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x7243EB",
+    "line": "jl      short loc_72444F",
+    "mnemonic": "jl",
+    "size": 2
+  },
+  {
+    "ea": "0x7243ED",
+    "line": "mov     ecx, [esi+0B0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x7243F3",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7243F4",
+    "line": "mov     edi, [ecx+eax*4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7243F7",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x7243F9",
+    "line": "jz      short loc_72444E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7243FB",
+    "line": "mov     edx, [esi+0F0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x724401",
+    "line": "mov     edx, [edx+eax*4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x724404",
+    "line": "cmp     edx, [esi+0E8h]",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x72440A",
+    "line": "lea     ecx, [esi+0E8h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x724410",
+    "line": "jz      short loc_724442",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x724412",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x724413",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x724414",
+    "line": "lea     ecx, [esi+0ECh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x72441A",
+    "line": "call    NiTArray_SetAt; Actually first arg is a generic NiTArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x72441F",
+    "line": "fld     dword ptr [esi+0E4h]",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x724425",
+    "line": "movzx   ecx, byte ptr [esi+0DCh]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x72442C",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x72442E",
+    "line": "mov     edx, [eax+60h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x724431",
+    "line": "shr     cl, 1",
+    "mnemonic": "shr",
+    "size": 2
+  },
+  {
+    "ea": "0x724433",
+    "line": "and     ecx, 0FFFFFF01h",
+    "mnemonic": "and",
+    "size": 6
+  },
+  {
+    "ea": "0x724439",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x72443A",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x72443B",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x72443D",
+    "line": "fstp    [esp+10h+var_10]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x724440",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x724442",
+    "line": "mov     eax, [esp+8+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x724446",
+    "line": "push    eax; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x724447",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x724449",
+    "line": "call    NiAVObject_Render",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x72444E",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x72444F",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x724450",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

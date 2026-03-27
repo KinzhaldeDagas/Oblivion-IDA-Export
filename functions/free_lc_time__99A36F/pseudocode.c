@@ -1,0 +1,49 @@
+void __cdecl _free_lc_time(void **a1)
+{
+  if ( a1 )
+  {
+    free(a1[1]);
+    free(a1[2]);
+    free(a1[3]);
+    free(a1[4]);
+    free(a1[5]);
+    free(a1[6]);
+    free(*a1);
+    free(a1[8]);
+    free(a1[9]);
+    free(a1[0xA]);
+    free(a1[0xB]);
+    free(a1[0xC]);
+    free(a1[0xD]);
+    free(a1[7]);
+    free(a1[0xE]);
+    free(a1[0xF]);
+    free(a1[0x10]);
+    free(a1[0x11]);
+    free(a1[0x12]);
+    free(a1[0x13]);
+    free(a1[0x14]);
+    free(a1[0x15]);
+    free(a1[0x16]);
+    free(a1[0x17]);
+    free(a1[0x18]);
+    free(a1[0x19]);
+    free(a1[0x1A]);
+    free(a1[0x1B]);
+    free(a1[0x1C]);
+    free(a1[0x1D]);
+    free(a1[0x1E]);
+    free(a1[0x1F]);
+    free(a1[0x20]);
+    free(a1[0x21]);
+    free(a1[0x22]);
+    free(a1[0x23]);
+    free(a1[0x24]);
+    free(a1[0x25]);
+    free(a1[0x26]);
+    free(a1[0x27]);
+    free(a1[0x28]);
+    free(a1[0x29]);
+    free(a1[0x2A]);
+  }
+}

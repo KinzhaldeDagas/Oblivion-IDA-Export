@@ -1,0 +1,206 @@
+[
+  {
+    "ea": "0x6675B0",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6675B1",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6675B2",
+    "line": "mov     esi, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x6675B6",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6675B7",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6675B8",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6675BA",
+    "line": "call    Actor_RemoveMagicItemForm",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6675BF",
+    "line": "mov     bl, al",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6675C1",
+    "line": "test    bl, bl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6675C3",
+    "line": "jz      short loc_6675F7",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6675C5",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6675C7",
+    "line": "jz      short loc_6675CE",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6675C9",
+    "line": "add     esi, 18h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x6675CC",
+    "line": "jmp     short loc_6675D0",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x6675CE",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x6675D0",
+    "line": "mov     eax, [edi+624h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6675D6",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6675D8",
+    "line": "jnz     short loc_6675EA",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6675DA",
+    "line": "call    Magic_GetDefaultPlayerSpell",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6675DF",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6675E1",
+    "line": "jz      short loc_6675E8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6675E3",
+    "line": "add     eax, 18h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x6675E6",
+    "line": "jmp     short loc_6675EA",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x6675E8",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x6675EA",
+    "line": "cmp     esi, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x6675EC",
+    "line": "jnz     short loc_6675F7",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6675EE",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6675F0",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6675F2",
+    "line": "call    PlayerCharacter_SetCurrentMagicItem",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6675F7",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6675F8",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6675F9",
+    "line": "mov     al, bl",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6675FB",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6675FC",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

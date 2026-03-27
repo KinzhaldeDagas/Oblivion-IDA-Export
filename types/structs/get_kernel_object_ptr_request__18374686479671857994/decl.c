@@ -1,0 +1,1 @@
+get_kernel_object_ptr_request

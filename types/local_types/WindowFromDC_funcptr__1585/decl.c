@@ -1,0 +1,1 @@
+WindowFromDC_funcptr

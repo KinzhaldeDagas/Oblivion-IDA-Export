@@ -1,0 +1,254 @@
+[
+  {
+    "ea": "0x42FF80",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42FF81",
+    "line": "mov     ebx, [esp+4+Origin]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42FF85",
+    "line": "cmp     ebx, ds:BSFile_FilePos_Beg",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x42FF8B",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42FF8C",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42FF8D",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42FF8F",
+    "line": "jnz     short loc_42FFAB",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FF91",
+    "line": "cmp     dword ptr [esi+20h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x42FF95",
+    "line": "mov     eax, [esp+0Ch+Offset]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42FF99",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42FF9B",
+    "line": "jnz     short loc_42FFE4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FF9D",
+    "line": "mov     ebx, ds:BSFile_FilePos_Cur",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x42FFA3",
+    "line": "sub     eax, [esi+148h]",
+    "mnemonic": "sub",
+    "size": 6
+  },
+  {
+    "ea": "0x42FFA9",
+    "line": "jmp     short loc_42FFE4",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x42FFAB",
+    "line": "cmp     ebx, ds:BSFile_FilePos_Cur",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x42FFB1",
+    "line": "jnz     short loc_42FFC1",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FFB3",
+    "line": "mov     edi, [esi+148h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x42FFB9",
+    "line": "mov     eax, [esp+0Ch+Offset]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42FFBD",
+    "line": "add     edi, eax",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x42FFBF",
+    "line": "jmp     short loc_42FFE4",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x42FFC1",
+    "line": "cmp     ebx, ds:BSFile_FilePos_End",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x42FFC7",
+    "line": "jnz     short loc_42FFDA",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FFC9",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42FFCB",
+    "line": "mov     edx, [eax+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42FFCE",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x42FFD0",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42FFD2",
+    "line": "mov     eax, [esp+0Ch+Offset]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42FFD6",
+    "line": "sub     edi, eax",
+    "mnemonic": "sub",
+    "size": 2
+  },
+  {
+    "ea": "0x42FFD8",
+    "line": "jmp     short loc_42FFE4",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x42FFDA",
+    "line": "mov     edi, [esi+148h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x42FFE0",
+    "line": "mov     eax, [esp+0Ch+Offset]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42FFE4",
+    "line": "cmp     edi, [esi+148h]",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x42FFEA",
+    "line": "jz      short loc_42FFFB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FFEC",
+    "line": "push    ebx; Origin",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42FFED",
+    "line": "push    eax; Offset",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42FFEE",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42FFF0",
+    "line": "call    NiFile_Seek",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42FFF5",
+    "line": "mov     [esi+148h], edi",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x42FFFB",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42FFFC",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42FFFD",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42FFFE",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

@@ -1,0 +1,1 @@
+RO_INIT_TYPE

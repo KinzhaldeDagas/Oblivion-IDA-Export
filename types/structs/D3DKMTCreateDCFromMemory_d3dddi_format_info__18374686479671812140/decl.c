@@ -1,0 +1,1 @@
+D3DKMTCreateDCFromMemory::d3dddi_format_info

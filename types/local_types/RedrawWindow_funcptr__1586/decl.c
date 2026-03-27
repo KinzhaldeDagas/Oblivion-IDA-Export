@@ -1,0 +1,1 @@
+RedrawWindow_funcptr

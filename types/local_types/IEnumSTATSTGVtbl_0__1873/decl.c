@@ -1,0 +1,1 @@
+IEnumSTATSTGVtbl_0

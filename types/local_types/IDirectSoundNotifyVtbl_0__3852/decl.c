@@ -1,0 +1,1 @@
+IDirectSoundNotifyVtbl_0

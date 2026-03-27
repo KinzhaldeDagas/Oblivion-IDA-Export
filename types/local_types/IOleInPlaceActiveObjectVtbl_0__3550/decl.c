@@ -1,0 +1,1 @@
+IOleInPlaceActiveObjectVtbl_0

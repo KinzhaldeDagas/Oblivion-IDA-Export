@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA19AD0",
+    "line": "push    offset flt_B06EF4",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA19AD5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA19ADA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA19ADF",
+    "line": "mov     eax, off_B06EF8; \"fEyeEnvMapLOD2:Display\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA19AE4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA19AE6",
+    "line": "jz      short locret_A19AF4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA19AE8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA19AEB",
+    "line": "jnz     short locret_A19AF4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA19AED",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA19AEE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA19AF3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA19AF4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

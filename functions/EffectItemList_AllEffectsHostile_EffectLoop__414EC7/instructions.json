@@ -1,0 +1,68 @@
+[
+  {
+    "ea": "0x414EC7",
+    "line": "mov     ecx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x414ECA",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x414ECC",
+    "line": "jz      short EffectItemList_AllEffectsHostile___EffectLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x414ECE",
+    "line": "mov     eax, [ecx+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x414ED1",
+    "line": "mov     edx, [eax+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x414ED4",
+    "line": "shr     edx, 16h",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x414ED7",
+    "line": "test    dl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x414EDA",
+    "line": "jnz     short EffectItemList_AllEffectsHostile___EffectLoop_Next",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x414EDC",
+    "line": "call    EffectItem_IsHostile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x414EE1",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x414EE3",
+    "line": "jz      short EffectItemList_AllEffectsHostile___Return_False",
+    "mnemonic": "jz",
+    "size": 2
+  }
+]

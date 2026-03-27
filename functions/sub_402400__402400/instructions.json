@@ -1,0 +1,200 @@
+[
+  {
+    "ea": "0x402400",
+    "line": "push    esi; dwFreeType",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x402401",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x402403",
+    "line": "mov     eax, [esi+40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x402406",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x402408",
+    "line": "jz      short loc_402456",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x40240A",
+    "line": "push    8000h; dwFreeType",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x40240F",
+    "line": "push    0; dwSize",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x402411",
+    "line": "push    eax; lpAddress",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x402412",
+    "line": "call    ds:VirtualFree",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x402418",
+    "line": "mov     eax, [esi+100h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x40241E",
+    "line": "shr     eax, 2",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x402421",
+    "line": "mov     g_HeapPoolsBySize[eax*4], 0",
+    "mnemonic": "mov",
+    "size": 11
+  },
+  {
+    "ea": "0x40242C",
+    "line": "mov     eax, [esi+110h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x402432",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x402434",
+    "line": "shr     ecx, 18h",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x402437",
+    "line": "test    eax, 0FFFFFFh",
+    "mnemonic": "test",
+    "size": 5
+  },
+  {
+    "ea": "0x40243C",
+    "line": "jz      short loc_402441",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x40243E",
+    "line": "add     ecx, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x402441",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x402443",
+    "line": "movzx   eax, byte ptr [esi+43h]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x402447",
+    "line": "jbe     short loc_402456",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x402449",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x40244A",
+    "line": "lea     edi, ds:0B32C80h[eax*4]",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x402451",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x402453",
+    "line": "rep stosd",
+    "mnemonic": "stosd",
+    "size": 2
+  },
+  {
+    "ea": "0x402455",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x402456",
+    "line": "mov     ecx, [esi+108h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x40245C",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x40245D",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x402462",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x402465",
+    "line": "lea     ecx, [esi+80h]; lpCriticalSection",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x40246B",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x40246C",
+    "line": "jmp     NiDeleteCriticalSection",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

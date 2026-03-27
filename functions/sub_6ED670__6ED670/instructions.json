@@ -1,0 +1,86 @@
+[
+  {
+    "ea": "0x6ED670",
+    "line": "mov     eax, [esp+MaxCount]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x6ED674",
+    "line": "mov     ecx, [esp+Src]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x6ED678",
+    "line": "mov     edx, [esp+SizeInBytes]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x6ED67C",
+    "line": "push    esi; MaxCount",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6ED67D",
+    "line": "mov     esi, [esp+4+Dst]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x6ED681",
+    "line": "push    eax; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6ED682",
+    "line": "push    ecx; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6ED683",
+    "line": "push    edx; SizeInBytes",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6ED684",
+    "line": "push    esi; Dst",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6ED685",
+    "line": "call    _strncpy_s",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6ED68A",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x6ED68D",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6ED68F",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6ED690",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

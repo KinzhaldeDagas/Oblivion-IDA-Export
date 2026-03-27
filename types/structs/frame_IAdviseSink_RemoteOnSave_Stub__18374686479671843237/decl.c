@@ -1,0 +1,1 @@
+__frame_IAdviseSink_RemoteOnSave_Stub

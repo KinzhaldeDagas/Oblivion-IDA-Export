@@ -1,0 +1,1 @@
+PANSI_STRING

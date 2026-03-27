@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA1C610",
+    "line": "push    offset dword_B11910",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C615",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C61A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C61F",
+    "line": "mov     eax, off_B11914; \"iMaxViewCasterPicksFuzzy:Interface\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C624",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C626",
+    "line": "jz      short locret_A1C634",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C628",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1C62B",
+    "line": "jnz     short locret_A1C634",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C62D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1C62E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C633",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA1C634",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

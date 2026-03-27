@@ -1,0 +1,1 @@
+__non_rtti_object

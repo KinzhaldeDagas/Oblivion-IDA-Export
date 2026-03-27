@@ -1,0 +1,1 @@
+TBITMAP_INFO

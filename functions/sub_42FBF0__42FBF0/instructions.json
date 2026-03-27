@@ -1,0 +1,92 @@
+[
+  {
+    "ea": "0x42FBF0",
+    "line": "mov     eax, [ecx+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42FBF3",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42FBF5",
+    "line": "jz      short locret_42FC16",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FBF7",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42FBF8",
+    "line": "lea     esi, [eax+2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x42FBFB",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42FBFE",
+    "line": "push    0FFFFFFFFh; dwMilliseconds",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC00",
+    "line": "push    eax; hHandle",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42FC01",
+    "line": "call    ds:WaitForSingleObject",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x42FC07",
+    "line": "cmp     eax, 102h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x42FC0C",
+    "line": "jz      short loc_42FC15",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42FC0E",
+    "line": "push    esi; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42FC0F",
+    "line": "call    ds:InterlockedDecrement",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x42FC15",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42FC16",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

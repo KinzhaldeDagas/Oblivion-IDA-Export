@@ -1,0 +1,194 @@
+[
+  {
+    "ea": "0x403C90",
+    "line": "sub     esp, 18h",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x403C93",
+    "line": "cmp     dword ptr [ecx+28h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x403C97",
+    "line": "jz      short loc_403CE0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x403C99",
+    "line": "mov     eax, [ecx+28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x403C9C",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x403C9E",
+    "line": "lea     edx, [esp+1Ch+var_18]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x403CA2",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403CA3",
+    "line": "lea     edx, [esp+20h+var_14]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x403CA7",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403CA8",
+    "line": "mov     [esp+24h+var_18], 1",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x403CB0",
+    "line": "mov     ecx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x403CB2",
+    "line": "push    14h",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x403CB4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403CB5",
+    "line": "mov     eax, [ecx+28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x403CB8",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x403CBA",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x403CBC",
+    "line": "jnz     short loc_403CE0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x403CBE",
+    "line": "cmp     [esp+18h+var_18], eax",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x403CC1",
+    "line": "jz      short loc_403CE0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x403CC3",
+    "line": "mov     eax, [esp+18h+var_14.dwData]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x403CC7",
+    "line": "mov     ecx, [esp+18h+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x403CCB",
+    "line": "mov     edx, [esp+18h+var_14.dwOfs]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x403CCF",
+    "line": "and     al, 80h; dwData & 0x80 -> dwData == 0x80",
+    "mnemonic": "and",
+    "size": 2
+  },
+  {
+    "ea": "0x403CD1",
+    "line": "neg     al; - (dwData & 0x80); Set CF = (dwData & 0x80) (1 if dwData 0x80 or a composition)",
+    "mnemonic": "neg",
+    "size": 2
+  },
+  {
+    "ea": "0x403CD3",
+    "line": "mov     [ecx], edx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x403CD5",
+    "line": "sbb     eax, eax; res = eax - eax - CF -> res = -CF",
+    "mnemonic": "sbb",
+    "size": 2
+  },
+  {
+    "ea": "0x403CD7",
+    "line": "add     eax, 2; -CF +2",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x403CDA",
+    "line": "add     esp, 18h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x403CDD",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x403CE0",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x403CE2",
+    "line": "add     esp, 18h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x403CE5",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

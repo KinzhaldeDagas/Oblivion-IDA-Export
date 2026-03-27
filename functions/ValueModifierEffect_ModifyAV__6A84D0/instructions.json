@@ -1,0 +1,110 @@
+[
+  {
+    "ea": "0x6A84D0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A84D1",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A84D2",
+    "line": "mov     edi, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x6A84D6",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A84D8",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A84DA",
+    "line": "jz      ValueModifierEffect_ModifyAV___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x6A84E0",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A84E2",
+    "line": "call    Actor_IsPlayer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A84E7",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A84E9",
+    "line": "jz      short ValueModifierEffect_ModifyAV___GetCasterActor",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A84EB",
+    "line": "cmp     dword ptr [esi+28h], 4",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x6A84EF",
+    "line": "jnz     short ValueModifierEffect_ModifyAV___GetCasterActor",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A84F1",
+    "line": "mov     eax, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A84F4",
+    "line": "mov     ecx, [eax+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A84F7",
+    "line": "mov     edx, [ecx+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A84FA",
+    "line": "shr     edx, 1",
+    "mnemonic": "shr",
+    "size": 2
+  },
+  {
+    "ea": "0x6A84FC",
+    "line": "test    dl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x6A84FF",
+    "line": "jz      short ValueModifierEffect_ModifyAV___GetCasterActor",
+    "mnemonic": "jz",
+    "size": 2
+  }
+]

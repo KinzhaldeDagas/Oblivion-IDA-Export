@@ -1,0 +1,1 @@
+IEnumCATEGORYINFOVtbl_0

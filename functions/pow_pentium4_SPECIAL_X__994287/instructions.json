@@ -1,0 +1,332 @@
+[
+  {
+    "ea": "0x994287",
+    "line": "movlpd  xmm1, [esp+arg_8]",
+    "mnemonic": "movlpd",
+    "size": 6
+  },
+  {
+    "ea": "0x99428D",
+    "line": "movlpd  xmm3, qword ptr ds:xmmword_AAB960",
+    "mnemonic": "movlpd",
+    "size": 8
+  },
+  {
+    "ea": "0x994295",
+    "line": "movd    eax, xmm1",
+    "mnemonic": "movd",
+    "size": 4
+  },
+  {
+    "ea": "0x994299",
+    "line": "movsd   xmm2, xmm1",
+    "mnemonic": "movsd",
+    "size": 4
+  },
+  {
+    "ea": "0x99429D",
+    "line": "andpd   xmm1, xmm3",
+    "mnemonic": "andpd",
+    "size": 4
+  },
+  {
+    "ea": "0x9942A1",
+    "line": "psrlq   xmm1, 20h ; ' '",
+    "mnemonic": "psrlq",
+    "size": 5
+  },
+  {
+    "ea": "0x9942A6",
+    "line": "movd    ecx, xmm1",
+    "mnemonic": "movd",
+    "size": 4
+  },
+  {
+    "ea": "0x9942AA",
+    "line": "cmp     ecx, 7FF00000h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x9942B0",
+    "line": "jnb     __pow_pentium4___Y_INF_NAN_CHECK_X",
+    "mnemonic": "jnb",
+    "size": 6
+  },
+  {
+    "ea": "0x9942B6",
+    "line": "or      eax, ecx",
+    "mnemonic": "or",
+    "size": 2
+  },
+  {
+    "ea": "0x9942B8",
+    "line": "cmp     eax, 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x9942BB",
+    "line": "jz      __pow_pentium4___Y_ZERO",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9942C1",
+    "line": "cmp     edx, 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x9942C4",
+    "line": "jge     __pow_pentium4___DENORMAL_POS_X",
+    "mnemonic": "jge",
+    "size": 6
+  },
+  {
+    "ea": "0x9942CA",
+    "line": "neg     edx",
+    "mnemonic": "neg",
+    "size": 2
+  },
+  {
+    "ea": "0x9942CC",
+    "line": "add     edx, 7FEFh",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9942D2",
+    "line": "psllq   xmm3, 34h ; '4'",
+    "mnemonic": "psllq",
+    "size": 5
+  },
+  {
+    "ea": "0x9942D7",
+    "line": "orpd    xmm2, xmm3",
+    "mnemonic": "orpd",
+    "size": 4
+  },
+  {
+    "ea": "0x9942DB",
+    "line": "mov     ecx, 3F3h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9942E0",
+    "line": "movd    xmm3, ecx",
+    "mnemonic": "movd",
+    "size": 4
+  },
+  {
+    "ea": "0x9942E4",
+    "line": "psrlq   xmm1, 14h",
+    "mnemonic": "psrlq",
+    "size": 5
+  },
+  {
+    "ea": "0x9942E9",
+    "line": "psubd   xmm1, xmm3",
+    "mnemonic": "psubd",
+    "size": 4
+  },
+  {
+    "ea": "0x9942ED",
+    "line": "pxor    xmm3, xmm3",
+    "mnemonic": "pxor",
+    "size": 4
+  },
+  {
+    "ea": "0x9942F1",
+    "line": "pmaxsw  xmm1, xmm3",
+    "mnemonic": "pmaxsw",
+    "size": 4
+  },
+  {
+    "ea": "0x9942F5",
+    "line": "psllq   xmm2, xmm1",
+    "mnemonic": "psllq",
+    "size": 4
+  },
+  {
+    "ea": "0x9942F9",
+    "line": "pcmpeqd xmm2, xmm3",
+    "mnemonic": "pcmpeqd",
+    "size": 4
+  },
+  {
+    "ea": "0x9942FD",
+    "line": "pmovmskb eax, xmm2",
+    "mnemonic": "pmovmskb",
+    "size": 4
+  },
+  {
+    "ea": "0x994301",
+    "line": "mov     ecx, edx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x994303",
+    "line": "and     edx, 7FFFh",
+    "mnemonic": "and",
+    "size": 6
+  },
+  {
+    "ea": "0x994309",
+    "line": "cmp     edx, 7FF0h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x99430F",
+    "line": "jnb     __pow_pentium4___INF_NAN_X",
+    "mnemonic": "jnb",
+    "size": 6
+  },
+  {
+    "ea": "0x994315",
+    "line": "and     eax, 0FFh",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x99431A",
+    "line": "cmp     eax, 0FFh",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x99431F",
+    "line": "jnz     __pow_pentium4___RET_INVALID",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x994325",
+    "line": "movlpd  xmm1, [esp+arg_8]",
+    "mnemonic": "movlpd",
+    "size": 6
+  },
+  {
+    "ea": "0x99432B",
+    "line": "movlpd  xmm2, [esp+arg_8]",
+    "mnemonic": "movlpd",
+    "size": 6
+  },
+  {
+    "ea": "0x994331",
+    "line": "mov     ecx, 3F4h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x994336",
+    "line": "movd    xmm3, ecx",
+    "mnemonic": "movd",
+    "size": 4
+  },
+  {
+    "ea": "0x99433A",
+    "line": "andpd   xmm1, ds:xmmword_AAB960",
+    "mnemonic": "andpd",
+    "size": 8
+  },
+  {
+    "ea": "0x994342",
+    "line": "psrlq   xmm1, 34h ; '4'",
+    "mnemonic": "psrlq",
+    "size": 5
+  },
+  {
+    "ea": "0x994347",
+    "line": "psubd   xmm1, xmm3",
+    "mnemonic": "psubd",
+    "size": 4
+  },
+  {
+    "ea": "0x99434B",
+    "line": "movlpd  xmm3, ds:qword_AAB9C0",
+    "mnemonic": "movlpd",
+    "size": 8
+  },
+  {
+    "ea": "0x994353",
+    "line": "psllq   xmm2, xmm1",
+    "mnemonic": "psllq",
+    "size": 4
+  },
+  {
+    "ea": "0x994357",
+    "line": "pcmpeqd xmm2, xmm3",
+    "mnemonic": "pcmpeqd",
+    "size": 4
+  },
+  {
+    "ea": "0x99435B",
+    "line": "pmovmskb eax, xmm2",
+    "mnemonic": "pmovmskb",
+    "size": 4
+  },
+  {
+    "ea": "0x99435F",
+    "line": "and     eax, 0FFh",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x994364",
+    "line": "mov     ecx, 3FF01h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x994369",
+    "line": "add     ecx, eax",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x99436B",
+    "line": "and     ecx, 40000h",
+    "mnemonic": "and",
+    "size": 6
+  },
+  {
+    "ea": "0x994371",
+    "line": "cmp     edx, 10h",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x994374",
+    "line": "jb      short __pow_pentium4___DENORMAL_X",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x994376",
+    "line": "mov     edx, 0BFE7Fh",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x99437B",
+    "line": "movlpd  xmm3, qword ptr ds:xmmword_AAB940",
+    "mnemonic": "movlpd",
+    "size": 8
+  },
+  {
+    "ea": "0x994383",
+    "line": "movlpd  xmm2, qword ptr ds:xmmword_AAB950",
+    "mnemonic": "movlpd",
+    "size": 8
+  },
+  {
+    "ea": "0x99438B",
+    "line": "jmp     __pow_pentium4___BACK_MAIN",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

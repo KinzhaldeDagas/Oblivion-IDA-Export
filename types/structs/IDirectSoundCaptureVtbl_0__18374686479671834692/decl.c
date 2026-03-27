@@ -1,0 +1,1 @@
+IDirectSoundCaptureVtbl_0

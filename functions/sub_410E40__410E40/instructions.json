@@ -1,0 +1,194 @@
+[
+  {
+    "ea": "0x410E40",
+    "line": "push    ecx; lpThreadId",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x410E41",
+    "line": "mov     ecx, [esp+4+lpParameter]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x410E45",
+    "line": "lea     eax, [esp+4+ThreadId]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x410E48",
+    "line": "push    eax; dwCreationFlags",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x410E49",
+    "line": "push    4; lpParameter",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x410E4B",
+    "line": "push    ecx; lpStartAddress",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x410E4C",
+    "line": "push    offset StartAddress; lpStartAddress",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x410E51",
+    "line": "push    0; dwStackSize",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x410E53",
+    "line": "push    0; lpThreadAttributes",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x410E55",
+    "line": "call    ds:CreateThread",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x410E5B",
+    "line": "mov     edx, [esp+4+ThreadId]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x410E5E",
+    "line": "push    offset aMovieplayer; \"MoviePlayer\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x410E63",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x410E64",
+    "line": "mov     hHandle, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x410E69",
+    "line": "call    sub_747830",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x410E6E",
+    "line": "mov     al, [esp+0Ch+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x410E72",
+    "line": "mov     byte_B33427, al",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x410E77",
+    "line": "mov     eax, [esp+0Ch+arg_8]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x410E7B",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x410E7E",
+    "line": "cmp     eax, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x410E81",
+    "line": "jnz     short loc_410E8C",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x410E83",
+    "line": "mov     ecx, dword_B030C4",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x410E89",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x410E8A",
+    "line": "jmp     short loc_410E8D",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x410E8C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x410E8D",
+    "line": "call    BSThread_SetPriority",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x410E92",
+    "line": "mov     edx, hHandle",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x410E98",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x410E9B",
+    "line": "push    edx; hThread",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x410E9C",
+    "line": "call    ds:ResumeThread",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x410EA2",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x410EA3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

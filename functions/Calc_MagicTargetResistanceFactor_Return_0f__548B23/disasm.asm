@@ -1,0 +1,5 @@
+0x548B23: fstp    st
+0x548B25: fstp    st
+0x548B27: fldz
+0x548B29: pop     ecx
+0x548B2A: retn

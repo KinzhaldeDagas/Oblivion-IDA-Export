@@ -1,0 +1,173 @@
+{
+  "decl": "threadpool_object",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "win32_callback",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "name": "refcount",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "LONG"
+    },
+    {
+      "name": "shutdown",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "BOOL"
+    },
+    {
+      "name": "type",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "threadpool_objtype"
+    },
+    {
+      "name": "pool",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "threadpool *"
+    },
+    {
+      "name": "group",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 32,
+      "type": "threadpool_group *"
+    },
+    {
+      "name": "userdata",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "group_cancel_callback",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 32,
+      "type": "PTP_CLEANUP_GROUP_CANCEL_CALLBACK"
+    },
+    {
+      "name": "finalization_callback",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 32,
+      "type": "PTP_SIMPLE_CALLBACK"
+    },
+    {
+      "name": "may_run_long",
+      "offset_bits": 288,
+      "offset_bytes": 36,
+      "size_bits": 32,
+      "type": "BOOL"
+    },
+    {
+      "name": "race_dll",
+      "offset_bits": 320,
+      "offset_bytes": 40,
+      "size_bits": 32,
+      "type": "HMODULE"
+    },
+    {
+      "name": "priority",
+      "offset_bits": 352,
+      "offset_bytes": 44,
+      "size_bits": 32,
+      "type": "TP_CALLBACK_PRIORITY"
+    },
+    {
+      "name": "group_entry",
+      "offset_bits": 384,
+      "offset_bytes": 48,
+      "size_bits": 64,
+      "type": "list"
+    },
+    {
+      "name": "is_group_member",
+      "offset_bits": 448,
+      "offset_bytes": 56,
+      "size_bits": 32,
+      "type": "BOOL"
+    },
+    {
+      "name": "pool_entry",
+      "offset_bits": 480,
+      "offset_bytes": 60,
+      "size_bits": 64,
+      "type": "list"
+    },
+    {
+      "name": "finished_event",
+      "offset_bits": 544,
+      "offset_bytes": 68,
+      "size_bits": 32,
+      "type": "RTL_CONDITION_VARIABLE"
+    },
+    {
+      "name": "group_finished_event",
+      "offset_bits": 576,
+      "offset_bytes": 72,
+      "size_bits": 32,
+      "type": "RTL_CONDITION_VARIABLE"
+    },
+    {
+      "name": "completed_event",
+      "offset_bits": 608,
+      "offset_bytes": 76,
+      "size_bits": 32,
+      "type": "HANDLE"
+    },
+    {
+      "name": "num_pending_callbacks",
+      "offset_bits": 640,
+      "offset_bytes": 80,
+      "size_bits": 32,
+      "type": "LONG"
+    },
+    {
+      "name": "num_running_callbacks",
+      "offset_bits": 672,
+      "offset_bytes": 84,
+      "size_bits": 32,
+      "type": "LONG"
+    },
+    {
+      "name": "num_associated_callbacks",
+      "offset_bits": 704,
+      "offset_bytes": 88,
+      "size_bits": 32,
+      "type": "LONG"
+    },
+    {
+      "name": "u",
+      "offset_bits": 768,
+      "offset_bytes": 96,
+      "size_bits": 384,
+      "type": "$769A967339D274836F7FAABDD7ECEEC5"
+    }
+  ],
+  "name": "threadpool_object",
+  "ordinal": 9061,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

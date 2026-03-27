@@ -1,0 +1,2 @@
+0x60D0B0: fldz
+0x60D0B2: retn    4

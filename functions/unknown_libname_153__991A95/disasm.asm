@@ -1,0 +1,2 @@
+0x991A95: fpatan
+0x991A97: retn

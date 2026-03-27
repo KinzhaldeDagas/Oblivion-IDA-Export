@@ -1,0 +1,194 @@
+[
+  {
+    "ea": "0x651E70",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x651E71",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x651E72",
+    "line": "mov     edi, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x651E76",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x651E78",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x651E7A",
+    "line": "jz      short loc_651EC7",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x651E7C",
+    "line": "cmp     dword ptr [esi+170h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x651E83",
+    "line": "jnz     short loc_651EAA",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x651E85",
+    "line": "push    8; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x651E87",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x651E8C",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x651E8F",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x651E91",
+    "line": "jz      short loc_651EA2",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x651E93",
+    "line": "mov     dword ptr [eax], 0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x651E99",
+    "line": "mov     dword ptr [eax+4], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x651EA0",
+    "line": "jmp     short loc_651EA4",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x651EA2",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x651EA4",
+    "line": "mov     [esi+170h], eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x651EAA",
+    "line": "mov     ecx, [esi+170h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x651EB0",
+    "line": "mov     eax, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x651EB2",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x651EB4",
+    "line": "jz      short loc_651EC1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x651EB6",
+    "line": "cmp     [eax], edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x651EB8",
+    "line": "jz      short loc_651EC7",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x651EBA",
+    "line": "mov     eax, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x651EBD",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x651EBF",
+    "line": "jnz     short loc_651EB6",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x651EC1",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x651EC2",
+    "line": "call    BSSimpleList_PushFront",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x651EC7",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x651EC8",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x651EC9",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

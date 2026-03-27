@@ -1,0 +1,92 @@
+[
+  {
+    "ea": "0x985B30",
+    "line": "cmp     dword ptr ds:0BAABDCh, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x985B37",
+    "line": "jz      __pow_default",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x985B3D",
+    "line": "sub     esp, 8",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x985B40",
+    "line": "stmxcsr [esp+8+var_4]",
+    "mnemonic": "stmxcsr",
+    "size": 5
+  },
+  {
+    "ea": "0x985B45",
+    "line": "mov     eax, [esp+8+var_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x985B49",
+    "line": "and     eax, 1F80h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x985B4E",
+    "line": "cmp     eax, 1F80h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x985B53",
+    "line": "jnz     short loc_985B64",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x985B55",
+    "line": "fnstcw  word ptr [esp+8+var_8]",
+    "mnemonic": "fnstcw",
+    "size": 3
+  },
+  {
+    "ea": "0x985B58",
+    "line": "mov     ax, word ptr [esp+8+var_8]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x985B5C",
+    "line": "and     ax, 7Fh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x985B60",
+    "line": "cmp     ax, 7Fh",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x985B64",
+    "line": "lea     esp, [esp+8]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x985B68",
+    "line": "jnz     short __pow_default",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x985B6A",
+    "line": "jmp     __pow_pentium4",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

@@ -1,0 +1,1 @@
+char_width_info

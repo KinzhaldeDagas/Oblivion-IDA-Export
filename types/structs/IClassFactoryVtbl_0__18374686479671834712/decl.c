@@ -1,0 +1,1 @@
+IClassFactoryVtbl_0

@@ -1,0 +1,62 @@
+[
+  {
+    "ea": "0x484E90",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484E92",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484E94",
+    "line": "jz      short ContainerEntryExtraData_HasWorn___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x484E96",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x484E97",
+    "line": "call    ExtraDataList_HasWorn",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x484E9C",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484E9E",
+    "line": "jnz     short ContainerEntryExtraData_HasWorn___Return_1",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x484EA0",
+    "line": "mov     esi, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x484EA3",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484EA5",
+    "line": "jnz     short ContainerEntryExtraData_HasWorn___ExtraDataLoop",
+    "mnemonic": "jnz",
+    "size": 2
+  }
+]

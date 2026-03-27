@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA1B990",
+    "line": "push    offset dword_B08B7C",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B995",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B99A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B99F",
+    "line": "mov     eax, off_B08B80; \"iLandBorder1G:Landscape\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B9A4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA1B9A6",
+    "line": "jz      short locret_A1B9B4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1B9A8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1B9AB",
+    "line": "jnz     short locret_A1B9B4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1B9AD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1B9AE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B9B3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA1B9B4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

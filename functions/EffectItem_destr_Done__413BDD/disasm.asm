@@ -1,0 +1,2 @@
+0x413BDD: pop     esi
+0x413BDE: retn

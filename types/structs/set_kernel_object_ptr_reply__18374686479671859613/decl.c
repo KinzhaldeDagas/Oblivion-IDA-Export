@@ -1,0 +1,1 @@
+set_kernel_object_ptr_reply

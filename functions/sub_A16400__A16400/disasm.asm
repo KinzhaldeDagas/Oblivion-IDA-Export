@@ -1,0 +1,3 @@
+0xA16400: mov     FormHeap, offset ??_7MemoryHeap@@6B@; const MemoryHeap::`vftable' ...
+0xA1640A: mov     ecx, offset FormHeap
+0xA1640F: jmp     sub_401750

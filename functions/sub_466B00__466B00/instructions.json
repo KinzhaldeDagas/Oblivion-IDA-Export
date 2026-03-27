@@ -1,0 +1,242 @@
+[
+  {
+    "ea": "0x466B00",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x466B02",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x466B03",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x466B04",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x466B05",
+    "line": "fstp    [esp+0Ch+duration]; duration",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x466B08",
+    "line": "mov     ebx, 1",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x466B0D",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x466B0F",
+    "line": "push    ebx; unk2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x466B10",
+    "line": "mov     [esi+0ABh], bl",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x466B16",
+    "line": "mov     eax, ds:0B38798h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x466B1B",
+    "line": "push    0; unk1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x466B1D",
+    "line": "push    eax; string",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x466B1E",
+    "line": "call    GameUI_QueueMessage",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x466B23",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x466B26",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x466B28",
+    "line": "push    offset aQuicksave; \"quicksave\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x466B2D",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x466B2F",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x466B31",
+    "line": "call    TESSaveLoadGame_LoadGame",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x466B36",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x466B38",
+    "line": "jnz     short loc_466B5D",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x466B3A",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x466B3C",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x466B3D",
+    "line": "mov     ecx, ds:0B387B0h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x466B43",
+    "line": "fstp    [esp+0Ch+duration]; duration",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x466B46",
+    "line": "push    ebx; unk2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x466B47",
+    "line": "push    0; unk1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x466B49",
+    "line": "push    ecx; string",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x466B4A",
+    "line": "call    GameUI_QueueMessage",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x466B4F",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x466B52",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x466B54",
+    "line": "mov     [esi+0ABh], al",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x466B5A",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x466B5B",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x466B5C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x466B5D",
+    "line": "mov     byte ptr [esi+0ABh], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x466B64",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x466B65",
+    "line": "mov     al, bl",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x466B67",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x466B68",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

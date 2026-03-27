@@ -1,0 +1,1 @@
+rtti_object_locator

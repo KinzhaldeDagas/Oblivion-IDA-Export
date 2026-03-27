@@ -1,0 +1,1 @@
+IOleInPlaceFrameVtbl_0

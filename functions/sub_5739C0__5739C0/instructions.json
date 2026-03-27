@@ -1,0 +1,218 @@
+[
+  {
+    "ea": "0x5739C0",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5739C1",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x5739C3",
+    "line": "mov     eax, [esp+4+arg_18]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5739C7",
+    "line": "push    ebp; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5739C8",
+    "line": "mov     ebp, [esp+8+arg_8]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5739CC",
+    "line": "push    esi; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5739CD",
+    "line": "mov     esi, [esp+0Ch+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5739D1",
+    "line": "fst     dword ptr [esi]",
+    "mnemonic": "fst",
+    "size": 2
+  },
+  {
+    "ea": "0x5739D3",
+    "line": "push    edi; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5739D4",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5739D6",
+    "line": "fld     dword ptr [edi+2Ch]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x5739D9",
+    "line": "mov     ecx, [esp+10h+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5739DD",
+    "line": "fstp    dword ptr [ebp+0]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5739E0",
+    "line": "add     eax, ecx",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x5739E2",
+    "line": "cmp     byte ptr [eax], 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5739E5",
+    "line": "fst     [esp+10h+arg_4]; float",
+    "mnemonic": "fst",
+    "size": 4
+  },
+  {
+    "ea": "0x5739E9",
+    "line": "mov     [esp+10h+var_4], 1; int",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x5739F1",
+    "line": "jz      loc_573BC8",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5739F7",
+    "line": "fld     qword ptr ds:0A68950h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5739FD",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5739FE",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x573A00",
+    "line": "mov     edx, [esp+14h+arg_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x573A04",
+    "line": "test    edx, edx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x573A06",
+    "line": "jz      loc_573BC5",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x573A0C",
+    "line": "jle     short loc_573A15",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x573A0E",
+    "line": "sub     edx, 1",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x573A11",
+    "line": "mov     [esp+14h+arg_C], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x573A15",
+    "line": "mov     al, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x573A17",
+    "line": "movzx   ecx, al",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x573A1A",
+    "line": "add     ecx, 0FFFFFF6Fh; switch 4 cases",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x573A20",
+    "line": "cmp     ecx, 3",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x573A23",
+    "line": "ja      short def_573A25",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x573A25",
+    "line": "jmp     ds:jpt_573A25[ecx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x573A2C",
+    "line": "mov     al, 27h ; '''; jumptable 00573A25 cases 145,146",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x573A2E",
+    "line": "jmp     short def_573A25",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x573A30",
+    "line": "mov     al, 22h ; '\"'; jumptable 00573A25 cases 147,148",
+    "mnemonic": "mov",
+    "size": 2
+  }
+]

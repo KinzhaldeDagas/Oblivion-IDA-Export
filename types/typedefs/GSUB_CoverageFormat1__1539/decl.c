@@ -1,0 +1,1 @@
+GSUB_CoverageFormat1

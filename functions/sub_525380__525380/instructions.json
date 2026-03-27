@@ -1,0 +1,248 @@
+[
+  {
+    "ea": "0x525380",
+    "line": "mov     eax, [esp+Size]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x525384",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x525385",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x525386",
+    "line": "mov     edi, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x52538A",
+    "line": "push    eax; Size",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x52538B",
+    "line": "push    edi; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x52538C",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x52538E",
+    "line": "call    TESActorBase_LoadModified",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x525393",
+    "line": "test    edi, 200h",
+    "mnemonic": "test",
+    "size": 6
+  },
+  {
+    "ea": "0x525399",
+    "line": "jz      short loc_5253AB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x52539B",
+    "line": "push    15h; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x52539D",
+    "line": "lea     ecx, [esi+0ECh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x5253A3",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5253A4",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5253A6",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5253AB",
+    "line": "test    edi, 400h",
+    "mnemonic": "test",
+    "size": 6
+  },
+  {
+    "ea": "0x5253B1",
+    "line": "jz      short loc_5253EB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5253B3",
+    "line": "push    4; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5253B5",
+    "line": "lea     edx, [esp+0Ch+Size]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x5253B9",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5253BA",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5253BC",
+    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5253C1",
+    "line": "mov     eax, [esp+10h]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5253C5",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5253C7",
+    "line": "push    offset ??_R0?AVTESCombatStyle@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5253CC",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5253D1",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5253D3",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5253D4",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5253D9",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5253DC",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5253DD",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5253E2",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5253E5",
+    "line": "mov     [esi+1E4h], eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5253EB",
+    "line": "cmp     dword ptr [esi+0Ch], 7",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x5253EF",
+    "line": "jz      short loc_5253F8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5253F1",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5253F3",
+    "line": "call    sub_5239C0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5253F8",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5253F9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5253FA",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

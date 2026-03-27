@@ -1,0 +1,260 @@
+[
+  {
+    "ea": "0x69B8FF",
+    "line": "cmp     [esp+arg_1C], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x69B904",
+    "line": "jz      short MagicCaster_ApplyActiveMagicItem___AfterVFX",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x69B906",
+    "line": "mov     ecx, [esp+arg_1C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x69B90A",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69B90C",
+    "line": "mov     eax, [edx+190h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x69B912",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x69B914",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x69B916",
+    "line": "jz      short MagicCaster_ApplyActiveMagicItem___AfterVFX",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x69B918",
+    "line": "mov     edi, [esp+arg_38]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x69B91C",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x69B91E",
+    "line": "jz      short MagicCaster_ApplyActiveMagicItem___AfterVFX",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x69B920",
+    "line": "mov     ecx, [edi+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69B923",
+    "line": "mov     edx, [ecx+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69B926",
+    "line": "shr     edx, 1Dh",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x69B929",
+    "line": "test    dl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x69B92C",
+    "line": "jz      short MagicCaster_ApplyActiveMagicItem___AfterVFX",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x69B92E",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69B930",
+    "line": "mov     edx, [eax+30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69B933",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69B935",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x69B937",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x69B938",
+    "line": "mov     eax, [esp+4+arg_1C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x69B93C",
+    "line": "add     eax, 68h ; 'h'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x69B93F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x69B940",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69B942",
+    "line": "call    sub_699EB0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x69B947",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x69B949",
+    "line": "jz      short MagicCaster_ApplyActiveMagicItem___AfterVFX",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x69B94B",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69B94D",
+    "line": "call    EffectItem_MagickaCost",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x69B952",
+    "line": "mov     edx, [esp+arg_1C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x69B956",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x69B957",
+    "line": "mov     ecx, [esp+4+arg_60]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x69B95B",
+    "line": "fstp    [esp+4+var_4]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x69B95E",
+    "line": "push    edi; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x69B95F",
+    "line": "sub     esp, 0Ch",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x69B962",
+    "line": "mov     eax, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69B964",
+    "line": "mov     [eax], ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69B966",
+    "line": "mov     [eax+4], ebx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69B969",
+    "line": "mov     [eax+8], ecx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69B96C",
+    "line": "push    edx; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x69B96D",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69B96F",
+    "line": "call    sub_699900",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

@@ -1,0 +1,1 @@
+get_window_text_request

@@ -1,0 +1,1 @@
+JoystickObjectsInfo::Enum

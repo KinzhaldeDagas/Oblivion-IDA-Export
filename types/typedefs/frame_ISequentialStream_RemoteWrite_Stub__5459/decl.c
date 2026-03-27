@@ -1,0 +1,1 @@
+__frame_ISequentialStream_RemoteWrite_Stub

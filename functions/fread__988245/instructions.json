@@ -1,0 +1,50 @@
+[
+  {
+    "ea": "0x988245",
+    "line": "push    [esp+File]; File",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x988249",
+    "line": "push    [esp+4+Count]; ElementSize",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x98824D",
+    "line": "push    [esp+8+ElementSize]; ElementSize",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x988251",
+    "line": "push    0FFFFFFFFh; DstSize",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x988253",
+    "line": "push    [esp+10h+DstBuf]; DstBuf",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x988257",
+    "line": "call    _fread_s",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98825C",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x98825F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

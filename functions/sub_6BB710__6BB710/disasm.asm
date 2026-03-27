@@ -1,0 +1,11 @@
+0x6BB710: mov     eax, [esp+arg_4]
+0x6BB714: fld     dword ptr [eax]
+0x6BB716: mov     ecx, [esp+arg_0]
+0x6BB71A: fstp    dword ptr [ecx]
+0x6BB71C: fld     dword ptr [eax+4]
+0x6BB71F: fstp    dword ptr [ecx+4]
+0x6BB722: fld     dword ptr [eax+8]
+0x6BB725: fstp    dword ptr [ecx+8]
+0x6BB728: fld     dword ptr [eax+0Ch]
+0x6BB72B: fstp    dword ptr [ecx+0Ch]
+0x6BB72E: retn

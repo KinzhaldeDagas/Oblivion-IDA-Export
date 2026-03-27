@@ -1,0 +1,110 @@
+{
+  "decl": "device",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "set",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "DeviceInfoSet *"
+    },
+    {
+      "name": "key",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "HKEY"
+    },
+    {
+      "name": "phantom",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "BOOL"
+    },
+    {
+      "name": "instanceId",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "WCHAR_0 *"
+    },
+    {
+      "name": "interfaces",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 64,
+      "type": "list"
+    },
+    {
+      "name": "class",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 128,
+      "type": "GUID"
+    },
+    {
+      "name": "devnode",
+      "offset_bits": 320,
+      "offset_bytes": 40,
+      "size_bits": 32,
+      "type": "DEVINST"
+    },
+    {
+      "name": "entry",
+      "offset_bits": 352,
+      "offset_bytes": 44,
+      "size_bits": 64,
+      "type": "list"
+    },
+    {
+      "name": "removed",
+      "offset_bits": 416,
+      "offset_bytes": 52,
+      "size_bits": 32,
+      "type": "BOOL"
+    },
+    {
+      "name": "params",
+      "offset_bits": 448,
+      "offset_bytes": 56,
+      "size_bits": 4544,
+      "type": "SP_DEVINSTALL_PARAMS_W"
+    },
+    {
+      "name": "drivers",
+      "offset_bits": 4992,
+      "offset_bytes": 624,
+      "size_bits": 32,
+      "type": "driver *"
+    },
+    {
+      "name": "driver_count",
+      "offset_bits": 5024,
+      "offset_bytes": 628,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "name": "selected_driver",
+      "offset_bits": 5056,
+      "offset_bytes": 632,
+      "size_bits": 32,
+      "type": "driver *"
+    }
+  ],
+  "name": "device",
+  "ordinal": 5955,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

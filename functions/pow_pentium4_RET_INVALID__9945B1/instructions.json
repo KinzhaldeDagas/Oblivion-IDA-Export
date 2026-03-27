@@ -1,0 +1,86 @@
+[
+  {
+    "ea": "0x9945B1",
+    "line": "movlpd  xmm2, [esp+arg_0]",
+    "mnemonic": "movlpd",
+    "size": 6
+  },
+  {
+    "ea": "0x9945B7",
+    "line": "movd    eax, xmm2",
+    "mnemonic": "movd",
+    "size": 4
+  },
+  {
+    "ea": "0x9945BB",
+    "line": "psrlq   xmm2, 20h ; ' '",
+    "mnemonic": "psrlq",
+    "size": 5
+  },
+  {
+    "ea": "0x9945C0",
+    "line": "movd    edx, xmm2",
+    "mnemonic": "movd",
+    "size": 4
+  },
+  {
+    "ea": "0x9945C4",
+    "line": "and     edx, 7FFFFFFFh",
+    "mnemonic": "and",
+    "size": 6
+  },
+  {
+    "ea": "0x9945CA",
+    "line": "or      eax, edx",
+    "mnemonic": "or",
+    "size": 2
+  },
+  {
+    "ea": "0x9945CC",
+    "line": "mov     ecx, 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9945D1",
+    "line": "cmp     eax, 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x9945D4",
+    "line": "jz      __pow_pentium4___ZERO_X",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9945DA",
+    "line": "movlpd  xmm1, ds:qword_AAB9A8",
+    "mnemonic": "movlpd",
+    "size": 8
+  },
+  {
+    "ea": "0x9945E2",
+    "line": "movlpd  xmm0, ds:qword_AAB9E0",
+    "mnemonic": "movlpd",
+    "size": 8
+  },
+  {
+    "ea": "0x9945EA",
+    "line": "mulsd   xmm1, xmm1",
+    "mnemonic": "mulsd",
+    "size": 4
+  },
+  {
+    "ea": "0x9945EE",
+    "line": "mov     edx, 1Ch",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9945F3",
+    "line": "jmp     __pow_pentium4___CALL_LIBM_ERROR_0",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

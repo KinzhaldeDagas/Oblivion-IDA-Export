@@ -1,0 +1,1 @@
+destroy_class_request

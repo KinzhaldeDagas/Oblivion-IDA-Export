@@ -1,0 +1,128 @@
+[
+  {
+    "ea": "0x402F50",
+    "line": "mov     eax, [esp+whichDevice]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x402F54",
+    "line": "lea     eax, [eax+eax*4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x402F57",
+    "line": "shl     eax, 5",
+    "mnemonic": "shl",
+    "size": 3
+  },
+  {
+    "ea": "0x402F5A",
+    "line": "lea     ecx, [eax+ecx+30h]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x402F5E",
+    "line": "mov     eax, [esp+a3]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x402F62",
+    "line": "add     eax, 0FFFFFFFFh; switch 6 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x402F65",
+    "line": "cmp     eax, 5",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x402F68",
+    "line": "ja      short def_402F6A",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x402F6A",
+    "line": "jmp     ds:jpt_402F6A[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x402F71",
+    "line": "mov     eax, [ecx]; jumptable 00402F6A case 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x402F73",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x402F76",
+    "line": "mov     eax, [ecx+4]; jumptable 00402F6A case 2",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x402F79",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x402F7C",
+    "line": "mov     eax, [ecx+8]; jumptable 00402F6A case 3",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x402F7F",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x402F82",
+    "line": "mov     eax, [ecx+0Ch]; jumptable 00402F6A case 4",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x402F85",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x402F88",
+    "line": "mov     eax, [ecx+10h]; jumptable 00402F6A case 5",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x402F8B",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x402F8E",
+    "line": "mov     eax, [ecx+14h]; jumptable 00402F6A case 6",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x402F91",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

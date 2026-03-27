@@ -1,0 +1,1 @@
+__frame_IMoniker_RemoteBindToStorage_Stub

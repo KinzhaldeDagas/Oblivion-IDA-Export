@@ -1,0 +1,272 @@
+[
+  {
+    "ea": "0x4301A0",
+    "line": "sub     esp, 15Ch",
+    "mnemonic": "sub",
+    "size": 6
+  },
+  {
+    "ea": "0x4301A6",
+    "line": "mov     eax, ___security_cookie",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4301AB",
+    "line": "xor     eax, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4301AD",
+    "line": "mov     [esp+15Ch+var_4], eax",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4301B4",
+    "line": "mov     eax, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4301B6",
+    "line": "cmp     dword ptr [eax+1Ch], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4301BA",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4301BB",
+    "line": "mov     esi, [esp+160h+lpLocalTime]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x4301C2",
+    "line": "jnz     short loc_4301D3",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4301C4",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4301C6",
+    "line": "mov     [esi], eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4301C8",
+    "line": "mov     [esi+4], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4301CB",
+    "line": "mov     [esi+8], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4301CE",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4301D1",
+    "line": "jmp     short loc_43021C",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4301D3",
+    "line": "lea     ecx, [esp+160h+FindFileData]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4301D7",
+    "line": "push    ecx; lpFindFileData",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4301D8",
+    "line": "add     eax, 3Ch ; '<'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4301DB",
+    "line": "push    eax; lpFileName",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4301DC",
+    "line": "call    ds:FindFirstFileA",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x4301E2",
+    "line": "cmp     eax, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x4301E5",
+    "line": "jz      short loc_4301F7",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4301E7",
+    "line": "mov     edx, [esp+160h+FindFileData.ftLastWriteTime.dwLowDateTime]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4301EB",
+    "line": "mov     ecx, [esp+160h+FindFileData.ftLastWriteTime.dwHighDateTime]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4301EF",
+    "line": "mov     [esp+160h+FileTime.dwLowDateTime], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4301F3",
+    "line": "mov     [esp+160h+FileTime.dwHighDateTime], ecx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4301F7",
+    "line": "push    eax; hFindFile",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4301F8",
+    "line": "call    ds:FindClose",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x4301FE",
+    "line": "lea     edx, [esp+160h+SystemTime]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x430202",
+    "line": "push    edx; lpSystemTime",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430203",
+    "line": "lea     eax, [esp+164h+FileTime]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x430207",
+    "line": "push    eax; lpFileTime",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430208",
+    "line": "call    ds:FileTimeToSystemTime",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x43020E",
+    "line": "push    esi; lpLocalTime",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x43020F",
+    "line": "lea     ecx, [esp+164h+SystemTime]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x430213",
+    "line": "push    ecx; lpUniversalTime",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x430214",
+    "line": "push    0; lpTimeZoneInformation",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x430216",
+    "line": "call    ds:SystemTimeToTzSpecificLocalTime",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x43021C",
+    "line": "mov     ecx, [esp+160h+var_4]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x430223",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x430225",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x430226",
+    "line": "xor     ecx, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x430228",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x43022D",
+    "line": "add     esp, 15Ch",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x430233",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

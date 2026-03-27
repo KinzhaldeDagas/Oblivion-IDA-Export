@@ -1,0 +1,1 @@
+__frame_IEnumOLEVERB_RemoteNext_Stub

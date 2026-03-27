@@ -1,0 +1,1 @@
+__frame_IOleInPlaceSite_DiscardUndoState_Stub

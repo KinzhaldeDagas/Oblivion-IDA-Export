@@ -1,0 +1,80 @@
+[
+  {
+    "ea": "0x414E0B",
+    "line": "push    24h ; '$'; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x414E0D",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x414E12",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x414E15",
+    "line": "mov     [esp+arg_24], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x414E19",
+    "line": "cmp     eax, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x414E1B",
+    "line": "mov     [esp+arg_1C], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x414E1F",
+    "line": "jz      short loc_414E2D",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x414E21",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x414E22",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x414E24",
+    "line": "call    EffectItem_constrCopy",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x414E29",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x414E2B",
+    "line": "jmp     short EffectItemList_CopyFrom___FindLastEntry",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x414E2D",
+    "line": "xor     edi, edi",
+    "mnemonic": "xor",
+    "size": 2
+  }
+]

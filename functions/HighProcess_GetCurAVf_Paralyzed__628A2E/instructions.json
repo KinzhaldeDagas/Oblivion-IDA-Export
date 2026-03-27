@@ -1,0 +1,86 @@
+[
+  {
+    "ea": "0x628A2E",
+    "line": "cmp     eax, 30h ; '0'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x628A31",
+    "line": "jnz     short HighProcess_GetCurAVf?___OtherAV",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x628A33",
+    "line": "cmp     dword ptr [esi+298h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x628A3A",
+    "line": "jge     short loc_628A52",
+    "mnemonic": "jge",
+    "size": 2
+  },
+  {
+    "ea": "0x628A3C",
+    "line": "mov     edx, [esp+arg_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x628A40",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x628A41",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x628A42",
+    "line": "mov     eax, [esp+8+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x628A46",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x628A47",
+    "line": "call    MiddleProcess_GetAViCur",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x628A4C",
+    "line": "mov     [esi+298h], eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x628A52",
+    "line": "fild    dword ptr [esi+298h]",
+    "mnemonic": "fild",
+    "size": 6
+  },
+  {
+    "ea": "0x628A58",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x628A59",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

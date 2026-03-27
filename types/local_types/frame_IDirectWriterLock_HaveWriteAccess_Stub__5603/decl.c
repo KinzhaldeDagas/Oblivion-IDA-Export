@@ -1,0 +1,1 @@
+__frame_IDirectWriterLock_HaveWriteAccess_Stub

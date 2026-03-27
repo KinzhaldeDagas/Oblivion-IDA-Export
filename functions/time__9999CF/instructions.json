@@ -1,0 +1,134 @@
+[
+  {
+    "ea": "0x9999CF",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9999D0",
+    "line": "mov     ebp, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x9999D2",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9999D3",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9999D4",
+    "line": "lea     eax, [ebp+SystemTimeAsFileTime]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9999D7",
+    "line": "push    eax; lpSystemTimeAsFileTime",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9999D8",
+    "line": "call    ds:GetSystemTimeAsFileTime",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x9999DE",
+    "line": "mov     eax, [ebp+SystemTimeAsFileTime.dwLowDateTime]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9999E1",
+    "line": "mov     ecx, [ebp+SystemTimeAsFileTime.dwHighDateTime]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9999E4",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9999E6",
+    "line": "add     eax, 2AC18000h",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x9999EB",
+    "line": "push    989680h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9999F0",
+    "line": "adc     ecx, 0FE624E21h",
+    "mnemonic": "adc",
+    "size": 6
+  },
+  {
+    "ea": "0x9999F6",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9999F7",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9999F8",
+    "line": "call    __aulldiv",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9999FD",
+    "line": "mov     ecx, [ebp+Time]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x999A00",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x999A02",
+    "line": "jz      short locret_999A06",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x999A04",
+    "line": "mov     [ecx], eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x999A06",
+    "line": "leave",
+    "mnemonic": "leave",
+    "size": 1
+  },
+  {
+    "ea": "0x999A07",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

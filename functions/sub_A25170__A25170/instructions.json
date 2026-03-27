@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA25170",
+    "line": "push    offset dword_B14874",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA25175",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA2517A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA2517F",
+    "line": "mov     eax, off_B14878; \"iActorShadowExtMax:Display\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA25184",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA25186",
+    "line": "jz      short locret_A25194",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA25188",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA2518B",
+    "line": "jnz     short locret_A25194",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA2518D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA2518E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA25193",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA25194",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

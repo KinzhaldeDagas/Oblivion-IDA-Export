@@ -1,0 +1,1 @@
+__frame_ISynchronize_Signal_Stub

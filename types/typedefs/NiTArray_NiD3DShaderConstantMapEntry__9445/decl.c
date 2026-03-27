@@ -1,0 +1,1 @@
+NiTArray_NiD3DShaderConstantMapEntry

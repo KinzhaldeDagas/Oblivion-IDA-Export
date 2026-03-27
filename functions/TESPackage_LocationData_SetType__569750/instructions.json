@@ -1,0 +1,86 @@
+[
+  {
+    "ea": "0x569750",
+    "line": "movsx   edx, byte ptr [ecx]",
+    "mnemonic": "movsx",
+    "size": 3
+  },
+  {
+    "ea": "0x569753",
+    "line": "mov     eax, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x569757",
+    "line": "cmp     eax, edx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x569759",
+    "line": "jz      short TESPackage_LocationData_SetType___def_569765",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x56975B",
+    "line": "mov     [ecx], al",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x56975D",
+    "line": "movsx   eax, al",
+    "mnemonic": "movsx",
+    "size": 3
+  },
+  {
+    "ea": "0x569760",
+    "line": "cmp     eax, 5; switch 6 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x569763",
+    "line": "ja      short TESPackage_LocationData_SetType___def_569765",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x569765",
+    "line": "jmp     ds:jpt_569765[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x56976C",
+    "line": "xor     eax, eax; jumptable 00569765 case 1",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x56976E",
+    "line": "mov     [ecx+8], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x569771",
+    "line": "mov     [ecx+4], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x569774",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x569777",
+    "line": "mov     dword ptr [ecx+8], 0; jumptable 00569765 cases 0,2-5",
+    "mnemonic": "mov",
+    "size": 7
+  }
+]

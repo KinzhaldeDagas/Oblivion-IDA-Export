@@ -1,0 +1,80 @@
+[
+  {
+    "ea": "0x415045",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x415047",
+    "line": "jnz     short EffectItemList_HasTouchEffect___Done",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x415049",
+    "line": "mov     edx, [ecx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41504C",
+    "line": "test    edx, edx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41504E",
+    "line": "jz      short EffectItemList_HasTouchEffect___EffectLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x415050",
+    "line": "cmp     dword ptr [edx+10h], 1",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x415054",
+    "line": "jnz     short EffectItemList_HasTouchEffect___EffectLoop_Next",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x415056",
+    "line": "mov     edx, [edx+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x415059",
+    "line": "mov     edx, [edx+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41505C",
+    "line": "shr     edx, 16h",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x41505F",
+    "line": "test    dl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x415062",
+    "line": "jnz     short EffectItemList_HasTouchEffect___EffectLoop_Next",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x415064",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  }
+]

@@ -1,0 +1,212 @@
+[
+  {
+    "ea": "0x5A5EF0",
+    "line": "push    esi; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5A5EF1",
+    "line": "push    3ECh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5A5EF6",
+    "line": "call    Menu_GetOpenMenuTile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5A5EFB",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5A5EFD",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5A5F00",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5A5F02",
+    "line": "jz      short loc_5A5F5C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5A5F04",
+    "line": "call    sub_57A310",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5A5F09",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5A5F0B",
+    "line": "jnz     short loc_5A5F5C",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5A5F0D",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5A5F0F",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5A5F11",
+    "line": "call    sub_57C7C0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5A5F16",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5A5F19",
+    "line": "push    0FB2h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5A5F1E",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5A5F20",
+    "line": "call    Tile_GetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5A5F25",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5A5F26",
+    "line": "fstp    [esp+8+a2]; a3",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5A5F29",
+    "line": "push    0FB3h; a2",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5A5F2E",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5A5F30",
+    "line": "call    Tile_SetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5A5F35",
+    "line": "fld     dword ptr ds:0A379B4h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5A5F3B",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5A5F3C",
+    "line": "fstp    [esp+8+a2]; a3",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5A5F3F",
+    "line": "push    0FB2h; a2",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5A5F44",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5A5F46",
+    "line": "call    Tile_SetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5A5F4B",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5A5F4D",
+    "line": "call    Tile_GetParentMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5A5F52",
+    "line": "push    0Eh; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5A5F54",
+    "line": "call    sub_57DE50",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5A5F59",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5A5F5C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5A5F5D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

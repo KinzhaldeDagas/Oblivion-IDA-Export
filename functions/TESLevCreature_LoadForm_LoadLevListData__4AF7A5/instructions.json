@@ -1,0 +1,122 @@
+[
+  {
+    "ea": "0x4AF7A5",
+    "line": "push    0; a4",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4AF7A7",
+    "line": "lea     ecx, [ebp-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4AF7AA",
+    "line": "push    ecx; Dst",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4AF7AB",
+    "line": "mov     ecx, edi; a1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4AF7AD",
+    "line": "mov     byte ptr [ebp-0Ch], 0",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4AF7B1",
+    "line": "call    TESFile_GetChunkData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4AF7B6",
+    "line": "test    byte ptr [ebp-0Ch], 80h",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x4AF7BA",
+    "line": "lea     ebx, [esi+24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4AF7BD",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4AF7BF",
+    "line": "jz      short loc_4AF7C5",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4AF7C1",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4AF7C3",
+    "line": "jmp     short loc_4AF7C7",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4AF7C5",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4AF7C7",
+    "line": "call    TESLeveledList_SetCalcAllLevels",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4AF7CC",
+    "line": "and     byte ptr [ebp-0Ch], 7Fh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x4AF7D0",
+    "line": "mov     edx, [ebp-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4AF7D3",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4AF7D4",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4AF7D6",
+    "line": "call    TESLeveledList_SetChanceNone",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4AF7DB",
+    "line": "jmp     TESLevCreature_LoadForm___NextChunk",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

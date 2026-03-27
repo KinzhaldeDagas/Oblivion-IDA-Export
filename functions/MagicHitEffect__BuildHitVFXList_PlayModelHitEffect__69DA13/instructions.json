@@ -1,0 +1,326 @@
+[
+  {
+    "ea": "0x69DA13",
+    "line": "mov     edi, [esp+arg_1C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x69DA17",
+    "line": "mov     eax, [edi+14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69DA1A",
+    "line": "shr     eax, 2",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x69DA1D",
+    "line": "xor     ebp, ebp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA1F",
+    "line": "test    al, 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA21",
+    "line": "jnz     MagicHitEffect?_BuildHitVFXList___PlayShaderHitEffect",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x69DA27",
+    "line": "cmp     byte ptr ds:0B333B8h, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x69DA2E",
+    "line": "jnz     short MagicHitEffect?_BuildHitVFXList___PlayShaderHitEffect",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA30",
+    "line": "push    38h ; '8'; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA32",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x69DA37",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA39",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x69DA3C",
+    "line": "mov     [esp+arg_1C], esi",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x69DA40",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA42",
+    "line": "mov     [esp+arg_14], ebp",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x69DA46",
+    "line": "jz      short loc_69DA5F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA48",
+    "line": "mov     ecx, [edi+20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69DA4B",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA4D",
+    "line": "mov     eax, [edx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69DA50",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x69DA51",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA53",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x69DA54",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA56",
+    "line": "call    MagicModelHitEffect_constr_args",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x69DA5B",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA5D",
+    "line": "jmp     short loc_69DA61",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA5F",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA61",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA63",
+    "line": "mov     eax, [edx+68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69DA66",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA68",
+    "line": "mov     [esp+arg_14], 0FFFFFFFFh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x69DA70",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA72",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA74",
+    "line": "jz      short loc_69DAA2",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA76",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x69DA77",
+    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x69DA7C",
+    "line": "call    sub_678D30",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x69DA81",
+    "line": "push    8; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA83",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x69DA88",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x69DA8B",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA8D",
+    "line": "jz      short loc_69DA9C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA8F",
+    "line": "mov     [eax], esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA91",
+    "line": "mov     dword ptr [eax+4], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x69DA98",
+    "line": "mov     ebp, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA9A",
+    "line": "jmp     short MagicHitEffect?_BuildHitVFXList___PlayShaderHitEffect",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA9C",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x69DA9E",
+    "line": "mov     ebp, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69DAA0",
+    "line": "jmp     short MagicHitEffect?_BuildHitVFXList___PlayShaderHitEffect",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x69DAA2",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69DAA4",
+    "line": "mov     eax, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69DAA6",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x69DAA8",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69DAAA",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  }
+]

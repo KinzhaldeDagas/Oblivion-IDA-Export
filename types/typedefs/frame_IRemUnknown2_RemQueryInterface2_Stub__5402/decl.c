@@ -1,0 +1,1 @@
+__frame_IRemUnknown2_RemQueryInterface2_Stub

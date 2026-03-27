@@ -1,0 +1,1 @@
+clipped_rects

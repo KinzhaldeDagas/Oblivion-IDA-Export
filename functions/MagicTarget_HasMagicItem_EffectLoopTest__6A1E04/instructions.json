@@ -1,0 +1,50 @@
+[
+  {
+    "ea": "0x6A1E04",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A1E06",
+    "line": "jnz     short MagicTarget_HasMagicItem___Done_",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A1E08",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A1E0A",
+    "line": "test    edx, edx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A1E0C",
+    "line": "jz      short MagicTarget_HasMagicItem___EffectLoopNext",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A1E0E",
+    "line": "cmp     [edx+8], esi",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x6A1E11",
+    "line": "jnz     short MagicTarget_HasMagicItem___EffectLoopNext",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A1E13",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  }
+]

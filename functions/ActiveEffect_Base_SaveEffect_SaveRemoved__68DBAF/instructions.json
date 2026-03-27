@@ -1,0 +1,98 @@
+[
+  {
+    "ea": "0x68DBAF",
+    "line": "push    1; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x68DBB1",
+    "line": "lea     ecx, [ebp+12h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x68DBB4",
+    "line": "push    ecx; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x68DBB5",
+    "line": "mov     ecx, ds:0B33B00h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x68DBBB",
+    "line": "call    SaveLoad_SaveData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x68DBC0",
+    "line": "mov     ecx, ds:0B33B00h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x68DBC6",
+    "line": "cmp     byte ptr [ecx+7Ch], 2Ah ; '*'",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x68DBCA",
+    "line": "jb      short ActiveEffect_Base_SaveEffect___SkipDataList",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x68DBCC",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x68DBCD",
+    "line": "mov     byte ptr [esp+4+Src+3], 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x68DBD2",
+    "line": "mov     edx, [ecx+14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x68DBD5",
+    "line": "push    1; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x68DBD7",
+    "line": "lea     eax, [esp+8+Src+3]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x68DBDB",
+    "line": "push    eax; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x68DBDC",
+    "line": "mov     [esp+0Ch+arg_14], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x68DBE0",
+    "line": "call    SaveLoad_SaveData",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

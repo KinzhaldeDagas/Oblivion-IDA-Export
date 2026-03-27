@@ -1,0 +1,54 @@
+{
+  "decl": "osmesa_funcs",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "get_gl_funcs",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "void (*)(opengl_funcs *)"
+    },
+    {
+      "name": "create_context",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "wgl_context *(*)(HDC, const PIXELFORMATDESCRIPTOR *)"
+    },
+    {
+      "name": "delete_context",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "BOOL (*)(wgl_context *)"
+    },
+    {
+      "name": "get_proc_address",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "PROC (*)(const char *)"
+    },
+    {
+      "name": "make_current",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "BOOL (*)(wgl_context *, void *, int, int, int, int)"
+    }
+  ],
+  "name": "osmesa_funcs",
+  "ordinal": 1112,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

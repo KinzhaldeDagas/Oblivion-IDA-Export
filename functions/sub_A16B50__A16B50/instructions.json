@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA16B50",
+    "line": "push    offset dword_B02D48",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA16B55",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA16B5A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA16B5F",
+    "line": "mov     eax, off_B02D4C; \"iFPS:CameraPath\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA16B64",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA16B66",
+    "line": "jz      short locret_A16B74",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA16B68",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA16B6B",
+    "line": "jnz     short locret_A16B74",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA16B6D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA16B6E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA16B73",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA16B74",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

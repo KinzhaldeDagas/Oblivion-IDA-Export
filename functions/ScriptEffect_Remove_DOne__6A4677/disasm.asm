@@ -1,0 +1,3 @@
+0x6A4677: pop     edi
+0x6A4678: pop     esi
+0x6A4679: retn

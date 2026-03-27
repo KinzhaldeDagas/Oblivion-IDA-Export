@@ -1,0 +1,320 @@
+{
+  "decl": "DirectSoundDevice_0",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "ref",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "LONG"
+    },
+    {
+      "name": "guid",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 128,
+      "type": "GUID"
+    },
+    {
+      "name": "drvcaps",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 768,
+      "type": "DSCAPS"
+    },
+    {
+      "name": "priolevel",
+      "offset_bits": 928,
+      "offset_bytes": 116,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "sleeptime",
+      "offset_bits": 960,
+      "offset_bytes": 120,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "pwfx",
+      "offset_bits": 992,
+      "offset_bytes": 124,
+      "size_bits": 32,
+      "type": "PWAVEFORMATEX"
+    },
+    {
+      "name": "primary_pwfx",
+      "offset_bits": 1024,
+      "offset_bytes": 128,
+      "size_bits": 32,
+      "type": "PWAVEFORMATEX"
+    },
+    {
+      "name": "buffer",
+      "offset_bits": 1056,
+      "offset_bytes": 132,
+      "size_bits": 32,
+      "type": "LPBYTE_0"
+    },
+    {
+      "name": "writelead",
+      "offset_bits": 1088,
+      "offset_bytes": 136,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "buflen",
+      "offset_bits": 1120,
+      "offset_bytes": 140,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "ac_frames",
+      "offset_bits": 1152,
+      "offset_bytes": 144,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "frag_frames",
+      "offset_bits": 1184,
+      "offset_bytes": 148,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "playpos",
+      "offset_bits": 1216,
+      "offset_bytes": 152,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "pad",
+      "offset_bits": 1248,
+      "offset_bytes": 156,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "stopped",
+      "offset_bits": 1280,
+      "offset_bytes": 160,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "nrofbuffers",
+      "offset_bits": 1312,
+      "offset_bytes": 164,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "buffers",
+      "offset_bits": 1344,
+      "offset_bytes": 168,
+      "size_bits": 32,
+      "type": "IDirectSoundBufferImpl_0 **"
+    },
+    {
+      "name": "buffer_list_lock",
+      "offset_bits": 1376,
+      "offset_bytes": 172,
+      "size_bits": 32,
+      "type": "SRWLOCK"
+    },
+    {
+      "name": "mixlock",
+      "offset_bits": 1408,
+      "offset_bytes": 176,
+      "size_bits": 256,
+      "type": "CRITICAL_SECTION"
+    },
+    {
+      "name": "primary",
+      "offset_bits": 1664,
+      "offset_bytes": 208,
+      "size_bits": 32,
+      "type": "IDirectSoundBufferImpl_0 *"
+    },
+    {
+      "name": "speaker_config",
+      "offset_bits": 1696,
+      "offset_bytes": 212,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "speaker_angles",
+      "offset_bits": 1728,
+      "offset_bytes": 216,
+      "size_bits": 192,
+      "type": "float[6]"
+    },
+    {
+      "name": "speaker_num",
+      "offset_bits": 1920,
+      "offset_bytes": 240,
+      "size_bits": 192,
+      "type": "int[6]"
+    },
+    {
+      "name": "num_speakers",
+      "offset_bits": 2112,
+      "offset_bytes": 264,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "lfe_channel",
+      "offset_bits": 2144,
+      "offset_bytes": 268,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "tmp_buffer",
+      "offset_bits": 2176,
+      "offset_bytes": 272,
+      "size_bits": 32,
+      "type": "float *"
+    },
+    {
+      "name": "cp_buffer",
+      "offset_bits": 2208,
+      "offset_bytes": 276,
+      "size_bits": 32,
+      "type": "float *"
+    },
+    {
+      "name": "dsp_buffer",
+      "offset_bits": 2240,
+      "offset_bytes": 280,
+      "size_bits": 32,
+      "type": "float *"
+    },
+    {
+      "name": "tmp_buffer_len",
+      "offset_bits": 2272,
+      "offset_bytes": 284,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "cp_buffer_len",
+      "offset_bits": 2304,
+      "offset_bytes": 288,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "dsp_buffer_len",
+      "offset_bits": 2336,
+      "offset_bytes": 292,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "volpan",
+      "offset_bits": 2368,
+      "offset_bytes": 296,
+      "size_bits": 256,
+      "type": "DSVOLUMEPAN"
+    },
+    {
+      "name": "normfunction",
+      "offset_bits": 2624,
+      "offset_bytes": 328,
+      "size_bits": 32,
+      "type": "normfunc"
+    },
+    {
+      "name": "eax",
+      "offset_bits": 2656,
+      "offset_bytes": 332,
+      "size_bits": 992,
+      "type": "eax_info"
+    },
+    {
+      "name": "ds3dl",
+      "offset_bits": 3648,
+      "offset_bytes": 456,
+      "size_bits": 512,
+      "type": "DS3DLISTENER"
+    },
+    {
+      "name": "ds3dl_need_recalc",
+      "offset_bits": 4160,
+      "offset_bytes": 520,
+      "size_bits": 32,
+      "type": "BOOL"
+    },
+    {
+      "name": "mmdevice",
+      "offset_bits": 4192,
+      "offset_bytes": 524,
+      "size_bits": 32,
+      "type": "IMMDevice_0 *"
+    },
+    {
+      "name": "client",
+      "offset_bits": 4224,
+      "offset_bytes": 528,
+      "size_bits": 32,
+      "type": "IAudioClient_0 *"
+    },
+    {
+      "name": "volume",
+      "offset_bits": 4256,
+      "offset_bytes": 532,
+      "size_bits": 32,
+      "type": "IAudioStreamVolume_0 *"
+    },
+    {
+      "name": "render",
+      "offset_bits": 4288,
+      "offset_bytes": 536,
+      "size_bits": 32,
+      "type": "IAudioRenderClient_0 *"
+    },
+    {
+      "name": "sleepev",
+      "offset_bits": 4320,
+      "offset_bytes": 540,
+      "size_bits": 32,
+      "type": "HANDLE"
+    },
+    {
+      "name": "thread",
+      "offset_bits": 4352,
+      "offset_bytes": 544,
+      "size_bits": 32,
+      "type": "HANDLE"
+    },
+    {
+      "name": "entry",
+      "offset_bits": 4384,
+      "offset_bytes": 548,
+      "size_bits": 64,
+      "type": "list"
+    }
+  ],
+  "name": "DirectSoundDevice_0",
+  "ordinal": 3884,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

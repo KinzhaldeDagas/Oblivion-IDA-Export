@@ -1,0 +1,1 @@
+__frame_IPersistStorage_SaveCompleted_Stub

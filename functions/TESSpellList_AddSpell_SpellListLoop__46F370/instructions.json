@@ -1,0 +1,152 @@
+[
+  {
+    "ea": "0x46F370",
+    "line": "cmp     [eax], esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x46F372",
+    "line": "jz      short TESSpellList_AddSpell___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46F374",
+    "line": "mov     eax, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x46F377",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x46F379",
+    "line": "jnz     short TESSpellList_AddSpell___SpellListLoop",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x46F37B",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46F37C",
+    "line": "call    BSSimpleList_PushFront",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x46F381",
+    "line": "mov     ecx, ds:0B333C4h; this",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x46F387",
+    "line": "push    0; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x46F389",
+    "line": "call    Actor_GetActorBaseForm",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x46F38E",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x46F390",
+    "line": "jz      short loc_46F397",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46F392",
+    "line": "add     eax, 54h ; 'T'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x46F395",
+    "line": "jmp     short loc_46F399",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x46F397",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x46F399",
+    "line": "cmp     edi, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x46F39B",
+    "line": "jnz     short TESSpellList_AddSpell___Return_1",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x46F39D",
+    "line": "mov     eax, ds:0BA9DE4h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x46F3A2",
+    "line": "mov     ecx, large fs:2Ch",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x46F3A9",
+    "line": "mov     edx, [ecx+eax*4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x46F3AC",
+    "line": "cmp     byte ptr [edx+184h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x46F3B3",
+    "line": "jnz     short TESSpellList_AddSpell___Return_1",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x46F3B5",
+    "line": "mov     ecx, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x46F3BB",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46F3BC",
+    "line": "call    PlayerCharacter_SetKnownEffect",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

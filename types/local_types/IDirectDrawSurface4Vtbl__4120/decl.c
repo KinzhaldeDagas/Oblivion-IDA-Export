@@ -1,0 +1,1 @@
+IDirectDrawSurface4Vtbl

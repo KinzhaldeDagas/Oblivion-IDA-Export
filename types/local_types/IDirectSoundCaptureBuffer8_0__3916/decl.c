@@ -1,0 +1,1 @@
+IDirectSoundCaptureBuffer8_0

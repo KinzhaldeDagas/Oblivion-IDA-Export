@@ -1,0 +1,224 @@
+[
+  {
+    "ea": "0x8D32C0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8D32C1",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8D32C2",
+    "line": "mov     edi, [esp+8+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8D32C6",
+    "line": "mov     eax, [edi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8D32C9",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x8D32CB",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8D32CD",
+    "line": "jle     short loc_8D331F",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x8D32CF",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8D32D0",
+    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8D32D4",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8D32D6",
+    "line": "mov     eax, [eax+esi*4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8D32D9",
+    "line": "mov     ecx, [eax+50h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8D32DC",
+    "line": "mov     edx, [ebx+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8D32DF",
+    "line": "mov     eax, [ecx+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8D32E2",
+    "line": "movaps  xmm0, xmmword ptr [ecx+0D0h]",
+    "mnemonic": "movaps",
+    "size": 7
+  },
+  {
+    "ea": "0x8D32E9",
+    "line": "add     eax, edx",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x8D32EB",
+    "line": "mov     dl, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8D32EE",
+    "line": "test    dl, dl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8D32F0",
+    "line": "movaps  xmmword ptr [eax+10h], xmm0",
+    "mnemonic": "movaps",
+    "size": 4
+  },
+  {
+    "ea": "0x8D32F4",
+    "line": "jz      short loc_8D3303",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8D32F6",
+    "line": "movaps  xmm0, xmmword ptr [ecx+0E0h]",
+    "mnemonic": "movaps",
+    "size": 7
+  },
+  {
+    "ea": "0x8D32FD",
+    "line": "movaps  xmmword ptr [eax+20h], xmm0",
+    "mnemonic": "movaps",
+    "size": 4
+  },
+  {
+    "ea": "0x8D3301",
+    "line": "jmp     short loc_8D3316",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x8D3303",
+    "line": "add     ecx, 0E0h ; 'à'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x8D3309",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8D330A",
+    "line": "lea     ecx, [eax+50h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x8D330D",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8D330E",
+    "line": "lea     ecx, [eax+20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x8D3311",
+    "line": "call    sub_88FE00",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8D3316",
+    "line": "mov     eax, [edi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8D3319",
+    "line": "inc     esi",
+    "mnemonic": "inc",
+    "size": 1
+  },
+  {
+    "ea": "0x8D331A",
+    "line": "cmp     esi, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x8D331C",
+    "line": "jl      short loc_8D32D4",
+    "mnemonic": "jl",
+    "size": 2
+  },
+  {
+    "ea": "0x8D331E",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8D331F",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8D3320",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8D3321",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

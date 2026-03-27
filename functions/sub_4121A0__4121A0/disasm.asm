@@ -1,0 +1,12 @@
+0x4121A0: mov     edx, [esp+arg_4]
+0x4121A4: fld     dword ptr [ecx]
+0x4121A6: fsub    dword ptr [edx]
+0x4121A8: mov     eax, [esp+arg_0]
+0x4121AC: fstp    dword ptr [eax]
+0x4121AE: fld     dword ptr [ecx+4]
+0x4121B1: fsub    dword ptr [edx+4]
+0x4121B4: fstp    dword ptr [eax+4]
+0x4121B7: fld     dword ptr [ecx+8]
+0x4121BA: fsub    dword ptr [edx+8]
+0x4121BD: fstp    dword ptr [eax+8]
+0x4121C0: retn    8

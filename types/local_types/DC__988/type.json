@@ -1,0 +1,474 @@
+{
+  "decl": "DC",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "obj",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 128,
+      "type": "gdi_obj_header"
+    },
+    {
+      "name": "hSelf",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "HDC"
+    },
+    {
+      "name": "nulldrv",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 96,
+      "type": "gdi_physdev"
+    },
+    {
+      "name": "physDev",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 32,
+      "type": "PHYSDEV"
+    },
+    {
+      "name": "thread",
+      "offset_bits": 288,
+      "offset_bytes": 36,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "refcount",
+      "offset_bits": 320,
+      "offset_bytes": 40,
+      "size_bits": 32,
+      "type": "LONG"
+    },
+    {
+      "name": "dirty",
+      "offset_bits": 352,
+      "offset_bytes": 44,
+      "size_bits": 32,
+      "type": "LONG"
+    },
+    {
+      "name": "disabled",
+      "offset_bits": 384,
+      "offset_bytes": 48,
+      "size_bits": 32,
+      "type": "LONG"
+    },
+    {
+      "name": "saveLevel",
+      "offset_bits": 416,
+      "offset_bytes": 52,
+      "size_bits": 32,
+      "type": "INT"
+    },
+    {
+      "name": "attr",
+      "offset_bits": 448,
+      "offset_bytes": 56,
+      "size_bits": 32,
+      "type": "DC_ATTR_0 *"
+    },
+    {
+      "name": "saved_dc",
+      "offset_bits": 480,
+      "offset_bytes": 60,
+      "size_bits": 32,
+      "type": "tagDC *"
+    },
+    {
+      "name": "dwHookData",
+      "offset_bits": 512,
+      "offset_bytes": 64,
+      "size_bits": 64,
+      "type": "DWORD_PTR"
+    },
+    {
+      "name": "hookProc",
+      "offset_bits": 576,
+      "offset_bytes": 72,
+      "size_bits": 32,
+      "type": "DCHOOKPROC"
+    },
+    {
+      "name": "bounds_enabled",
+      "offset_bits": 608,
+      "offset_bytes": 76,
+      "size_bits": 1,
+      "type": "__int32 : 1"
+    },
+    {
+      "name": "path_open",
+      "offset_bits": 609,
+      "offset_bytes": 76,
+      "size_bits": 1,
+      "type": "__int32 : 1"
+    },
+    {
+      "name": "wnd_org",
+      "offset_bits": 640,
+      "offset_bytes": 80,
+      "size_bits": 64,
+      "type": "POINT"
+    },
+    {
+      "name": "wnd_ext",
+      "offset_bits": 704,
+      "offset_bytes": 88,
+      "size_bits": 64,
+      "type": "SIZE"
+    },
+    {
+      "name": "vport_org",
+      "offset_bits": 768,
+      "offset_bytes": 96,
+      "size_bits": 64,
+      "type": "POINT"
+    },
+    {
+      "name": "vport_ext",
+      "offset_bits": 832,
+      "offset_bytes": 104,
+      "size_bits": 64,
+      "type": "SIZE"
+    },
+    {
+      "name": "virtual_res",
+      "offset_bits": 896,
+      "offset_bytes": 112,
+      "size_bits": 64,
+      "type": "SIZE"
+    },
+    {
+      "name": "virtual_size",
+      "offset_bits": 960,
+      "offset_bytes": 120,
+      "size_bits": 64,
+      "type": "SIZE"
+    },
+    {
+      "name": "vis_rect",
+      "offset_bits": 1024,
+      "offset_bytes": 128,
+      "size_bits": 128,
+      "type": "RECT"
+    },
+    {
+      "name": "device_rect",
+      "offset_bits": 1152,
+      "offset_bytes": 144,
+      "size_bits": 128,
+      "type": "RECT"
+    },
+    {
+      "name": "pixel_format",
+      "offset_bits": 1280,
+      "offset_bytes": 160,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "aa_flags",
+      "offset_bits": 1312,
+      "offset_bytes": 164,
+      "size_bits": 32,
+      "type": "UINT"
+    },
+    {
+      "name": "miterLimit",
+      "offset_bits": 1344,
+      "offset_bytes": 168,
+      "size_bits": 32,
+      "type": "FLOAT"
+    },
+    {
+      "name": "display",
+      "offset_bits": 1376,
+      "offset_bytes": 172,
+      "size_bits": 512,
+      "type": "WCHAR_0[32]"
+    },
+    {
+      "name": "flags",
+      "offset_bits": 1888,
+      "offset_bytes": 236,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "layout",
+      "offset_bits": 1920,
+      "offset_bytes": 240,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "hClipRgn",
+      "offset_bits": 1952,
+      "offset_bytes": 244,
+      "size_bits": 32,
+      "type": "HRGN"
+    },
+    {
+      "name": "hMetaRgn",
+      "offset_bits": 1984,
+      "offset_bytes": 248,
+      "size_bits": 32,
+      "type": "HRGN"
+    },
+    {
+      "name": "hVisRgn",
+      "offset_bits": 2016,
+      "offset_bytes": 252,
+      "size_bits": 32,
+      "type": "HRGN"
+    },
+    {
+      "name": "region",
+      "offset_bits": 2048,
+      "offset_bytes": 256,
+      "size_bits": 32,
+      "type": "HRGN"
+    },
+    {
+      "name": "hPen",
+      "offset_bits": 2080,
+      "offset_bytes": 260,
+      "size_bits": 32,
+      "type": "HPEN"
+    },
+    {
+      "name": "hBrush",
+      "offset_bits": 2112,
+      "offset_bytes": 264,
+      "size_bits": 32,
+      "type": "HBRUSH"
+    },
+    {
+      "name": "hFont",
+      "offset_bits": 2144,
+      "offset_bytes": 268,
+      "size_bits": 32,
+      "type": "HFONT"
+    },
+    {
+      "name": "hBitmap",
+      "offset_bits": 2176,
+      "offset_bytes": 272,
+      "size_bits": 32,
+      "type": "HBITMAP"
+    },
+    {
+      "name": "hPalette",
+      "offset_bits": 2208,
+      "offset_bytes": 276,
+      "size_bits": 32,
+      "type": "HPALETTE"
+    },
+    {
+      "name": "path",
+      "offset_bits": 2240,
+      "offset_bytes": 280,
+      "size_bits": 32,
+      "type": "gdi_path *"
+    },
+    {
+      "name": "font_gamma_ramp",
+      "offset_bits": 2272,
+      "offset_bytes": 284,
+      "size_bits": 32,
+      "type": "const font_gamma_ramp *"
+    },
+    {
+      "name": "font_code_page",
+      "offset_bits": 2304,
+      "offset_bytes": 288,
+      "size_bits": 32,
+      "type": "UINT"
+    },
+    {
+      "name": "ROPmode",
+      "offset_bits": 2336,
+      "offset_bytes": 292,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "polyFillMode",
+      "offset_bits": 2352,
+      "offset_bytes": 294,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "stretchBltMode",
+      "offset_bits": 2368,
+      "offset_bytes": 296,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "relAbsMode",
+      "offset_bits": 2384,
+      "offset_bytes": 298,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "backgroundMode",
+      "offset_bits": 2400,
+      "offset_bytes": 300,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "backgroundColor",
+      "offset_bits": 2432,
+      "offset_bytes": 304,
+      "size_bits": 32,
+      "type": "COLORREF"
+    },
+    {
+      "name": "textColor",
+      "offset_bits": 2464,
+      "offset_bytes": 308,
+      "size_bits": 32,
+      "type": "COLORREF"
+    },
+    {
+      "name": "dcBrushColor",
+      "offset_bits": 2496,
+      "offset_bytes": 312,
+      "size_bits": 32,
+      "type": "COLORREF"
+    },
+    {
+      "name": "dcPenColor",
+      "offset_bits": 2528,
+      "offset_bytes": 316,
+      "size_bits": 32,
+      "type": "COLORREF"
+    },
+    {
+      "name": "brush_org",
+      "offset_bits": 2560,
+      "offset_bytes": 320,
+      "size_bits": 64,
+      "type": "POINT"
+    },
+    {
+      "name": "mapperFlags",
+      "offset_bits": 2624,
+      "offset_bytes": 328,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "textAlign",
+      "offset_bits": 2656,
+      "offset_bytes": 332,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "charExtra",
+      "offset_bits": 2688,
+      "offset_bytes": 336,
+      "size_bits": 32,
+      "type": "INT"
+    },
+    {
+      "name": "breakExtra",
+      "offset_bits": 2720,
+      "offset_bytes": 340,
+      "size_bits": 32,
+      "type": "INT"
+    },
+    {
+      "name": "breakRem",
+      "offset_bits": 2752,
+      "offset_bytes": 344,
+      "size_bits": 32,
+      "type": "INT"
+    },
+    {
+      "name": "MapMode",
+      "offset_bits": 2784,
+      "offset_bytes": 348,
+      "size_bits": 32,
+      "type": "INT"
+    },
+    {
+      "name": "GraphicsMode",
+      "offset_bits": 2816,
+      "offset_bytes": 352,
+      "size_bits": 32,
+      "type": "INT"
+    },
+    {
+      "name": "pAbortProc",
+      "offset_bits": 2848,
+      "offset_bytes": 356,
+      "size_bits": 32,
+      "type": "ABORTPROC"
+    },
+    {
+      "name": "ArcDirection",
+      "offset_bits": 2880,
+      "offset_bytes": 360,
+      "size_bits": 32,
+      "type": "INT"
+    },
+    {
+      "name": "xformWorld2Wnd",
+      "offset_bits": 2912,
+      "offset_bytes": 364,
+      "size_bits": 192,
+      "type": "XFORM"
+    },
+    {
+      "name": "xformWorld2Vport",
+      "offset_bits": 3104,
+      "offset_bytes": 388,
+      "size_bits": 192,
+      "type": "XFORM"
+    },
+    {
+      "name": "xformVport2World",
+      "offset_bits": 3296,
+      "offset_bytes": 412,
+      "size_bits": 192,
+      "type": "XFORM"
+    },
+    {
+      "name": "vport2WorldValid",
+      "offset_bits": 3488,
+      "offset_bytes": 436,
+      "size_bits": 32,
+      "type": "BOOL"
+    },
+    {
+      "name": "bounds",
+      "offset_bits": 3520,
+      "offset_bytes": 440,
+      "size_bits": 128,
+      "type": "RECT"
+    }
+  ],
+  "name": "DC",
+  "ordinal": 988,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

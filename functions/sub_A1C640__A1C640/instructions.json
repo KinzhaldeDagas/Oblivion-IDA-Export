@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA1C640",
+    "line": "push    offset dword_B11918",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C645",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C64A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C64F",
+    "line": "mov     eax, off_B1191C; \"iMaxViewCasterPicksHavok:Interface\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C654",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C656",
+    "line": "jz      short locret_A1C664",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C658",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1C65B",
+    "line": "jnz     short locret_A1C664",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C65D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1C65E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C663",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA1C664",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

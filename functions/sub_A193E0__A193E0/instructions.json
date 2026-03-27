@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA193E0",
+    "line": "push    offset unk_B06DCC",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA193E5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA193EA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA193EF",
+    "line": "mov     eax, off_B06DD0; \"bReportBadTangentSpace:Display\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA193F4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA193F6",
+    "line": "jz      short locret_A19404",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA193F8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA193FB",
+    "line": "jnz     short locret_A19404",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA193FD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA193FE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA19403",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA19404",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

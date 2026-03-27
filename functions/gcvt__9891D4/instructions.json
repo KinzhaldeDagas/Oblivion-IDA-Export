@@ -1,0 +1,86 @@
+[
+  {
+    "ea": "0x9891D4",
+    "line": "push    [esp+NumOfDigits]; NumOfDigits",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x9891D8",
+    "line": "fld     [esp+4+Val]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x9891DC",
+    "line": "push    ecx; Val",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9891DD",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9891DE",
+    "line": "fstp    [esp+0Ch+var_C]; Val",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x9891E1",
+    "line": "push    0FFFFFFFFh; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9891E3",
+    "line": "push    [esp+10h+DstBuf]; DstBuf",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x9891E7",
+    "line": "call    __gcvt_s",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9891EC",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9891EF",
+    "line": "neg     eax",
+    "mnemonic": "neg",
+    "size": 2
+  },
+  {
+    "ea": "0x9891F1",
+    "line": "sbb     eax, eax",
+    "mnemonic": "sbb",
+    "size": 2
+  },
+  {
+    "ea": "0x9891F3",
+    "line": "not     eax",
+    "mnemonic": "not",
+    "size": 2
+  },
+  {
+    "ea": "0x9891F5",
+    "line": "and     eax, [esp+DstBuf]",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9891F9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

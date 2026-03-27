@@ -1,0 +1,116 @@
+[
+  {
+    "ea": "0x405B00",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x405B01",
+    "line": "mov     esi, g_InterfaceScenegraph",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x405B07",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x405B09",
+    "line": "jz      short loc_405B31",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x405B0B",
+    "line": "lea     eax, [esi+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x405B0E",
+    "line": "push    eax; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x405B0F",
+    "line": "call    ds:InterlockedDecrement",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x405B15",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x405B17",
+    "line": "jnz     short loc_405B27",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x405B19",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x405B1B",
+    "line": "jz      short loc_405B27",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x405B1D",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x405B1F",
+    "line": "mov     eax, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x405B21",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x405B23",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x405B25",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x405B27",
+    "line": "mov     g_InterfaceScenegraph, 0",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x405B31",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x405B32",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

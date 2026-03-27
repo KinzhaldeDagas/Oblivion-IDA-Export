@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA16910",
+    "line": "push    offset unk_B02CE8",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA16915",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1691A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1691F",
+    "line": "mov     eax, off_B02CEC; \"bUseMyGamesDirectory:General\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA16924",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA16926",
+    "line": "jz      short locret_A16934",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA16928",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1692B",
+    "line": "jnz     short locret_A16934",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1692D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1692E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA16933",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA16934",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

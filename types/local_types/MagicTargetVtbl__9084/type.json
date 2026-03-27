@@ -1,0 +1,96 @@
+{
+  "decl": "MagicTargetVtbl",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "Destructor",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicTarget *this)"
+    },
+    {
+      "name": "GetParent",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "TESObjectREFR *(__thiscall *)(MagicTarget *this)"
+    },
+    {
+      "name": "GetEffectList",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "EffectNode *(__thiscall *)(MagicTarget *this)"
+    },
+    {
+      "name": "GetActiveEffectList",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "void *(__thiscall *)(MagicTarget *this)"
+    },
+    {
+      "name": "IsActor",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "bool (__thiscall *)(MagicTarget *this)"
+    },
+    {
+      "name": "PostAddEffect",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicTarget *this, ActiveEffect *activeEffect)"
+    },
+    {
+      "name": "PostRemoveEffect",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicTarget *this, ActiveEffect *activeEffect)"
+    },
+    {
+      "name": "PlayReflectShader",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicTarget *this, MagicCaster *caster, ActiveEffect *activeEffect)"
+    },
+    {
+      "name": "PlayAbsorbShader",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicTarget *this, MagicCaster *caster, ActiveEffect *activeEffect)"
+    },
+    {
+      "name": "ResistanceFactor",
+      "offset_bits": 288,
+      "offset_bytes": 36,
+      "size_bits": 32,
+      "type": "float (__thiscall *)(MagicTarget *this, MagicCaster *caster, MagicItem *magicItem, ActiveEffect *activeEffect)"
+    },
+    {
+      "name": "AttemptAbsorb",
+      "offset_bits": 320,
+      "offset_bytes": 40,
+      "size_bits": 32,
+      "type": "bool (__thiscall *)(MagicTarget *this, MagicCaster *caster, MagicItem *magicItem, ActiveEffect *activeEffect, bool reflected)"
+    }
+  ],
+  "name": "MagicTargetVtbl",
+  "ordinal": 9084,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

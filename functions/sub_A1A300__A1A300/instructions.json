@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA1A300",
+    "line": "push    offset byte_B07070",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA1A305",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1A30A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1A30F",
+    "line": "mov     eax, off_B07074; \"bUseWaterReflectionsTrees:Water\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1A314",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA1A316",
+    "line": "jz      short locret_A1A324",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1A318",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1A31B",
+    "line": "jnz     short locret_A1A324",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1A31D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1A31E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1A323",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA1A324",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "ea": "0x6A875D",
+    "line": "mov     ecx, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A8760",
+    "line": "mov     edx, [ecx+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A8763",
+    "line": "mov     eax, [edx+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A8766",
+    "line": "shr     eax, 1",
+    "mnemonic": "shr",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8768",
+    "line": "test    al, 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A876A",
+    "line": "jnz     short ValueModifierEffect_Apply___ApplyImmediately",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A876C",
+    "line": "call    EffectItem_GetDuration",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A8771",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8773",
+    "line": "jnz     short ValueModifierEffect_Apply___Wrapup",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8775",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8777",
+    "line": "call    ActiveEffect_Base_IsBoundObjWearable",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A877C",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A877E",
+    "line": "jnz     short ValueModifierEffect_Apply___Wrapup",
+    "mnemonic": "jnz",
+    "size": 2
+  }
+]

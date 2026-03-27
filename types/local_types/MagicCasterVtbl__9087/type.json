@@ -1,0 +1,138 @@
+{
+  "decl": "MagicCasterVtbl",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "AddAbility",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicItemForm *ability, bool noHitFX)"
+    },
+    {
+      "name": "AddDisease",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicItemForm *disease, MagicTarget *target, bool noHitFX)"
+    },
+    {
+      "name": "AddObjectEnchantment",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicItem *arg0, TESBoundObject *sourceObj, bool noHitFX)"
+    },
+    {
+      "name": "FindTouchTarget",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "MagicTarget *(__thiscall *)(MagicCaster *this, MagicCaster *this)"
+    },
+    {
+      "name": "PlayTargettedCastAnim",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicCaster *this)"
+    },
+    {
+      "name": "PlayCastingAnim",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicCaster *this)"
+    },
+    {
+      "name": "ApplyMagicItemCost",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicItem *ite, bool applyStatChanges)"
+    },
+    {
+      "name": "IsMagicItemUsable",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 32,
+      "type": "bool (__thiscall *)(MagicCaster *this, MagicItem *magicItem, float *wortcraftSkill, UInt32 *faliureCode, bool useBaseMagicka)"
+    },
+    {
+      "name": "GetParentRefr",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 32,
+      "type": "TESObjectREFR *(__thiscall *)(MagicCaster *this)"
+    },
+    {
+      "name": "GetMagicNode",
+      "offset_bits": 288,
+      "offset_bytes": 36,
+      "size_bits": 32,
+      "type": "NiNode *(__thiscall *)(MagicCaster *this, MagicCaster *this)"
+    },
+    {
+      "name": "AddEffectToSelf",
+      "offset_bits": 320,
+      "offset_bytes": 40,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicCaster *this, ActiveEffect *effect)"
+    },
+    {
+      "name": "GetSpellEffectiveness",
+      "offset_bits": 352,
+      "offset_bytes": 44,
+      "size_bits": 32,
+      "type": "float (__thiscall *)(MagicCaster *this, bool ignoreFatigue, float currentFatigue)"
+    },
+    {
+      "name": "GetActiveMagicItem",
+      "offset_bits": 384,
+      "offset_bytes": 48,
+      "size_bits": 32,
+      "type": "MagicItem *(__thiscall *)(MagicCaster *this)"
+    },
+    {
+      "name": "SetActiveMagicItem",
+      "offset_bits": 416,
+      "offset_bytes": 52,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicItem *item)"
+    },
+    {
+      "name": "GetCastingTarget",
+      "offset_bits": 448,
+      "offset_bytes": 56,
+      "size_bits": 32,
+      "type": "MagicTarget (__thiscall *)(MagicCaster *this, MagicCaster *this)"
+    },
+    {
+      "name": "SetCastingTarget",
+      "offset_bits": 480,
+      "offset_bytes": 60,
+      "size_bits": 32,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicTarget *target)"
+    },
+    {
+      "name": "CreateActiveMagicEffect",
+      "offset_bits": 512,
+      "offset_bytes": 64,
+      "size_bits": 32,
+      "type": "ActiveEffect *(__thiscall *)(MagicCaster *this, MagicItem *magicItem, EffectItem *effect, TESBoundObject *src)"
+    }
+  ],
+  "name": "MagicCasterVtbl",
+  "ordinal": 9087,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

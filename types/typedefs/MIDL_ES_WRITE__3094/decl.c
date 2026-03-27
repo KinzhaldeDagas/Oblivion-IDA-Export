@@ -1,0 +1,1 @@
+MIDL_ES_WRITE

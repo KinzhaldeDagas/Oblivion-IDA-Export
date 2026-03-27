@@ -1,0 +1,2 @@
+0x6A1DD0: fld1
+0x6A1DD2: retn    0Ch

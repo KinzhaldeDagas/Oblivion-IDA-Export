@@ -1,0 +1,260 @@
+[
+  {
+    "ea": "0x4D8FB0",
+    "line": "sub     esp, 0Ch",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x4D8FB3",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FB5",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4D8FB6",
+    "line": "fstp    [esp+10h+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x4D8FBA",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FBC",
+    "line": "call    TESObjectREFR_GetContainer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4D8FC1",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FC3",
+    "line": "jz      short loc_4D8FEC",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FC5",
+    "line": "lea     ecx, [esi+44h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4D8FC8",
+    "line": "call    ExtraDataList_GetContainerChanges",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4D8FCD",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FCF",
+    "line": "jz      short loc_4D8FDA",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FD1",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FD3",
+    "line": "call    ContainerExtraData_GetEncoumberance",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4D8FD8",
+    "line": "jmp     short loc_4D8FE8",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FDA",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FDC",
+    "line": "call    TESObjectREFR_GetContainer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4D8FE1",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FE3",
+    "line": "call    TESContainer_GetEncumberance",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4D8FE8",
+    "line": "fstp    [esp+10h+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x4D8FEC",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FEE",
+    "line": "mov     edx, [eax+190h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4D8FF4",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FF6",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FF8",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FFA",
+    "line": "jz      short loc_4D9029",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D8FFC",
+    "line": "cmp     esi, ds:0B333C4h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x4D9002",
+    "line": "jz      short loc_4D9029",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D9004",
+    "line": "fld     [esp+10h+var_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x4D9008",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D900A",
+    "line": "fstp    [esp+10h+var_8]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x4D900E",
+    "line": "call    Actor_GetBaseEncumberance",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4D9013",
+    "line": "fcomp   [esp+10h+var_8]",
+    "mnemonic": "fcomp",
+    "size": 4
+  },
+  {
+    "ea": "0x4D9017",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x4D9019",
+    "line": "test    ah, 5",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x4D901C",
+    "line": "jp      short loc_4D9029",
+    "mnemonic": "jp",
+    "size": 2
+  },
+  {
+    "ea": "0x4D901E",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D9020",
+    "line": "call    Actor_GetBaseEncumberance",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4D9025",
+    "line": "fstp    [esp+10h+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x4D9029",
+    "line": "fld     [esp+10h+var_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x4D902D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4D902E",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4D9031",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

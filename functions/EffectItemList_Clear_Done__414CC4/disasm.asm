@@ -1,0 +1,2 @@
+0x414CC4: pop     esi
+0x414CC5: retn

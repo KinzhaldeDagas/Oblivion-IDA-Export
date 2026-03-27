@@ -1,0 +1,292 @@
+{
+  "decl": "gdi_font",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "entry",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 64,
+      "type": "list"
+    },
+    {
+      "name": "unused_entry",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 64,
+      "type": "list"
+    },
+    {
+      "name": "refcount",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "gm_size",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "gm",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "glyph_metrics **"
+    },
+    {
+      "name": "otm",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 1728,
+      "type": "OUTLINETEXTMETRICW"
+    },
+    {
+      "name": "kern_pairs",
+      "offset_bits": 1952,
+      "offset_bytes": 244,
+      "size_bits": 32,
+      "type": "KERNINGPAIR *"
+    },
+    {
+      "name": "kern_count",
+      "offset_bits": 1984,
+      "offset_bytes": 248,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "name": "private",
+      "offset_bits": 2016,
+      "offset_bytes": 252,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "name": "child_fonts",
+      "offset_bits": 2048,
+      "offset_bytes": 256,
+      "size_bits": 64,
+      "type": "list"
+    },
+    {
+      "name": "handle",
+      "offset_bits": 2112,
+      "offset_bytes": 264,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "cache_num",
+      "offset_bits": 2144,
+      "offset_bytes": 268,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "hash",
+      "offset_bits": 2176,
+      "offset_bytes": 272,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "charset",
+      "offset_bits": 2208,
+      "offset_bytes": 276,
+      "size_bits": 32,
+      "type": "UINT"
+    },
+    {
+      "name": "codepage",
+      "offset_bits": 2240,
+      "offset_bytes": 280,
+      "size_bits": 32,
+      "type": "UINT"
+    },
+    {
+      "name": "fs",
+      "offset_bits": 2272,
+      "offset_bytes": 284,
+      "size_bits": 192,
+      "type": "FONTSIGNATURE"
+    },
+    {
+      "name": "lf",
+      "offset_bits": 2464,
+      "offset_bytes": 308,
+      "size_bits": 736,
+      "type": "LOGFONTW"
+    },
+    {
+      "name": "matrix",
+      "offset_bits": 3200,
+      "offset_bytes": 400,
+      "size_bits": 128,
+      "type": "FMAT2"
+    },
+    {
+      "name": "face_index",
+      "offset_bits": 3328,
+      "offset_bytes": 416,
+      "size_bits": 32,
+      "type": "UINT"
+    },
+    {
+      "name": "scale_y",
+      "offset_bits": 3360,
+      "offset_bytes": 420,
+      "size_bits": 32,
+      "type": "INT"
+    },
+    {
+      "name": "aveWidth",
+      "offset_bits": 3392,
+      "offset_bytes": 424,
+      "size_bits": 32,
+      "type": "INT"
+    },
+    {
+      "name": "ppem",
+      "offset_bits": 3424,
+      "offset_bytes": 428,
+      "size_bits": 32,
+      "type": "INT"
+    },
+    {
+      "name": "yMax",
+      "offset_bits": 3456,
+      "offset_bytes": 432,
+      "size_bits": 16,
+      "type": "SHORT"
+    },
+    {
+      "name": "yMin",
+      "offset_bits": 3472,
+      "offset_bytes": 434,
+      "size_bits": 16,
+      "type": "SHORT"
+    },
+    {
+      "name": "ntmFlags",
+      "offset_bits": 3488,
+      "offset_bytes": 436,
+      "size_bits": 32,
+      "type": "UINT"
+    },
+    {
+      "name": "ntmAvgWidth",
+      "offset_bits": 3520,
+      "offset_bytes": 440,
+      "size_bits": 32,
+      "type": "UINT"
+    },
+    {
+      "name": "aa_flags",
+      "offset_bits": 3552,
+      "offset_bytes": 444,
+      "size_bits": 32,
+      "type": "UINT"
+    },
+    {
+      "name": "ttc_item_offset",
+      "offset_bits": 3584,
+      "offset_bytes": 448,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "can_use_bitmap",
+      "offset_bits": 3616,
+      "offset_bytes": 452,
+      "size_bits": 1,
+      "type": "__int32 : 1"
+    },
+    {
+      "name": "fake_italic",
+      "offset_bits": 3617,
+      "offset_bytes": 452,
+      "size_bits": 1,
+      "type": "__int32 : 1"
+    },
+    {
+      "name": "fake_bold",
+      "offset_bits": 3618,
+      "offset_bytes": 452,
+      "size_bits": 1,
+      "type": "__int32 : 1"
+    },
+    {
+      "name": "scalable",
+      "offset_bits": 3619,
+      "offset_bytes": 452,
+      "size_bits": 1,
+      "type": "__int32 : 1"
+    },
+    {
+      "name": "base_font",
+      "offset_bits": 3648,
+      "offset_bytes": 456,
+      "size_bits": 32,
+      "type": "gdi_font *"
+    },
+    {
+      "name": "gsub_table",
+      "offset_bits": 3680,
+      "offset_bytes": 460,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "name": "vert_feature",
+      "offset_bits": 3712,
+      "offset_bytes": 464,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "name": "data_ptr",
+      "offset_bits": 3744,
+      "offset_bytes": 468,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "name": "data_size",
+      "offset_bits": 3776,
+      "offset_bytes": 472,
+      "size_bits": 64,
+      "type": "SIZE_T"
+    },
+    {
+      "name": "writetime",
+      "offset_bits": 3840,
+      "offset_bytes": 480,
+      "size_bits": 64,
+      "type": "FILETIME"
+    },
+    {
+      "name": "file",
+      "offset_bits": 3904,
+      "offset_bytes": 488,
+      "size_bits": 16,
+      "type": "WCHAR_0[1]"
+    }
+  ],
+  "name": "gdi_font",
+  "ordinal": 1507,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

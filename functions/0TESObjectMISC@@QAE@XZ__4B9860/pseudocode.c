@@ -1,0 +1,24 @@
+TESObjectMISC *__thiscall TESObjectMISC::TESObjectMISC(TESObjectMISC *this)
+{
+  TESBoundObject_constr((TESForm *)this);
+  *((_DWORD *)this + 9) = &TESFullName::`vftable';
+  *((_DWORD *)this + 0xA) = 0;
+  *((_WORD *)this + 0x16) = 0;
+  *((_WORD *)this + 0x17) = 0;
+  TESModel::TESModel((TESModel *)this + 2);
+  TESTexture_constr((TESTexture *)this + 6);
+  *((_DWORD *)this + 0x12) = &TESIcon::`vftable';
+  TESScriptableForm_constr((_DWORD *)this + 0x15);
+  TESValueForm_constr((_DWORD *)this + 0x18);
+  TESWeightForm_constr((float *)this + 0x1A);
+  *(_DWORD *)this = &TESObjectMISC::`vftable'{for `TESObjectMISC'};
+  *((_DWORD *)this + 9) = &TESObjectMISC::`vftable'{for `TESFullName'};
+  *((_DWORD *)this + 0xC) = &TESObjectMISC::`vftable'{for `TESModel'};
+  *((_DWORD *)this + 0x12) = &TESObjectMISC::`vftable'{for `TESIcon'};
+  *((_DWORD *)this + 0x15) = &TESObjectMISC::`vftable'{for `TESScriptableForm'};
+  *((_DWORD *)this + 0x18) = &TESObjectMISC::`vftable'{for `TESValueForm'};
+  *((_DWORD *)this + 0x1A) = &TESObjectMISC::`vftable'{for `TESWeightForm'};
+  *((_BYTE *)this + 4) = 0x1B;
+  TESForm_SetIsLinked((TESForm *)this, 1);
+  return this;
+}

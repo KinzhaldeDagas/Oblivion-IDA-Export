@@ -1,0 +1,206 @@
+[
+  {
+    "ea": "0x46C300",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46C301",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x46C303",
+    "line": "mov     eax, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x46C306",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46C307",
+    "line": "mov     edi, [esp+8+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x46C30B",
+    "line": "cmp     edi, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x46C30D",
+    "line": "jz      short TESForm_SetFormID___Done",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46C30F",
+    "line": "mov     ecx, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x46C312",
+    "line": "shr     ecx, 0Eh",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x46C315",
+    "line": "test    cl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x46C318",
+    "line": "jnz     short TESForm_SetFormID___SetFormID",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x46C31A",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x46C31C",
+    "line": "jz      short loc_46C329",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46C31E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46C31F",
+    "line": "mov     ecx, offset TESForm_FormIDMap",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x46C324",
+    "line": "call    NiTMap_RemoveAt",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x46C329",
+    "line": "cmp     [esp+8+arg_4], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x46C32E",
+    "line": "jz      short TESForm_SetFormID___AddToFormTable",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46C330",
+    "line": "mov     eax, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x46C333",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x46C335",
+    "line": "jz      short TESForm_SetFormID___AddToFormTable",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46C337",
+    "line": "mov     ecx, ds:0B33A98h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x46C33D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46C33E",
+    "line": "call    TESDataHandler_ReleaseFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x46C343",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x46C345",
+    "line": "jz      short TESForm_SetFormID___SetFormID",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46C347",
+    "line": "push    esi; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46C348",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x46C349",
+    "line": "mov     ecx, offset TESForm_FormIDMap; this",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x46C34E",
+    "line": "call    NiTMap_SetAt",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x46C353",
+    "line": "mov     [esi+0Ch], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x46C356",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x46C357",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x46C358",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

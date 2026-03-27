@@ -1,0 +1,1 @@
+__frame_IOleItemContainer_GetObjectStorage_Stub

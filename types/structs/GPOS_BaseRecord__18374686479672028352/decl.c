@@ -1,0 +1,1 @@
+GPOS_BaseRecord

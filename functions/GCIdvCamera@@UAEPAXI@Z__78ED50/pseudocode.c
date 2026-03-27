@@ -1,0 +1,7 @@
+CIdvCamera *__thiscall CIdvCamera::`scalar deleting destructor'(CIdvCamera *this, char a2)
+{
+  *(_DWORD *)this = &CIdvCamera::`vftable';
+  if ( (a2 & 1) != 0 )
+    FormHeapFree((unsigned int)this);
+  return this;
+}

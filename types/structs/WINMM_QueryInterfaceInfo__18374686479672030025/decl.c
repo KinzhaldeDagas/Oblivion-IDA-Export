@@ -1,0 +1,1 @@
+WINMM_QueryInterfaceInfo

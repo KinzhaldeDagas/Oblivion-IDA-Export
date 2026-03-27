@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA25A10",
+    "line": "push    offset dword_B14ED0",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA25A15",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA25A1A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA25A1F",
+    "line": "mov     eax, off_B14ED4; \"iJoystickMoveLeftRight:Controls\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA25A24",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA25A26",
+    "line": "jz      short locret_A25A34",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA25A28",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA25A2B",
+    "line": "jnz     short locret_A25A34",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA25A2D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA25A2E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA25A33",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA25A34",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

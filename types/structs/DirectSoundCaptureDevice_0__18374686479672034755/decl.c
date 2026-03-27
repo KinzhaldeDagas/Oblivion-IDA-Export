@@ -1,0 +1,1 @@
+DirectSoundCaptureDevice_0

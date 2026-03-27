@@ -1,0 +1,134 @@
+[
+  {
+    "ea": "0x663A60",
+    "line": "mov     ecx, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x663A66",
+    "line": "add     ecx, 44h ; 'D'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x663A69",
+    "line": "call    GetExtraDataFollower",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x663A6E",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x663A70",
+    "line": "jz      short loc_663A91",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x663A72",
+    "line": "mov     eax, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x663A75",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x663A77",
+    "line": "jz      short loc_663A91",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x663A79",
+    "line": "mov     edx, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x663A7D",
+    "line": "lea     ecx, [ecx+0]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x663A80",
+    "line": "mov     ecx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x663A82",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x663A84",
+    "line": "jz      short loc_663A91",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x663A86",
+    "line": "cmp     ecx, edx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x663A88",
+    "line": "jz      short loc_663A96",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x663A8A",
+    "line": "mov     eax, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x663A8D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x663A8F",
+    "line": "jnz     short loc_663A80",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x663A91",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x663A93",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x663A96",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x663A98",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

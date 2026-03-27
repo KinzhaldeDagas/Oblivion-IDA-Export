@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA18D20",
+    "line": "push    offset byte_B06CAC",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA18D25",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA18D2A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA18D2F",
+    "line": "mov     eax, off_B06CB0; \"bUseRefractionShader:Display\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA18D34",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA18D36",
+    "line": "jz      short locret_A18D44",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA18D38",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA18D3B",
+    "line": "jnz     short locret_A18D44",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA18D3D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA18D3E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA18D43",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA18D44",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

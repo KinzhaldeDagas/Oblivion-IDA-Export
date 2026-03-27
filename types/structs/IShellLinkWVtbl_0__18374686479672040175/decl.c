@@ -1,0 +1,1 @@
+IShellLinkWVtbl_0

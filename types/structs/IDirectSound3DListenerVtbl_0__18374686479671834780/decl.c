@@ -1,0 +1,1 @@
+IDirectSound3DListenerVtbl_0

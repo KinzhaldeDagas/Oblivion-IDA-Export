@@ -1,0 +1,2 @@
+0x60D070: fldz
+0x60D072: retn    0Ch

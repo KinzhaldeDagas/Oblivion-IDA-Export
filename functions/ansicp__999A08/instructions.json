@@ -1,0 +1,158 @@
+[
+  {
+    "ea": "0x999A08",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x999A09",
+    "line": "mov     ebp, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x999A0B",
+    "line": "sub     esp, 0Ch",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x999A0E",
+    "line": "mov     eax, ___security_cookie",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x999A13",
+    "line": "xor     eax, ebp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x999A15",
+    "line": "mov     [ebp+var_4], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x999A18",
+    "line": "push    6; cchData",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x999A1A",
+    "line": "lea     eax, [ebp+LCData]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x999A1D",
+    "line": "push    eax; lpLCData",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x999A1E",
+    "line": "push    1004h; LCType",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x999A23",
+    "line": "push    [ebp+Locale]; Locale",
+    "mnemonic": "push",
+    "size": 3
+  },
+  {
+    "ea": "0x999A26",
+    "line": "mov     [ebp+var_6], 0",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x999A2A",
+    "line": "call    ds:GetLocaleInfoA",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x999A30",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x999A32",
+    "line": "jnz     short loc_999A39",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x999A34",
+    "line": "or      eax, 0FFFFFFFFh",
+    "mnemonic": "or",
+    "size": 3
+  },
+  {
+    "ea": "0x999A37",
+    "line": "jmp     short loc_999A43",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x999A39",
+    "line": "lea     eax, [ebp+LCData]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x999A3C",
+    "line": "push    eax; Str",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x999A3D",
+    "line": "call    _atol",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x999A42",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x999A43",
+    "line": "mov     ecx, [ebp+var_4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x999A46",
+    "line": "xor     ecx, ebp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x999A48",
+    "line": "call    @__security_check_cookie@4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x999A4D",
+    "line": "leave",
+    "mnemonic": "leave",
+    "size": 1
+  },
+  {
+    "ea": "0x999A4E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

@@ -1,0 +1,2 @@
+0x991A98: fptan
+0x991A9A: retn

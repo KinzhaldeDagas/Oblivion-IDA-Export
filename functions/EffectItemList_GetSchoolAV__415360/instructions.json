@@ -1,0 +1,86 @@
+[
+  {
+    "ea": "0x415360",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415361",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x415363",
+    "line": "push    3",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x415365",
+    "line": "or      esi, 0FFFFFFFFh",
+    "mnemonic": "or",
+    "size": 3
+  },
+  {
+    "ea": "0x415368",
+    "line": "call    EffectItemList_GetStrongestItem",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41536D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41536F",
+    "line": "jz      short EffectItemList_GetSchoolAV___Return_Invalid",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x415371",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x415373",
+    "line": "call    EffectItem_GetSchool",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x415378",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415379",
+    "line": "call    Magic_GetSkillAVFromSchool",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41537E",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x415381",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x415382",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

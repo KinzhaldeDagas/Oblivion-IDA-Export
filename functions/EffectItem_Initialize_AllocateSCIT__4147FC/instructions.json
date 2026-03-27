@@ -1,0 +1,122 @@
+[
+  {
+    "ea": "0x4147FC",
+    "line": "push    18h; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4147FE",
+    "line": "fstp    st",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x414800",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x414805",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x414808",
+    "line": "cmp     eax, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x41480A",
+    "line": "jz      short loc_414819",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41480C",
+    "line": "mov     [eax+8], ebx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41480F",
+    "line": "mov     [eax+0Ch], bx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x414813",
+    "line": "mov     [eax+0Eh], bx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x414817",
+    "line": "jmp     short loc_41481B",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x414819",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x41481B",
+    "line": "mov     ecx, [esi+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41481E",
+    "line": "sub     esp, 8",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x414821",
+    "line": "mov     edx, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x414823",
+    "line": "mov     [esp+8+arg_5C], esp",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x414827",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x414828",
+    "line": "mov     [esi+18h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41482B",
+    "line": "call    EffectSetting_GetName",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x414830",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x414832",
+    "line": "call    EffectItem_SetSCITName",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

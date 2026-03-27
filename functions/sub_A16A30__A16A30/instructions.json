@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA16A30",
+    "line": "push    offset dword_B02D18",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA16A35",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA16A3A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA16A3F",
+    "line": "mov     eax, off_B02D1C; \"bUseThreadedParticleSystem:General\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA16A44",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA16A46",
+    "line": "jz      short locret_A16A54",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA16A48",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA16A4B",
+    "line": "jnz     short locret_A16A54",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA16A4D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA16A4E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA16A53",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA16A54",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

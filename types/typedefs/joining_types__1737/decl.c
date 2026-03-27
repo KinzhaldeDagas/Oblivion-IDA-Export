@@ -1,0 +1,1 @@
+joining_types

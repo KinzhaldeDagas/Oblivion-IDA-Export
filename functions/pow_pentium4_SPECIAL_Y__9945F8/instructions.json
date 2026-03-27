@@ -1,0 +1,128 @@
+[
+  {
+    "ea": "0x9945F8",
+    "line": "movlpd  xmm4, [esp+arg_0]",
+    "mnemonic": "movlpd",
+    "size": 6
+  },
+  {
+    "ea": "0x9945FE",
+    "line": "movlpd  xmm2, [esp+arg_8]",
+    "mnemonic": "movlpd",
+    "size": 6
+  },
+  {
+    "ea": "0x994604",
+    "line": "movlpd  xmm3, qword ptr ds:xmmword_AAB940",
+    "mnemonic": "movlpd",
+    "size": 8
+  },
+  {
+    "ea": "0x99460C",
+    "line": "xorpd   xmm1, xmm1",
+    "mnemonic": "xorpd",
+    "size": 4
+  },
+  {
+    "ea": "0x994610",
+    "line": "andpd   xmm3, xmm2",
+    "mnemonic": "andpd",
+    "size": 4
+  },
+  {
+    "ea": "0x994614",
+    "line": "pcmpeqd xmm1, xmm3",
+    "mnemonic": "pcmpeqd",
+    "size": 4
+  },
+  {
+    "ea": "0x994618",
+    "line": "pmovmskb eax, xmm1",
+    "mnemonic": "pmovmskb",
+    "size": 4
+  },
+  {
+    "ea": "0x99461C",
+    "line": "and     eax, 0FFh",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x994621",
+    "line": "cmp     eax, 0FFh",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x994626",
+    "line": "jnz     __pow_pentium4___RET_Y_NAN",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x99462C",
+    "line": "movd    eax, xmm4",
+    "mnemonic": "movd",
+    "size": 4
+  },
+  {
+    "ea": "0x994630",
+    "line": "cmp     eax, 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x994633",
+    "line": "jnz     short __pow_pentium4___Y_INF_NAN",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x994635",
+    "line": "psrlq   xmm4, 20h ; ' '",
+    "mnemonic": "psrlq",
+    "size": 5
+  },
+  {
+    "ea": "0x99463A",
+    "line": "movd    edx, xmm4",
+    "mnemonic": "movd",
+    "size": 4
+  },
+  {
+    "ea": "0x99463E",
+    "line": "cmp     edx, 3FF00000h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x994644",
+    "line": "jz      __pow_pentium4___RET_ONE",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x99464A",
+    "line": "cmp     edx, 0BFF00000h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x994650",
+    "line": "jnz     short __pow_pentium4___Y_INF_NAN",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x994652",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x994654",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

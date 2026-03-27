@@ -1,0 +1,68 @@
+[
+  {
+    "ea": "0x420F00",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x420F01",
+    "line": "push    23h ; '#'; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x420F03",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x420F05",
+    "line": "call    BaseExtraList_GetExtraData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x420F0A",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x420F0C",
+    "line": "jz      short loc_420F17",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x420F0E",
+    "line": "push    23h ; '#'",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x420F10",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x420F12",
+    "line": "call    BaseExtraList_RemoveExtraByType",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x420F17",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x420F18",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

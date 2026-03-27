@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA1B840",
+    "line": "push    offset flt_B08B44",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B845",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B84A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B84F",
+    "line": "mov     eax, off_B08B48; \"fLandTextureTilingMult:Landscape\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B854",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA1B856",
+    "line": "jz      short locret_A1B864",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1B858",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1B85B",
+    "line": "jnz     short locret_A1B864",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1B85D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1B85E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1B863",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA1B864",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

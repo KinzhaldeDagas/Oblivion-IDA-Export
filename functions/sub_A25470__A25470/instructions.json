@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA25470",
+    "line": "push    offset bBackgroundLoadLipFiles",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA25475",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA2547A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA2547F",
+    "line": "mov     eax, off_B14910; \"bBackgroundLoadLipFiles:BackgroundLoad\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA25484",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA25486",
+    "line": "jz      short locret_A25494",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA25488",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA2548B",
+    "line": "jnz     short locret_A25494",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA2548D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA2548E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA25493",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA25494",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

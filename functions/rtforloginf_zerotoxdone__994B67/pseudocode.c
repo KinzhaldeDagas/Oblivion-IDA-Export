@@ -1,0 +1,4 @@
+void rtforloginf_::zerotoxdone()
+{
+  ;
+}

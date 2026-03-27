@@ -1,0 +1,194 @@
+[
+  {
+    "ea": "0x98BEEB",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98BEEC",
+    "line": "push    dwTlsIndex; dwTlsIndex",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98BEF2",
+    "line": "mov     esi, ds:TlsGetValue",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x98BEF8",
+    "line": "call    esi ; TlsGetValue",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x98BEFA",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98BEFC",
+    "line": "jz      short loc_98BF1F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98BEFE",
+    "line": "mov     eax, dword_B310AC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98BF03",
+    "line": "cmp     eax, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x98BF06",
+    "line": "jz      short loc_98BF1F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF08",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98BF09",
+    "line": "push    dwTlsIndex; dwTlsIndex",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98BF0F",
+    "line": "call    esi ; TlsGetValue",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF11",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF13",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF15",
+    "line": "jz      short loc_98BF1F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF17",
+    "line": "mov     eax, [eax+1FCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x98BF1D",
+    "line": "jmp     short loc_98BF3A",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF1F",
+    "line": "push    offset aKernel32_dll",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98BF24",
+    "line": "call    ds:GetModuleHandleA",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x98BF2A",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF2C",
+    "line": "jz      short loc_98BF48",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF2E",
+    "line": "push    offset aDecodepointer",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98BF33",
+    "line": "push    eax; hModule",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98BF34",
+    "line": "call    ds:GetProcAddress",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x98BF3A",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF3C",
+    "line": "jz      short loc_98BF48",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF3E",
+    "line": "push    [esp+4+arg_0]",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x98BF42",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x98BF44",
+    "line": "mov     [esp+4+arg_0], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x98BF48",
+    "line": "mov     eax, [esp+4+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x98BF4C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98BF4D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

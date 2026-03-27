@@ -1,0 +1,1 @@
+IErrorInfoVtbl_0

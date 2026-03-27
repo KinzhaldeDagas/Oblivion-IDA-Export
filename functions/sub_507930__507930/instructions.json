@@ -1,0 +1,80 @@
+[
+  {
+    "ea": "0x507930",
+    "line": "cmp     byte ptr ds:0B3B908h, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x507937",
+    "line": "setz    al",
+    "mnemonic": "setz",
+    "size": 3
+  },
+  {
+    "ea": "0x50793A",
+    "line": "mov     ds:0B3B908h, al",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x50793F",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x507941",
+    "line": "mov     eax, offset aShown_; \"shown.\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x507946",
+    "line": "jnz     short loc_50794D",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x507948",
+    "line": "mov     eax, offset aHidden_; \"hidden.\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x50794D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x50794E",
+    "line": "push    offset aVerboseMessage; \"Verbose messages %s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x507953",
+    "line": "call    Interface_ConsolePrint",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x507958",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x50795B",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x50795D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

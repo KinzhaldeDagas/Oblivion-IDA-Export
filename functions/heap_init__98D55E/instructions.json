@@ -1,0 +1,170 @@
+[
+  {
+    "ea": "0x98D55E",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x98D560",
+    "line": "cmp     [esp+arg_0], eax",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x98D564",
+    "line": "push    0; dwMaximumSize",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x98D566",
+    "line": "setz    al",
+    "mnemonic": "setz",
+    "size": 3
+  },
+  {
+    "ea": "0x98D569",
+    "line": "push    1000h; dwInitialSize",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98D56E",
+    "line": "push    eax; flOptions",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98D56F",
+    "line": "call    ds:HeapCreate",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x98D575",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98D577",
+    "line": "mov     hHeap, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98D57C",
+    "line": "jnz     short loc_98D581",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x98D57E",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x98D580",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x98D581",
+    "line": "call    ___heap_select",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98D586",
+    "line": "cmp     eax, 3",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x98D589",
+    "line": "mov     dword_BAABC0, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x98D58E",
+    "line": "jnz     short loc_98D5B4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x98D590",
+    "line": "push    3F8h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98D595",
+    "line": "call    ___sbh_heap_init",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98D59A",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98D59C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98D59D",
+    "line": "jnz     short loc_98D5B4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x98D59F",
+    "line": "push    hHeap; hHeap",
+    "mnemonic": "push",
+    "size": 6
+  },
+  {
+    "ea": "0x98D5A5",
+    "line": "call    ds:HeapDestroy",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x98D5AB",
+    "line": "and     hHeap, 0",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x98D5B2",
+    "line": "jmp     short loc_98D57E",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x98D5B4",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x98D5B6",
+    "line": "inc     eax",
+    "mnemonic": "inc",
+    "size": 1
+  },
+  {
+    "ea": "0x98D5B7",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

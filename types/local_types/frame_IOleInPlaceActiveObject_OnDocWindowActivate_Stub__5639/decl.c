@@ -1,0 +1,1 @@
+__frame_IOleInPlaceActiveObject_OnDocWindowActivate_Stub

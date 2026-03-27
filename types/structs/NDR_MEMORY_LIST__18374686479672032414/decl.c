@@ -1,0 +1,1 @@
+_NDR_MEMORY_LIST

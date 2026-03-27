@@ -1,0 +1,92 @@
+[
+  {
+    "ea": "0x628B20",
+    "line": "mov     eax, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x628B24",
+    "line": "cmp     eax, 30h; switch 49 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x628B27",
+    "line": "ja      short def_628B30; jumptable 00628B30 default case, cases 1-6,8-10,12-17,19-26,28-47",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x628B29",
+    "line": "movzx   eax, ds:byte_628B74[eax]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x628B30",
+    "line": "jmp     ds:jpt_628B30[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x628B37",
+    "line": "fld     dword ptr ds:0A30634h; jumptable 00628B30 case 11",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x628B3D",
+    "line": "fstp    dword ptr [ecx+294h]",
+    "mnemonic": "fstp",
+    "size": 6
+  },
+  {
+    "ea": "0x628B43",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x628B46",
+    "line": "mov     dword ptr [ecx+298h], 0FFFFFFFFh; jumptable 00628B30 case 48",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x628B50",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x628B53",
+    "line": "mov     ecx, [esp+arg_0]; jumptable 00628B30 cases 0,7,18,27",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x628B57",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x628B59",
+    "line": "mov     eax, [edx+2C0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x628B5F",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x628B61",
+    "line": "retn    8; jumptable 00628B30 default case, cases 1-6,8-10,12-17,19-26,28-47",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

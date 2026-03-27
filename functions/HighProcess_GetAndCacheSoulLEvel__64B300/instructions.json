@@ -1,0 +1,80 @@
+[
+  {
+    "ea": "0x64B300",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x64B301",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x64B303",
+    "line": "cmp     word ptr [esi+138h], 0FFFFh",
+    "mnemonic": "cmp",
+    "size": 8
+  },
+  {
+    "ea": "0x64B30B",
+    "line": "jnz     short loc_64B326",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x64B30D",
+    "line": "mov     ecx, [esp+4+a2]; this",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x64B311",
+    "line": "push    0; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x64B313",
+    "line": "call    Actor_GetActorBaseForm",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x64B318",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x64B31A",
+    "line": "call    TESCreature__GetSoulLevel",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x64B31F",
+    "line": "mov     [esi+138h], ax",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x64B326",
+    "line": "movsx   eax, word ptr [esi+138h]",
+    "mnemonic": "movsx",
+    "size": 7
+  },
+  {
+    "ea": "0x64B32D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x64B32E",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

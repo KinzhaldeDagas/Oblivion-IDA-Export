@@ -1,0 +1,1 @@
+IDirectSoundFullDuplexVtbl_0

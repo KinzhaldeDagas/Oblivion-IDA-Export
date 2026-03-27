@@ -1,0 +1,1 @@
+__frame_IOleInPlaceSite_OnPosRectChange_Stub

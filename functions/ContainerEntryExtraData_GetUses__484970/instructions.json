@@ -1,0 +1,164 @@
+[
+  {
+    "ea": "0x484970",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x484971",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x484973",
+    "line": "push    offset ??_R0?AVTESUsesForm@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x484978",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48497A",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48497D",
+    "line": "push    offset ??_R0?AVTESBoundObject@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x484982",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x484984",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x484985",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48498A",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x48498D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x48498F",
+    "line": "jz      short ContainerEntryExtraData_GetUses___Return_Neg1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x484991",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484993",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x484995",
+    "line": "jz      short ContainerEntryExtraData_GetUses___Return_BaseUseCount",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x484997",
+    "line": "mov     esi, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x484999",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x48499B",
+    "line": "jz      short ContainerEntryExtraData_GetUses___Return_BaseUseCount",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48499D",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48499F",
+    "line": "call    ExtraDataList_GetUses",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4849A4",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4849A6",
+    "line": "jz      short ContainerEntryExtraData_GetUses___Return_Neg1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4849A8",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4849AA",
+    "line": "call    ExtraDataList_GetUses",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4849AF",
+    "line": "movzx   eax, al",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x4849B2",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4849B3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

@@ -1,0 +1,230 @@
+[
+  {
+    "ea": "0x9812C0",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9812C1",
+    "line": "mov     ebp, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x9812C3",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9812C4",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9812C5",
+    "line": "mov     esi, [ebp+Src]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9812C8",
+    "line": "mov     ecx, [ebp+Size]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9812CB",
+    "line": "mov     edi, [ebp+Dst]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9812CE",
+    "line": "mov     eax, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x9812D0",
+    "line": "mov     edx, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x9812D2",
+    "line": "add     eax, esi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x9812D4",
+    "line": "cmp     edi, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x9812D6",
+    "line": "jbe     short CopyUp",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x9812D8",
+    "line": "cmp     edi, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x9812DA",
+    "line": "jb      CopyDown",
+    "mnemonic": "jb",
+    "size": 6
+  },
+  {
+    "ea": "0x9812E0",
+    "line": "cmp     ecx, 100h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x9812E6",
+    "line": "jb      short Dword_align",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x9812E8",
+    "line": "cmp     dword ptr ds:0BAABE0h, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x9812EF",
+    "line": "jz      short Dword_align",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x9812F1",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9812F2",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9812F3",
+    "line": "and     edi, 0Fh",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9812F6",
+    "line": "and     esi, 0Fh",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9812F9",
+    "line": "cmp     edi, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x9812FB",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9812FC",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9812FD",
+    "line": "jnz     short Dword_align",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x9812FF",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x981300",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x981301",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x981302",
+    "line": "jmp     __VEC_memcpy",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x981307",
+    "line": "test    edi, 3",
+    "mnemonic": "test",
+    "size": 6
+  },
+  {
+    "ea": "0x98130D",
+    "line": "jnz     short CopyLeadUp",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x98130F",
+    "line": "shr     ecx, 2",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x981312",
+    "line": "and     edx, 3",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x981315",
+    "line": "cmp     ecx, 8; switch 8 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x981318",
+    "line": "jb      short CopyUnwindUp",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x98131A",
+    "line": "rep movsd; jumptable 00981344 default case",
+    "mnemonic": "movsd",
+    "size": 2
+  },
+  {
+    "ea": "0x98131C",
+    "line": "jmp     ds:jpt_98131C[edx*4]; switch 4 cases",
+    "mnemonic": "jmp",
+    "size": 7
+  }
+]

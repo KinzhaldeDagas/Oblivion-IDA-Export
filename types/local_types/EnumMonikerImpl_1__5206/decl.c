@@ -1,0 +1,1 @@
+EnumMonikerImpl_1

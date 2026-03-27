@@ -1,0 +1,98 @@
+[
+  {
+    "ea": "0x98C3B2",
+    "line": "push    8",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x98C3B4",
+    "line": "push    offset stru_AFFE08",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x98C3B9",
+    "line": "call    __SEH_prolog4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C3BE",
+    "line": "call    __getptd",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98C3C3",
+    "line": "mov     eax, [eax+78h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98C3C6",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x98C3C8",
+    "line": "jz      short loc_98C3E0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98C3CA",
+    "line": "and     [ebp+ms_exc.registration.TryLevel], 0",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x98C3CE",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x98C3D0",
+    "line": "jmp     short loc_98C3D9",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x98C3D2",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x98C3D4",
+    "line": "inc     eax",
+    "mnemonic": "inc",
+    "size": 1
+  },
+  {
+    "ea": "0x98C3D5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x98C3D6",
+    "line": "mov     esp, [ebp+ms_exc.old_esp]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98C3D9",
+    "line": "mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x98C3E0",
+    "line": "call    _abort",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

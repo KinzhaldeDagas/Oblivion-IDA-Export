@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA24A10",
+    "line": "push    offset dword_B139A4",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA24A15",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA24A1A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA24A1F",
+    "line": "mov     eax, off_B139A8; \"iConsoleTextYPos:Menu\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA24A24",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA24A26",
+    "line": "jz      short locret_A24A34",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA24A28",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA24A2B",
+    "line": "jnz     short locret_A24A34",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA24A2D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA24A2E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA24A33",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA24A34",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

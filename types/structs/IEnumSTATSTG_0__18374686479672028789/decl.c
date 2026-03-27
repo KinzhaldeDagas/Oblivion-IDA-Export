@@ -1,0 +1,1 @@
+IEnumSTATSTG_0

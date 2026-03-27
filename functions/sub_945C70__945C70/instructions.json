@@ -1,0 +1,152 @@
+[
+  {
+    "ea": "0x945C70",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x945C71",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x945C73",
+    "line": "mov     eax, [esi+20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x945C76",
+    "line": "cmp     eax, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x945C79",
+    "line": "jz      short loc_945CA9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x945C7B",
+    "line": "mov     ecx, [esp+4+len]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x945C7F",
+    "line": "mov     edx, [esp+4+buf]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x945C83",
+    "line": "push    0; flags",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x945C85",
+    "line": "push    ecx; len",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x945C86",
+    "line": "push    edx; buf",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x945C87",
+    "line": "push    eax; s",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x945C88",
+    "line": "call    send_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x945C8D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x945C8F",
+    "line": "jle     short loc_945C96",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x945C91",
+    "line": "cmp     eax, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x945C94",
+    "line": "jnz     short loc_945CAB",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x945C96",
+    "line": "call    WSAGetLastError_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x945C9B",
+    "line": "cmp     eax, 2733h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x945CA0",
+    "line": "jz      short loc_945CA9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x945CA2",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x945CA4",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x945CA6",
+    "line": "call    dword ptr [eax+0Ch]",
+    "mnemonic": "call",
+    "size": 3
+  },
+  {
+    "ea": "0x945CA9",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x945CAB",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x945CAC",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

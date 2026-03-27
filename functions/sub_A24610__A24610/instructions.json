@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA24610",
+    "line": "push    offset dword_B135A0",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA24615",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA2461A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA2461F",
+    "line": "mov     eax, off_B135A4; \"fActivatePickSphereRadius:Interface\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA24624",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA24626",
+    "line": "jz      short locret_A24634",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA24628",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA2462B",
+    "line": "jnz     short locret_A24634",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA2462D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA2462E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA24633",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA24634",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

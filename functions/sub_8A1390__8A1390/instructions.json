@@ -1,0 +1,230 @@
+[
+  {
+    "ea": "0x8A1390",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8A1391",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8A1393",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8A1395",
+    "line": "jz      short loc_8A13DE",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8A1397",
+    "line": "mov     ecx, [edi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8A139A",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8A139C",
+    "line": "jz      short loc_8A13DE",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8A139E",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13A0",
+    "line": "mov     edx, [eax+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8A13A3",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8A13A4",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13A6",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13A8",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13AA",
+    "line": "jz      short loc_8A13DD",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13AC",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8A13AD",
+    "line": "mov     ebx, ds:0A28078h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x8A13B3",
+    "line": "mov     eax, [edi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8A13B6",
+    "line": "sub     esi, 1",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x8A13B9",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13BB",
+    "line": "jz      short loc_8A13CC",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13BD",
+    "line": "mov     eax, [eax+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8A13C0",
+    "line": "mov     eax, [eax+esi*8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8A13C3",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13C5",
+    "line": "jz      short loc_8A13CC",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13C7",
+    "line": "mov     eax, [eax+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8A13CA",
+    "line": "jmp     short loc_8A13CE",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13CC",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13CE",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13D0",
+    "line": "jz      short loc_8A13D8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13D2",
+    "line": "add     eax, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x8A13D5",
+    "line": "push    eax; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8A13D6",
+    "line": "call    ebx ; InterlockedIncrement",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13D8",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13DA",
+    "line": "jnz     short loc_8A13B3",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x8A13DC",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8A13DD",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8A13DE",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8A13DF",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

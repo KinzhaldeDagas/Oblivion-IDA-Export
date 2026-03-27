@@ -1,0 +1,1 @@
+emf_in_wmf_comment

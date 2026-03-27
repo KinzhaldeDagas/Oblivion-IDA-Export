@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA170C0",
+    "line": "push    offset off_B03094; \"Map loop.bik\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA170C5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA170CA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA170CF",
+    "line": "mov     eax, off_B03098; \"sMainMenuMovie:General\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA170D4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA170D6",
+    "line": "jz      short locret_A170E4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA170D8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA170DB",
+    "line": "jnz     short locret_A170E4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA170DD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA170DE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA170E3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA170E4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

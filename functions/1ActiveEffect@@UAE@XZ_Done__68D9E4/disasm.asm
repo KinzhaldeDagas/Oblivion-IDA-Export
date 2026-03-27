@@ -1,0 +1,2 @@
+0x68D9E4: pop     esi
+0x68D9E5: retn

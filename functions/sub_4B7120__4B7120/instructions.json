@@ -1,0 +1,470 @@
+[
+  {
+    "ea": "0x4B7120",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B7121",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B7122",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B7123",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B7125",
+    "line": "call    TESForm_InitializeFormRecord",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B712A",
+    "line": "lea     ecx, [edi+24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B712D",
+    "line": "call    TESFullName_Save",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B7132",
+    "line": "push    54444F4Dh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B7137",
+    "line": "push    42444F4Dh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B713C",
+    "line": "push    4C444F4Dh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B7141",
+    "line": "lea     ecx, [edi+30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B7144",
+    "line": "call    TESModel_Save",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B7149",
+    "line": "lea     ecx, [edi+48h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B714C",
+    "line": "call    TESScriptableForm_Save",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B7151",
+    "line": "mov     eax, [edi+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B7154",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4B7156",
+    "line": "jz      short loc_4B7173",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B7158",
+    "line": "mov     eax, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B715B",
+    "line": "push    4; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4B715D",
+    "line": "lea     ecx, [esp+10h+Src]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4B7161",
+    "line": "push    ecx; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B7162",
+    "line": "push    4D414E53h; int",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B7167",
+    "line": "mov     [esp+18h+Src], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4B716B",
+    "line": "call    TESForm_PutFormRecordChunkData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B7170",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B7173",
+    "line": "mov     eax, [edi+5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B7176",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4B7178",
+    "line": "jz      short loc_4B7195",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B717A",
+    "line": "mov     edx, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B717D",
+    "line": "push    4; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4B717F",
+    "line": "lea     eax, [esp+10h+Src]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4B7183",
+    "line": "push    eax; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B7184",
+    "line": "push    4D414E41h; int",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B7189",
+    "line": "mov     [esp+18h+Src], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4B718D",
+    "line": "call    TESForm_PutFormRecordChunkData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B7192",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B7195",
+    "line": "mov     eax, [edi+60h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B7198",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4B719A",
+    "line": "jz      short loc_4B71B7",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B719C",
+    "line": "mov     ecx, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B719F",
+    "line": "push    4; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4B71A1",
+    "line": "lea     edx, [esp+10h+Src]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4B71A5",
+    "line": "push    edx; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B71A6",
+    "line": "push    4D414E42h; int",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B71AB",
+    "line": "mov     [esp+18h+Src], ecx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4B71AF",
+    "line": "call    TESForm_PutFormRecordChunkData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B71B4",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B71B7",
+    "line": "push    1; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4B71B9",
+    "line": "lea     eax, [edi+64h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B71BC",
+    "line": "push    eax; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B71BD",
+    "line": "push    4D414E46h; int",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B71C2",
+    "line": "call    TESForm_PutFormRecordChunkData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B71C7",
+    "line": "lea     esi, [edi+68h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B71CA",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B71CD",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4B71CF",
+    "line": "jz      short loc_4B7200",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B71D1",
+    "line": "cmp     dword ptr [esi+4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4B71D5",
+    "line": "jnz     short loc_4B71DC",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B71D7",
+    "line": "cmp     dword ptr [esi], 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x4B71DA",
+    "line": "jz      short loc_4B7200",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B71DC",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B71DE",
+    "line": "mov     edx, [ecx+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B71E1",
+    "line": "push    4; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4B71E3",
+    "line": "lea     eax, [esp+10h+Src]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4B71E7",
+    "line": "push    eax; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B71E8",
+    "line": "push    4D414E54h; int",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B71ED",
+    "line": "mov     [esp+18h+Src], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4B71F1",
+    "line": "call    TESForm_PutFormRecordChunkData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B71F6",
+    "line": "mov     esi, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B71F9",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B71FC",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4B71FE",
+    "line": "jnz     short loc_4B71D1",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B7200",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4B7202",
+    "line": "call    TESForm_FinalizeFormRecord",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B7207",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4B7208",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4B7209",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4B720A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

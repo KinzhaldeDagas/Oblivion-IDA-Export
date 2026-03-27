@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA24880",
+    "line": "push    offset dword_B13608",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA24885",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA2488A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA2488F",
+    "line": "mov     eax, off_B1360C; \"iSafeZoneXWide:Interface\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA24894",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA24896",
+    "line": "jz      short locret_A248A4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA24898",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA2489B",
+    "line": "jnz     short locret_A248A4",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA2489D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA2489E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA248A3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA248A4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

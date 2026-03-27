@@ -1,0 +1,131 @@
+{
+  "decl": "XSAVE_FORMAT",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "ControlWord",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "StatusWord",
+      "offset_bits": 16,
+      "offset_bytes": 2,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "TagWord",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 8,
+      "type": "BYTE"
+    },
+    {
+      "name": "Reserved1",
+      "offset_bits": 40,
+      "offset_bytes": 5,
+      "size_bits": 8,
+      "type": "BYTE"
+    },
+    {
+      "name": "ErrorOpcode",
+      "offset_bits": 48,
+      "offset_bytes": 6,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "ErrorOffset",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "ErrorSelector",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "Reserved2",
+      "offset_bits": 112,
+      "offset_bytes": 14,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "DataOffset",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "DataSelector",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "Reserved3",
+      "offset_bits": 176,
+      "offset_bytes": 22,
+      "size_bits": 16,
+      "type": "WORD"
+    },
+    {
+      "name": "MxCsr",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "MxCsr_Mask",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "FloatRegisters",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 1024,
+      "type": "M128A[8]"
+    },
+    {
+      "name": "XmmRegisters",
+      "offset_bits": 1280,
+      "offset_bytes": 160,
+      "size_bits": 2048,
+      "type": "M128A[16]"
+    },
+    {
+      "name": "Reserved4",
+      "offset_bits": 3328,
+      "offset_bytes": 416,
+      "size_bits": 768,
+      "type": "BYTE[96]"
+    }
+  ],
+  "name": "XSAVE_FORMAT",
+  "ordinal": 803,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

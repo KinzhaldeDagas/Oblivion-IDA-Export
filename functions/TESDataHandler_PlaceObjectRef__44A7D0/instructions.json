@@ -1,0 +1,386 @@
+[
+  {
+    "ea": "0x44A7D0",
+    "line": "push    0FFFFFFFFh",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x44A7D2",
+    "line": "push    offset TESDataHandler_PlaceObjectRef_SEH",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x44A7D7",
+    "line": "mov     eax, large fs:0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x44A7DD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x44A7DE",
+    "line": "sub     esp, 24h",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x44A7E1",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x44A7E2",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x44A7E3",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x44A7E4",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x44A7E5",
+    "line": "mov     eax, ds:0B30AACh",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x44A7EA",
+    "line": "xor     eax, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x44A7EC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x44A7ED",
+    "line": "lea     eax, [esp+44h+var_C]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x44A7F1",
+    "line": "mov     large fs:0, eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x44A7F7",
+    "line": "mov     ebx, [esp+44h+arg_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44A7FB",
+    "line": "xor     ebp, ebp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x44A7FD",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x44A7FF",
+    "line": "jz      short loc_44A80E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x44A801",
+    "line": "mov     ecx, ebx; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44A803",
+    "line": "call    TESObjectCELL_IsInterior",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44A808",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x44A80A",
+    "line": "jnz     short loc_44A88B",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x44A80C",
+    "line": "xor     ebx, ebx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x44A80E",
+    "line": "mov     edi, [esp+44h+arg_10]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44A812",
+    "line": "mov     esi, [esp+44h+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44A816",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x44A818",
+    "line": "jz      loc_44ABBF",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44A81E",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x44A820",
+    "line": "jnz     short loc_44A82A",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x44A822",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x44A824",
+    "line": "jz      loc_44ABBF",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44A82A",
+    "line": "mov     ebp, [esp+44h+arg_14]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44A82E",
+    "line": "test    ebp, ebp",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x44A830",
+    "line": "jz      short TESDataHandler_PlaceObjectRef___SwitchRefType",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x44A832",
+    "line": "mov     ecx, ebp; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44A834",
+    "line": "call    TESObjectREFR_IsPersistent?",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44A839",
+    "line": "push    0; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x44A83B",
+    "line": "mov     ecx, ebp; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44A83D",
+    "line": "mov     byte ptr [esp+48h+arg_10], al",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x44A841",
+    "line": "call    TESObjectREFR_SetPersistance",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44A846",
+    "line": "mov     ecx, ebp; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44A848",
+    "line": "call    TESObjectREFR_GetParentCell",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44A84D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x44A84F",
+    "line": "jz      short loc_44A859",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x44A851",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x44A852",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44A854",
+    "line": "call    sub_4CECD0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44A859",
+    "line": "mov     eax, [ebp+0]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x44A85C",
+    "line": "mov     edx, [eax+170h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x44A862",
+    "line": "mov     ecx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44A864",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x44A866",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x44A868",
+    "line": "jnz     short loc_44A872",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x44A86A",
+    "line": "push    esi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x44A86B",
+    "line": "mov     ecx, ebp; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44A86D",
+    "line": "call    TESObjectREFR_SetBaseForm",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44A872",
+    "line": "mov     ecx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x44A874",
+    "line": "call    sub_4DB3C0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x44A879",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x44A87B",
+    "line": "jz      loc_44A96D",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x44A881",
+    "line": "mov     byte ptr [esp+44h+arg_10], 1",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x44A886",
+    "line": "jmp     loc_44A96D",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x44A88B",
+    "line": "xor     edi, edi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x44A88D",
+    "line": "jmp     short loc_44A812",
+    "mnemonic": "jmp",
+    "size": 2
+  }
+]

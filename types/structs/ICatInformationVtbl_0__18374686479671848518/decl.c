@@ -1,0 +1,1 @@
+ICatInformationVtbl_0

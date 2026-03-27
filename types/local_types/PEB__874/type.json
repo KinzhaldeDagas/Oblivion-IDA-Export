@@ -1,0 +1,628 @@
+{
+  "decl": "_PEB",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "InheritedAddressSpace",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 8,
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "ReadImageFileExecOptions",
+      "offset_bits": 8,
+      "offset_bytes": 1,
+      "size_bits": 8,
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "BeingDebugged",
+      "offset_bits": 16,
+      "offset_bytes": 2,
+      "size_bits": 8,
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "SpareBool",
+      "offset_bits": 24,
+      "offset_bytes": 3,
+      "size_bits": 8,
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "Mutant",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "HANDLE"
+    },
+    {
+      "name": "ImageBaseAddress",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "HMODULE"
+    },
+    {
+      "name": "LdrData",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "PPEB_LDR_DATA"
+    },
+    {
+      "name": "ProcessParameters",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "RTL_USER_PROCESS_PARAMETERS *"
+    },
+    {
+      "name": "SubSystemData",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "ProcessHeap",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "HANDLE"
+    },
+    {
+      "name": "FastPebLock",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 32,
+      "type": "PRTL_CRITICAL_SECTION"
+    },
+    {
+      "name": "FastPebLockRoutine",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "FastPebUnlockRoutine",
+      "offset_bits": 288,
+      "offset_bytes": 36,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "EnvironmentUpdateCount",
+      "offset_bits": 320,
+      "offset_bytes": 40,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "KernelCallbackTable",
+      "offset_bits": 352,
+      "offset_bytes": 44,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "Reserved",
+      "offset_bits": 384,
+      "offset_bytes": 48,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "AtlThunkSListPtr32",
+      "offset_bits": 416,
+      "offset_bytes": 52,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "ApiSetMap",
+      "offset_bits": 448,
+      "offset_bytes": 56,
+      "size_bits": 32,
+      "type": "PAPI_SET_NAMESPACE_ARRAY"
+    },
+    {
+      "name": "TlsExpansionCounter",
+      "offset_bits": 480,
+      "offset_bytes": 60,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "TlsBitmap",
+      "offset_bits": 512,
+      "offset_bytes": 64,
+      "size_bits": 32,
+      "type": "PRTL_BITMAP"
+    },
+    {
+      "name": "TlsBitmapBits",
+      "offset_bits": 544,
+      "offset_bytes": 68,
+      "size_bits": 64,
+      "type": "ULONG[2]"
+    },
+    {
+      "name": "ReadOnlySharedMemoryBase",
+      "offset_bits": 608,
+      "offset_bytes": 76,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "ReadOnlySharedMemoryHeap",
+      "offset_bits": 640,
+      "offset_bytes": 80,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "ReadOnlyStaticServerData",
+      "offset_bits": 672,
+      "offset_bytes": 84,
+      "size_bits": 32,
+      "type": "PVOID *"
+    },
+    {
+      "name": "AnsiCodePageData",
+      "offset_bits": 704,
+      "offset_bytes": 88,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "OemCodePageData",
+      "offset_bits": 736,
+      "offset_bytes": 92,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "UnicodeCaseTableData",
+      "offset_bits": 768,
+      "offset_bytes": 96,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "NumberOfProcessors",
+      "offset_bits": 800,
+      "offset_bytes": 100,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "NtGlobalFlag",
+      "offset_bits": 832,
+      "offset_bytes": 104,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "CriticalSectionTimeout",
+      "offset_bits": 896,
+      "offset_bytes": 112,
+      "size_bits": 64,
+      "type": "LARGE_INTEGER_0"
+    },
+    {
+      "name": "HeapSegmentReserve",
+      "offset_bits": 960,
+      "offset_bytes": 120,
+      "size_bits": 64,
+      "type": "SIZE_T"
+    },
+    {
+      "name": "HeapSegmentCommit",
+      "offset_bits": 1024,
+      "offset_bytes": 128,
+      "size_bits": 64,
+      "type": "SIZE_T"
+    },
+    {
+      "name": "HeapDeCommitTotalFreeThreshold",
+      "offset_bits": 1088,
+      "offset_bytes": 136,
+      "size_bits": 64,
+      "type": "SIZE_T"
+    },
+    {
+      "name": "HeapDeCommitFreeBlockThreshold",
+      "offset_bits": 1152,
+      "offset_bytes": 144,
+      "size_bits": 64,
+      "type": "SIZE_T"
+    },
+    {
+      "name": "NumberOfHeaps",
+      "offset_bits": 1216,
+      "offset_bytes": 152,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "MaximumNumberOfHeaps",
+      "offset_bits": 1248,
+      "offset_bytes": 156,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "ProcessHeaps",
+      "offset_bits": 1280,
+      "offset_bytes": 160,
+      "size_bits": 32,
+      "type": "PVOID *"
+    },
+    {
+      "name": "GdiSharedHandleTable",
+      "offset_bits": 1312,
+      "offset_bytes": 164,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "ProcessStarterHelper",
+      "offset_bits": 1344,
+      "offset_bytes": 168,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "GdiDCAttributeList",
+      "offset_bits": 1376,
+      "offset_bytes": 172,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "LoaderLock",
+      "offset_bits": 1408,
+      "offset_bytes": 176,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "OSMajorVersion",
+      "offset_bits": 1440,
+      "offset_bytes": 180,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "OSMinorVersion",
+      "offset_bits": 1472,
+      "offset_bytes": 184,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "OSBuildNumber",
+      "offset_bits": 1504,
+      "offset_bytes": 188,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "OSPlatformId",
+      "offset_bits": 1536,
+      "offset_bytes": 192,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "ImageSubSystem",
+      "offset_bits": 1568,
+      "offset_bytes": 196,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "ImageSubSystemMajorVersion",
+      "offset_bits": 1600,
+      "offset_bytes": 200,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "ImageSubSystemMinorVersion",
+      "offset_bits": 1632,
+      "offset_bytes": 204,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "ImageProcessAffinityMask",
+      "offset_bits": 1664,
+      "offset_bytes": 208,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "GdiHandleBuffer",
+      "offset_bits": 1696,
+      "offset_bytes": 212,
+      "size_bits": 896,
+      "type": "HANDLE[28]"
+    },
+    {
+      "name": "unknown",
+      "offset_bits": 2592,
+      "offset_bytes": 324,
+      "size_bits": 192,
+      "type": "ULONG[6]"
+    },
+    {
+      "name": "PostProcessInitRoutine",
+      "offset_bits": 2784,
+      "offset_bytes": 348,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "TlsExpansionBitmap",
+      "offset_bits": 2816,
+      "offset_bytes": 352,
+      "size_bits": 32,
+      "type": "PRTL_BITMAP"
+    },
+    {
+      "name": "TlsExpansionBitmapBits",
+      "offset_bits": 2848,
+      "offset_bytes": 356,
+      "size_bits": 1024,
+      "type": "ULONG[32]"
+    },
+    {
+      "name": "SessionId",
+      "offset_bits": 3872,
+      "offset_bytes": 484,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "AppCompatFlags",
+      "offset_bits": 3904,
+      "offset_bytes": 488,
+      "size_bits": 64,
+      "type": "ULARGE_INTEGER"
+    },
+    {
+      "name": "AppCompatFlagsUser",
+      "offset_bits": 3968,
+      "offset_bytes": 496,
+      "size_bits": 64,
+      "type": "ULARGE_INTEGER"
+    },
+    {
+      "name": "ShimData",
+      "offset_bits": 4032,
+      "offset_bytes": 504,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "AppCompatInfo",
+      "offset_bits": 4064,
+      "offset_bytes": 508,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "CSDVersion",
+      "offset_bits": 4096,
+      "offset_bytes": 512,
+      "size_bits": 64,
+      "type": "UNICODE_STRING"
+    },
+    {
+      "name": "ActivationContextData",
+      "offset_bits": 4160,
+      "offset_bytes": 520,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "ProcessAssemblyStorageMap",
+      "offset_bits": 4192,
+      "offset_bytes": 524,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "SystemDefaultActivationData",
+      "offset_bits": 4224,
+      "offset_bytes": 528,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "SystemAssemblyStorageMap",
+      "offset_bits": 4256,
+      "offset_bytes": 532,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "MinimumStackCommit",
+      "offset_bits": 4288,
+      "offset_bytes": 536,
+      "size_bits": 64,
+      "type": "SIZE_T"
+    },
+    {
+      "name": "FlsCallback",
+      "offset_bits": 4352,
+      "offset_bytes": 544,
+      "size_bits": 32,
+      "type": "PVOID *"
+    },
+    {
+      "name": "FlsListHead",
+      "offset_bits": 4384,
+      "offset_bytes": 548,
+      "size_bits": 64,
+      "type": "LIST_ENTRY"
+    },
+    {
+      "name": "FlsBitmap",
+      "offset_bits": 4448,
+      "offset_bytes": 556,
+      "size_bits": 32,
+      "type": "PRTL_BITMAP"
+    },
+    {
+      "name": "FlsBitmapBits",
+      "offset_bits": 4480,
+      "offset_bytes": 560,
+      "size_bits": 128,
+      "type": "ULONG[4]"
+    },
+    {
+      "name": "FlsHighIndex",
+      "offset_bits": 4608,
+      "offset_bytes": 576,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "WerRegistrationData",
+      "offset_bits": 4640,
+      "offset_bytes": 580,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "WerShipAssertPtr",
+      "offset_bits": 4672,
+      "offset_bytes": 584,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "pUnused",
+      "offset_bits": 4704,
+      "offset_bytes": 588,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "pImageHeaderHash",
+      "offset_bits": 4736,
+      "offset_bytes": 592,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "TracingFlags",
+      "offset_bits": 4768,
+      "offset_bytes": 596,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "CsrServerReadOnlySharedMemoryBase",
+      "offset_bits": 4800,
+      "offset_bytes": 600,
+      "size_bits": 64,
+      "type": "ULONGLONG"
+    },
+    {
+      "name": "TppWorkerpListLock",
+      "offset_bits": 4864,
+      "offset_bytes": 608,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "TppWorkerpList",
+      "offset_bits": 4896,
+      "offset_bytes": 612,
+      "size_bits": 64,
+      "type": "LIST_ENTRY"
+    },
+    {
+      "name": "WaitOnAddressHashTable",
+      "offset_bits": 4960,
+      "offset_bytes": 620,
+      "size_bits": 4096,
+      "type": "PVOID[128]"
+    },
+    {
+      "name": "TelemetryCoverageHeader",
+      "offset_bits": 9056,
+      "offset_bytes": 1132,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "CloudFileFlags",
+      "offset_bits": 9088,
+      "offset_bytes": 1136,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "CloudFileDiagFlags",
+      "offset_bits": 9120,
+      "offset_bytes": 1140,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "PlaceholderCompatibilityMode",
+      "offset_bits": 9152,
+      "offset_bytes": 1144,
+      "size_bits": 8,
+      "type": "CHAR"
+    },
+    {
+      "name": "PlaceholderCompatibilityModeReserved",
+      "offset_bits": 9160,
+      "offset_bytes": 1145,
+      "size_bits": 56,
+      "type": "CHAR[7]"
+    },
+    {
+      "name": "LeapSecondData",
+      "offset_bits": 9216,
+      "offset_bytes": 1152,
+      "size_bits": 32,
+      "type": "PVOID"
+    },
+    {
+      "name": "LeapSecondFlags",
+      "offset_bits": 9248,
+      "offset_bytes": 1156,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "NtGlobalFlag2",
+      "offset_bits": 9280,
+      "offset_bytes": 1160,
+      "size_bits": 32,
+      "type": "ULONG"
+    }
+  ],
+  "name": "_PEB",
+  "ordinal": 874,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

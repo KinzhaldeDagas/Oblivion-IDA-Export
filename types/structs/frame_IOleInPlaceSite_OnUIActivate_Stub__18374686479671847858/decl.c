@@ -1,0 +1,1 @@
+__frame_IOleInPlaceSite_OnUIActivate_Stub

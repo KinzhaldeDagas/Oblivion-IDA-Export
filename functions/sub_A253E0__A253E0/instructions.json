@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA253E0",
+    "line": "push    offset byte_B148F4",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA253E5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA253EA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA253EF",
+    "line": "mov     eax, off_B148F8; \"bDisableHeadTracking:General\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA253F4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA253F6",
+    "line": "jz      short locret_A25404",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA253F8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA253FB",
+    "line": "jnz     short locret_A25404",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA253FD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA253FE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA25403",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA25404",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

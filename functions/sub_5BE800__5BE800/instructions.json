@@ -1,0 +1,122 @@
+[
+  {
+    "ea": "0x5BE800",
+    "line": "push    esi; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5BE801",
+    "line": "mov     esi, [ecx+0A8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE807",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE809",
+    "line": "jz      short loc_5BE850",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE80B",
+    "line": "mov     ecx, [ecx+84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE811",
+    "line": "cmp     ecx, 3; switch 4 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE814",
+    "line": "ja      short def_5BE816",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE816",
+    "line": "jmp     ds:jpt_5BE816[ecx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x5BE81D",
+    "line": "fld1; jumptable 005BE816 case 0",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE81F",
+    "line": "jmp     short loc_5BE837",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE821",
+    "line": "fld     dword ptr ds:0A379B4h; jumptable 005BE816 case 1",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE827",
+    "line": "jmp     short loc_5BE837",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE829",
+    "line": "fld     dword ptr ds:0A46C30h; jumptable 005BE816 case 2",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE82F",
+    "line": "jmp     short loc_5BE837",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE831",
+    "line": "fld     dword ptr ds:0A46B10h; jumptable 005BE816 case 3",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE837",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5BE838",
+    "line": "fstp    [esp+8+a2]; a3",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE83B",
+    "line": "push    0FAEh; a2",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE840",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE842",
+    "line": "call    Tile_SetFloat",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

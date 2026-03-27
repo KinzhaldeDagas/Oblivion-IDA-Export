@@ -1,0 +1,642 @@
+{
+  "decl": "TEB64",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "Tib",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 448,
+      "type": "NT_TIB64"
+    },
+    {
+      "name": "EnvironmentPointer",
+      "offset_bits": 448,
+      "offset_bytes": 56,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "ClientId",
+      "offset_bits": 512,
+      "offset_bytes": 64,
+      "size_bits": 128,
+      "type": "CLIENT_ID64"
+    },
+    {
+      "name": "ActiveRpcHandle",
+      "offset_bits": 640,
+      "offset_bytes": 80,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "ThreadLocalStoragePointer",
+      "offset_bits": 704,
+      "offset_bytes": 88,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "Peb",
+      "offset_bits": 768,
+      "offset_bytes": 96,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "LastErrorValue",
+      "offset_bits": 832,
+      "offset_bytes": 104,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "CountOfOwnedCriticalSections",
+      "offset_bits": 864,
+      "offset_bytes": 108,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "CsrClientThread",
+      "offset_bits": 896,
+      "offset_bytes": 112,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "Win32ThreadInfo",
+      "offset_bits": 960,
+      "offset_bytes": 120,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "User32Reserved",
+      "offset_bits": 1024,
+      "offset_bytes": 128,
+      "size_bits": 832,
+      "type": "ULONG[26]"
+    },
+    {
+      "name": "UserReserved",
+      "offset_bits": 1856,
+      "offset_bytes": 232,
+      "size_bits": 160,
+      "type": "ULONG[5]"
+    },
+    {
+      "name": "WOW32Reserved",
+      "offset_bits": 2048,
+      "offset_bytes": 256,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "CurrentLocale",
+      "offset_bits": 2112,
+      "offset_bytes": 264,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "FpSoftwareStatusRegister",
+      "offset_bits": 2144,
+      "offset_bytes": 268,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "ReservedForDebuggerInstrumentation",
+      "offset_bits": 2176,
+      "offset_bytes": 272,
+      "size_bits": 1024,
+      "type": "ULONG64[16]"
+    },
+    {
+      "name": "SystemReserved1",
+      "offset_bits": 3200,
+      "offset_bytes": 400,
+      "size_bits": 1920,
+      "type": "ULONG64[30]"
+    },
+    {
+      "name": "PlaceholderCompatibilityMode",
+      "offset_bits": 5120,
+      "offset_bytes": 640,
+      "size_bits": 8,
+      "type": "char"
+    },
+    {
+      "name": "PlaceholderReserved",
+      "offset_bits": 5128,
+      "offset_bytes": 641,
+      "size_bits": 88,
+      "type": "char[11]"
+    },
+    {
+      "name": "ProxiedProcessId",
+      "offset_bits": 5216,
+      "offset_bytes": 652,
+      "size_bits": 32,
+      "type": "DWORD"
+    },
+    {
+      "name": "ActivationContextStack",
+      "offset_bits": 5248,
+      "offset_bytes": 656,
+      "size_bits": 320,
+      "type": "ACTIVATION_CONTEXT_STACK64"
+    },
+    {
+      "name": "WorkingOnBehalfOfTicket",
+      "offset_bits": 5568,
+      "offset_bytes": 696,
+      "size_bits": 64,
+      "type": "UCHAR[8]"
+    },
+    {
+      "name": "ExceptionCode",
+      "offset_bits": 5632,
+      "offset_bytes": 704,
+      "size_bits": 32,
+      "type": "LONG"
+    },
+    {
+      "name": "ActivationContextStackPointer",
+      "offset_bits": 5696,
+      "offset_bytes": 712,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "InstrumentationCallbackSp",
+      "offset_bits": 5760,
+      "offset_bytes": 720,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "InstrumentationCallbackPreviousPc",
+      "offset_bits": 5824,
+      "offset_bytes": 728,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "InstrumentationCallbackPreviousSp",
+      "offset_bits": 5888,
+      "offset_bytes": 736,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "TxFsContext",
+      "offset_bits": 5952,
+      "offset_bytes": 744,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "InstrumentationCallbackDisabled",
+      "offset_bits": 5984,
+      "offset_bytes": 748,
+      "size_bits": 8,
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "GdiTebBatch",
+      "offset_bits": 6016,
+      "offset_bytes": 752,
+      "size_bits": 10048,
+      "type": "ULONG64[157]"
+    },
+    {
+      "name": "RealClientId",
+      "offset_bits": 16064,
+      "offset_bytes": 2008,
+      "size_bits": 128,
+      "type": "CLIENT_ID64"
+    },
+    {
+      "name": "GdiCachedProcessHandle",
+      "offset_bits": 16192,
+      "offset_bytes": 2024,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "GdiClientPID",
+      "offset_bits": 16256,
+      "offset_bytes": 2032,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "GdiClientTID",
+      "offset_bits": 16288,
+      "offset_bytes": 2036,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "GdiThreadLocaleInfo",
+      "offset_bits": 16320,
+      "offset_bytes": 2040,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "Win32ClientInfo",
+      "offset_bits": 16384,
+      "offset_bytes": 2048,
+      "size_bits": 3968,
+      "type": "ULONG64[62]"
+    },
+    {
+      "name": "glDispatchTable",
+      "offset_bits": 20352,
+      "offset_bytes": 2544,
+      "size_bits": 14912,
+      "type": "ULONG64[233]"
+    },
+    {
+      "name": "glReserved1",
+      "offset_bits": 35264,
+      "offset_bytes": 4408,
+      "size_bits": 1856,
+      "type": "ULONG64[29]"
+    },
+    {
+      "name": "glReserved2",
+      "offset_bits": 37120,
+      "offset_bytes": 4640,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "glSectionInfo",
+      "offset_bits": 37184,
+      "offset_bytes": 4648,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "glSection",
+      "offset_bits": 37248,
+      "offset_bytes": 4656,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "glTable",
+      "offset_bits": 37312,
+      "offset_bytes": 4664,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "glCurrentRC",
+      "offset_bits": 37376,
+      "offset_bytes": 4672,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "glContext",
+      "offset_bits": 37440,
+      "offset_bytes": 4680,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "LastStatusValue",
+      "offset_bits": 37504,
+      "offset_bytes": 4688,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "StaticUnicodeString",
+      "offset_bits": 37568,
+      "offset_bytes": 4696,
+      "size_bits": 128,
+      "type": "UNICODE_STRING64"
+    },
+    {
+      "name": "StaticUnicodeBuffer",
+      "offset_bits": 37696,
+      "offset_bytes": 4712,
+      "size_bits": 4176,
+      "type": "WCHAR_0[261]"
+    },
+    {
+      "name": "DeallocationStack",
+      "offset_bits": 41920,
+      "offset_bytes": 5240,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "TlsSlots",
+      "offset_bits": 41984,
+      "offset_bytes": 5248,
+      "size_bits": 4096,
+      "type": "ULONG64[64]"
+    },
+    {
+      "name": "TlsLinks",
+      "offset_bits": 46080,
+      "offset_bytes": 5760,
+      "size_bits": 128,
+      "type": "LIST_ENTRY64"
+    },
+    {
+      "name": "Vdm",
+      "offset_bits": 46208,
+      "offset_bytes": 5776,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "ReservedForNtRpc",
+      "offset_bits": 46272,
+      "offset_bytes": 5784,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "DbgSsReserved",
+      "offset_bits": 46336,
+      "offset_bytes": 5792,
+      "size_bits": 128,
+      "type": "ULONG64[2]"
+    },
+    {
+      "name": "HardErrorDisabled",
+      "offset_bits": 46464,
+      "offset_bytes": 5808,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "Instrumentation",
+      "offset_bits": 46528,
+      "offset_bytes": 5816,
+      "size_bits": 1024,
+      "type": "ULONG64[16]"
+    },
+    {
+      "name": "WinSockData",
+      "offset_bits": 47552,
+      "offset_bytes": 5944,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "GdiBatchCount",
+      "offset_bits": 47616,
+      "offset_bytes": 5952,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "Spare2",
+      "offset_bits": 47648,
+      "offset_bytes": 5956,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "GuaranteedStackBytes",
+      "offset_bits": 47680,
+      "offset_bytes": 5960,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "ReservedForPerf",
+      "offset_bits": 47744,
+      "offset_bytes": 5968,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "ReservedForOle",
+      "offset_bits": 47808,
+      "offset_bytes": 5976,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "WaitingOnLoaderLock",
+      "offset_bits": 47872,
+      "offset_bytes": 5984,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "Reserved5",
+      "offset_bits": 47936,
+      "offset_bytes": 5992,
+      "size_bits": 192,
+      "type": "ULONG64[3]"
+    },
+    {
+      "name": "TlsExpansionSlots",
+      "offset_bits": 48128,
+      "offset_bytes": 6016,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "DeallocationBStore",
+      "offset_bits": 48192,
+      "offset_bytes": 6024,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "BStoreLimit",
+      "offset_bits": 48256,
+      "offset_bytes": 6032,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "ImpersonationLocale",
+      "offset_bits": 48320,
+      "offset_bytes": 6040,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "IsImpersonating",
+      "offset_bits": 48352,
+      "offset_bytes": 6044,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "NlsCache",
+      "offset_bits": 48384,
+      "offset_bytes": 6048,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "ShimData",
+      "offset_bits": 48448,
+      "offset_bytes": 6056,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "HeapVirtualAffinity",
+      "offset_bits": 48512,
+      "offset_bytes": 6064,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "CurrentTransactionHandle",
+      "offset_bits": 48576,
+      "offset_bytes": 6072,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "ActiveFrame",
+      "offset_bits": 48640,
+      "offset_bytes": 6080,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "FlsSlots",
+      "offset_bits": 48704,
+      "offset_bytes": 6088,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "PreferredLanguages",
+      "offset_bits": 48768,
+      "offset_bytes": 6096,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "UserPrefLanguages",
+      "offset_bits": 48832,
+      "offset_bytes": 6104,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "MergedPrefLanguages",
+      "offset_bits": 48896,
+      "offset_bytes": 6112,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "MuiImpersonation",
+      "offset_bits": 48960,
+      "offset_bytes": 6120,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "CrossTebFlags",
+      "offset_bits": 48992,
+      "offset_bytes": 6124,
+      "size_bits": 16,
+      "type": "USHORT"
+    },
+    {
+      "name": "SameTebFlags",
+      "offset_bits": 49008,
+      "offset_bytes": 6126,
+      "size_bits": 16,
+      "type": "USHORT"
+    },
+    {
+      "name": "TxnScopeEnterCallback",
+      "offset_bits": 49024,
+      "offset_bytes": 6128,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "TxnScopeExitCallback",
+      "offset_bits": 49088,
+      "offset_bytes": 6136,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "TxnScopeContext",
+      "offset_bits": 49152,
+      "offset_bytes": 6144,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "LockCount",
+      "offset_bits": 49216,
+      "offset_bytes": 6152,
+      "size_bits": 32,
+      "type": "ULONG"
+    },
+    {
+      "name": "WowTebOffset",
+      "offset_bits": 49248,
+      "offset_bytes": 6156,
+      "size_bits": 32,
+      "type": "LONG"
+    },
+    {
+      "name": "ResourceRetValue",
+      "offset_bits": 49280,
+      "offset_bytes": 6160,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "ReservedForWdf",
+      "offset_bits": 49344,
+      "offset_bytes": 6168,
+      "size_bits": 64,
+      "type": "ULONG64"
+    },
+    {
+      "name": "ReservedForCrt",
+      "offset_bits": 49408,
+      "offset_bytes": 6176,
+      "size_bits": 64,
+      "type": "ULONGLONG"
+    },
+    {
+      "name": "EffectiveContainerId",
+      "offset_bits": 49472,
+      "offset_bytes": 6184,
+      "size_bits": 128,
+      "type": "GUID"
+    }
+  ],
+  "name": "TEB64",
+  "ordinal": 8830,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

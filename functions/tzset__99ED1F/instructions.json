@@ -1,0 +1,98 @@
+[
+  {
+    "ea": "0x99ED1F",
+    "line": "push    8",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x99ED21",
+    "line": "push    offset stru_B001B0",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x99ED26",
+    "line": "call    __SEH_prolog4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99ED2B",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x99ED2D",
+    "line": "cmp     dword_BAA874, esi",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x99ED33",
+    "line": "jnz     short ___tzset___$LN10_10",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x99ED35",
+    "line": "push    6",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x99ED37",
+    "line": "call    __lock",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99ED3C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x99ED3D",
+    "line": "mov     [ebp+ms_exc.registration.TryLevel], esi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x99ED40",
+    "line": "cmp     dword_BAA874, esi",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x99ED46",
+    "line": "jnz     short loc_99ED53",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x99ED48",
+    "line": "call    __tzset_nolock",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99ED4D",
+    "line": "inc     dword_BAA874",
+    "mnemonic": "inc",
+    "size": 6
+  },
+  {
+    "ea": "0x99ED53",
+    "line": "mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x99ED5A",
+    "line": "call    ___tzset___$LN9_9",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

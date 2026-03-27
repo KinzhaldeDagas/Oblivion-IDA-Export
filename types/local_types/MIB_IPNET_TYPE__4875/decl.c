@@ -1,0 +1,1 @@
+MIB_IPNET_TYPE

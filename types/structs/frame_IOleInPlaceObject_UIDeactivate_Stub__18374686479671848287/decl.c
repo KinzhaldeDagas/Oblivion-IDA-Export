@@ -1,0 +1,1 @@
+__frame_IOleInPlaceObject_UIDeactivate_Stub

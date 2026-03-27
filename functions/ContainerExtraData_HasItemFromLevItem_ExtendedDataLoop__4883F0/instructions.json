@@ -1,0 +1,44 @@
+[
+  {
+    "ea": "0x4883F0",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4883F2",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4883F4",
+    "line": "jz      short ContainerExtraData_HasItemFromLevItem___ItemLoop_next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4883F6",
+    "line": "call    ExtraDataList_GetExtraLeveledItem",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4883FB",
+    "line": "cmp     eax, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4883FD",
+    "line": "jnz     short ContainerExtraData_HasItemFromLevItem___ExtendedDataLoop_next",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4883FF",
+    "line": "mov     bl, 1",
+    "mnemonic": "mov",
+    "size": 2
+  }
+]

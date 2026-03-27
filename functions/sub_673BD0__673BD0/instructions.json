@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0x673BD0",
+    "line": "mov     eax, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x673BD4",
+    "line": "cmp     eax, 3; switch 4 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x673BD7",
+    "line": "ja      short def_673BD9",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x673BD9",
+    "line": "jmp     ds:jpt_673BD9[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x673BE0",
+    "line": "add     ecx, 68h ; 'h'; jumptable 00673BD9 case 0",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x673BE3",
+    "line": "jmp     short loc_673BED; jumptable 00673BD9 case 1",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x673BE5",
+    "line": "add     ecx, 0Ch; jumptable 00673BD9 case 2",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x673BE8",
+    "line": "jmp     short loc_673BED; jumptable 00673BD9 case 1",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x673BEA",
+    "line": "add     ecx, 18h; jumptable 00673BD9 case 3",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x673BED",
+    "line": "test    ecx, ecx; jumptable 00673BD9 case 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x673BEF",
+    "line": "jz      short def_673BD9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x673BF1",
+    "line": "call    sub_67B430",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

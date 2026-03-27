@@ -1,0 +1,2 @@
+0x6BF3D0: fldz
+0x6BF3D2: retn

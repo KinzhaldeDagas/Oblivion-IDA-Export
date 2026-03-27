@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA17CF0",
+    "line": "push    offset uInteriorCellBuffer",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA17CF5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA17CFA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA17CFF",
+    "line": "mov     eax, off_B051D8; \"uInterior Cell Buffer:General\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA17D04",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA17D06",
+    "line": "jz      short locret_A17D14",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA17D08",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA17D0B",
+    "line": "jnz     short locret_A17D14",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA17D0D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA17D0E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA17D13",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA17D14",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

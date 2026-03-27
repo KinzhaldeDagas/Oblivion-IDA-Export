@@ -1,0 +1,1 @@
+IApartmentShutdownVtbl_0

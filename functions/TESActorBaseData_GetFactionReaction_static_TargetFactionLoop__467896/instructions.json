@@ -1,0 +1,182 @@
+[
+  {
+    "ea": "0x467896",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x467898",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x46789A",
+    "line": "jz      short loc_4678EE",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x46789C",
+    "line": "cmp     byte ptr [eax+4], 0FFh",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4678A0",
+    "line": "mov     esi, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4678A2",
+    "line": "jle     short TESActorBaseData_GetFactionReaction_static___TargetFactionLoop_next",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x4678A4",
+    "line": "movzx   eax, byte ptr [esi+34h]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x4678A8",
+    "line": "shr     eax, 3",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x4678AB",
+    "line": "test    al, 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4678AD",
+    "line": "jz      short loc_4678C2",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4678AF",
+    "line": "mov     ecx, ds:0B333C4h; this",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4678B5",
+    "line": "push    0; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4678B7",
+    "line": "call    Actor_GetActorBaseForm",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4678BC",
+    "line": "cmp     [esp+arg_14], eax",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4678C0",
+    "line": "jz      short TESActorBaseData_GetFactionReaction_static___TargetFactionLoop_next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4678C2",
+    "line": "mov     ecx, [esp+arg_10]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4678C6",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4678C7",
+    "line": "add     ecx, 24h ; '$'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4678CA",
+    "line": "call    TESReactionForm_GetReactionToTarget",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4678CF",
+    "line": "cmp     esi, [esp+arg_10]",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x4678D3",
+    "line": "jnz     short loc_4678DD",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4678D5",
+    "line": "cmp     ebp, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4678D7",
+    "line": "jge     short loc_4678DD",
+    "mnemonic": "jge",
+    "size": 2
+  },
+  {
+    "ea": "0x4678D9",
+    "line": "mov     ebp, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4678DB",
+    "line": "jmp     short TESActorBaseData_GetFactionReaction_static___TargetFactionLoop_next",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4678DD",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4678DF",
+    "line": "jz      short TESActorBaseData_GetFactionReaction_static___TargetFactionLoop_next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4678E1",
+    "line": "cmp     ebx, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4678E3",
+    "line": "jle     short TESActorBaseData_GetFactionReaction_static___TargetFactionLoop_next",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x4678E5",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  }
+]

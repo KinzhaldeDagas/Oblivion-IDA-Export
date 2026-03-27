@@ -1,0 +1,1 @@
+__frame_IEnumString_Clone_Stub

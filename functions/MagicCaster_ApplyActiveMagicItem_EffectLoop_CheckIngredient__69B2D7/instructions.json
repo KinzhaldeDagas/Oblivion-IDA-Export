@@ -1,0 +1,104 @@
+[
+  {
+    "ea": "0x69B2D7",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69B2D9",
+    "line": "mov     eax, [edx+30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69B2DC",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69B2DE",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x69B2E0",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69B2E2",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x69B2E4",
+    "line": "mov     eax, [edx+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x69B2E7",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x69B2E9",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x69B2EB",
+    "line": "jz      MagicCaster_ApplyActiveMagicItem___EffectLoop_Spell",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x69B2F1",
+    "line": "cmp     eax, 8",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x69B2F4",
+    "line": "jnz     MagicCaster_ApplyActiveMagicItem___EffectLoop_CheckRange",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x69B2FA",
+    "line": "mov     eax, [esp+arg_3C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x69B2FE",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x69B300",
+    "line": "jz      short MagicCaster_ApplyActiveMagicItem___EffectLoop_InedibleIngredient",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x69B302",
+    "line": "test    byte ptr [eax+7Ch], 2",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x69B306",
+    "line": "jz      short MagicCaster_ApplyActiveMagicItem___EffectLoop_InedibleIngredient",
+    "mnemonic": "jz",
+    "size": 2
+  }
+]

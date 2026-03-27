@@ -1,0 +1,248 @@
+[
+  {
+    "ea": "0x5AC730",
+    "line": "mov     eax, ds:0B33398h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5AC735",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5AC736",
+    "line": "mov     esi, [eax+24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5AC739",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC73B",
+    "line": "push    edi; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5AC73C",
+    "line": "jz      short loc_5AC759",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC73E",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC740",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC742",
+    "line": "push    0FFFFh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5AC747",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC749",
+    "line": "call    SoundManager_OpenMusicFile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AC74E",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC750",
+    "line": "jz      short loc_5AC759",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC752",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC754",
+    "line": "call    SoundManager_PlayMusic",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AC759",
+    "line": "push    403h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5AC75E",
+    "line": "call    Menu_GetOpenMenuTile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AC763",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC765",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5AC768",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC76A",
+    "line": "jz      short loc_5AC79F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC76C",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC76E",
+    "line": "call    Tile_GetParentMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AC773",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC775",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC777",
+    "line": "jz      short loc_5AC79F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC779",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC77B",
+    "line": "call    sub_5AC6A0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AC780",
+    "line": "fld     dword ptr ds:0A379B4h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5AC786",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5AC787",
+    "line": "fstp    [esp+0Ch+a2]; a3",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5AC78A",
+    "line": "push    1772h; a2",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5AC78F",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC791",
+    "line": "call    Tile_SetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AC796",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5AC797",
+    "line": "mov     ecx, esi; int",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AC799",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5AC79A",
+    "line": "jmp     sub_584740",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x5AC79F",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5AC7A0",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5AC7A1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

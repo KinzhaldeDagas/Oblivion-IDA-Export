@@ -1,0 +1,134 @@
+[
+  {
+    "ea": "0x415507",
+    "line": "push    24h ; '$'; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x415509",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41550E",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x415511",
+    "line": "mov     [esp+arg_14], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x415515",
+    "line": "cmp     eax, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x415517",
+    "line": "mov     [esp+arg_2C], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x41551B",
+    "line": "jz      short loc_415527",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41551D",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41551E",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x415520",
+    "line": "call    EffectItem_constr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x415525",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x415527",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x415529",
+    "line": "mov     [esp+arg_2C], ebp",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x41552D",
+    "line": "jz      EffectItemList_LoadItem___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x415533",
+    "line": "mov     ebp, [esp+arg_38]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x415537",
+    "line": "mov     edx, [esp+arg_34]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x41553B",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41553C",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41553D",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41553F",
+    "line": "call    EffectItem_Load",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x415544",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x415546",
+    "line": "jz      short EffectItemList_LoadItem___LoadFailed",
+    "mnemonic": "jz",
+    "size": 2
+  }
+]

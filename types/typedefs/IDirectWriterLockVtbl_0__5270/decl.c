@@ -1,0 +1,1 @@
+IDirectWriterLockVtbl_0

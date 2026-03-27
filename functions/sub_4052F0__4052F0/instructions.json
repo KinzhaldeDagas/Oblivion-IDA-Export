@@ -1,0 +1,194 @@
+[
+  {
+    "ea": "0x4052F0",
+    "line": "sub     esp, 204h",
+    "mnemonic": "sub",
+    "size": 6
+  },
+  {
+    "ea": "0x4052F6",
+    "line": "mov     eax, ___security_cookie",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4052FB",
+    "line": "xor     eax, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4052FD",
+    "line": "mov     [esp+204h+var_4], eax",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x405304",
+    "line": "mov     eax, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x405306",
+    "line": "mov     ecx, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x405309",
+    "line": "mov     edx, [eax+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x40530C",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x40530D",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x40530E",
+    "line": "call    CreateWindowAndInitialize",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x405313",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x405316",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x405318",
+    "line": "jnz     short loc_40534D",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x40531A",
+    "line": "push    offset byte_B34FC8",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x40531F",
+    "line": "lea     eax, [esp+208h+Text]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x405323",
+    "line": "push    offset aFailedToInit_0; \"Failed to initialize renderer.\\n%s\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x405328",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x405329",
+    "line": "call    __sprintf",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x40532E",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x405331",
+    "line": "push    0; uType",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x405333",
+    "line": "push    offset Caption; \"Oblivion\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x405338",
+    "line": "lea     ecx, [esp+20Ch+Text]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x40533C",
+    "line": "push    ecx; lpText",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x40533D",
+    "line": "push    0; hWnd",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x40533F",
+    "line": "call    ds:MessageBoxA",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x405345",
+    "line": "push    0; uExitCode",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x405347",
+    "line": "call    ds:ExitProcess",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x40534D",
+    "line": "mov     ecx, [esp+204h+var_4]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x405354",
+    "line": "xor     ecx, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x405356",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x40535B",
+    "line": "add     esp, 204h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x405361",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

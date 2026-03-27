@@ -1,0 +1,22 @@
+// positive sp value has been detected, the output may be wrong!
+NiObjectNET *__thiscall sub_706942(int this, int a2)
+{
+  NiObjectNET *v3; // eax
+  NiObjectNET *v4; // esi
+
+  v3 = (NiObjectNET *)FormHeapAlloc(0x1Cu);
+  v4 = v3;
+  if ( v3 )
+  {
+    NiObjectNET::NiObjectNET(v3);
+    v4->vtbl = (NiObjectVtbl **)&NiWireframeProperty::`vftable';
+    LOWORD(v4[1].vtbl) = 0;
+  }
+  else
+  {
+    v4 = 0;
+  }
+  sub_700A60((char **)this, v4, a2);
+  LOWORD(v4[1].vtbl) = *(_WORD *)(this + 0x18);
+  return v4;
+}

@@ -1,0 +1,1 @@
+IDirectDrawSurface3Vtbl

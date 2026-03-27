@@ -1,0 +1,1 @@
+IMediaObjectVtbl_0

@@ -1,0 +1,56 @@
+[
+  {
+    "ea": "0x415548",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x415549",
+    "line": "lea     ecx, [esi+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x41554C",
+    "line": "call    BSSimpleList_PushBack",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x415551",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x415553",
+    "line": "call    EffectItem_IsHostile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x415558",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41555A",
+    "line": "jz      EffectItemList_LoadItem___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x415560",
+    "line": "add     dword ptr [esi+0Ch], 1",
+    "mnemonic": "add",
+    "size": 4
+  },
+  {
+    "ea": "0x415564",
+    "line": "jmp     EffectItemList_LoadItem___Done",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

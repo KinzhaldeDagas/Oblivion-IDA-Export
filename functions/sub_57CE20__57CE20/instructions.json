@@ -1,0 +1,128 @@
+[
+  {
+    "ea": "0x57CE20",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x57CE21",
+    "line": "mov     bl, [esp+4+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x57CE25",
+    "line": "push    3EAh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x57CE2A",
+    "line": "mov     [ecx+0Bh], bl",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x57CE2D",
+    "line": "call    Menu_GetOpenMenuTile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x57CE32",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x57CE35",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x57CE37",
+    "line": "jz      short loc_57CE53",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x57CE39",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x57CE3B",
+    "line": "call    Tile_GetParentMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x57CE40",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x57CE42",
+    "line": "jz      short loc_57CE53",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x57CE44",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x57CE46",
+    "line": "mov     edx, [edx+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x57CE49",
+    "line": "movsx   ecx, bl",
+    "mnemonic": "movsx",
+    "size": 3
+  },
+  {
+    "ea": "0x57CE4C",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57CE4E",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x57CE4F",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x57CE51",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x57CE53",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x57CE54",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

@@ -1,0 +1,1 @@
+cstdstubbuffer_delegating_t

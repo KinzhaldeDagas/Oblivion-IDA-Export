@@ -1,0 +1,1 @@
+nsiproxy_get_parameter

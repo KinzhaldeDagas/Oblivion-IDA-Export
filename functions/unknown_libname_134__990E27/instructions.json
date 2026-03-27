@@ -1,0 +1,2474 @@
+[
+  {
+    "ea": "0x990E27",
+    "line": "sub     esp, 2Ch",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x990E2A",
+    "line": "and     eax, 3Fh; switch 64 cases",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x990E2D",
+    "line": "jmp     jpt_990E2D[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x990E34",
+    "line": "fdiv    st, st; jumptable 00990E2D case 0",
+    "mnemonic": "fdiv",
+    "size": 2
+  },
+  {
+    "ea": "0x990E36",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990E39",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990E3A",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990E3D",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x990E3F",
+    "line": "fdivr   st, st; jumptable 00990E2D case 2",
+    "mnemonic": "fdivr",
+    "size": 2
+  },
+  {
+    "ea": "0x990E41",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990E44",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990E45",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 3",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990E48",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x990E4A",
+    "line": "fdiv    st, st; jumptable 00990E2D case 4",
+    "mnemonic": "fdiv",
+    "size": 2
+  },
+  {
+    "ea": "0x990E4C",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990E4F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990E50",
+    "line": "fdivp   st, st; jumptable 00990E2D case 5",
+    "mnemonic": "fdivp",
+    "size": 2
+  },
+  {
+    "ea": "0x990E52",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990E55",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990E56",
+    "line": "fdivr   st, st; jumptable 00990E2D case 6",
+    "mnemonic": "fdivr",
+    "size": 2
+  },
+  {
+    "ea": "0x990E58",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990E5B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990E5C",
+    "line": "fdivrp  st, st; jumptable 00990E2D case 7",
+    "mnemonic": "fdivrp",
+    "size": 2
+  },
+  {
+    "ea": "0x990E5E",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990E61",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990E62",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 8",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990E66",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x990E68",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990E6B",
+    "line": "fstp    [esp+2Ch+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990E6F",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990E74",
+    "line": "fld     [esp+2Ch+var_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x990E78",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990E7A",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990E7D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990E7E",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 9",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990E81",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x990E83",
+    "line": "fstp    tbyte ptr [esp+0]; jumptable 00990E2D case 10",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990E86",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990E8A",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990E8F",
+    "line": "fld     [esp+arg_8]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x990E93",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990E95",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990E98",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990E99",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 11",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990E9C",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x990E9E",
+    "line": "fxch    st(1); jumptable 00990E2D case 12",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990EA0",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990EA4",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x990EA6",
+    "line": "fstp    tbyte ptr [esp+0]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990EA9",
+    "line": "fstp    [esp+arg_1C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990EAD",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990EB2",
+    "line": "fld     [esp+arg_1C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x990EB6",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990EB9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990EBA",
+    "line": "fstp    [esp+2Ch+var_2C]; jumptable 00990E2D case 13",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990EBD",
+    "line": "fstp    [esp+2Ch+var_20]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990EC1",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990EC6",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990EC9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990ECA",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 14",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990ECE",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990ED1",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990ED6",
+    "line": "fld     [esp+2Ch+var_20]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x990EDA",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990EDD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990EDE",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 15",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990EE2",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990EE5",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990EEA",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990EED",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990EEE",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 16",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990EF2",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990EF4",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x990EF6",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990EF9",
+    "line": "fstp    [esp+2Ch+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990EFD",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990F02",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F04",
+    "line": "fld     [esp+2Ch+var_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x990F08",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F0A",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990F0D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990F0E",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 17",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990F11",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x990F13",
+    "line": "fstp    tbyte ptr [esp+0]; jumptable 00990E2D case 18",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990F16",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F18",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990F1C",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990F21",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F23",
+    "line": "fld     [esp+arg_8]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x990F27",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F29",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990F2C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990F2D",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 19",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990F30",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x990F32",
+    "line": "fxch    st(2); jumptable 00990E2D case 20",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F34",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990F38",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F3A",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x990F3C",
+    "line": "fstp    tbyte ptr [esp+0]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990F3F",
+    "line": "fstp    [esp+arg_1C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990F43",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990F48",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F4A",
+    "line": "fld     [esp+arg_1C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x990F4E",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990F51",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990F52",
+    "line": "fstp    [esp+2Ch+var_2C]; jumptable 00990E2D case 21",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990F55",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F57",
+    "line": "fstp    [esp+2Ch+var_20]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990F5B",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990F60",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F62",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990F65",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990F66",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 22",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990F6A",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F6C",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990F6F",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990F74",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F76",
+    "line": "fld     [esp+2Ch+var_20]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x990F7A",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990F7D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990F7E",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 23",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990F82",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F84",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990F87",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990F8C",
+    "line": "fxch    st(1)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F8E",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990F91",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990F92",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 24",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990F96",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990F98",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x990F9A",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990F9D",
+    "line": "fstp    [esp+2Ch+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990FA1",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990FA6",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990FA8",
+    "line": "fld     [esp+2Ch+var_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x990FAC",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990FAE",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990FB1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990FB2",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 25",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990FB5",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x990FB7",
+    "line": "fstp    tbyte ptr [esp+0]; jumptable 00990E2D case 26",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990FBA",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990FBC",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990FC0",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990FC5",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990FC7",
+    "line": "fld     [esp+arg_8]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x990FCB",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990FCD",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990FD0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990FD1",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 27",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990FD4",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x990FD6",
+    "line": "fxch    st(3); jumptable 00990E2D case 28",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990FD8",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990FDC",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990FDE",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x990FE0",
+    "line": "fstp    tbyte ptr [esp+0]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990FE3",
+    "line": "fstp    [esp+arg_1C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990FE7",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x990FEC",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990FEE",
+    "line": "fld     [esp+arg_1C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x990FF2",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x990FF5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x990FF6",
+    "line": "fstp    [esp+2Ch+var_2C]; jumptable 00990E2D case 29",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x990FF9",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x990FFB",
+    "line": "fstp    [esp+2Ch+var_20]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x990FFF",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991004",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991006",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991009",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x99100A",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 30",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x99100E",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991010",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x991013",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991018",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99101A",
+    "line": "fld     [esp+2Ch+var_20]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x99101E",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991021",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x991022",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 31",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991026",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991028",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x99102B",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991030",
+    "line": "fxch    st(2)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991032",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991035",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x991036",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 32",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x99103A",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99103C",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x99103E",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x991041",
+    "line": "fstp    [esp+2Ch+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991045",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99104A",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99104C",
+    "line": "fld     [esp+2Ch+var_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x991050",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991052",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991055",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x991056",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 33",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991059",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x99105B",
+    "line": "fstp    tbyte ptr [esp+0]; jumptable 00990E2D case 34",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x99105E",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991060",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991064",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991069",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99106B",
+    "line": "fld     [esp+arg_8]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x99106F",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991071",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991074",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x991075",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 35",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991078",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x99107A",
+    "line": "fxch    st(4); jumptable 00990E2D case 36",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99107C",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991080",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991082",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x991084",
+    "line": "fstp    tbyte ptr [esp+0]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x991087",
+    "line": "fstp    [esp+arg_1C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x99108B",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991090",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991092",
+    "line": "fld     [esp+arg_1C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x991096",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991099",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x99109A",
+    "line": "fstp    [esp+2Ch+var_2C]; jumptable 00990E2D case 37",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x99109D",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99109F",
+    "line": "fstp    [esp+2Ch+var_20]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x9910A3",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9910A8",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9910AA",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9910AD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9910AE",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 38",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x9910B2",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9910B4",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x9910B7",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9910BC",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9910BE",
+    "line": "fld     [esp+2Ch+var_20]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x9910C2",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9910C5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9910C6",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 39",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x9910CA",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9910CC",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x9910CF",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9910D4",
+    "line": "fxch    st(3)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9910D6",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9910D9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9910DA",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 40",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x9910DE",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9910E0",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x9910E2",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x9910E5",
+    "line": "fstp    [esp+2Ch+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x9910E9",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9910EE",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9910F0",
+    "line": "fld     [esp+2Ch+var_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x9910F4",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9910F6",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9910F9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9910FA",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 41",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9910FD",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x9910FF",
+    "line": "fstp    tbyte ptr [esp+0]; jumptable 00990E2D case 42",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x991102",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991104",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991108",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99110D",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99110F",
+    "line": "fld     [esp+arg_8]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x991113",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991115",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991118",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x991119",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 43",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x99111C",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x99111E",
+    "line": "fxch    st(5); jumptable 00990E2D case 44",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991120",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991124",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991126",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x991128",
+    "line": "fstp    tbyte ptr [esp+0]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x99112B",
+    "line": "fstp    [esp+arg_1C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x99112F",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991134",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991136",
+    "line": "fld     [esp+arg_1C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x99113A",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x99113D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x99113E",
+    "line": "fstp    [esp+2Ch+var_2C]; jumptable 00990E2D case 45",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x991141",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991143",
+    "line": "fstp    [esp+2Ch+var_20]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991147",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99114C",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99114E",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991151",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x991152",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 46",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991156",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991158",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x99115B",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991160",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991162",
+    "line": "fld     [esp+2Ch+var_20]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x991166",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991169",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x99116A",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 47",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x99116E",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991170",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x991173",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991178",
+    "line": "fxch    st(4)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99117A",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x99117D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x99117E",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 48",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991182",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991184",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x991186",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x991189",
+    "line": "fstp    [esp+2Ch+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x99118D",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991192",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991194",
+    "line": "fld     [esp+2Ch+var_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x991198",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99119A",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x99119D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x99119E",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 49",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9911A1",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x9911A3",
+    "line": "fstp    tbyte ptr [esp+0]; jumptable 00990E2D case 50",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x9911A6",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9911A8",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x9911AC",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9911B1",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9911B3",
+    "line": "fld     [esp+arg_8]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x9911B7",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9911B9",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9911BC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9911BD",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 51",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9911C0",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x9911C2",
+    "line": "fxch    st(6); jumptable 00990E2D case 52",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9911C4",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x9911C8",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9911CA",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x9911CC",
+    "line": "fstp    tbyte ptr [esp+0]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x9911CF",
+    "line": "fstp    [esp+arg_1C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x9911D3",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9911D8",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9911DA",
+    "line": "fld     [esp+arg_1C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x9911DE",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9911E1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9911E2",
+    "line": "fstp    [esp+2Ch+var_2C]; jumptable 00990E2D case 53",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x9911E5",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9911E7",
+    "line": "fstp    [esp+2Ch+var_20]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x9911EB",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9911F0",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9911F2",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9911F5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9911F6",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 54",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x9911FA",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9911FC",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x9911FF",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991204",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991206",
+    "line": "fld     [esp+2Ch+var_20]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x99120A",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x99120D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x99120E",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 55",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991212",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991214",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x991217",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99121C",
+    "line": "fxch    st(5)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99121E",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991221",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x991222",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 56",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991226",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991228",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x99122A",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x99122D",
+    "line": "fstp    [esp+2Ch+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991231",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991236",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991238",
+    "line": "fld     [esp+2Ch+var_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x99123C",
+    "line": "fxch    st(7)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99123E",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991241",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x991242",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 57",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991245",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x991247",
+    "line": "fstp    tbyte ptr [esp+0]; jumptable 00990E2D case 58",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x99124A",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99124C",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991250",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991255",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991257",
+    "line": "fld     [esp+arg_8]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x99125B",
+    "line": "fxch    st(7)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99125D",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991260",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x991261",
+    "line": "add     esp, 2Ch; jumptable 00990E2D case 59",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991264",
+    "line": "int     6;  - internal hardware - UNDEFINED OPCODE (80286+)",
+    "mnemonic": "int",
+    "size": 2
+  },
+  {
+    "ea": "0x991266",
+    "line": "fxch    st(7); jumptable 00990E2D case 60",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991268",
+    "line": "fstp    [esp+arg_8]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x99126C",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99126E",
+    "line": "fld     st",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x991270",
+    "line": "fstp    tbyte ptr [esp+0]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x991273",
+    "line": "fstp    [esp+arg_1C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x991277",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99127C",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99127E",
+    "line": "fld     [esp+arg_1C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x991282",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991285",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x991286",
+    "line": "fstp    [esp+2Ch+var_2C]; jumptable 00990E2D case 61",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x991289",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x99128B",
+    "line": "fstp    [esp+2Ch+var_20]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x99128F",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x991294",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x991296",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x991299",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x99129A",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 62",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x99129E",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9912A0",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x9912A3",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9912A8",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9912AA",
+    "line": "fld     [esp+2Ch+var_20]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x9912AE",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9912B1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9912B2",
+    "line": "fstp    [esp+2Ch+var_20]; jumptable 00990E2D case 63",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x9912B6",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9912B8",
+    "line": "fstp    [esp+2Ch+var_2C]; _TBYTE",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x9912BB",
+    "line": "call    unknown_libname_133",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9912C0",
+    "line": "fxch    st(6)",
+    "mnemonic": "fxch",
+    "size": 2
+  },
+  {
+    "ea": "0x9912C2",
+    "line": "add     esp, 2Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9912C5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

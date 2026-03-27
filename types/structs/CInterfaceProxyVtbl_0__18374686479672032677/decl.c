@@ -1,0 +1,1 @@
+CInterfaceProxyVtbl_0

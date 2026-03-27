@@ -1,0 +1,404 @@
+[
+  {
+    "ea": "0x4FD2A0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD2A1",
+    "line": "push    edi; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD2A2",
+    "line": "mov     edi, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4FD2A6",
+    "line": "lea     eax, [edi+50h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD2A9",
+    "line": "xor     dl, dl",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2AB",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2AD",
+    "line": "jz      short loc_4FD2F3",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2AF",
+    "line": "nop",
+    "mnemonic": "nop",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD2B0",
+    "line": "mov     esi, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD2B3",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2B5",
+    "line": "jnz     short loc_4FD2BB",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2B7",
+    "line": "cmp     [eax], esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2B9",
+    "line": "jz      short loc_4FD2F3",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2BB",
+    "line": "mov     eax, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2BD",
+    "line": "mov     ecx, [eax+410h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4FD2C3",
+    "line": "add     ecx, 0FFFFFFF0h; switch 16 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD2C6",
+    "line": "cmp     ecx, 0Fh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD2C9",
+    "line": "ja      short def_4FD2D2; jumptable 004FD2D2 default case, cases 21-28,30",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2CB",
+    "line": "movzx   ecx, ds:byte_4FD358[ecx]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x4FD2D2",
+    "line": "jmp     ds:jpt_4FD2D2[ecx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x4FD2D9",
+    "line": "test    dl, dl; jumptable 004FD2D2 case 16",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2DB",
+    "line": "jnz     short loc_4FD2FA",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2DD",
+    "line": "mov     dl, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2DF",
+    "line": "jmp     short loc_4FD2ED; jumptable 004FD2D2 cases 18-20,29,31",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2E1",
+    "line": "test    dl, dl; jumptable 004FD2D2 case 17",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2E3",
+    "line": "jz      short loc_4FD314",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2E5",
+    "line": "xor     dl, dl",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2E7",
+    "line": "jmp     short loc_4FD2ED; jumptable 004FD2D2 cases 18-20,29,31",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2E9",
+    "line": "test    dl, dl; jumptable 004FD2D2 default case, cases 21-28,30",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2EB",
+    "line": "jz      short loc_4FD32E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2ED",
+    "line": "mov     eax, esi; jumptable 004FD2D2 cases 18-20,29,31",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2EF",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2F1",
+    "line": "jnz     short loc_4FD2B0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2F3",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD2F4",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2F6",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD2F7",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD2FA",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD2FC",
+    "line": "push    offset aNestedBeginEnd; \"Nested begin/end blocks are not allowed\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4FD301",
+    "line": "push    edi; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD302",
+    "line": "mov     [edi+1Ch], edx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD305",
+    "line": "call    sub_4FCE30",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4FD30A",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD30D",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD30E",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD310",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD311",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD314",
+    "line": "mov     eax, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD316",
+    "line": "push    offset aEndWithoutMatc; \"End without matching Begin.\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4FD31B",
+    "line": "push    edi; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD31C",
+    "line": "mov     [edi+1Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD31F",
+    "line": "call    sub_4FCE30",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4FD324",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD327",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD328",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD32A",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD32B",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD32E",
+    "line": "mov     ecx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD330",
+    "line": "push    offset aAllScriptComma; \"All script commands must be inside a be\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4FD335",
+    "line": "push    edi; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD336",
+    "line": "mov     [edi+1Ch], ecx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD339",
+    "line": "call    sub_4FCE30",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4FD33E",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4FD341",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD342",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4FD344",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4FD345",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

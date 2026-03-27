@@ -1,0 +1,1 @@
+STGMEDIUM_0

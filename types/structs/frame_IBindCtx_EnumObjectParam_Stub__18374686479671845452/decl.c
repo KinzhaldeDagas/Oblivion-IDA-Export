@@ -1,0 +1,1 @@
+__frame_IBindCtx_EnumObjectParam_Stub

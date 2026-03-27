@@ -1,0 +1,134 @@
+[
+  {
+    "ea": "0x47CF50",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x47CF51",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x47CF53",
+    "line": "mov     ecx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x47CF56",
+    "line": "push    offset aResume_thread; lpCriticalSection",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x47CF5B",
+    "line": "call    NiEnterCriticalSection",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x47CF60",
+    "line": "cmp     byte ptr [esi+18h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x47CF64",
+    "line": "jnz     short loc_47CF8A",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x47CF66",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x47CF69",
+    "line": "push    0FFFFFFFFh; nPriority",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x47CF6B",
+    "line": "push    eax; hThread",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x47CF6C",
+    "line": "call    dword ptr ds:0A280ECh",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x47CF72",
+    "line": "mov     ecx, [esi+4]; lpCriticalSection",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x47CF75",
+    "line": "mov     byte ptr [esi+18h], 1",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x47CF79",
+    "line": "call    NiLeaveCriticalSection_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x47CF7E",
+    "line": "mov     ecx, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x47CF81",
+    "line": "push    ecx; hThread",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x47CF82",
+    "line": "call    dword ptr ds:0A280F0h",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x47CF88",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x47CF89",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x47CF8A",
+    "line": "mov     ecx, [esi+4]; lpCriticalSection",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x47CF8D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x47CF8E",
+    "line": "jmp     NiLeaveCriticalSection_0",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

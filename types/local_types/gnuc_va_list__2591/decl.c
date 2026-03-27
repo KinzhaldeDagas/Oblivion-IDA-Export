@@ -1,0 +1,1 @@
+__gnuc_va_list

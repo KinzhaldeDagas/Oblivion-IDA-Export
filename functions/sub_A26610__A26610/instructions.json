@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA26610",
+    "line": "push    offset fMediumWeaponSpeedMax_Audio",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA26615",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA2661A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA2661F",
+    "line": "mov     eax, off_B162E0; \"fMediumWeaponSpeedMax:Audio\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA26624",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA26626",
+    "line": "jz      short locret_A26634",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA26628",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA2662B",
+    "line": "jnz     short locret_A26634",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA2662D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA2662E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA26633",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA26634",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

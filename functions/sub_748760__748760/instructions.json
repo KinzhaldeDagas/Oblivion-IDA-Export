@@ -1,0 +1,128 @@
+[
+  {
+    "ea": "0x748760",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x748761",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x748763",
+    "line": "push    100h; FilenameSize",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x748768",
+    "line": "lea     eax, [esi+103h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x74876E",
+    "line": "push    eax; Filename",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x74876F",
+    "line": "mov     eax, [esp+0Ch+FullPath]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x748773",
+    "line": "push    100h; FilenameSize",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x748778",
+    "line": "lea     ecx, [esi+203h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x74877E",
+    "line": "push    ecx; DirSize",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x74877F",
+    "line": "push    100h; Dir",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x748784",
+    "line": "push    esi; Dir",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x748785",
+    "line": "push    3; DriveSize",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x748787",
+    "line": "lea     edx, [esi+100h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x74878D",
+    "line": "push    edx; Drive",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x74878E",
+    "line": "push    eax; FullPath",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x74878F",
+    "line": "mov     byte ptr [esi+303h], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x748796",
+    "line": "call    __splitpath_s",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x74879B",
+    "line": "add     esp, 24h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x74879E",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7487A0",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7487A1",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

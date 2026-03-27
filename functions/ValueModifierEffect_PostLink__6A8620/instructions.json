@@ -1,0 +1,200 @@
+[
+  {
+    "ea": "0x6A8620",
+    "line": "mov     eax, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x6A8624",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A8625",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A8626",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8628",
+    "line": "call    ActiveEffect_Base_PostLink",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A862D",
+    "line": "mov     ecx, ds:0B33B00h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6A8633",
+    "line": "mov     al, [ecx+7Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A8636",
+    "line": "cmp     al, 5Fh ; '_'",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8638",
+    "line": "jb      ValueModifierEffect_PostLink___Done",
+    "mnemonic": "jb",
+    "size": 6
+  },
+  {
+    "ea": "0x6A863E",
+    "line": "cmp     al, 62h ; 'b'",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8640",
+    "line": "jnb     ValueModifierEffect_PostLink___Done",
+    "mnemonic": "jnb",
+    "size": 6
+  },
+  {
+    "ea": "0x6A8646",
+    "line": "mov     ecx, [esi+20h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A8649",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A864B",
+    "line": "jz      ValueModifierEffect_PostLink___Done",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x6A8651",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A8652",
+    "line": "call    MagicTarget_GetParentActor",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A8657",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8659",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A865B",
+    "line": "jz      ValueModifierEffect_PostLink___Done_",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x6A8661",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8663",
+    "line": "call    Actor_IsPlayer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A8668",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A866A",
+    "line": "jz      short ValueModifierEffect_PostLink___Done_",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A866C",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A866E",
+    "line": "call    ActiveEffect_Base_IsBoundObjWearable",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A8673",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8675",
+    "line": "jz      short ValueModifierEffect_PostLink___Done_",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8677",
+    "line": "mov     edx, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A867A",
+    "line": "mov     eax, [edx+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A867D",
+    "line": "mov     ecx, [eax+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6A8680",
+    "line": "shr     ecx, 1",
+    "mnemonic": "shr",
+    "size": 2
+  },
+  {
+    "ea": "0x6A8682",
+    "line": "test    cl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x6A8685",
+    "line": "jz      short ValueModifierEffect_PostLink___Done_",
+    "mnemonic": "jz",
+    "size": 2
+  }
+]

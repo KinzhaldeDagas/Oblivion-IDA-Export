@@ -1,0 +1,1 @@
+__frame_IPersistStorage_InitNew_Stub

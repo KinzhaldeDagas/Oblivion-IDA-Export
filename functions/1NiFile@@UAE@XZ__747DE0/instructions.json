@@ -1,0 +1,116 @@
+[
+  {
+    "ea": "0x747DE0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x747DE1",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x747DE3",
+    "line": "cmp     byte ptr [esi+24h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x747DE7",
+    "line": "mov     dword ptr [esi], offset ??_7NiFile@@6B@; const NiFile::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x747DED",
+    "line": "jz      short loc_747E06",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x747DEF",
+    "line": "cmp     dword ptr [esi+1Ch], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x747DF3",
+    "line": "jz      short loc_747E06",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x747DF5",
+    "line": "call    NiFile_Flush",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x747DFA",
+    "line": "mov     eax, [esi+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x747DFD",
+    "line": "push    eax; File",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x747DFE",
+    "line": "call    _fclose",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x747E03",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x747E06",
+    "line": "mov     ecx, [esi+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x747E09",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x747E0A",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x747E0F",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x747E12",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x747E14",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x747E15",
+    "line": "jmp     NiBinaryStream_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "ea": "0x983FD0",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x983FD1",
+    "line": "mov     ebp, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x983FD3",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x983FD4",
+    "line": "mov     edi, [ebp+Str]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x983FD7",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x983FD9",
+    "line": "or      ecx, 0FFFFFFFFh",
+    "mnemonic": "or",
+    "size": 3
+  },
+  {
+    "ea": "0x983FDC",
+    "line": "repne scasb",
+    "mnemonic": "scasb",
+    "size": 2
+  },
+  {
+    "ea": "0x983FDE",
+    "line": "add     ecx, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x983FE1",
+    "line": "neg     ecx",
+    "mnemonic": "neg",
+    "size": 2
+  },
+  {
+    "ea": "0x983FE3",
+    "line": "sub     edi, 1",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x983FE6",
+    "line": "mov     al, byte ptr [ebp+arg_4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x983FE9",
+    "line": "std",
+    "mnemonic": "std",
+    "size": 1
+  },
+  {
+    "ea": "0x983FEA",
+    "line": "repne scasb",
+    "mnemonic": "scasb",
+    "size": 2
+  },
+  {
+    "ea": "0x983FEC",
+    "line": "add     edi, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x983FEF",
+    "line": "cmp     [edi], al",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x983FF1",
+    "line": "jz      short _strrchr___returndi",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x983FF3",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x983FF5",
+    "line": "jmp     short _strrchr___toend",
+    "mnemonic": "jmp",
+    "size": 2
+  }
+]

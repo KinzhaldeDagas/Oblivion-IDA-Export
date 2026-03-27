@@ -1,0 +1,284 @@
+[
+  {
+    "ea": "0x5EE5C3",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE5C6",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5C8",
+    "line": "push    offset ??_R0?AVIngredientItem@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE5CD",
+    "line": "push    offset ??_R0?AVMagicItem@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE5D2",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5D4",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE5D5",
+    "line": "xor     bl, bl",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5D7",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE5DC",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE5DF",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5E1",
+    "line": "jz      short loc_5EE5ED",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5E3",
+    "line": "mov     bl, [eax+7Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE5E6",
+    "line": "shr     bl, 1",
+    "mnemonic": "shr",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5E8",
+    "line": "and     bl, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE5EB",
+    "line": "jmp     short loc_5EE614",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5ED",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE5F0",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5F2",
+    "line": "push    offset ??_R0?AVAlchemyItem@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE5F7",
+    "line": "push    offset ??_R0?AVMagicItem@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE5FC",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE5FE",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE5FF",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE604",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE607",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE609",
+    "line": "jz      short loc_5EE614",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE60B",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE60D",
+    "line": "call    AlchemyItem_IsEdible",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE612",
+    "line": "mov     bl, al",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE614",
+    "line": "mov     ecx, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE617",
+    "line": "call    EffectItem_IsHostile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE61C",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE61E",
+    "line": "jz      short Actor_MagicTarget_PostAddEffect___Done_",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE620",
+    "line": "cmp     dword ptr [esi+28h], 4",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x5EE624",
+    "line": "jz      short Actor_MagicTarget_PostAddEffect___Done_",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE626",
+    "line": "test    bl, bl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE628",
+    "line": "jnz     short Actor_MagicTarget_PostAddEffect___Done_",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE62A",
+    "line": "mov     ecx, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE62D",
+    "line": "mov     edx, [ecx+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE630",
+    "line": "cmp     dword ptr [edx+98h], 434E4C53h",
+    "mnemonic": "cmp",
+    "size": 10
+  },
+  {
+    "ea": "0x5EE63A",
+    "line": "mov     byte ptr [esp+arg_C], 1",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5EE63F",
+    "line": "jz      short loc_5EE645",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE641",
+    "line": "mov     byte ptr [esp+arg_C], bl",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5EE645",
+    "line": "mov     eax, [esp+arg_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5EE649",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5EE64B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EE64C",
+    "line": "lea     ecx, [edi-68h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x5EE64F",
+    "line": "call    Actor_PlayPainFX",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

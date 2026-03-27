@@ -1,0 +1,1 @@
+__frame_IEnumMoniker_Reset_Stub

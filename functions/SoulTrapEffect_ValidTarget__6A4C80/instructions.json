@@ -1,0 +1,332 @@
+[
+  {
+    "ea": "0x6A4C80",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A4C81",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6A4C82",
+    "line": "mov     edi, [esp+8+a1]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x6A4C86",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4C88",
+    "line": "jz      short loc_6A4CA7",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4C8A",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4C8C",
+    "line": "call    MagicTarget_GetParentActor",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A4C91",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4C93",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4C95",
+    "line": "jz      short loc_6A4CA9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4C97",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4C99",
+    "line": "call    Actor_IsCreature",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A4C9E",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CA0",
+    "line": "jz      short loc_6A4CA9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CA2",
+    "line": "add     edi, -68h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x6A4CA5",
+    "line": "jmp     short loc_6A4CAB",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CA7",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CA9",
+    "line": "xor     edi, edi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CAB",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CAD",
+    "line": "jz      short SoulTrapEffect_ValidTarget___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CAF",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CB1",
+    "line": "mov     edx, [eax+198h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6A4CB7",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CB9",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CBB",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CBD",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CBF",
+    "line": "jnz     short SoulTrapEffect_ValidTarget___Return_0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CC1",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CC3",
+    "line": "mov     edx, [eax+1F8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6A4CC9",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CCB",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CCD",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CCF",
+    "line": "jnz     short SoulTrapEffect_ValidTarget___Return_0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CD1",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CD3",
+    "line": "call    Actor__IsEssential",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A4CD8",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CDA",
+    "line": "jnz     short SoulTrapEffect_ValidTarget___Return_0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CDC",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CDE",
+    "line": "call    Actor_IsNPC",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A4CE3",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CE5",
+    "line": "jnz     short SoulTrapEffect_ValidTarget___Return_1",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CE7",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CE9",
+    "line": "jz      short SoulTrapEffect_ValidTarget___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CEB",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CED",
+    "line": "call    Actor__GetSoulLevel",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6A4CF2",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CF4",
+    "line": "jle     short SoulTrapEffect_ValidTarget___Return_0",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CF6",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6A4CF7",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4CF9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6A4CFA",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x6A4CFD",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6A4CFE",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x6A4D00",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6A4D01",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

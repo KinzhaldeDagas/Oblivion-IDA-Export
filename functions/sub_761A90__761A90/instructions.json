@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0x761A90",
+    "line": "mov     eax, [esp+Src]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x761A94",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x761A96",
+    "line": "jz      short loc_761AB1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x761A98",
+    "line": "push    0FFh; Src",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x761A9D",
+    "line": "push    eax; Src",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x761A9E",
+    "line": "push    100h; SizeInBytes",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x761AA3",
+    "line": "push    offset byte_B3F828; Dst",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x761AA8",
+    "line": "call    _strncpy_s",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x761AAD",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x761AB0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x761AB1",
+    "line": "mov     byte ptr ds:0B3F828h, 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x761AB8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

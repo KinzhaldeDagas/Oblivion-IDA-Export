@@ -1,0 +1,134 @@
+[
+  {
+    "ea": "0x96E0C0",
+    "line": "cmp     [esp+arg_0], 0A000106h",
+    "mnemonic": "cmp",
+    "size": 8
+  },
+  {
+    "ea": "0x96E0C8",
+    "line": "jnb     short def_96E0D2",
+    "mnemonic": "jnb",
+    "size": 2
+  },
+  {
+    "ea": "0x96E0CA",
+    "line": "mov     eax, [ecx+24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x96E0CD",
+    "line": "cmp     eax, 4; switch 5 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x96E0D0",
+    "line": "ja      short def_96E0D2",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x96E0D2",
+    "line": "jmp     ds:jpt_96E0D2[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x96E0D9",
+    "line": "mov     dword ptr [ecx+24h], 3; jumptable 0096E0D2 case 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x96E0E0",
+    "line": "cmp     dword ptr [ecx+2Ch], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x96E0E4",
+    "line": "jz      short loc_96E0F0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x96E0E6",
+    "line": "push    2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x96E0E8",
+    "line": "call    sub_95A2B0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x96E0ED",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x96E0F0",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x96E0F2",
+    "line": "call    sub_95A2B0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x96E0F7",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x96E0FA",
+    "line": "mov     dword ptr [ecx+24h], 3; jumptable 0096E0D2 case 1",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x96E101",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x96E104",
+    "line": "mov     dword ptr [ecx+24h], 0; jumptable 0096E0D2 case 2",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x96E10B",
+    "line": "jmp     short loc_96E0E0",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x96E10D",
+    "line": "mov     dword ptr [ecx+24h], 2; jumptable 0096E0D2 case 3",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x96E114",
+    "line": "jmp     short loc_96E0E0",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x96E116",
+    "line": "mov     dword ptr [ecx+24h], 2; jumptable 0096E0D2 case 4",
+    "mnemonic": "mov",
+    "size": 7
+  }
+]

@@ -1,0 +1,3 @@
+0x6A5BF0: pop     edi
+0x6A5BF1: pop     ecx
+0x6A5BF2: retn

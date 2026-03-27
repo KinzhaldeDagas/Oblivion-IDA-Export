@@ -1,0 +1,146 @@
+[
+  {
+    "ea": "0x416286",
+    "line": "mov     eax, [ebx+9Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x41628C",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41628E",
+    "line": "jz      short loc_41629B",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x416290",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x416291",
+    "line": "mov     ecx, offset FormHeap",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x416296",
+    "line": "call    MemoryHeap_Free_checked",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41629B",
+    "line": "movzx   eax, word ptr [ebx+6Ch]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x41629F",
+    "line": "test    ax, ax",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x4162A2",
+    "line": "jz      EffectSetting_LoadForm___ChunkLoopContinue",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4162A8",
+    "line": "movsx   esi, ax",
+    "mnemonic": "movsx",
+    "size": 3
+  },
+  {
+    "ea": "0x4162AB",
+    "line": "add     esi, esi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x4162AD",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4162AF",
+    "line": "add     esi, esi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x4162B1",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4162B2",
+    "line": "mov     ecx, offset FormHeap",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4162B7",
+    "line": "call    j_MemoryHeap_Alloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4162BC",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4162BE",
+    "line": "mov     [ebx+9Ch], eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4162C4",
+    "line": "jz      short EffectSetting_LoadForm___ChunkLoopContinue",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4162C6",
+    "line": "push    esi; a4",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4162C7",
+    "line": "push    eax; Dst",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4162C8",
+    "line": "mov     ecx, edi; a1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4162CA",
+    "line": "call    TESFile_GetChunkData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4162CF",
+    "line": "jmp     short EffectSetting_LoadForm___ChunkLoopContinue",
+    "mnemonic": "jmp",
+    "size": 2
+  }
+]

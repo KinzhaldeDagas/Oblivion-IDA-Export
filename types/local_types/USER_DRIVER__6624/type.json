@@ -1,0 +1,334 @@
+{
+  "decl": "USER_DRIVER",
+  "kind": "struct",
+  "members": [
+    {
+      "name": "pActivateKeyboardLayout",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "BOOL (*)(HKL, UINT)"
+    },
+    {
+      "name": "pBeep",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "void (*)(void)"
+    },
+    {
+      "name": "pGetKeyNameText",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "INT (*)(LONG, LPWSTR, INT)"
+    },
+    {
+      "name": "pGetKeyboardLayoutList",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "UINT (*)(INT, HKL *)"
+    },
+    {
+      "name": "pMapVirtualKeyEx",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "UINT (*)(UINT, UINT, HKL)"
+    },
+    {
+      "name": "pRegisterHotKey",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 32,
+      "type": "BOOL (*)(HWND, UINT, UINT)"
+    },
+    {
+      "name": "pToUnicodeEx",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "INT (*)(UINT, UINT, const BYTE *, LPWSTR, int, UINT, HKL)"
+    },
+    {
+      "name": "pUnregisterHotKey",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 32,
+      "type": "void (*)(HWND, UINT, UINT)"
+    },
+    {
+      "name": "pVkKeyScanEx",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 32,
+      "type": "SHORT (*)(WCHAR_0, HKL)"
+    },
+    {
+      "name": "pDestroyCursorIcon",
+      "offset_bits": 288,
+      "offset_bytes": 36,
+      "size_bits": 32,
+      "type": "void (*)(HCURSOR)"
+    },
+    {
+      "name": "pSetCursor",
+      "offset_bits": 320,
+      "offset_bytes": 40,
+      "size_bits": 32,
+      "type": "void (*)(HCURSOR)"
+    },
+    {
+      "name": "pGetCursorPos",
+      "offset_bits": 352,
+      "offset_bytes": 44,
+      "size_bits": 32,
+      "type": "BOOL (*)(LPPOINT)"
+    },
+    {
+      "name": "pSetCursorPos",
+      "offset_bits": 384,
+      "offset_bytes": 48,
+      "size_bits": 32,
+      "type": "BOOL (*)(INT, INT)"
+    },
+    {
+      "name": "pClipCursor",
+      "offset_bits": 416,
+      "offset_bytes": 52,
+      "size_bits": 32,
+      "type": "BOOL (*)(LPCRECT)"
+    },
+    {
+      "name": "pUpdateClipboard",
+      "offset_bits": 448,
+      "offset_bytes": 56,
+      "size_bits": 32,
+      "type": "void (*)(void)"
+    },
+    {
+      "name": "pChangeDisplaySettingsEx",
+      "offset_bits": 480,
+      "offset_bytes": 60,
+      "size_bits": 32,
+      "type": "LONG (*)(LPCWSTR, LPDEVMODEW_0, HWND, DWORD, LPVOID)"
+    },
+    {
+      "name": "pEnumDisplayMonitors",
+      "offset_bits": 512,
+      "offset_bytes": 64,
+      "size_bits": 32,
+      "type": "BOOL (*)(HDC, LPRECT, MONITORENUMPROC, LPARAM_0)"
+    },
+    {
+      "name": "pEnumDisplaySettingsEx",
+      "offset_bits": 544,
+      "offset_bytes": 68,
+      "size_bits": 32,
+      "type": "BOOL (*)(LPCWSTR, DWORD, LPDEVMODEW_0, DWORD)"
+    },
+    {
+      "name": "pGetMonitorInfo",
+      "offset_bits": 576,
+      "offset_bytes": 72,
+      "size_bits": 32,
+      "type": "BOOL (*)(HMONITOR, MONITORINFO *)"
+    },
+    {
+      "name": "pCreateDesktopWindow",
+      "offset_bits": 608,
+      "offset_bytes": 76,
+      "size_bits": 32,
+      "type": "BOOL (*)(HWND)"
+    },
+    {
+      "name": "pCreateWindow",
+      "offset_bits": 640,
+      "offset_bytes": 80,
+      "size_bits": 32,
+      "type": "BOOL (*)(HWND)"
+    },
+    {
+      "name": "pDestroyWindow",
+      "offset_bits": 672,
+      "offset_bytes": 84,
+      "size_bits": 32,
+      "type": "void (*)(HWND)"
+    },
+    {
+      "name": "pFlashWindowEx",
+      "offset_bits": 704,
+      "offset_bytes": 88,
+      "size_bits": 32,
+      "type": "void (*)(FLASHWINFO *)"
+    },
+    {
+      "name": "pGetDC",
+      "offset_bits": 736,
+      "offset_bytes": 92,
+      "size_bits": 32,
+      "type": "void (*)(HDC, HWND, HWND, const RECT *, const RECT *, DWORD)"
+    },
+    {
+      "name": "pMsgWaitForMultipleObjectsEx",
+      "offset_bits": 768,
+      "offset_bytes": 96,
+      "size_bits": 32,
+      "type": "DWORD (*)(DWORD, const HANDLE *, DWORD, DWORD, DWORD)"
+    },
+    {
+      "name": "pReleaseDC",
+      "offset_bits": 800,
+      "offset_bytes": 100,
+      "size_bits": 32,
+      "type": "void (*)(HWND, HDC)"
+    },
+    {
+      "name": "pScrollDC",
+      "offset_bits": 832,
+      "offset_bytes": 104,
+      "size_bits": 32,
+      "type": "BOOL (*)(HDC, INT, INT, HRGN)"
+    },
+    {
+      "name": "pSetActiveWindow",
+      "offset_bits": 864,
+      "offset_bytes": 108,
+      "size_bits": 32,
+      "type": "void (*)(HWND)"
+    },
+    {
+      "name": "pSetCapture",
+      "offset_bits": 896,
+      "offset_bytes": 112,
+      "size_bits": 32,
+      "type": "void (*)(HWND, UINT)"
+    },
+    {
+      "name": "pSetFocus",
+      "offset_bits": 928,
+      "offset_bytes": 116,
+      "size_bits": 32,
+      "type": "void (*)(HWND)"
+    },
+    {
+      "name": "pSetLayeredWindowAttributes",
+      "offset_bits": 960,
+      "offset_bytes": 120,
+      "size_bits": 32,
+      "type": "void (*)(HWND, COLORREF, BYTE, DWORD)"
+    },
+    {
+      "name": "pSetParent",
+      "offset_bits": 992,
+      "offset_bytes": 124,
+      "size_bits": 32,
+      "type": "void (*)(HWND, HWND, HWND)"
+    },
+    {
+      "name": "pSetWindowRgn",
+      "offset_bits": 1024,
+      "offset_bytes": 128,
+      "size_bits": 32,
+      "type": "void (*)(HWND, HRGN, BOOL)"
+    },
+    {
+      "name": "pSetWindowIcon",
+      "offset_bits": 1056,
+      "offset_bytes": 132,
+      "size_bits": 32,
+      "type": "void (*)(HWND, UINT, HICON)"
+    },
+    {
+      "name": "pSetWindowStyle",
+      "offset_bits": 1088,
+      "offset_bytes": 136,
+      "size_bits": 32,
+      "type": "void (*)(HWND, INT, STYLESTRUCT *)"
+    },
+    {
+      "name": "pSetWindowText",
+      "offset_bits": 1120,
+      "offset_bytes": 140,
+      "size_bits": 32,
+      "type": "void (*)(HWND, LPCWSTR)"
+    },
+    {
+      "name": "pShowWindow",
+      "offset_bits": 1152,
+      "offset_bytes": 144,
+      "size_bits": 32,
+      "type": "UINT (*)(HWND, INT, RECT *, UINT)"
+    },
+    {
+      "name": "pSysCommand",
+      "offset_bits": 1184,
+      "offset_bytes": 148,
+      "size_bits": 32,
+      "type": "LRESULT_0 (*)(HWND, WPARAM_0, LPARAM_0)"
+    },
+    {
+      "name": "pUpdateLayeredWindow",
+      "offset_bits": 1216,
+      "offset_bytes": 152,
+      "size_bits": 32,
+      "type": "BOOL (*)(HWND, const UPDATELAYEREDWINDOWINFO *, const RECT *)"
+    },
+    {
+      "name": "pWindowMessage",
+      "offset_bits": 1248,
+      "offset_bytes": 156,
+      "size_bits": 32,
+      "type": "LRESULT_0 (*)(HWND, UINT, WPARAM_0, LPARAM_0)"
+    },
+    {
+      "name": "pWindowPosChanging",
+      "offset_bits": 1280,
+      "offset_bytes": 160,
+      "size_bits": 32,
+      "type": "BOOL (*)(HWND, HWND, UINT, const RECT *, const RECT *, RECT *, window_surface **)"
+    },
+    {
+      "name": "pWindowPosChanged",
+      "offset_bits": 1312,
+      "offset_bytes": 164,
+      "size_bits": 32,
+      "type": "void (*)(HWND, HWND, UINT, const RECT *, const RECT *, const RECT *, const RECT *, window_surface *)"
+    },
+    {
+      "name": "pSystemParametersInfo",
+      "offset_bits": 1344,
+      "offset_bytes": 168,
+      "size_bits": 32,
+      "type": "BOOL (*)(UINT, UINT, void *, UINT)"
+    },
+    {
+      "name": "pUpdateCandidatePos",
+      "offset_bits": 1376,
+      "offset_bytes": 172,
+      "size_bits": 32,
+      "type": "void (*)(HWND, const RECT *)"
+    },
+    {
+      "name": "pThreadDetach",
+      "offset_bits": 1408,
+      "offset_bytes": 176,
+      "size_bits": 32,
+      "type": "void (*)(void)"
+    }
+  ],
+  "name": "USER_DRIVER",
+  "ordinal": 6624,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  }
+}

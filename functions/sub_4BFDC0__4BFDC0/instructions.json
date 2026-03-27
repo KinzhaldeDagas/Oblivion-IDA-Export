@@ -1,0 +1,116 @@
+[
+  {
+    "ea": "0x4BFDC0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4BFDC1",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4BFDC3",
+    "line": "mov     ecx, [esp+4+a2]; this",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4BFDC7",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4BFDC9",
+    "line": "mov     [esi+20h], ecx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4BFDCC",
+    "line": "jz      short loc_4BFDF4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4BFDCE",
+    "line": "call    TESObjectCELL_GetWorldSpace",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4BFDD3",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4BFDD5",
+    "line": "jz      short loc_4BFDED",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4BFDD7",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4BFDD9",
+    "line": "call    TESWorldSpace_GetParentWorldpsace",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4BFDDE",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4BFDE0",
+    "line": "jz      short loc_4BFDED",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4BFDE2",
+    "line": "or      dword ptr [esi+1Ch], 400h",
+    "mnemonic": "or",
+    "size": 7
+  },
+  {
+    "ea": "0x4BFDE9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4BFDEA",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x4BFDED",
+    "line": "and     dword ptr [esi+1Ch], 0FFFFFBFFh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x4BFDF4",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4BFDF5",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

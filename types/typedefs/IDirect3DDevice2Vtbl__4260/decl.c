@@ -1,0 +1,1 @@
+IDirect3DDevice2Vtbl

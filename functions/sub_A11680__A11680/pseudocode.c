@@ -1,0 +1,39 @@
+void sub_A11680()
+{
+  *(float *)&dword_B46070 = 0.0;
+  *(float *)&dword_B46074 = 0.0;
+  *(float *)&dword_B46078 = 0.0;
+  *(float *)&dword_B4607C = 0.0;
+  *(float *)&dword_B46080 = 0.0;
+  *(float *)&dword_B46084 = 0.0;
+  *(float *)&dword_B46088 = 0.0;
+  *(float *)&dword_B4608C = 0.0;
+  flt_B46090 = 0.0;
+  flt_B46094 = 0.0;
+  flt_B46098 = 0.0;
+  flt_B4609C = 0.0;
+  flt_B460A0 = 0.0;
+  flt_B460A4 = 0.0;
+  flt_B460A8 = 0.0;
+  flt_B460AC = 0.0;
+  flt_B460B0 = 0.0;
+  flt_B460B4 = 0.0;
+  flt_B460B8 = 0.0;
+  flt_B460BC = 0.0;
+  *(float *)&dword_B460C0 = 0.0;
+  *(float *)&dword_B460C4 = 0.0;
+  *(float *)&dword_B460C8 = 0.0;
+  *(float *)&dword_B460CC = 0.0;
+  *(float *)&dword_B460D0 = 0.0;
+  *(float *)&dword_B460D4 = 0.0;
+  *(float *)&dword_B460D8 = 0.0;
+  *(float *)&dword_B460DC = 0.0;
+  flt_B460E0 = 0.0;
+  flt_B460E4 = 0.0;
+  flt_B460E8 = 0.0;
+  flt_B460EC = 0.0;
+  flt_B460F0 = 0.0;
+  flt_B460F4 = 0.0;
+  flt_B460F8 = 0.0;
+  flt_B460FC = 0.0;
+}

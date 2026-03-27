@@ -1,0 +1,152 @@
+[
+  {
+    "ea": "0x989E6E",
+    "line": "push    [esp+NewSize]; NewSize",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x989E72",
+    "line": "push    [esp+4+Memory]; Memory",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x989E76",
+    "line": "call    _realloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x989E7B",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x989E7D",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x989E7F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x989E80",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x989E81",
+    "line": "jnz     short loc_989EB0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x989E83",
+    "line": "cmp     [esp+NewSize], eax",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x989E87",
+    "line": "jz      short loc_989EB0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x989E89",
+    "line": "cmp     dword_BA9E0C, eax",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x989E8F",
+    "line": "jbe     short loc_989EB0",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x989E91",
+    "line": "push    esi; dwMilliseconds",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x989E92",
+    "line": "call    ds:Sleep",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x989E98",
+    "line": "lea     eax, [esi+3E8h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x989E9E",
+    "line": "cmp     eax, dword_BA9E0C",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x989EA4",
+    "line": "jbe     short loc_989EA9",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x989EA6",
+    "line": "or      eax, 0FFFFFFFFh",
+    "mnemonic": "or",
+    "size": 3
+  },
+  {
+    "ea": "0x989EA9",
+    "line": "cmp     eax, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x989EAC",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x989EAE",
+    "line": "jnz     short unknown_libname_76___unknown_libname_77",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x989EB0",
+    "line": "mov     eax, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x989EB2",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x989EB3",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x989EB4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

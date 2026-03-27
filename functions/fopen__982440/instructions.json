@@ -1,0 +1,38 @@
+[
+  {
+    "ea": "0x982440",
+    "line": "push    40h ; '@'; ShFlag",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x982442",
+    "line": "push    [esp+4+Mode]; Mode",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x982446",
+    "line": "push    [esp+8+Filename]; Filename",
+    "mnemonic": "push",
+    "size": 4
+  },
+  {
+    "ea": "0x98244A",
+    "line": "call    __fsopen",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98244F",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x982452",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

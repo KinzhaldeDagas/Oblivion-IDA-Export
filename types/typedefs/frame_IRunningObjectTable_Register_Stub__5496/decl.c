@@ -1,0 +1,1 @@
+__frame_IRunningObjectTable_Register_Stub

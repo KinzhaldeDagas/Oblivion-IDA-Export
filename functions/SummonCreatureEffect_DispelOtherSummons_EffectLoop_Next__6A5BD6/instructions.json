@@ -1,0 +1,62 @@
+[
+  {
+    "ea": "0x6A5BD6",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5BD8",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5BDA",
+    "line": "jnz     short SummonCreatureEffect_DispelOtherSummons___EffectLoop_Test",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5BDC",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5BDE",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6A5BDF",
+    "line": "jz      short SummonCreatureEffect_DispelOtherSummons___Done",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5BE1",
+    "line": "cmp     edi, ds:0B38280h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x6A5BE7",
+    "line": "jle     short SummonCreatureEffect_DispelOtherSummons___Done",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5BE9",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6A5BEB",
+    "line": "call    ActiveEffect_Base_Remove",
+    "mnemonic": "call",
+    "size": 5
+  }
+]

@@ -1,0 +1,1 @@
+set_named_pipe_info_request

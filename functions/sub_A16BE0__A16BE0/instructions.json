@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA16BE0",
+    "line": "push    offset bUseHardDriveCache",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA16BE5",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA16BEA",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA16BEF",
+    "line": "mov     eax, off_B02D64; \"bUseHardDriveCache:General\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA16BF4",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA16BF6",
+    "line": "jz      short locret_A16C04",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA16BF8",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA16BFB",
+    "line": "jnz     short locret_A16C04",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA16BFD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA16BFE",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA16C03",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA16C04",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

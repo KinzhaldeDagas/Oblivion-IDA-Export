@@ -1,0 +1,80 @@
+[
+  {
+    "ea": "0x9907D4",
+    "line": "push    offset aKernel32",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9907D9",
+    "line": "call    ds:GetModuleHandleA",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x9907DF",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x9907E1",
+    "line": "jz      short loc_9907F8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x9907E3",
+    "line": "push    offset aIsprocessorfea",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9907E8",
+    "line": "push    eax; hModule",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9907E9",
+    "line": "call    ds:GetProcAddress",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x9907EF",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x9907F1",
+    "line": "jz      short loc_9907F8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x9907F3",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9907F5",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x9907F7",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9907F8",
+    "line": "jmp     __ms_p5_test_fdiv",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

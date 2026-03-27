@@ -1,0 +1,164 @@
+[
+  {
+    "ea": "0x5BE780",
+    "line": "mov     eax, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5BE784",
+    "line": "add     eax, 0FFFFFFFFh; switch 4 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE787",
+    "line": "cmp     eax, 3",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE78A",
+    "line": "ja      short def_5BE78C",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE78C",
+    "line": "jmp     ds:jpt_5BE78C[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x5BE793",
+    "line": "fld     dword ptr ds:0B38E58h; jumptable 005BE78C case 1",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE799",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE79C",
+    "line": "fld     dword ptr ds:0B38E60h; jumptable 005BE78C case 2",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE7A2",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE7A5",
+    "line": "fld     dword ptr ds:0B38E68h; jumptable 005BE78C case 3",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE7AB",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE7AE",
+    "line": "mov     ecx, ds:0B333C4h; jumptable 005BE78C case 4",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE7B4",
+    "line": "push    20h ; ' '",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE7B6",
+    "line": "call    Actor_GetSkillMasteryLevel",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE7BB",
+    "line": "cmp     eax, 3",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE7BE",
+    "line": "jz      short loc_5BE7E1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE7C0",
+    "line": "mov     ecx, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE7C6",
+    "line": "push    20h ; ' '",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE7C8",
+    "line": "call    Actor_GetSkillMasteryLevel",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE7CD",
+    "line": "cmp     eax, 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE7D0",
+    "line": "jz      short loc_5BE7E1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE7D2",
+    "line": "mov     ecx, offset fPersuasionReactionHate",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE7D7",
+    "line": "call    GameSetting_GetSafeFloatPointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE7DC",
+    "line": "fld     dword ptr [eax]",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE7DE",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE7E1",
+    "line": "fld     dword ptr ds:0B38E78h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE7E7",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

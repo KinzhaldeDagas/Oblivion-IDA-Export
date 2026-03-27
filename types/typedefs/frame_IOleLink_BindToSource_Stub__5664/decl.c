@@ -1,0 +1,1 @@
+__frame_IOleLink_BindToSource_Stub

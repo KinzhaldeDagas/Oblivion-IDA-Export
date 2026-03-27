@@ -1,0 +1,1 @@
+__frame_IOleObject_SetMoniker_Stub

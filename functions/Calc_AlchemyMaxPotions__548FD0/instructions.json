@@ -1,0 +1,98 @@
+[
+  {
+    "ea": "0x548FD0",
+    "line": "mov     eax, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x548FD4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x548FD5",
+    "line": "call    Calc_MasteryFromSkill",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x548FDA",
+    "line": "add     eax, 0FFFFFFFFh; switch 4 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x548FDD",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x548FE0",
+    "line": "cmp     eax, 3",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x548FE3",
+    "line": "ja      short Calc_AlchemyMaxPotions___def_548FE5",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x548FE5",
+    "line": "jmp     ds:jpt_548FE5[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x548FEC",
+    "line": "mov     eax, ds:0B380B0h; jumptable 00548FE5 case 1",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x548FF1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x548FF2",
+    "line": "mov     eax, ds:0B380B8h; jumptable 00548FE5 case 2",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x548FF7",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x548FF8",
+    "line": "mov     eax, ds:0B380C0h; jumptable 00548FE5 case 3",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x548FFD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x548FFE",
+    "line": "mov     eax, ds:0B380C8h; jumptable 00548FE5 case 4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x549003",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

@@ -1,0 +1,2 @@
+0x519CB9: mov     al, 1
+0x519CBB: retn

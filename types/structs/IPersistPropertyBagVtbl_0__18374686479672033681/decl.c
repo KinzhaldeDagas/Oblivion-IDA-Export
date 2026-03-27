@@ -1,0 +1,1 @@
+IPersistPropertyBagVtbl_0

@@ -1,0 +1,1 @@
+BSShaderPPLightingProperty::TextureEffectData

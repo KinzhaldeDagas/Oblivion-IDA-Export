@@ -1,0 +1,2198 @@
+[
+  {
+    "ea": "0x426270",
+    "line": "sub     esp, 8",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x426273",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426274",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426275",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426276",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426277",
+    "line": "mov     ebp, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x426279",
+    "line": "push    offset aExtradatalis_0; lpCriticalSection",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x42627E",
+    "line": "mov     ecx, offset BSExtraDataCS",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x426283",
+    "line": "call    NiEnterCriticalSection",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426288",
+    "line": "mov     ebx, [esp+18h+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42628C",
+    "line": "mov     esi, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42628F",
+    "line": "push    0FFFFFFFFh; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x426291",
+    "line": "mov     ecx, ebx; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x426293",
+    "line": "call    TESForm_GetOverrideFile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426298",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42629A",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42629C",
+    "line": "jz      loc_42670B",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4262A2",
+    "line": "jmp     short loc_4262A8",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4262A4",
+    "line": "mov     ebx, [esp+18h+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4262A8",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4262AB",
+    "line": "mov     [esp+18h+var_4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4262AF",
+    "line": "movzx   eax, byte ptr [esi+4]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x4262B3",
+    "line": "add     eax, 0FFFFFFFBh; switch 84 cases",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4262B6",
+    "line": "cmp     eax, 53h",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x4262B9",
+    "line": "ja      ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "ja",
+    "size": 6
+  },
+  {
+    "ea": "0x4262BF",
+    "line": "movzx   ecx, ds:byte_426758[eax]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x4262C6",
+    "line": "jmp     ds:jpt_4262C6[ecx*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x4262CD",
+    "line": "mov     ebx, [esi+0Ch]; jumptable 004262C6 case 49",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4262D0",
+    "line": "mov     eax, [ebx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4262D3",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4262D5",
+    "line": "jz      ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4262DB",
+    "line": "lea     edx, [esp+18h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4262DF",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4262E0",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4262E1",
+    "line": "mov     dword ptr [esp+20h+ArgList], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4262E5",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4262EA",
+    "line": "mov     eax, dword ptr [esp+20h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4262EE",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4262F1",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4262F3",
+    "line": "push    offset ??_R0?AVTESKey@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4262F8",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4262FD",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4262FF",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426300",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426305",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426308",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426309",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42630E",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426311",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x426313",
+    "line": "mov     [ebx+4], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x426316",
+    "line": "jnz     ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x42631C",
+    "line": "mov     ecx, dword ptr [esp+18h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426320",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426321",
+    "line": "push    offset aUnableToFindKe; \"Unable to find key %08X for lock data. \"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x426326",
+    "line": "jmp     loc_4266ED",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x42632B",
+    "line": "mov     ecx, [esi+0Ch]; jumptable 004262C6 case 50",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42632E",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42632F",
+    "line": "call    sub_42B700",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426334",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x426336",
+    "line": "jnz     ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x42633C",
+    "line": "jmp     loc_4266F5",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x426341",
+    "line": "mov     edx, [esi+0Ch]; jumptable 004262C6 case 39",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x426344",
+    "line": "lea     eax, [esp+18h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x426348",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426349",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42634A",
+    "line": "mov     dword ptr [esp+20h+ArgList], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42634E",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426353",
+    "line": "mov     ecx, dword ptr [esp+20h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426357",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426358",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42635D",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426360",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x426362",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x426365",
+    "line": "jnz     ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x42636B",
+    "line": "mov     edx, dword ptr [esp+18h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42636F",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426370",
+    "line": "push    offset aUnableToFindOw; \"Unable to find ownership owner form %08\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x426375",
+    "line": "jmp     loc_4266ED",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x42637A",
+    "line": "mov     eax, [esi+0Ch]; jumptable 004262C6 case 40",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42637D",
+    "line": "lea     ecx, [esp+18h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x426381",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426382",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426383",
+    "line": "mov     dword ptr [esp+20h+ArgList], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426387",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42638C",
+    "line": "mov     edx, dword ptr [esp+20h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426390",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426393",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x426395",
+    "line": "push    offset ??_R0?AVTESGlobal@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x42639A",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x42639F",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4263A1",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4263A2",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4263A7",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4263AA",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4263AB",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4263B0",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4263B3",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4263B5",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4263B8",
+    "line": "jnz     ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x4263BE",
+    "line": "mov     eax, dword ptr [esp+18h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4263C2",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4263C3",
+    "line": "push    offset aUnableToFind_3; \"Unable to find ownership condition glob\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4263C8",
+    "line": "jmp     loc_4266ED",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x4263CD",
+    "line": "mov     ecx, [esi+0Ch]; jumptable 004262C6 case 72",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4263D0",
+    "line": "lea     edx, [esp+18h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4263D4",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4263D5",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4263D6",
+    "line": "mov     dword ptr [esp+20h+ArgList], ecx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4263DA",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4263DF",
+    "line": "mov     eax, dword ptr [esp+20h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4263E3",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4263E6",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4263E8",
+    "line": "push    offset ??_R0?AVAlchemyItem@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4263ED",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4263F2",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4263F4",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4263F5",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4263FA",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4263FD",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4263FE",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426403",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426406",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x426408",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42640B",
+    "line": "jnz     ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x426411",
+    "line": "mov     ecx, dword ptr [esp+18h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426415",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426416",
+    "line": "push    offset aUnableToFindPo; \"Unable to find poison %08X. Poison data\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x42641B",
+    "line": "jmp     loc_4266ED",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x426420",
+    "line": "mov     edx, [esi+0Ch]; jumptable 004262C6 case 12",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x426423",
+    "line": "lea     eax, [esp+18h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x426427",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426428",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426429",
+    "line": "mov     dword ptr [esp+20h+ArgList], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42642D",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426432",
+    "line": "mov     ecx, dword ptr [esp+20h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426436",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426439",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x42643B",
+    "line": "push    offset ??_R0?AVTESClimate@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x426440",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x426445",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x426447",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426448",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42644D",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426450",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426451",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426456",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426459",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42645B",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42645E",
+    "line": "jnz     ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x426464",
+    "line": "mov     edx, dword ptr [esp+18h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426468",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426469",
+    "line": "push    offset aUnableToFindCe; \"Unable to find cell climate %08X. Clima\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x42646E",
+    "line": "jmp     loc_4266ED",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x426473",
+    "line": "mov     eax, [esi+0Ch]; jumptable 004262C6 case 5",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x426476",
+    "line": "lea     ecx, [esp+18h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x42647A",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42647B",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42647C",
+    "line": "mov     dword ptr [esp+20h+ArgList], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426480",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426485",
+    "line": "mov     edx, dword ptr [esp+20h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426489",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x42648C",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x42648E",
+    "line": "push    offset ??_R0?AVTESWaterForm@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x426493",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x426498",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x42649A",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42649B",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4264A0",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4264A3",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4264A4",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4264A9",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4264AC",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4264AE",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4264B1",
+    "line": "jnz     ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x4264B7",
+    "line": "mov     eax, dword ptr [esp+18h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4264BB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4264BC",
+    "line": "push    offset aUnableToFind_4; \"Unable to find cell water type %08X. Wa\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4264C1",
+    "line": "jmp     loc_4266ED",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x4264C6",
+    "line": "mov     ecx, [esi+0Ch]; jumptable 004262C6 case 30",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4264C9",
+    "line": "lea     edx, [esp+18h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4264CD",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4264CE",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4264CF",
+    "line": "mov     dword ptr [esp+20h+ArgList], ecx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4264D3",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4264D8",
+    "line": "mov     eax, dword ptr [esp+20h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4264DC",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4264DD",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4264E2",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4264E5",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4264E7",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4264EA",
+    "line": "jnz     ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x4264F0",
+    "line": "mov     ecx, dword ptr [esp+18h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4264F4",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4264F5",
+    "line": "push    offset aUnableToFindPa; \"Unable to find package start location c\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4264FA",
+    "line": "jmp     loc_4266ED",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x4264FF",
+    "line": "mov     edx, [esi+0Ch]; jumptable 004262C6 case 63",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x426502",
+    "line": "lea     eax, [esp+18h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x426506",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426507",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426508",
+    "line": "mov     dword ptr [esp+20h+ArgList], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42650C",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426511",
+    "line": "mov     ecx, dword ptr [esp+20h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426515",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426518",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x42651A",
+    "line": "push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x42651F",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x426524",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x426526",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426527",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42652C",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x42652F",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426530",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426535",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426538",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42653A",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42653D",
+    "line": "jnz     short loc_42654E",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x42653F",
+    "line": "mov     edx, dword ptr [esp+18h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426543",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426544",
+    "line": "push    offset aUnableToFindEn; \"Unable to find enable state parent %08X\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x426549",
+    "line": "jmp     loc_4266ED",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x42654E",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x426550",
+    "line": "push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x426555",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x42655A",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x42655C",
+    "line": "push    ebx; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42655D",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426562",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x426564",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426567",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x426569",
+    "line": "jz      short loc_426587",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42656B",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42656D",
+    "line": "call    ??0?$NiTPointerMap@PAVTESObjectREFR@@_N@@QAE@XZ; NiTPointerMap<TESObjectREFR *,bool>::NiTPointerMap<TESObjectREFR *,bool>(void)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426572",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x426574",
+    "line": "jz      short loc_426587",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x426576",
+    "line": "mov     ecx, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x426579",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42657A",
+    "line": "add     ecx, 44h ; 'D'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x42657D",
+    "line": "call    sub_424A70",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426582",
+    "line": "jmp     ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x426587",
+    "line": "push    offset aEnableStatePar; \"Enable state parent loop detected. Pare\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x42658C",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426591",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426594",
+    "line": "jmp     loc_4266F5",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x426599",
+    "line": "mov     eax, [esi+0Ch]; jumptable 004262C6 case 67",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42659C",
+    "line": "lea     ecx, [esp+18h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4265A0",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4265A1",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4265A2",
+    "line": "mov     dword ptr [esp+20h+ArgList], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4265A6",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4265AB",
+    "line": "mov     edx, dword ptr [esp+20h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4265AF",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4265B2",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4265B4",
+    "line": "push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4265B9",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4265BE",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4265C0",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4265C1",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4265C6",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4265C9",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4265CA",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4265CF",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4265D2",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4265D4",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4265D7",
+    "line": "jnz     ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x4265DD",
+    "line": "mov     eax, dword ptr [esp+18h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4265E1",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4265E2",
+    "line": "push    offset aUnableToFindRa; \"Unable to find random door teleport mar\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4265E7",
+    "line": "jmp     loc_4266ED",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x4265EC",
+    "line": "mov     ecx, [esi+0Ch]; jumptable 004262C6 case 68",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4265EF",
+    "line": "lea     edx, [esp+18h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4265F3",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4265F4",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4265F5",
+    "line": "mov     dword ptr [esp+20h+ArgList], ecx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4265F9",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4265FE",
+    "line": "mov     eax, dword ptr [esp+20h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426602",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426605",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x426607",
+    "line": "push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x42660C",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x426611",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x426613",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426614",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426619",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x42661C",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42661D",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426622",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426625",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x426627",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42662A",
+    "line": "jnz     ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x426630",
+    "line": "mov     ecx, dword ptr [esp+18h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426634",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426635",
+    "line": "push    offset aUnableToFindMe; \"Unable to find merchant container %08X.\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x42663A",
+    "line": "jmp     loc_4266ED",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x42663F",
+    "line": "mov     edx, [esi+0Ch]; jumptable 004262C6 case 88",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x426642",
+    "line": "lea     eax, [esp+18h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x426646",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426647",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426648",
+    "line": "mov     dword ptr [esp+20h+ArgList], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42664C",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426651",
+    "line": "mov     ecx, dword ptr [esp+20h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426655",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426658",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x42665A",
+    "line": "push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x42665F",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x426664",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x426666",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426667",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x42666C",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x42666F",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x426670",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426675",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x426678",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42667A",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42667D",
+    "line": "jz      short loc_426691",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42667F",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x426681",
+    "line": "call    sub_4D74D0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426686",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x426688",
+    "line": "jnz     short loc_426691",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x42668A",
+    "line": "mov     dword ptr [esi+0Ch], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x426691",
+    "line": "cmp     dword ptr [esi+0Ch], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x426695",
+    "line": "jnz     short ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x426697",
+    "line": "mov     edx, dword ptr [esp+18h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42669B",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42669C",
+    "line": "push    offset aUnableToFindTr; \"Unable to find travel horse %08X. Trave\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4266A1",
+    "line": "jmp     short loc_4266ED",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4266A3",
+    "line": "mov     eax, [esi+0Ch]; jumptable 004262C6 case 77",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4266A6",
+    "line": "lea     ecx, [esp+18h+ArgList]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x4266AA",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4266AB",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4266AC",
+    "line": "mov     dword ptr [esp+20h+ArgList], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4266B0",
+    "line": "call    TESForm_ResolveFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4266B5",
+    "line": "mov     edx, dword ptr [esp+20h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4266B9",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4266BC",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4266BE",
+    "line": "push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4266C3",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4266C8",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4266CA",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4266CB",
+    "line": "call    TESForm_LookupByFormID",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4266D0",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4266D3",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4266D4",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4266D9",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4266DC",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4266DE",
+    "line": "mov     [esi+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4266E1",
+    "line": "jnz     short ExtraDataList_Link?___def_4262C6; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4266E3",
+    "line": "mov     eax, dword ptr [esp+18h+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4266E7",
+    "line": "push    eax; ArgList",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4266E8",
+    "line": "push    offset aUnableToFindXm; \"Unable to find XMarker target %08X. XMa\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4266ED",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4266F2",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4266F5",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4266F7",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4266F8",
+    "line": "mov     ecx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4266FA",
+    "line": "call    BaseExtraList_RemoveExtraByPtr",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4266FF",
+    "line": "mov     esi, [esp+18h+var_4]; jumptable 004262C6 default case, cases 6-11,13-29,31-38,41-48,51-62,64-66,69-71,73-76,78-87",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x426703",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x426705",
+    "line": "jnz     loc_4262A4",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x42670B",
+    "line": "mov     ecx, offset BSExtraDataCS; lpCriticalSection",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x426710",
+    "line": "call    NiLeaveCriticalSection_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x426715",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x426716",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x426717",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x426718",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x426719",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x42671C",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]

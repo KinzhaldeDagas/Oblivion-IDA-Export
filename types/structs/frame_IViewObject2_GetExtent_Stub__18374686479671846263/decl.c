@@ -1,0 +1,1 @@
+__frame_IViewObject2_GetExtent_Stub

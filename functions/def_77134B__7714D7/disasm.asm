@@ -1,0 +1,3 @@
+0x7714D7: pop     edi
+0x7714D8: pop     esi
+0x7714D9: retn

@@ -1,0 +1,1 @@
+__frame_IThumbnailExtractor_OnFileUpdated_Stub

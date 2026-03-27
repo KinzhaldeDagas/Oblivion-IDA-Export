@@ -1,0 +1,1 @@
+Lighting30ShaderProperty

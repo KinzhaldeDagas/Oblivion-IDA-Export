@@ -1,0 +1,1 @@
+IRoMetaDataLocatorVtbl_0

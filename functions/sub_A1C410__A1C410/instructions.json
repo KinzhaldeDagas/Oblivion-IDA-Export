@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA1C410",
+    "line": "push    offset off_B10D68",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C415",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C41A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C41F",
+    "line": "mov     eax, off_B10D6C; \"sFileTypeSource:Voice\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C424",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C426",
+    "line": "jz      short locret_A1C434",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C428",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1C42B",
+    "line": "jnz     short locret_A1C434",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1C42D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1C42E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1C433",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA1C434",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

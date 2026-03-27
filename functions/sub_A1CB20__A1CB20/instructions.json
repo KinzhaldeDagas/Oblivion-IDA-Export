@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA1CB20",
+    "line": "push    offset off_B11AE4; \"1.0, 1.0\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA1CB25",
+    "line": "mov     ecx, offset unk_B11D4C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1CB2A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1CB2F",
+    "line": "mov     eax, off_B11AE8; \"sRForeArm:QUADHIT\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1CB34",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA1CB36",
+    "line": "jz      short locret_A1CB44",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1CB38",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1CB3B",
+    "line": "jnz     short locret_A1CB44",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1CB3D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1CB3E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1CB43",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA1CB44",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

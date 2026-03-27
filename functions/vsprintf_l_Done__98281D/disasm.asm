@@ -1,0 +1,3 @@
+0x98281D: pop     ebx
+0x98281E: leave
+0x98281F: retn

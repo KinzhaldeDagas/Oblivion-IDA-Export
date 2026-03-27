@@ -1,0 +1,1 @@
+IRestrictedErrorInfoVtbl_0

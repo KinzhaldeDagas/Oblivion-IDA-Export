@@ -1,0 +1,1 @@
+CATID_IEnumGUIDImpl

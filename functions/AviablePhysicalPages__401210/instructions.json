@@ -1,0 +1,44 @@
+[
+  {
+    "ea": "0x401210",
+    "line": "sub     esp, 20h",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x401213",
+    "line": "lea     eax, [esp+20h+Buffer]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x401216",
+    "line": "push    eax; lpBuffer",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x401217",
+    "line": "call    ds:GlobalMemoryStatus",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x40121D",
+    "line": "mov     eax, [esp+20h+Buffer.dwAvailPhys]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x401221",
+    "line": "add     esp, 20h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x401224",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

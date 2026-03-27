@@ -1,0 +1,1 @@
+__frame_IPersistFile_GetCurFile_Stub

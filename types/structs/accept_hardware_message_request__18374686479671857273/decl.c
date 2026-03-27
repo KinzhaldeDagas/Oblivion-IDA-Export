@@ -1,0 +1,1 @@
+accept_hardware_message_request

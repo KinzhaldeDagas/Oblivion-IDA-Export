@@ -1,0 +1,1 @@
+get_window_rectangles_reply

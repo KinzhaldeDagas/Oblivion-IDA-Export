@@ -1,0 +1,1 @@
+__frame_IOleClientSite_GetMoniker_Stub

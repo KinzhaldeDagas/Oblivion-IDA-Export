@@ -1,0 +1,266 @@
+[
+  {
+    "ea": "0x945EB0",
+    "line": "sub     esp, 3A0h",
+    "mnemonic": "sub",
+    "size": 6
+  },
+  {
+    "ea": "0x945EB6",
+    "line": "mov     eax, ds:0B30AACh",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x945EBB",
+    "line": "mov     [esp+3A0h+var_4], eax",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x945EC2",
+    "line": "test    byte ptr ds:0BA94FCh, 1",
+    "mnemonic": "test",
+    "size": 7
+  },
+  {
+    "ea": "0x945EC9",
+    "line": "jnz     short loc_945EDB",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x945ECB",
+    "line": "or      dword ptr ds:0BA94FCh, 1",
+    "mnemonic": "or",
+    "size": 7
+  },
+  {
+    "ea": "0x945ED2",
+    "line": "mov     byte ptr ds:0BA94F8h, 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x945ED9",
+    "line": "jmp     short loc_945EE4",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x945EDB",
+    "line": "mov     al, ds:0BA94F8h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x945EE0",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x945EE2",
+    "line": "jnz     short loc_945F4F",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x945EE4",
+    "line": "lea     eax, [esp+3A0h+WSAData]",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x945EEB",
+    "line": "push    eax; lpWSAData",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x945EEC",
+    "line": "push    202h; wVersionRequested",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x945EF1",
+    "line": "call    WSAStartup_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x945EF6",
+    "line": "cmp     eax, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x945EF9",
+    "line": "jnz     short loc_945F48",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x945EFB",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x945EFC",
+    "line": "mov     eax, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x945EFE",
+    "line": "push    200h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x945F03",
+    "line": "lea     ecx, [esp+3A8h+var_394]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x945F07",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x945F08",
+    "line": "lea     ecx, [esp+3ACh+var_3A0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x945F0C",
+    "line": "mov     byte ptr [eax], 1",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x945F0F",
+    "line": "call    sub_8BBFB0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x945F14",
+    "line": "push    offset aWindowsWsastar; \"(Windows)WSAStartup failed with error!\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x945F19",
+    "line": "lea     ecx, [esp+3A4h+var_3A0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x945F1D",
+    "line": "call    sub_8BBDB0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x945F22",
+    "line": "mov     ecx, ds:0BA7FB0h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x945F28",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x945F2A",
+    "line": "push    41h ; 'A'",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x945F2C",
+    "line": "push    offset a_StreamImplHkb; \".\\\\stream\\\\impl\\\\hkBsdSocket.cpp\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x945F31",
+    "line": "lea     eax, [esp+3A8h+var_394]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x945F35",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x945F36",
+    "line": "push    321825F8h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x945F3B",
+    "line": "push    3",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x945F3D",
+    "line": "call    dword ptr [edx+8]",
+    "mnemonic": "call",
+    "size": 3
+  },
+  {
+    "ea": "0x945F40",
+    "line": "lea     ecx, [esp+3A0h+var_3A0]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x945F43",
+    "line": "call    sub_8BC000",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x945F48",
+    "line": "mov     byte ptr ds:0BA94F8h, 1",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x945F4F",
+    "line": "mov     ecx, [esp+3A0h+var_4]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x945F56",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x945F5B",
+    "line": "add     esp, 3A0h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x945F61",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

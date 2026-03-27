@@ -1,0 +1,11 @@
+char __cdecl sub_4F59B0(int a1, int a2, int a3, double *a4)
+{
+  double v4; // st7
+
+  *a4 = 0.0;
+  v4 = (double)TESDataHandler_g_PlayerRef->vtbl->super.GetInfamy((Actor *)TESDataHandler_g_PlayerRef);
+  *a4 = v4;
+  if ( IsConsoleMode )
+    Interface_ConsolePrint("Player Infamy is %0.2f", v4);
+  return 1;
+}

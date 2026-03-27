@@ -1,0 +1,1 @@
+__frame_IOleContainer_EnumObjects_Stub

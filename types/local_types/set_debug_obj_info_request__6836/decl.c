@@ -1,0 +1,1 @@
+set_debug_obj_info_request

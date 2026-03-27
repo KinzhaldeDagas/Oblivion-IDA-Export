@@ -1,0 +1,1 @@
+LZCopy::_readfun

@@ -1,0 +1,74 @@
+[
+  {
+    "ea": "0xA19650",
+    "line": "push    offset flt_B06E34",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0xA19655",
+    "line": "mov     ecx, offset dword_B07CFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA1965A",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA1965F",
+    "line": "mov     eax, off_B06E38; \"fSunlightDimmer:BlurShaderHDR\"",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0xA19664",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0xA19666",
+    "line": "jz      short locret_A19674",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0xA19668",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0xA1966B",
+    "line": "jnz     short locret_A19674",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0xA1966D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0xA1966E",
+    "line": "call    FormHeapFree",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0xA19673",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0xA19674",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

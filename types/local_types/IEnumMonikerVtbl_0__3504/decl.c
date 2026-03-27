@@ -1,0 +1,1 @@
+IEnumMonikerVtbl_0

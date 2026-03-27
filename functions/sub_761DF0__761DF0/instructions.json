@@ -1,0 +1,212 @@
+[
+  {
+    "ea": "0x761DF0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x761DF1",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x761DF3",
+    "line": "cmp     ds:0B42154h, esi",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x761DF9",
+    "line": "jnz     short loc_761E59",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x761DFB",
+    "line": "mov     eax, ds:0B42158h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x761E00",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x761E02",
+    "line": "jnz     short loc_761E2D",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x761E04",
+    "line": "push    offset aD3d9_dll; \"D3D9.DLL\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x761E09",
+    "line": "call    dword ptr ds:0A28118h",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x761E0F",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x761E11",
+    "line": "mov     ds:0B42150h, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x761E16",
+    "line": "jz      short loc_761E3A",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x761E18",
+    "line": "push    offset aDirect3dcreate; \"Direct3DCreate9\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x761E1D",
+    "line": "push    eax; hModule",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x761E1E",
+    "line": "call    dword ptr ds:0A2811Ch",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x761E24",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x761E26",
+    "line": "mov     ds:0B42158h, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x761E2B",
+    "line": "jz      short loc_761E3A",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x761E2D",
+    "line": "push    20h ; ' '",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x761E2F",
+    "line": "call    eax ; dword_B42158",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x761E31",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x761E33",
+    "line": "mov     ds:0B42154h, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x761E38",
+    "line": "jnz     short loc_761E4C",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x761E3A",
+    "line": "push    offset aCreateD3d9Inst; \"Create D3D9 instance...FAILED\\n\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x761E3F",
+    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x761E44",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x761E47",
+    "line": "or      eax, 0FFFFFFFFh",
+    "mnemonic": "or",
+    "size": 3
+  },
+  {
+    "ea": "0x761E4A",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x761E4B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x761E4C",
+    "line": "push    offset aCreateD3d9In_0; \"Create D3D9 instance...SUCCESSFUL\\n\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x761E51",
+    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x761E56",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x761E59",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x761E5B",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x761E5C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

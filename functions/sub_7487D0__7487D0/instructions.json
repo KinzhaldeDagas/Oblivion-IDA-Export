@@ -1,0 +1,128 @@
+[
+  {
+    "ea": "0x7487D0",
+    "line": "sub     esp, 24h",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x7487D3",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7487D4",
+    "line": "push    4; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x7487D6",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7487DB",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7487DD",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7487E0",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x7487E2",
+    "line": "jz      short loc_748800",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7487E4",
+    "line": "lea     eax, [esp+28h+SystemInfo]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7487E8",
+    "line": "push    eax; lpSystemInfo",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7487E9",
+    "line": "call    dword ptr ds:0A281F0h",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x7487EF",
+    "line": "mov     ecx, [esp+28h+SystemInfo.dwNumberOfProcessors]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7487F3",
+    "line": "mov     [esi], ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7487F5",
+    "line": "mov     ds:0B407B8h, esi",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x7487FB",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7487FC",
+    "line": "add     esp, 24h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7487FF",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x748800",
+    "line": "mov     dword ptr ds:0B407B8h, 0",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x74880A",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x74880B",
+    "line": "add     esp, 24h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x74880E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  }
+]

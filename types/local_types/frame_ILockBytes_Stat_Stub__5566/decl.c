@@ -1,0 +1,1 @@
+__frame_ILockBytes_Stat_Stub

@@ -1,0 +1,176 @@
+[
+  {
+    "ea": "0x646E60",
+    "line": "mov     edx, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x646E62",
+    "line": "mov     ecx, [edx+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x646E65",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x646E67",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x646E69",
+    "line": "jnz     short loc_646E6E",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x646E6B",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x646E6E",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x646E6F",
+    "line": "mov     esi, [ecx+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x646E72",
+    "line": "mov     esi, ds:0B152B0h[esi*4]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x646E79",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x646E7A",
+    "line": "mov     edi, [edx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x646E7D",
+    "line": "mov     esi, [esi+edi*4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x646E80",
+    "line": "cmp     esi, 2Ch; switch 45 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x646E83",
+    "line": "ja      short def_646E8C; jumptable 00646E8C default case, cases 9-12,16-28,30,31,33-43",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x646E85",
+    "line": "movzx   esi, ds:byte_646EC4[esi]",
+    "mnemonic": "movzx",
+    "size": 7
+  },
+  {
+    "ea": "0x646E8C",
+    "line": "jmp     ds:jpt_646E8C[esi*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x646E93",
+    "line": "cmp     [ecx+24h], eax; jumptable 00646E8C cases 0,4,5,7",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x646E96",
+    "line": "jz      short loc_646EA6; jumptable 00646E8C cases 29,44",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x646E98",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x646E99",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x646E9A",
+    "line": "jmp     sub_566A40",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x646E9F",
+    "line": "mov     ecx, [edx+2Ch]; jumptable 00646E8C cases 1-3,6,8,13-15,32",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x646EA2",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x646EA4",
+    "line": "jnz     short loc_646EAA",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x646EA6",
+    "line": "mov     ecx, [esp+8+arg_0]; jumptable 00646E8C cases 29,44",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x646EAA",
+    "line": "call    TESObjectREFR_GetParentCell",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x646EAF",
+    "line": "pop     edi; jumptable 00646E8C default case, cases 9-12,16-28,30,31,33-43",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x646EB0",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x646EB1",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  }
+]
