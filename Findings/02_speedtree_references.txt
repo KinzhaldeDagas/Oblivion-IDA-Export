@@ -1,0 +1,25 @@
+SpeedTree references discovered in repo exports:
+
+A) SpeedTree class/function symbols in function index
+- 19 SpeedTree-named entries were found in functions_index_by_name.json.
+- Examples include constructors/destructors and deleting destructors for:
+  * SpeedTreeBranchShader
+  * SpeedTreeFrondShader
+  * SpeedTreeLeafShader
+  * SpeedTreeLeafShaderProperty
+  * SpeedTreeShaderLightingProperty
+  * SpeedTreeShaderPPLightingProperty
+
+B) Runtime method-name strings in metadata/strings.json (CSpeedTreeRT)
+- CSpeedTreeRT::SetLeafLightingMethod
+- CSpeedTreeRT::NotifyAllTreesOfEvent
+- CSpeedTreeRT::SetTime
+- CSpeedTreeRT::MakeInstance
+- CSpeedTreeRT::LoadTree
+- Plus many others (27+ CSpeedTreeRT-prefixed strings total)
+
+C) Concrete callsite evidence in disassembly comments
+- functions/sub_78B440__78B440/disasm.asm -> "CSpeedTreeRT::SetLeafLightingMethod"
+- functions/sub_78C4D0__78C4D0/disasm.asm -> "CSpeedTreeRT::NotifyAllTreesOfEvent"
+- functions/sub_78D3F0__78D3F0/disasm.asm -> "CSpeedTreeRT::SetTime"
+- functions/sub_78DC10__78DC10/disasm.asm -> "CSpeedTreeRT::MakeInstance"
