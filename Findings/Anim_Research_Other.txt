@@ -1,0 +1,54 @@
+Animation Research (Non-Hook Findings)
+======================================
+
+Scope
+-----
+This file intentionally excludes all hook-centric entities captured in `Anim_Research.csv`.
+It focuses on animation data types and animation-related engine/vtable integration points.
+
+Core Animation Typedefs
+-----------------------
+- ActorAnimData (typedef): types/typedefs/ActorAnimData__9129/typedef.json
+- AnimAction (typedef): types/typedefs/AnimAction__9658/typedef.json
+- AnimSequenceSingle (typedef): types/typedefs/AnimSequenceSingle__407/typedef.json
+- AnimSequenceMultiple (typedef): types/typedefs/AnimSequenceMultiple__408/typedef.json
+- AnimationNode (typedef): types/typedefs/AnimationNode__9573/typedef.json
+- TESAnimation (typedef): types/typedefs/TESAnimation__9574/typedef.json
+- TESAnimGroup (typedef): types/typedefs/TESAnimGroup__232/typedef.json
+- BSAnimGroupSequence (typedef): types/typedefs/BSAnimGroupSequence__414/typedef.json
+- BSFaceGenAnimationData (typedef): types/typedefs/BSFaceGenAnimationData__491/typedef.json
+- ExtraAnim (typedef): types/typedefs/ExtraAnim__119/typedef.json
+
+Animation Structures and Members
+--------------------------------
+1) ActorAnimData (struct)
+   - Source: types/structs/ActorAnimData__18374686479671983005/struct.json
+   - Notable members: RootNode, AccumNode, nBip01, nLForearm, nTorch
+
+2) TESAnimation (struct)
+   - Source: types/structs/TESAnimation__18374686479671995165/struct.json
+   - Notable members: vtbl, animData
+
+3) AnimationNode (struct)
+   - Source: types/structs/AnimationNode__18374686479671995167/struct.json
+   - Notable members: animationName, next
+
+Animation Integration Points
+----------------------------
+1) PlayerCharacter animation handles
+   - Source: types/structs/PlayerCharacter__18374686479671985316/struct.json
+   - Members detected: firstPersonAnimData, defaultAnimData
+
+2) TESObjectREFRVtbl animation accessor
+   - Source: types/structs/TESObjectREFRVtbl__18374686479671808354/struct.json
+   - Method detected: GetAnimData
+
+3) MagicCasterVtbl animation actions
+   - Source: types/structs/MagicCasterVtbl__18374686479671982437/struct.json
+   - Methods detected: PlayTargettedCastAnim, PlayCastingAnim
+
+Suggested Next Targets
+----------------------
+- Track cross-references from TESAnimation::animData to identify concrete runtime animation containers.
+- Map call-sites for GetAnimData / PlayCastingAnim to understand actor state transitions.
+- Correlate ActorAnimData node pointers with scene graph object types for stronger field naming.
