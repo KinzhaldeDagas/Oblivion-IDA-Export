@@ -114,3 +114,36 @@ G) Deletion trace template (minimal + high signal)
 H) Clarifications / uncertainty handling
 - Confirmed: deletion, method, compute, and shader-definition links above are direct from disasm/pseudocode/xrefs.
 - Not asserted as direct (without extra runtime proof): exact dynamic caller path into sub_80E0C0 (anchor/function relation is confirmed; direct static caller list is not populated).
+
+I) Research: 6E7D35xx–6E7D38xx caller chain
+
+Address normalization used
+- The requested range 6E7D35xx–6E7D38xx maps to 0x7D35xx–0x7D38xx when rebased against module base 0x6E000000.
+- This falls inside one function in this export:
+  - functions/sub_7D34C0__7D34C0 (0x7D34C0-0x7D456C)
+
+What happens in 0x7D35xx–0x7D38xx block
+- Initializes local frustum/culling-plane data and camera-derived values.
+- Repeated calls to sub_716DB0 initialize plane/frustum structures.
+- The block is math-heavy (FPU ops) and appears to build/transform plane terms used by visibility/culling tests.
+- No direct Frond-specific strings or method-name anchors occur in this exact block.
+
+Direct callers of sub_7D34C0 (confirmed)
+- def_7D5B69 (callsite 0x7D5E79)
+- ShadowSceneLight_CullProcess (callsite 0x7D640B)
+
+Upstream caller chain (connected)
+- sub_7D34C0
+  <- ShadowSceneLight_CullProcess
+     <- ShadowPass
+        <- NiRenderer_Render
+- sub_7D34C0
+  <- def_7D5B69
+     <- sub_7D5B20
+        <- ShadowSceneLight_CullProcess
+           <- ShadowPass / sub_7C78D0
+
+Interpretation for Frond investigation
+- This 6E7D35xx–6E7D38xx chain sits in shadow-scene culling/camera logic, not in the core Frond runtime method cluster (DeleteFrondGeometry / SetFrondLightingMethod / SetFrondWindMethod).
+- It is still relevant for visual outcomes (shadow visibility) and may indirectly affect when Frond-rendered geometry is considered during shadow passes.
+- Best use: secondary instrumentation path for render/cull correlation, not primary hook target for Frond deletion/state changes.
