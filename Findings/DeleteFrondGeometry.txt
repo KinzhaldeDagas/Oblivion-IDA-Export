@@ -1,0 +1,86 @@
+Request addressed: "Deeper research into DeleteFrondGeometry"
+
+Primary target identification
+- Candidate function: sub_789EC0, strongly identified as CSpeedTreeRT::DeleteFrondGeometry by embedded exception-report strings:
+  - "CSpeedTreeRT::DeleteFrondGeometry"
+  - "%s - failed [%s]"
+  - "%s - threw an unknown system exception"
+- Function location: functions/sub_789EC0__789EC0
+
+High-confidence behavior of DeleteFrondGeometry (sub_789EC0)
+- Guard #1: exits unless byte at this+0x45 is non-zero (compute-complete flag).
+- Guard #2: exits if this+0x60 (frond geometry object pointer) is null.
+- Guard #3: exits if this+0x34 is non-zero.
+- Guard #4: exits if this+0x30 is null or *(*(this+0x30)) != 1.
+- If all guards pass:
+  1) calls sub_797270(this->frondGeom) to deep-free internal frond geometry buffers,
+  2) calls FormHeapFree(this->frondGeom) to free outer frond geometry object,
+  3) writes this+0x60 = 0.
+- No success/failure return value; this is a best-effort void cleanup routine with SEH wrappers for error reporting.
+
+Field mapping (inferred from constructor/compute/callers)
+- this+0x60 == this[0x18] : frond geometry object pointer.
+- this+0x45 : model "computed" or "ready" byte.
+- this+0x30 : pointer to integer reference-counter block (dword expected == 1 for cleanup path).
+- this+0x34 : pointer/flag gating whether delete is permitted.
+
+Why each guard likely exists (inference)
+- this+0x45 must be set: DeleteFrondGeometry only applies after Compute() succeeds.
+- this+0x60 must be set: avoid double-free and stale pointer dereference.
+- this+0x34 must be clear: likely blocks deletion when a transient dependency still owns or references frond data.
+- *(this+0x30) must be exactly 1: additional ownership/refcount protection before destroying shared geometry.
+
+Cross-function evidence chain
+1) Constructor/init path (sub_78D6A0)
+- Initializes this+0x45 = 0.
+- Allocates frond-related object and stores it into this+0x60 (this[0x18]).
+- Creates a refcount dword at this+0x30 with initial value 1.
+
+2) Compute path (sub_78CCA0)
+- If this+0x45 is already set, logs: "Compute() called more than once for single tree model (ignored)".
+- On successful completion sets this+0x45 = 1.
+- This explains why DeleteFrondGeometry checks this+0x45 before cleanup.
+
+3) Frond export/use path (sub_78A390)
+- Reads frond data from this+0x60 repeatedly.
+- If this+0x60 is null, logs:
+  "no frond geometry exists, possible prior call to DeleteFrondGeometry".
+- This confirms DeleteFrondGeometry intentionally invalidates frond usage by nulling this+0x60.
+
+4) Main pipeline caller (BSTreeModel_MakeBase__560600)
+- Calls sub_78CCA0 (compute), then various setup functions, then explicitly calls sub_789EC0.
+- This indicates frond geometry is generated for build/setup and then optionally discarded to reduce retained memory.
+
+5) Deep free routine called by DeleteFrondGeometry (sub_797270)
+- Frees many internal dynamic arrays/blocks and zeros their pointers/counters.
+- Also releases nested structures via sub_794FC0 before freeing top-level blocks.
+- Confirms DeleteFrondGeometry is a two-stage free: inner graph free (sub_797270) + outer object free (FormHeapFree).
+
+Observed side effects and runtime implications
+- After DeleteFrondGeometry, any code path requiring frond geometry through this+0x60 must either:
+  - regenerate it, or
+  - gracefully handle missing geometry.
+- sub_78A390 demonstrates explicit graceful error handling for the missing-frond case.
+- Multiple setter/configuration functions in this region gate on this+0x45 and often state they have no effect after compute, implying lifecycle phase separation:
+  pre-compute configuration -> compute -> optional geometry disposal.
+
+Potential rename suggestions (for local research readability)
+- sub_789EC0 -> CSpeedTreeRT_DeleteFrondGeometry
+- sub_797270 -> CSpeedTreeRT_FrondGeometry_DeepFree
+- this+0x60 -> m_pFrondGeometry
+- this+0x45 -> m_bComputed
+- this+0x30 -> m_pRefCount
+
+Confidence notes
+- High confidence: function identity, primary control flow, pointer nulling side effect, relationship to missing-frond error path.
+- Medium confidence: precise semantic meaning of this+0x34 and full ownership model around this+0x30 (refcount interpretation is strongly suggested but still inferred).
+
+Files inspected
+- functions/sub_789EC0__789EC0/disasm.asm
+- functions/sub_789EC0__789EC0/pseudocode.c
+- functions/sub_78A390__78A390/pseudocode.c
+- functions/sub_78CCA0__78CCA0/pseudocode.c
+- functions/sub_78D6A0__78D6A0/pseudocode.c
+- functions/sub_797270__797270/pseudocode.c
+- functions/BSTreeModel_MakeBase__560600/pseudocode.c
+- _jsonl/metadata_strings/000000.jsonl
