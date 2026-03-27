@@ -149,3 +149,44 @@ Additional high-signal tracepoints (EA-level)
 - 0x78BB25 / 0x78BB53: SetFrondWindMethod warning + method-name anchors in sub_78BAA0
 - 0x7A1EF0: frond vertices exceed %d in sub_7A1CD0
 - 0x80E0E6 / 0x80E1CD / 0x80E256 / 0x80E350 / 0x80E430: frond shader path/object naming anchors in sub_80E0C0
+
+Narrowed Frond deletion research (hook-focused)
+
+Primary deletion routine (narrowed)
+- Function: functions/sub_789EC0__789EC0
+- Why this is primary:
+  - Contains the runtime method anchor string for CSpeedTreeRT::DeleteFrondGeometry.
+  - Performs actual frond-geometry cleanup calls and heap free:
+    - call sub_797270 (prep/cleanup)
+    - call FormHeapFree( [this+0x60] )
+    - writes [this+0x60] = 0
+- Guard conditions observed in disassembly before delete/free path executes:
+  1) [this+0x45] != 0
+  2) [this+0x60] != 0
+  3) [this+0x34] == 0
+  4) [this+0x30] != 0 and dword ptr [[this+0x30]] == 1
+
+Who triggers deletion (narrowed caller set)
+- Direct caller set is currently a single known site:
+  - BSTreeModel::MakeBase (functions/BSTreeModel_MakeBase__560600)
+  - call site: 0x5608D5 -> call sub_789EC0
+- In MakeBase, the call occurs after setup/update and after these cleanup-adjacent calls:
+  - sub_78B0C0
+  - sub_78C160
+  - sub_789EC0 (deletion)
+
+Hook narrowing recommendation
+- If goal is to trace/override frond deletion behavior with minimal noise, prioritize hooks in this order:
+  1) sub_789EC0 entry (captures every known frond deletion attempt)
+  2) sub_789EC0 @ call FormHeapFree (captures actual free event)
+  3) BSTreeModel::MakeBase @ 0x5608D5 (captures per-model invocation context)
+- Optional correlated telemetry:
+  - Track sub_78A390 "no frond geometry exists" warning path to detect attempted usage after deletion.
+
+Deletion-specific trace template (practical)
+- On sub_789EC0 entry:
+  - Log this, [this+0x45], [this+0x34], [this+0x30], [this+0x60], and dword ptr [[this+0x30]] when valid.
+- On FormHeapFree call inside sub_789EC0:
+  - Log freed pointer value (expected old [this+0x60]).
+- On return from sub_789EC0:
+  - Verify [this+0x60] == 0 to confirm completion of deletion path.
