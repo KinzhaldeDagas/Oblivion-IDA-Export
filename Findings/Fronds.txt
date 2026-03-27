@@ -147,3 +147,46 @@ Interpretation for Frond investigation
 - This 6E7D35xx–6E7D38xx chain sits in shadow-scene culling/camera logic, not in the core Frond runtime method cluster (DeleteFrondGeometry / SetFrondLightingMethod / SetFrondWindMethod).
 - It is still relevant for visual outcomes (shadow visibility) and may indirectly affect when Frond-rendered geometry is considered during shadow passes.
 - Best use: secondary instrumentation path for render/cull correlation, not primary hook target for Frond deletion/state changes.
+
+J) Deep dive: sub_789EC0 (DeleteFrondGeometry path)
+
+Function identity
+- Folder: functions/sub_789EC0__789EC0
+- EA range: 0x789EC0-0x789FDF
+- Type: void __thiscall(int this)
+- Known direct caller count in export: 1 (BSTreeModel::MakeBase @ 0x5608D5)
+
+Core control flow (confirmed)
+- Fast-exit guards:
+  - cmp [esi+45h], 0  -> if zero, exit
+  - mov edi, [esi+60h] -> if null, exit
+  - cmp [esi+34h], 0   -> if nonzero, exit
+  - mov eax, [esi+30h] -> if null, exit
+  - cmp dword ptr [eax], 1 -> if not 1, exit
+- Delete/free path when all guards pass:
+  - call sub_797270 with [this+0x60]
+  - call FormHeapFree with old [this+0x60]
+  - write [this+0x60] = 0
+
+Error/exception logging behavior (confirmed)
+- Function has structured exception handling paths that format and emit DeleteFrondGeometry-tagged errors:
+  - uses string anchor "CSpeedTreeRT::DeleteFrondGeometry" at 0x789F3F and 0x789F8F
+  - failure format path: "%s - failed [%s]"
+  - unknown exception path: "%s - threw an unknown system exception"
+- Both logging paths route through sub_7895E0 after string assembly helpers.
+
+Data/xref evidence snapshot
+- data refs inside sub_789EC0:
+  - aCspeedtreertDe (DeleteFrondGeometry anchor)
+  - aSFailedS
+  - aSThrewAnUnknow
+- xrefs_to for sub_789EC0 show a single direct callsite in this export:
+  - 0x5608D5 (inside BSTreeModel::MakeBase)
+
+Hook placement for sub_789EC0 (surgical)
+- Entry hook at 0x789EC0:
+  - best for seeing all attempted invocations + guard-state outcomes
+- Pre-free hook at 0x789F17 (call FormHeapFree):
+  - best for confirming actual deletion events
+- Post-store hook at 0x789F1F (write [esi+60h]=0):
+  - best for verifying pointer-null completion semantics
