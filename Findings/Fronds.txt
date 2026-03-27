@@ -1,192 +1,116 @@
-Request addressed: "Find all Frond Hooks and places of interest in relation to SpeedTree Frond/Fronds"
+Request addressed: "Find all Frond Hooks and places of interest in relation to SpeedTree Frond/Fronds" + "Research further and connect the dots correctly"
 
-Scope and method
-- Searched for explicit hook-style functions and checked whether any are Frond/SpeedTree-Frond specific.
-- Enumerated Frond/Fronds/SpeedTreeFrond string anchors from metadata strings and mapped each anchor's xrefs to concrete function folders.
-- Cross-checked Frond-relevant functions for caller relationships to identify practical interception points.
+What this report is
+- A Frond-focused reverse-engineering map with evidence-backed traces.
+- It separates confirmed facts from inferred links.
+
+Evidence sources used
+- metadata/strings.json (Frond/SpeedTreeFrond string anchors)
+- data/named_items/*/xrefs_to.json (string anchor -> code xrefs)
+- functions/*/{disasm.asm,pseudocode.c,callers.json,callees.json}
+- functions_index_by_name.json (hook-name inventory)
 
 Commands used
 - rg -n -i "speedtree|frond|fronds" .
-- Python scan of functions_index_by_name.json for names containing "hook"
-- Python scan of data/named_items/_index.json + xrefs_to.json for entries containing "frond"
-- rg -n -i "Frond|CSpeedTreeRT::SetFrond|DeleteFrond|CFrondEngine|BSSM_FRONDS|speedtree\\frond|STFROND|SpeedTreeFrondShader" functions metadata/strings.json data/named_items/_index.json
-- Python mapping of frond-string EAs -> named_item -> xrefs_to -> containing function
-- Python readout of callers.json for key frond functions
+- Python scans over functions_index_by_name.json, data/named_items/_index.json, xrefs_to.json
+- rg -n -i "Frond|DeleteFrond|SetFrond|CFrondEngine|BSSM_FRONDS|speedtree\\frond|STFROND|SpeedTreeFrondShader" functions metadata/strings.json data/named_items/_index.json
+- Targeted disasm/pseudocode inspections for:
+  - BSTreeModel_MakeBase__560600
+  - sub_789EC0__789EC0
+  - sub_78B560__78B560
+  - sub_78BAA0__78BAA0
+  - sub_78CCA0__78CCA0
+  - sub_7A1CD0__7A1CD0
+  - GetShaderDefinition__7B4290
+  - sub_80EE10__80EE10
 
-Frond Hooks (explicit hook functions)
-- No explicit Frond-specific hook functions were found by hook naming convention.
-- Only 2 hook-named functions exist in the repository export, and neither is SpeedTree/Frond-related:
+A) Hook inventory (explicit hook-named exports)
+- No Frond-specific hook-named exports were found.
+- Only two hook-named exports exist overall, neither Frond-specific:
   1) NiDX9ImplicitDepthStencilBufferDataEx_GetBufferDataHook
-     - functions/NiDX9ImplicitDepthStencilBufferDataEx_GetBufferDataHook__76D530
   2) __initp_eh_hooks
-     - functions/initp_eh_hooks__98C435
 
-Frond / SpeedTree Frond places of interest
+B) Connected interaction graph (confirmed)
 
-1) CSpeedTreeRT Frond runtime method anchors
-- DeleteFrondGeometry flow
-  - String anchors: "CSpeedTreeRT::DeleteFrondGeometry" (0xA8BC00)
-                    "no frond geometry exists, possible prior call to DeleteFrondGeometry" (0xA8BC70)
-  - Function evidence: functions/sub_789EC0__789EC0, functions/sub_78A390__78A390
-- SetFrondLightingMethod flow
-  - String anchors: "CSpeedTreeRT::SetFrondLightingMethod" (0xA8BEC0)
-                    "SetFrondLightingMethod() has no effect after Compute() has been called" (0xA8BEE8)
-  - Function evidence: functions/sub_78B560__78B560
-- SetFrondWindMethod flow
-  - String anchors: "CSpeedTreeRT::SetFrondWindMethod" (0xA8C0A4)
-                    "SetFrondWindMethod() has no effect after Compute() has been called" (0xA8C0C8)
-  - Function evidence: functions/sub_78BAA0__78BAA0
+1) Tree build/setup path (confirmed call chain)
+- BSTreeModel::MakeBase (functions/BSTreeModel_MakeBase__560600) performs these Frond-relevant calls in one sequence:
+  - sub_78BAA0  (Frond wind method path)
+  - sub_78B560  (Frond lighting method path)
+  - sub_78CCA0  (runtime compute/update)
+  - sub_789EC0  (DeleteFrondGeometry path)
+- Disasm callsites in MakeBase:
+  - 0x5607F4 -> sub_78BAA0
+  - 0x56080F -> sub_78B560
+  - 0x560888 -> sub_78CCA0
+  - 0x5608D5 -> sub_789EC0
 
-2) CFrondEngine / frond parsing + compute diagnostics
-- "malformed frond texture information (token %d)" (0xA8C710)
-  - Function evidence: functions/def_79F39F__79F568
-- "malformed frond info (token %d)" (0xA8C6F0)
-  - Function evidence: functions/sub_7A5530__7A5530 (plus one edge xref at 0x79F5A0 not mapped to exported function folder)
-- "frond vertices exceed %d" (0xA8C7DC)
-  - Function evidence: functions/sub_7A1CD0__7A1CD0
-- "default reached in CFrondEngine::Compute()" (0xA8C7F8)
-  - Function evidence: functions/sub_7A1CD0__7A1CD0
+2) Compute path link (confirmed)
+- sub_78CCA0 calls sub_7A1CD0 (CFrondEngine compute diagnostics live here).
+- Disasm callsite:
+  - 0x78CD12 -> call sub_7A1CD0
 
-3) Frond shader asset and object naming setup
-- Shader path and binary naming anchors:
-  - "speedtree\\frond.v.hlsl" (0xA94534)
-  - "speedtree\\frond.p.hlsl" (0xA9451C)
-  - "STFROND%03i.vso" (0xA9450C)
-  - "STFROND%03i.pso" (0xA944E8)
-  - "STFROND2%03i.pso" (0xA944F8)
-- Function evidence: functions/sub_80E0C0__80E0C0
-
-4) Render-pass and shader class registration points
-- Render-pass token
-  - Anchor: "BSSM_FRONDS" (0xA8F0FC)
-  - Function evidence: functions/BSShaderProperty_GetRenderPassName__7B4920
-- Frond shader class registration
-  - Anchor: "SpeedTreeFrondShader" (0xA9457C)
-  - Function evidence: functions/sub_A11EB0__A11EB0
-- Frond shader property registration
-  - Anchor: "SpeedTreeFrondShaderProperty" (0xA95BB0)
-  - Function evidence: functions/sub_A12020__A12020
-
-5) Core SpeedTreeFrondShader lifecycle functions
-- Constructor: functions/0SpeedTreeFrondShader@@QAE@XZ__80E8C0
-- Destructor: functions/1SpeedTreeFrondShader@@UAE@XZ__80DF80
-- Scalar deleting destructor: functions/GSpeedTreeFrondShader@@UAEPAXI@Z__80E980
-- Allocation / creation call site that instantiates frond shader:
-  - functions/sub_80EE10__80EE10 (allocates and calls SpeedTreeFrondShader::SpeedTreeFrondShader)
-
-Further research: call-path and hook candidate map
-- High-value call-path entries (caller relationships):
-  - BSTreeModel::MakeBase -> functions/sub_789EC0__789EC0 (DeleteFrondGeometry string path)
-  - BSTreeModel::MakeBase -> functions/sub_78B560__78B560 (SetFrondLightingMethod path)
-  - BSTreeModel::MakeBase -> functions/sub_78BAA0__78BAA0 (SetFrondWindMethod path)
-  - sub_78C6F0 -> functions/sub_78A390__78A390 (no-frond-geometry diagnostic)
-  - sub_78CCA0 -> functions/sub_7A1CD0__7A1CD0 (CFrondEngine::Compute diagnostics)
-  - GetShaderDefinition -> functions/sub_80EE10__80EE10 (frond shader object creation)
-- Practical interception candidates (non-hook export, but useful for instrumentation):
-  1) functions/sub_789EC0__789EC0 (delete frond geometry path)
-  2) functions/sub_78B560__78B560 (frond lighting method path)
-  3) functions/sub_78BAA0__78BAA0 (frond wind method path)
-  4) functions/sub_7A1CD0__7A1CD0 (frond compute and limits)
-  5) functions/sub_80E0C0__80E0C0 (frond shader asset/pipeline naming)
-  6) functions/sub_80EE10__80EE10 (frond shader instantiation)
-  7) functions/BSShaderProperty_GetRenderPassName__7B4920 (BSSM_FRONDS render-pass branch)
-
-Named-item Frond anchors (quick lookup folders)
-- data/named_items/aCspeedtreertDe__A8BC00
-- data/named_items/aNoFrondGeometr__A8BC70
-- data/named_items/aCspeedtreert_3__A8BEC0
-- data/named_items/aSetfrondlighti__A8BEE8
-- data/named_items/aCspeedtreert_7__A8C0A4
-- data/named_items/aSetfrondwindme__A8C0C8
-- data/named_items/aMalformedFro_0__A8C6F0
-- data/named_items/aMalformedFrond__A8C710
-- data/named_items/aFrondVerticesE__A8C7DC
-- data/named_items/aDefaultReached__A8C7F8
-- data/named_items/aBssm_fronds__A8F0FC
-- data/named_items/aStfrond03i_pso__A944E8
-- data/named_items/aStfrond203i_ps__A944F8
-- data/named_items/aStfrond03i_vso__A9450C
-- data/named_items/aSpeedtreeFro_0__A9451C
-- data/named_items/aSpeedtreeFrond__A94534
-- data/named_items/aSpeedtreefrond__A9457C
-- data/named_items/aSpeedtreefro_0__A95BB0
-- data/named_items/7SpeedTreeFrondShader@@6B@__A9443C
-
-Bottom line
-- No explicit Frond-specific hook exports exist in this dataset.
-- Frond coverage is still strong through concrete, mappable Frond runtime functions, shader setup paths, parser/compute diagnostics, and call-path entries suitable for instrumentation.
-
-Interaction traces discovered (additional)
-
-Trace 1: BSTreeModel base-build frond interaction sequence
-- In BSTreeModel::MakeBase (functions/BSTreeModel_MakeBase__560600), Frond-related calls appear in one construction sequence:
-  - 0x5607F4 -> call sub_78BAA0 (SetFrondWindMethod path)
-  - 0x56080F -> call sub_78B560 (SetFrondLightingMethod path)
-  - 0x560888 -> call sub_78CCA0 (compute/update path that later invokes CFrondEngine::Compute)
-  - 0x5608D5 -> call sub_789EC0 (DeleteFrondGeometry path)
-- This provides a concrete trace location for runtime instrumentation at model-build time.
-
-Trace 2: Frond compute interaction path
-- sub_78CCA0 directly calls sub_7A1CD0 (0x78CD12), linking the runtime update path to CFrondEngine::Compute diagnostics.
-- sub_78C6F0 conditionally calls sub_78A390 at 0x78C745 (when bit 0x2 path is active), linking flag-driven update behavior to frond geometry extraction.
-
-Trace 3: Shader-definition to Frond-shader construction path
-- GetShaderDefinition switch case 5 routes to sub_80EE10:
-  - disasm callsite: 0x7B4302 -> call sub_80EE10 (jumptable case 5)
-- sub_80EE10 allocates and constructs SpeedTreeFrondShader:
-  - 0x80EF4D -> call SpeedTreeFrondShader::SpeedTreeFrondShader
-  - 0x80EF7A -> call sub_80E730 (pass/pipeline setup)
-  - plus three virtual calls on the shader object via vtable offsets +0x84, +0xA8, +0x88 (from pseudocode)
-- Inference: sub_80E0C0 appears to be a frond shader program loader (uses speedtree\\frond.* and STFROND* names), and is likely reached through virtual/indirect setup paths rather than direct static calls.
-
-Trace 4: Render-pass frond token interaction
-- BSShaderProperty_GetRenderPassName returns/uses BSSM_FRONDS at 0x7B4A20 (case 15 path in disassembly).
-- This is a stable tracepoint for observing whether Frond shader properties are selecting the frond-specific pass label at runtime.
-
-Additional high-signal tracepoints (EA-level)
-- 0x789F3F / 0x789F8F: CSpeedTreeRT::DeleteFrondGeometry string pushes in sub_789EC0
-- 0x78B5C3 / 0x78B5F1: SetFrondLightingMethod warning + method-name anchors in sub_78B560
-- 0x78BB25 / 0x78BB53: SetFrondWindMethod warning + method-name anchors in sub_78BAA0
-- 0x7A1EF0: frond vertices exceed %d in sub_7A1CD0
-- 0x80E0E6 / 0x80E1CD / 0x80E256 / 0x80E350 / 0x80E430: frond shader path/object naming anchors in sub_80E0C0
-
-Narrowed Frond deletion research (hook-focused)
-
-Primary deletion routine (narrowed)
-- Function: functions/sub_789EC0__789EC0
-- Why this is primary:
-  - Contains the runtime method anchor string for CSpeedTreeRT::DeleteFrondGeometry.
-  - Performs actual frond-geometry cleanup calls and heap free:
-    - call sub_797270 (prep/cleanup)
-    - call FormHeapFree( [this+0x60] )
-    - writes [this+0x60] = 0
-- Guard conditions observed in disassembly before delete/free path executes:
+3) Deletion path (confirmed + narrowed)
+- Primary deletion routine: functions/sub_789EC0__789EC0.
+- Why primary:
+  - Contains "CSpeedTreeRT::DeleteFrondGeometry" failure/exception anchor usage.
+  - Executes cleanup/free sequence:
+    - call sub_797270
+    - call FormHeapFree([this+0x60])
+    - [this+0x60] = 0
+- Guard conditions before free path:
   1) [this+0x45] != 0
   2) [this+0x60] != 0
   3) [this+0x34] == 0
   4) [this+0x30] != 0 and dword ptr [[this+0x30]] == 1
+- Direct caller currently visible in exported call graph:
+  - BSTreeModel::MakeBase at 0x5608D5
 
-Who triggers deletion (narrowed caller set)
-- Direct caller set is currently a single known site:
-  - BSTreeModel::MakeBase (functions/BSTreeModel_MakeBase__560600)
-  - call site: 0x5608D5 -> call sub_789EC0
-- In MakeBase, the call occurs after setup/update and after these cleanup-adjacent calls:
-  - sub_78B0C0
-  - sub_78C160
-  - sub_789EC0 (deletion)
+4) Shader definition / frond shader creation path (confirmed)
+- GetShaderDefinition switch case 5 calls sub_80EE10.
+  - disasm: 0x7B4302 -> call sub_80EE10 (case 5)
+- sub_80EE10 allocates + constructs SpeedTreeFrondShader, then runs setup:
+  - call SpeedTreeFrondShader::SpeedTreeFrondShader
+  - call sub_80E730
+  - plus virtual calls via vtable offsets (+0x84, +0xA8, +0x88 in pseudocode)
 
-Hook narrowing recommendation
-- If goal is to trace/override frond deletion behavior with minimal noise, prioritize hooks in this order:
-  1) sub_789EC0 entry (captures every known frond deletion attempt)
-  2) sub_789EC0 @ call FormHeapFree (captures actual free event)
-  3) BSTreeModel::MakeBase @ 0x5608D5 (captures per-model invocation context)
-- Optional correlated telemetry:
-  - Track sub_78A390 "no frond geometry exists" warning path to detect attempted usage after deletion.
+C) Frond runtime method mapping (anchor -> function)
+- "CSpeedTreeRT::DeleteFrondGeometry" -> sub_789EC0
+- "no frond geometry exists...DeleteFrondGeometry" -> sub_78A390
+- "CSpeedTreeRT::SetFrondLightingMethod" + warning text -> sub_78B560
+- "CSpeedTreeRT::SetFrondWindMethod" + warning text -> sub_78BAA0
 
-Deletion-specific trace template (practical)
-- On sub_789EC0 entry:
-  - Log this, [this+0x45], [this+0x34], [this+0x30], [this+0x60], and dword ptr [[this+0x30]] when valid.
-- On FormHeapFree call inside sub_789EC0:
-  - Log freed pointer value (expected old [this+0x60]).
-- On return from sub_789EC0:
-  - Verify [this+0x60] == 0 to confirm completion of deletion path.
+D) CFrondEngine + parser diagnostics (anchor -> function)
+- "malformed frond texture information (token %d)" -> def_79F39F__79F568
+- "malformed frond info (token %d)" -> sub_7A5530 (plus one additional xref edge at 0x79F5A0)
+- "frond vertices exceed %d" -> sub_7A1CD0
+- "default reached in CFrondEngine::Compute()" -> sub_7A1CD0
+
+E) Render/shader asset anchors (anchor -> function)
+- "BSSM_FRONDS" -> BSShaderProperty_GetRenderPassName__7B4920
+- "speedtree\\frond.v.hlsl", "speedtree\\frond.p.hlsl",
+  "STFROND%03i.vso", "STFROND%03i.pso", "STFROND2%03i.pso" -> sub_80E0C0
+- "SpeedTreeFrondShader" -> sub_A11EB0
+- "SpeedTreeFrondShaderProperty" -> sub_A12020
+
+F) Hooking priorities (connected and narrowed)
+
+Priority 1 (deletion objective)
+- Hook sub_789EC0 entry (captures deletion attempts)
+- Hook sub_789EC0 at FormHeapFree callsite (captures actual frees)
+- Optional caller-context hook: BSTreeModel::MakeBase at 0x5608D5
+
+Priority 2 (method-state objective)
+- Hook sub_78B560 for Frond lighting changes
+- Hook sub_78BAA0 for Frond wind changes
+
+Priority 3 (compute/diagnostic objective)
+- Hook sub_78CCA0 and sub_7A1CD0 to correlate runtime update -> compute diagnostics
+
+G) Deletion trace template (minimal + high signal)
+- On sub_789EC0 entry: log this, [this+0x45], [this+0x34], [this+0x30], [this+0x60], dword ptr [[this+0x30]] when valid
+- On FormHeapFree in sub_789EC0: log freed pointer
+- On sub_789EC0 return: verify [this+0x60] == 0
+
+H) Clarifications / uncertainty handling
+- Confirmed: deletion, method, compute, and shader-definition links above are direct from disasm/pseudocode/xrefs.
+- Not asserted as direct (without extra runtime proof): exact dynamic caller path into sub_80E0C0 (anchor/function relation is confirmed; direct static caller list is not populated).
