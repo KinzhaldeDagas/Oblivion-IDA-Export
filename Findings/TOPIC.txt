@@ -1,0 +1,47 @@
+Request addressed: "Browse the repo for all repo hooks for SpeedTree".
+
+Scope and method
+- Inventory all functions explicitly marked as hooks in exported function index files.
+- Check whether any hook-named function is SpeedTree-related.
+- Collect direct SpeedTree symbols/callsites that can serve as practical interception targets.
+
+Commands used
+- rg -n --ignore-case "speedtree.*hook|hook.*speedtree" .
+- Python scans of functions_index_by_name.json and functions_index_by_ea.json for entries containing "hook".
+- Python scan of metadata/strings.json for values containing "SpeedTree" / "CSpeedTreeRT::".
+
+Hook inventory discovered
+1) NiDX9ImplicitDepthStencilBufferDataEx_GetBufferDataHook
+   - Folder: functions/NiDX9ImplicitDepthStencilBufferDataEx_GetBufferDataHook__76D530
+   - Start EA: 0x76D530
+   - End EA:   0x76D5B4
+   - Type: char __thiscall(_DWORD *this, int)
+
+2) __initp_eh_hooks
+   - Folder: functions/initp_eh_hooks__98C435
+   - Start EA: 0x98C435
+   - End EA:   0x98C446
+   - Type: PVOID()
+
+SpeedTree linkage check against hook folders
+- No direct "SpeedTree" references were found inside the two hook folders above.
+- No direct symbol matched "speedtree.*hook" or "hook.*speedtree".
+
+SpeedTree references discovered
+- 19 SpeedTree-named entries in functions_index_by_name.json (constructors/destructors and deleting destructors for SpeedTree shader/property classes).
+- CSpeedTreeRT runtime method strings in metadata/strings.json, including:
+  - SetLeafLightingMethod
+  - NotifyAllTreesOfEvent
+  - SetTime
+  - MakeInstance
+  - LoadTree
+- Concrete callsite labels in disassembly:
+  - functions/sub_78B440__78B440/disasm.asm -> CSpeedTreeRT::SetLeafLightingMethod
+  - functions/sub_78C4D0__78C4D0/disasm.asm -> CSpeedTreeRT::NotifyAllTreesOfEvent
+  - functions/sub_78D3F0__78D3F0/disasm.asm -> CSpeedTreeRT::SetTime
+  - functions/sub_78DC10__78DC10/disasm.asm -> CSpeedTreeRT::MakeInstance
+
+Conclusions
+- No explicitly named dedicated SpeedTree hook function was identified in this export.
+- Broad hook infrastructure exists, but SpeedTree is represented primarily through symbols/strings/callsites.
+- Practical interception candidates (inferred): SetLeafLightingMethod, NotifyAllTreesOfEvent, SetTime, MakeInstance, LoadTree.
