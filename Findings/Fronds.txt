@@ -115,3 +115,37 @@ Named-item Frond anchors (quick lookup folders)
 Bottom line
 - No explicit Frond-specific hook exports exist in this dataset.
 - Frond coverage is still strong through concrete, mappable Frond runtime functions, shader setup paths, parser/compute diagnostics, and call-path entries suitable for instrumentation.
+
+Interaction traces discovered (additional)
+
+Trace 1: BSTreeModel base-build frond interaction sequence
+- In BSTreeModel::MakeBase (functions/BSTreeModel_MakeBase__560600), Frond-related calls appear in one construction sequence:
+  - 0x5607F4 -> call sub_78BAA0 (SetFrondWindMethod path)
+  - 0x56080F -> call sub_78B560 (SetFrondLightingMethod path)
+  - 0x560888 -> call sub_78CCA0 (compute/update path that later invokes CFrondEngine::Compute)
+  - 0x5608D5 -> call sub_789EC0 (DeleteFrondGeometry path)
+- This provides a concrete trace location for runtime instrumentation at model-build time.
+
+Trace 2: Frond compute interaction path
+- sub_78CCA0 directly calls sub_7A1CD0 (0x78CD12), linking the runtime update path to CFrondEngine::Compute diagnostics.
+- sub_78C6F0 conditionally calls sub_78A390 at 0x78C745 (when bit 0x2 path is active), linking flag-driven update behavior to frond geometry extraction.
+
+Trace 3: Shader-definition to Frond-shader construction path
+- GetShaderDefinition switch case 5 routes to sub_80EE10:
+  - disasm callsite: 0x7B4302 -> call sub_80EE10 (jumptable case 5)
+- sub_80EE10 allocates and constructs SpeedTreeFrondShader:
+  - 0x80EF4D -> call SpeedTreeFrondShader::SpeedTreeFrondShader
+  - 0x80EF7A -> call sub_80E730 (pass/pipeline setup)
+  - plus three virtual calls on the shader object via vtable offsets +0x84, +0xA8, +0x88 (from pseudocode)
+- Inference: sub_80E0C0 appears to be a frond shader program loader (uses speedtree\\frond.* and STFROND* names), and is likely reached through virtual/indirect setup paths rather than direct static calls.
+
+Trace 4: Render-pass frond token interaction
+- BSShaderProperty_GetRenderPassName returns/uses BSSM_FRONDS at 0x7B4A20 (case 15 path in disassembly).
+- This is a stable tracepoint for observing whether Frond shader properties are selecting the frond-specific pass label at runtime.
+
+Additional high-signal tracepoints (EA-level)
+- 0x789F3F / 0x789F8F: CSpeedTreeRT::DeleteFrondGeometry string pushes in sub_789EC0
+- 0x78B5C3 / 0x78B5F1: SetFrondLightingMethod warning + method-name anchors in sub_78B560
+- 0x78BB25 / 0x78BB53: SetFrondWindMethod warning + method-name anchors in sub_78BAA0
+- 0x7A1EF0: frond vertices exceed %d in sub_7A1CD0
+- 0x80E0E6 / 0x80E1CD / 0x80E256 / 0x80E350 / 0x80E430: frond shader path/object naming anchors in sub_80E0C0
