@@ -1,0 +1,84 @@
+sub_59E680 (0x59E680) research notes - Topic list + rumor suppression
+===================================================================
+
+Scope
+-----
+This note focuses on how sub_59E680 refreshes dialogue topic UI entries and where rumor suppression (NoRumors) affects what appears.
+
+Primary role of sub_59E680
+--------------------------
+1) Clears existing topic entry tiles under the menu root.
+   - It walks the child list at (a1+0x28)->+0x34 and destructs each tile node/object.
+
+2) Initializes an iterator over a cached topic-result list via sub_6B85C0(v5, 1).
+   - If there are entries, it shows the list container at alpha/visible constant fConstant_2.
+   - If there are no entries, it leaves list hidden/collapsed and later sets fallback visibility on (a1+0x30).
+
+3) If (a1+0x88) is set, it exits early through sub_59DD40 and returns 1.
+   - In this mode it does not rebuild the individual topic tiles.
+
+4) Otherwise it loops all current entries and creates one "topic_template" tile per entry:
+   - label text source = sub_6B8650(v5) -> likely current topic node payload.
+   - sets tile string IDs/properties including 0xFDE (text) and float properties 0xFA8/0xFAA.
+   - assigns a unique interaction id via InterfaceManager::unk08C into property 0xFF0.
+   - checks per-entry flag byte at +0x21 to gate additional visual/layout handling.
+
+5) After list generation it finalizes layout via sub_58FBA0 and optional follow-up via sub_57FD60.
+
+How rumor suppression feeds this function
+-----------------------------------------
+sub_59E680 does not directly call Actor::IsNoRumor itself. Rumor suppression happens earlier when the list is built, then sub_59E680 only renders whatever survived filtering.
+
+Relevant upstream builders:
+
+A) sub_59EA10 -> sub_6B92C0 -> sub_59E680
+   - sub_59EA10 refreshes list state and stores result in byte (a1+0x88), then calls sub_59E680.
+
+B) sub_59EA60 -> sub_6B93B0 -> sub_59E680
+   - targeted topic refresh path; temporarily clears (a1+0x88) for render call and restores after.
+
+C) sub_59EB90 fallback path -> sub_6B92C0 -> sub_59E680
+   - used when current node/topic selection is missing/invalid.
+
+Core rumor filter logic (in sub_6B9010)
+---------------------------------------
+sub_6B9010 is where TopicList candidate entries are expanded and conditioned:
+
+1) It iterates topic nodes from a TopicList chain (a2).
+
+2) Special-case for topic refID == 0xD7 (commented as "infogeneral topic"):
+   - If actor is NOT no-rumor (!Actor::IsNoRumor), it attempts to add an alternate/general topic source via sub_425970 and remembers this with v20.
+
+3) During per-topic quest/topic resolution:
+   - For refID 0xD7 it toggles creation rules using v20 and Actor::IsNoRumor(v24):
+     * if v20 already set OR actor is no-rumor => disables one creation path (v21=0)
+     * else enables v22 path.
+   - Depending on flags on resolved info (byte +0x25 & 4), it may attach extra data via sub_422C70.
+
+Interpretation: rumor suppression is actor-driven and mostly affects whether the infogeneral (0xD7) branch is injected/expanded. sub_59E680 is the renderer for that precomputed list.
+
+Actor no-rumor source of truth
+------------------------------
+Actor::IsNoRumor checks:
+1) non-NPC actors => true immediately.
+2) ExtraData kExtraData_HasNoRumors on actor.
+3) actor base flag kFlag_NoRumors.
+
+So the effective suppression can come from runtime extra data or base form flags.
+
+Notable UI/data hints
+---------------------
+- sub_59E680 references string "topic_template" (named data aTopic_template).
+- Engine metadata includes command/debug strings: "RefreshTopicList", "SetNoRumors", "GetNoRumors", and console print "GetNoRumors >> %0.2f".
+- This aligns with a pipeline where no-rumor state influences topic generation before menu tile creation.
+
+Quick call graph summary
+------------------------
+sub_59EA10/sub_59EA60/sub_59EB90
+  -> sub_6B92C0 or sub_6B93B0
+    -> sub_6B9010 (topic generation + rumor gating)
+      -> sub_59E680 (UI tile rebuild/render)
+
+Conclusion
+----------
+sub_59E680 should be treated as the TopicList renderer and state applier, not the policy owner for rumor suppression. Rumor suppression decisions are primarily upstream in sub_6B9010 via Actor::IsNoRumor checks around infogeneral topic 0xD7 handling.
