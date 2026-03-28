@@ -1,0 +1,217 @@
+Request addressed: "Find all Frond Hooks and places of interest in relation to SpeedTree Frond/Fronds" + "Research further and connect the dots correctly"
+
+What this report is
+- A Frond-focused reverse-engineering map with evidence-backed traces.
+- It separates confirmed facts from inferred links.
+
+Evidence sources used
+- metadata/strings.json (Frond/SpeedTreeFrond string anchors)
+- data/named_items/*/xrefs_to.json (string anchor -> code xrefs)
+- functions/*/{disasm.asm,pseudocode.c,callers.json,callees.json}
+- functions_index_by_name.json (hook-name inventory)
+
+Commands used
+- rg -n -i "speedtree|frond|fronds" .
+- Python scans over functions_index_by_name.json, data/named_items/_index.json, xrefs_to.json
+- rg -n -i "Frond|DeleteFrond|SetFrond|CFrondEngine|BSSM_FRONDS|speedtree\\frond|STFROND|SpeedTreeFrondShader" functions metadata/strings.json data/named_items/_index.json
+- Targeted disasm/pseudocode inspections for:
+  - BSTreeModel_MakeBase__560600
+  - sub_789EC0__789EC0
+  - sub_78B560__78B560
+  - sub_78BAA0__78BAA0
+  - sub_78CCA0__78CCA0
+  - sub_7A1CD0__7A1CD0
+  - GetShaderDefinition__7B4290
+  - sub_80EE10__80EE10
+
+A) Hook inventory (explicit hook-named exports)
+- No Frond-specific hook-named exports were found.
+- Only two hook-named exports exist overall, neither Frond-specific:
+  1) NiDX9ImplicitDepthStencilBufferDataEx_GetBufferDataHook
+  2) __initp_eh_hooks
+
+B) Connected interaction graph (confirmed)
+
+1) Tree build/setup path (confirmed call chain)
+- BSTreeModel::MakeBase (functions/BSTreeModel_MakeBase__560600) performs these Frond-relevant calls in one sequence:
+  - sub_78BAA0  (Frond wind method path)
+  - sub_78B560  (Frond lighting method path)
+  - sub_78CCA0  (runtime compute/update)
+  - sub_789EC0  (DeleteFrondGeometry path)
+- Disasm callsites in MakeBase:
+  - 0x5607F4 -> sub_78BAA0
+  - 0x56080F -> sub_78B560
+  - 0x560888 -> sub_78CCA0
+  - 0x5608D5 -> sub_789EC0
+
+2) Compute path link (confirmed)
+- sub_78CCA0 calls sub_7A1CD0 (CFrondEngine compute diagnostics live here).
+- Disasm callsite:
+  - 0x78CD12 -> call sub_7A1CD0
+
+3) Deletion path (confirmed + narrowed)
+- Primary deletion routine: functions/sub_789EC0__789EC0.
+- Why primary:
+  - Contains "CSpeedTreeRT::DeleteFrondGeometry" failure/exception anchor usage.
+  - Executes cleanup/free sequence:
+    - call sub_797270
+    - call FormHeapFree([this+0x60])
+    - [this+0x60] = 0
+- Guard conditions before free path:
+  1) [this+0x45] != 0
+  2) [this+0x60] != 0
+  3) [this+0x34] == 0
+  4) [this+0x30] != 0 and dword ptr [[this+0x30]] == 1
+- Direct caller currently visible in exported call graph:
+  - BSTreeModel::MakeBase at 0x5608D5
+
+4) Shader definition / frond shader creation path (confirmed)
+- GetShaderDefinition switch case 5 calls sub_80EE10.
+  - disasm: 0x7B4302 -> call sub_80EE10 (case 5)
+- sub_80EE10 allocates + constructs SpeedTreeFrondShader, then runs setup:
+  - call SpeedTreeFrondShader::SpeedTreeFrondShader
+  - call sub_80E730
+  - plus virtual calls via vtable offsets (+0x84, +0xA8, +0x88 in pseudocode)
+
+C) Frond runtime method mapping (anchor -> function)
+- "CSpeedTreeRT::DeleteFrondGeometry" -> sub_789EC0
+- "no frond geometry exists...DeleteFrondGeometry" -> sub_78A390
+- "CSpeedTreeRT::SetFrondLightingMethod" + warning text -> sub_78B560
+- "CSpeedTreeRT::SetFrondWindMethod" + warning text -> sub_78BAA0
+
+D) CFrondEngine + parser diagnostics (anchor -> function)
+- "malformed frond texture information (token %d)" -> def_79F39F__79F568
+- "malformed frond info (token %d)" -> sub_7A5530 (plus one additional xref edge at 0x79F5A0)
+- "frond vertices exceed %d" -> sub_7A1CD0
+- "default reached in CFrondEngine::Compute()" -> sub_7A1CD0
+
+E) Render/shader asset anchors (anchor -> function)
+- "BSSM_FRONDS" -> BSShaderProperty_GetRenderPassName__7B4920
+- "speedtree\\frond.v.hlsl", "speedtree\\frond.p.hlsl",
+  "STFROND%03i.vso", "STFROND%03i.pso", "STFROND2%03i.pso" -> sub_80E0C0
+- "SpeedTreeFrondShader" -> sub_A11EB0
+- "SpeedTreeFrondShaderProperty" -> sub_A12020
+
+F) Hooking priorities (connected and narrowed)
+
+Priority 1 (deletion objective)
+- Hook sub_789EC0 entry (captures deletion attempts)
+- Hook sub_789EC0 at FormHeapFree callsite (captures actual frees)
+- Optional caller-context hook: BSTreeModel::MakeBase at 0x5608D5
+
+Priority 2 (method-state objective)
+- Hook sub_78B560 for Frond lighting changes
+- Hook sub_78BAA0 for Frond wind changes
+
+Priority 3 (compute/diagnostic objective)
+- Hook sub_78CCA0 and sub_7A1CD0 to correlate runtime update -> compute diagnostics
+
+G) Deletion trace template (minimal + high signal)
+- On sub_789EC0 entry: log this, [this+0x45], [this+0x34], [this+0x30], [this+0x60], dword ptr [[this+0x30]] when valid
+- On FormHeapFree in sub_789EC0: log freed pointer
+- On sub_789EC0 return: verify [this+0x60] == 0
+
+H) Clarifications / uncertainty handling
+- Confirmed: deletion, method, compute, and shader-definition links above are direct from disasm/pseudocode/xrefs.
+- Not asserted as direct (without extra runtime proof): exact dynamic caller path into sub_80E0C0 (anchor/function relation is confirmed; direct static caller list is not populated).
+
+I) Research: 6E7D35xx–6E7D38xx caller chain
+
+Address normalization used
+- The requested range 6E7D35xx–6E7D38xx maps to 0x7D35xx–0x7D38xx when rebased against module base 0x6E000000.
+- This falls inside one function in this export:
+  - functions/sub_7D34C0__7D34C0 (0x7D34C0-0x7D456C)
+
+What happens in 0x7D35xx–0x7D38xx block
+- Initializes local frustum/culling-plane data and camera-derived values.
+- Repeated calls to sub_716DB0 initialize plane/frustum structures.
+- The block is math-heavy (FPU ops) and appears to build/transform plane terms used by visibility/culling tests.
+- No direct Frond-specific strings or method-name anchors occur in this exact block.
+
+Direct callers of sub_7D34C0 (confirmed)
+- def_7D5B69 (callsite 0x7D5E79)
+- ShadowSceneLight_CullProcess (callsite 0x7D640B)
+
+Upstream caller chain (connected)
+- sub_7D34C0
+  <- ShadowSceneLight_CullProcess
+     <- ShadowPass
+        <- NiRenderer_Render
+- sub_7D34C0
+  <- def_7D5B69
+     <- sub_7D5B20
+        <- ShadowSceneLight_CullProcess
+           <- ShadowPass / sub_7C78D0
+
+Interpretation for Frond investigation
+- This 6E7D35xx–6E7D38xx chain sits in shadow-scene culling/camera logic, not in the core Frond runtime method cluster (DeleteFrondGeometry / SetFrondLightingMethod / SetFrondWindMethod).
+- It is still relevant for visual outcomes (shadow visibility) and may indirectly affect when Frond-rendered geometry is considered during shadow passes.
+- Best use: secondary instrumentation path for render/cull correlation, not primary hook target for Frond deletion/state changes.
+
+J) Deep dive: sub_789EC0 (DeleteFrondGeometry path)
+
+Function identity
+- Folder: functions/sub_789EC0__789EC0
+- EA range: 0x789EC0-0x789FDF
+- Type: void __thiscall(int this)
+- Known direct caller count in export: 1 (BSTreeModel::MakeBase @ 0x5608D5)
+
+Core control flow (confirmed)
+- Fast-exit guards:
+  - cmp [esi+45h], 0  -> if zero, exit
+  - mov edi, [esi+60h] -> if null, exit
+  - cmp [esi+34h], 0   -> if nonzero, exit
+  - mov eax, [esi+30h] -> if null, exit
+  - cmp dword ptr [eax], 1 -> if not 1, exit
+- Delete/free path when all guards pass:
+  - call sub_797270 with [this+0x60]
+  - call FormHeapFree with old [this+0x60]
+  - write [this+0x60] = 0
+
+Error/exception logging behavior (confirmed)
+- Function has structured exception handling paths that format and emit DeleteFrondGeometry-tagged errors:
+  - uses string anchor "CSpeedTreeRT::DeleteFrondGeometry" at 0x789F3F and 0x789F8F
+  - failure format path: "%s - failed [%s]"
+  - unknown exception path: "%s - threw an unknown system exception"
+- Both logging paths route through sub_7895E0 after string assembly helpers.
+
+Data/xref evidence snapshot
+- data refs inside sub_789EC0:
+  - aCspeedtreertDe (DeleteFrondGeometry anchor)
+  - aSFailedS
+  - aSThrewAnUnknow
+- xrefs_to for sub_789EC0 show a single direct callsite in this export:
+  - 0x5608D5 (inside BSTreeModel::MakeBase)
+
+Hook placement for sub_789EC0 (surgical)
+- Entry hook at 0x789EC0:
+  - best for seeing all attempted invocations + guard-state outcomes
+- Pre-free hook at 0x789F17 (call FormHeapFree):
+  - best for confirming actual deletion events
+- Post-store hook at 0x789F1F (write [esi+60h]=0):
+  - best for verifying pointer-null completion semantics
+
+K) Further research: cleanup pair around sub_789EC0
+
+Observed paired cleanup in BSTreeModel::MakeBase
+- MakeBase calls two adjacent cleanup routines in order:
+  1) 0x5608CE -> call sub_78C160 (DeleteBranchGeometry path)
+  2) 0x5608D5 -> call sub_789EC0 (DeleteFrondGeometry path)
+- This indicates frond deletion is part of a broader post-build geometry cleanup stage, not a standalone isolated event.
+
+sub_78C160 vs sub_789EC0 (structural comparison)
+- sub_78C160 (DeleteBranchGeometry) and sub_789EC0 (DeleteFrondGeometry) are highly parallel:
+  - same computed/guard gate on [this+0x45]
+  - same "already transient/compute state" check via [this+0x34]
+  - same mode check using [this+0x30] and dword ptr [[this+0x30]] == 1
+  - same cleanup core: sub_797270 -> FormHeapFree -> pointer nulling
+- Key pointer slot difference:
+  - sub_78C160 frees [this+0x04] (branch geometry)
+  - sub_789EC0 frees [this+0x60] (frond geometry)
+
+Practical implication for hooks
+- If tracing only sub_789EC0, you may miss context that branch cleanup happened immediately before it.
+- Recommended paired telemetry for high-fidelity lifecycle traces:
+  - hook sub_78C160 entry + free
+  - hook sub_789EC0 entry + free
+  - correlate by same `this` pointer and near-adjacent callsites (0x5608CE / 0x5608D5).
