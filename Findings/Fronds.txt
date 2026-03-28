@@ -190,3 +190,28 @@ Hook placement for sub_789EC0 (surgical)
   - best for confirming actual deletion events
 - Post-store hook at 0x789F1F (write [esi+60h]=0):
   - best for verifying pointer-null completion semantics
+
+K) Further research: cleanup pair around sub_789EC0
+
+Observed paired cleanup in BSTreeModel::MakeBase
+- MakeBase calls two adjacent cleanup routines in order:
+  1) 0x5608CE -> call sub_78C160 (DeleteBranchGeometry path)
+  2) 0x5608D5 -> call sub_789EC0 (DeleteFrondGeometry path)
+- This indicates frond deletion is part of a broader post-build geometry cleanup stage, not a standalone isolated event.
+
+sub_78C160 vs sub_789EC0 (structural comparison)
+- sub_78C160 (DeleteBranchGeometry) and sub_789EC0 (DeleteFrondGeometry) are highly parallel:
+  - same computed/guard gate on [this+0x45]
+  - same "already transient/compute state" check via [this+0x34]
+  - same mode check using [this+0x30] and dword ptr [[this+0x30]] == 1
+  - same cleanup core: sub_797270 -> FormHeapFree -> pointer nulling
+- Key pointer slot difference:
+  - sub_78C160 frees [this+0x04] (branch geometry)
+  - sub_789EC0 frees [this+0x60] (frond geometry)
+
+Practical implication for hooks
+- If tracing only sub_789EC0, you may miss context that branch cleanup happened immediately before it.
+- Recommended paired telemetry for high-fidelity lifecycle traces:
+  - hook sub_78C160 entry + free
+  - hook sub_789EC0 entry + free
+  - correlate by same `this` pointer and near-adjacent callsites (0x5608CE / 0x5608D5).
