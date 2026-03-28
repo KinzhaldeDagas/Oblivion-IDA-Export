@@ -150,15 +150,15 @@ Interpretation: selection state is maintained as pointer identity (topic object 
 Further discoveries: cleanup/lifetime rules
 ------------------------------------------
 1) sub_6B9250 is the central cleanup gate before rebuilding lists.
-   - It clears iterator head and then frees each MenuTopic node unless node byte +0x20 indicates retained ownership.
+   - It clears iterator head and then frees each MenuTopic node unless `isInfoGeneralTopic` is set on that node.
    - The boolean argument decides whether cleanup starts from `this+1` or a saved alternate head at `this+2`.
 
-2) sub_6B8F50 (MenuTopic destructor helper) only frees child line-list objects when byte +0x20 is clear.
+2) sub_6B8F50 (MenuTopic destructor helper) only frees child line-list objects when `isInfoGeneralTopic` (byte +0x20) is clear.
    - Regardless, it then frees the title string and resets list counters.
 
 3) sub_6B8050 frees line text/audio strings for each dialogue line entry.
 
-Interpretation: the +0x20 control byte acts like a "borrowed/shared data" marker to avoid double-free across extra-data ownership paths.
+Correction: +0x20 is explicitly `isInfoGeneralTopic` (per recovered struct), not a generic ownership flag. The observed free/no-free branching in cleanup paths is therefore specifically tied to infogeneral-topic handling.
 
 Further discoveries: InfoGeneralTopic cache validation behavior
 --------------------------------------------------------------
@@ -185,3 +185,9 @@ Further discoveries: execution timing around selected info
 2) sub_59DD40 runs this execution path at menu close/transition with branches based on dialog state byte(s), then clears dword_B3B294.
 
 Interpretation: some dialogue-info side effects are intentionally deferred until transition points, not only immediate selection.
+
+Cross-reference corrections and confidence notes
+----------------------------------------------
+1) Struct cross-check confirms `UnkBohDialogueTopicBoh+0x20` is named `isInfoGeneralTopic` (not an unlabeled ownership byte).
+2) Therefore, any cleanup branching on +0x20 should be interpreted as infogeneral-specific lifecycle handling.
+3) The statement about deferred side effects via `dword_B3B294` remains an inference from observed calls in `sub_6B92C0`/`sub_59DD40`; global naming is still unknown, but call sequencing is consistent.
