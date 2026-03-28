@@ -191,3 +191,31 @@ Cross-reference corrections and confidence notes
 1) Struct cross-check confirms `UnkBohDialogueTopicBoh+0x20` is named `isInfoGeneralTopic` (not an unlabeled ownership byte).
 2) Therefore, any cleanup branching on +0x20 should be interpreted as infogeneral-specific lifecycle handling.
 3) The statement about deferred side effects via `dword_B3B294` remains an inference from observed calls in `sub_6B92C0`/`sub_59DD40`; global naming is still unknown, but call sequencing is consistent.
+
+Repository-validated fact sheet (cross-reference)
+-------------------------------------------------
+The following facts were re-checked directly against exported metadata/types to reduce ambiguity:
+
+1) ExtraData enum values:
+   - `kExtraData_InfoGeneralTopic = 89 (0x59)`
+   - `kExtraData_HasNoRumors = 90 (0x5A)`
+   These values match load/save switch handling where `case 0x5A` routes through `sub_420920`.
+
+2) Recovered struct fields:
+   - `ExtraInfoGeneralTopic` holds `GeneralTopicData` at offset +0xC.
+   - `ExtraNoRoumor` (engine typo in symbol) holds `NoRumour` at offset +0xC.
+   - `UnkBohDialogueTopicBoh` has `isInfoGeneralTopic` at +0x20 and `pad21` at +0x21.
+   - `UnkBohBoh` is a compact 16-byte state holder with fields at +0x0/+0x4/+0x8/+0xC.
+
+3) Function identity anchors (addresses):
+   - `sub_59E680` at `0x59E680` (TopicList render/rebuild path).
+   - `sub_6B9010` at `0x6B9010` (topic expansion/filtering path).
+   - `Actor::IsNoRumor` at `0x5E1E30`.
+   - `sub_50D7B0` at `0x50D7B0` (SetNoRumors handler path).
+   - `sub_5063D0` at `0x5063D0` (GetNoRumors handler path).
+
+Corrections summary (this revision)
+----------------------------------
+1) Reaffirmed that +0x20 semantics are tied to `isInfoGeneralTopic` specifically.
+2) Reaffirmed ExtraData numeric mapping (`0x59` / `0x5A`) using enum metadata and load switch behavior.
+3) Retained inference labels where symbol names are unknown (e.g., global `dword_B3B294`) and avoided upgrading those to hard facts.
