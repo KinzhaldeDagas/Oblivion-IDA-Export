@@ -219,3 +219,32 @@ Corrections summary (this revision)
 1) Reaffirmed that +0x20 semantics are tied to `isInfoGeneralTopic` specifically.
 2) Reaffirmed ExtraData numeric mapping (`0x59` / `0x5A`) using enum metadata and load switch behavior.
 3) Retained inference labels where symbol names are unknown (e.g., global `dword_B3B294`) and avoided upgrading those to hard facts.
+
+Further research into TESTopic / TopicList resolution
+----------------------------------------------------
+1) Topic container shape is confirmed:
+   - `TopicList` is a simple singly-linked node: `{ TESTopic *topic; TopicList *next; }`.
+   - `TESTopic` includes `topicType` at +0x24, `firstEntry` at +0x28, and `editorID` at +0x34.
+
+2) `TESTopic::GEtTopic` (0x52ED50) is an indexed lookup, not a search by FormID:
+   - Uses per-topic-type global arrays at `0xB110F4` (count table) and `0xB111B8` (array table).
+   - Returns null if index is out of range; otherwise returns array element at `+0xC * index`.
+
+3) `sub_52F010` is the core candidate selector used beneath topic generation and CreateDialogueInfo:
+   - Rejects topics with a specific form-flag bit (`super.flags >> 5 & 1`).
+   - Evaluates topic info entries through `sub_530830(...)` condition checks.
+   - Uses info flag byte at `+0x25` for routing behavior:
+     * bit `0x20` influences early-stop behavior (`v29` path).
+     * bit `0x02` controls whether a candidate is immediately returned vs pushed to random pool.
+   - When multiple candidates are pooled, selects one via `GetRandomLargeInteger_() % count`.
+
+4) Fallback behavior is topic-type aware:
+   - If no candidate exists and call mode permits, the function can toggle player `isInSEWorld` and recurse only for topic types `{2,3,4,6}`.
+   - This indicates worldspace-sensitive dialogue selection logic, not purely static topic lookup.
+
+5) `TESTopic::CreateDialogueInfo` is a thin wrapper:
+   - Calls `sub_52F010` to pick topic info, resolves quest parent via `sub_52F570`, then builds a UI dialogue-info object (`sub_6B80D0`).
+
+Practical implication for rumor work
+-----------------------------------
+Rumor suppression and infogeneral injection occur inside a broader stochastic and flag-driven topic-info selector (`sub_52F010`). So behavior differences can come from both NoRumors policy and per-info flag routing/randomization.
