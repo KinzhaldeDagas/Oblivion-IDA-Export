@@ -1,0 +1,258 @@
+NoRumorResearch - DialogMenu Topic Tile Construction Findings
+Date: 2026-03-27
+Repository: Oblivion-IDA-Export
+
+Goal
+----
+Hide the selectable "Rumor"/"Rumors" topic button in NPC dialogue lists without using SetNoRumors (which changes NPC rumor behavior globally).
+
+Primary Finding: Best Hook Site
+-------------------------------
+Function: sub_59E680
+Address range: 0x59E680 - 0x59EA07
+Folder: functions/sub_59E680__59E680/
+
+Why this function matters:
+- It is the topic-list UI tile builder for DialogMenu.
+- It references the string aTopic_template at site 0x59E761.
+- It creates per-topic UI entries via Menu_CreateTileFromTemplate.
+- It writes the human-readable topic name into the tile via Tile_SetString.
+
+Relevant behavior from pseudocode:
+1) Loop over available dialogue topics from an iterator-like object (sub_6B8660 / sub_6B8650 / sub_6B85F0).
+2) For each topic:
+   - BSStringT_Set("topic_template")
+   - Menu_CreateTileFromTemplate(..., "topic_template", ...)
+   - read topic name pointer via sub_6B8650(...)
+   - Tile_SetString(tile, 0xFDE, topicName)
+3) Assign additional tile metadata/index floats (0xFA8/0xFAA/0xFF0 etc.).
+
+Conclusion:
+- This is the precise location to suppress a specific displayed topic button (e.g., Rumor/Rumors) while preserving all other dialogue behavior.
+
+Deep Dive: Loop-State Integrity in sub_59E680
+---------------------------------------------
+This section focuses on safely filtering topics without corrupting menu/selection state.
+
+Core loop controls and invariants:
+- Iterator bootstrap:
+  - sub_6B8660() returns singleton topic iterator state object.
+  - sub_6B85C0(v5, 1) positions cursor at head and returns whether first item exists.
+- Current topic access:
+  - sub_6B8650(v5) returns current entry pointer (effectively **this->current ? *current : 0**).
+- Next-topic advance:
+  - sub_6B85F0(v5) advances to next node and returns whether a valid next item exists.
+- Loop continuation in sub_59E680 is driven by sub_6B85F0 return value.
+
+State variables that matter for safe filtering:
+- local visible/iteration counter at stack slot used as `var_28` (initialized to 0):
+  - tested to detect first visible tile path (FF0 assignment)
+  - tested post-loop for empty-state behavior (`if !var_28` -> hide/list state adjustments)
+- local per-tile index counter at stack slot decompiled as `*(_DWORD *)&v28[1]` (initialized to 0):
+  - used for tile properties 0xFA8 (index + 0x65) and 0xFAA (index)
+  - increments once per created tile
+- temporary BSString allocations (`v33`, `v32`) must remain balanced (FormHeapFree paths)
+
+Loop-state integrity rules for a Rumor filter:
+1) Advance source iterator exactly once per source topic.
+   - Regardless of filter match, call/execute the equivalent of sub_6B85F0 once.
+2) Increment visible counters only when a tile is actually kept.
+   - If filtering out Rumor, do NOT increment tile-visible counters used for first-item and empty-state checks.
+3) Keep tile-index assignment contiguous for visible tiles.
+   - If filtering out Rumor, do NOT bump index fields used for 0xFA8/0xFAA.
+4) Preserve memory cleanup ordering.
+   - Any temporary BSString allocated before match decision must still be cleared/freed on both keep/skip paths.
+5) Preserve first-visible-item selection marker logic.
+   - The `if (!var_28)` branch should trigger on first surviving tile, not first source topic.
+
+Why this matters:
+- If filtered topics still increment visibility counters, menu may think list is non-empty when zero tiles survive.
+- If index counters advance on skipped topics, visible tiles can get gaps/misaligned ordering.
+- If iterator advance is skipped on filtered topics, the loop can stall/repeat current topic.
+
+Recommended patch shape (integrity-safe):
+- Preferred: pre-create filter decision.
+  1) Read current topic name via sub_6B8650(v5) before Menu_CreateTileFromTemplate.
+  2) If name matches Rumor/Rumors (case-insensitive), jump to common iterator-advance/cleanup tail.
+  3) Only create tile + set strings + increment visible/index counters for non-filtered topics.
+- Acceptable fallback: post-create remove/hide path, but only if:
+  - created rumor tile is immediately detached/hidden,
+  - visible/index counters are rolled back or not incremented,
+  - selection and first-item marker logic remain correct.
+
+Observed helper semantics (relevant to loop integrity)
+-----------------------------------------------------
+sub_6B8650:
+- `if (*this) return **this; else return 0;`
+- Indicates current entry access through current-node pointer.
+
+sub_6B85F0:
+- Moves current pointer to next node (`current = current->next`) and returns true if next has payload.
+- This is the loop progression primitive; must execute exactly once each source iteration.
+
+sub_6B85C0:
+- Resets iterator cursor to start/head and returns whether first valid payload exists.
+- Used at start and end of sub_59E680 flow.
+
+Secondary Finding: Refresh/Entry Paths
+--------------------------------------
+sub_59E680 has known callers:
+- sub_59EA10 (0x59EA10)
+- sub_59EA60 (0x59EA60)
+- sub_59EB90 (0x59EB90)
+
+Observed implications:
+- Hooking/filtering in sub_59E680 likely catches multiple refresh scenarios (normal refresh, topic change flows, and fallback/refresh branches).
+
+Supporting caller notes:
+- sub_59EA10 initializes/refreshes internal topic state then calls sub_59E680.
+- sub_59EA60 appears to refresh based on a TESTopic parameter then calls sub_59E680.
+- sub_59EB90 has branch logic around current topic selection and also calls sub_59E680 in fallback refresh path.
+
+What NOT to use for this request
+--------------------------------
+SetNoRumors / GetNoRumors / ExtraHasNoRumors exist, but they are behavior/state flags and not strictly a UI-button-only hide path.
+
+Evidence observed:
+- Script command strings present in metadata/strings.json: "SetNoRumors", "GetNoRumors".
+- xrefs_to these strings point to Script_CommandList? (0xB0C8C0).
+- RTTI type descriptor exists for ExtraHasNoRumors.
+
+This supports the user's concern: using SetNoRumors is the wrong move when requirement is to only remove the Rumor topic button from the list.
+
+Implementation-Oriented Recommendations
+--------------------------------------
+Recommended patch strategy (UI-only filtering):
+1) Patch inside sub_59E680 topic-build loop.
+2) Read candidate topic name before tile creation.
+3) If case-insensitive match for "Rumor" or "Rumors":
+   - skip tile creation and label assignment for this entry,
+   - advance iterator exactly once,
+   - do not increment visible/index counters,
+   - preserve temp-memory cleanup.
+4) Continue normal creation path for all non-rumor topics.
+
+Potential pitfalls to validate:
+- Selection index continuity after skipping an entry.
+- Topic-added notifications/new-topic highlight behavior.
+- Whether localized strings can alter exact rumor label text.
+- Empty-list behavior when all candidate topics are filtered.
+
+Observed symbols/strings related to topic UI and menu
+-----------------------------------------------------
+- aTopic_template (0xA6B8C8)
+- aDialogueTopic (0xA3D324)
+- aRefreshtopicli (0xA4E178) [script command string entry]
+- DialogMenu constructors/destructors around 0x59E4E0+
+
+Quick reference file map used in this research
+----------------------------------------------
+- functions/sub_59E680__59E680/{function.json,pseudocode.c,disasm.asm,data_refs.json,callers.json,callees.json}
+- functions/sub_6B8660__6B8660/pseudocode.c
+- functions/sub_6B8650__6B8650/pseudocode.c
+- functions/sub_6B85C0__6B85C0/pseudocode.c
+- functions/sub_6B85F0__6B85F0/pseudocode.c
+- functions/sub_59EA10__59EA10/pseudocode.c
+- functions/sub_59EA60__59EA60/pseudocode.c
+- functions/sub_59EB90__59EB90/pseudocode.c
+- data/named_items/aTopic_template__A6B8C8/{item.json,xrefs_to.json}
+- data/named_items/aRefreshtopicli__A4E178/{item.json,xrefs_to.json}
+- metadata/strings.json
+
+Final recommendation
+--------------------
+For this implementation goal, target DialogMenu topic tile construction at sub_59E680 and perform an explicit topic-name filter for Rumor/Rumors during tile generation, while preserving loop-state invariants (iterator advance, visible-count semantics, and cleanup symmetry).
+
+Finalize: Internal Topic-Name Register Trace (sub_59E680)
+---------------------------------------------------------
+Objective: lock down where the topic display-name pointer lives in registers during tile creation.
+
+Disassembly-level register flow (core path):
+1) `0x59E78D  call Menu_CreateTileFromTemplate`
+   - Return in `EAX` is saved to `ESI` (`mov esi, eax`) and becomes the tile pointer for the current topic row.
+2) `0x59E794  mov ecx, ebp` / `call sub_6B8650`
+   - `EBP` is the iterator/state object from `sub_6B8660`.
+   - Return in `EAX` is pointer to current topic entry record.
+3) `0x59E79B  mov eax, [eax]`
+   - `EAX` now becomes `char*` topic name (internal topic label pointer).
+4) `0x59E79E..0x59E7A3  BSStringT_Set`
+   - Copies topic name into temp BSString.
+5) `0x59E7E1  mov eax, [eax]` (after another `sub_6B8650`)
+6) `0x59E7EB  call Tile_SetString` with arg2 `0xFDE`
+   - Writes topic label text into the tile.
+
+Additional name/entry checks tied to the same source entry:
+- `0x59E872 call sub_6B8650` then `cmp [eax+21h], bl`
+  - Checks a per-topic-entry flag byte at offset `+0x21` (used by rendering/priority branch).
+- `0x59E8EB call sub_6B8650` then `mov eax, [eax]` and `strcmp`
+  - Reuses topic name pointer for compare against current/selected text (`[edi+8Ch]`).
+
+Practical hook-ready register conclusions:
+- Stable iterator register in this function body: `EBP`.
+- Stable current tile register after creation: `ESI`.
+- Internal topic name pointer materializes in `EAX` immediately after `mov eax, [eax]` at:
+  - `0x59E79B` (pre-BSString copy path)
+  - `0x59E7E1` / `0x59E8F0` (string write/compare paths)
+
+Best interception point for UI-only rumor filter (register-accurate):
+- Prefer pre-create name read by invoking equivalent of current-entry dereference before `Menu_CreateTileFromTemplate`, then branch skip.
+- If patching post-create, use the `EAX` name pointer at `0x59E79B/0x59E7E1` to decide removal, but maintain loop-state invariants documented above.
+
+Internal topic-name register mapping summary:
+- `EBP` -> iterator context (`UnkBohBoh*`)
+- `EAX` (after `sub_6B8650` then deref) -> `char* topicName`
+- `ESI` -> created tile pointer for current topic row
+
+This finalizes the internal topic-name register-level understanding needed to implement or review a safe Rumor topic button filter in `sub_59E680`.
+
+Research: kTopicLoopPatchAddr / Keep / Skip Continuations
+---------------------------------------------------------
+Requested constants:
+- kTopicLoopPatchAddr
+- kTopicLoopContinueKeepAddr
+- kTopicLoopContinueSkipAddr
+
+Context in loop body (sub_59E680):
+- `0x59E760..0x59E778` builds temporary "topic_template" BSString.
+- `0x59E78D` creates tile (`Menu_CreateTileFromTemplate`).
+- `0x59E794..0x59E7EB` resolves current topic name and writes tile text.
+- `0x59E961..0x59E96D` performs iterator advance and increments loop-visible counter.
+- `0x59E971..0x59E998` performs temp-string free + loop continuation test.
+
+Address candidates and rationale
+--------------------------------
+kTopicLoopPatchAddr (recommended research candidate): `0x59E794`
+- Reason:
+  - It is immediately before current-entry fetch (`sub_6B8650`) and name dereference (`mov eax, [eax]`).
+  - Hook/cave code at this site can inspect topic name with minimal disruption to pre-loop state.
+  - Tile pointer is already in `ESI` (created at `0x59E78D`), allowing optional post-create hide/remove behavior.
+
+kTopicLoopContinueKeepAddr (recommended): `0x59E794`
+- Reason:
+  - Keep path should continue normal name-copy and tile text setup exactly as original.
+  - Returning to this address preserves all original side effects for non-rumor topics.
+
+kTopicLoopContinueSkipAddr (recommended): `0x59E971`
+- Reason:
+  - This path enters shared cleanup/continuation block that frees temporary BSString (`var_18`) and applies existing loop-test branch.
+  - It avoids executing tile metadata/index writes and avoids first-item/selection logic intended for visible tiles.
+- Critical requirement for skip cave logic before jumping to `0x59E971`:
+  1) perform one iterator advance (equivalent to `sub_6B85F0`) and place result in `AL`,
+  2) do NOT increment visible/index counters for filtered topics,
+  3) ensure any created rumor tile is safely hidden/detached if patch point is post-create.
+
+Alternative pre-create patch placement (if avoiding transient tile create)
+---------------------------------------------------------------------------
+- Potential earlier patch point around `0x59E77D` (before `Menu_CreateTileFromTemplate`).
+- Tradeoff:
+  - Cleaner skip semantics (no rumor tile ever created),
+  - But requires careful reconstruction of overwritten setup instructions and maintaining local temp-string lifecycle.
+
+Current recommendation for constant naming use
+---------------------------------------------
+If implementing with a code-cave branch model:
+- `kTopicLoopPatchAddr = 0x59E794`
+- `kTopicLoopContinueKeepAddr = 0x59E794`
+- `kTopicLoopContinueSkipAddr = 0x59E971`
+
+These values are the most practical for a minimal invasive hook while preserving loop integrity constraints already documented in this file.
