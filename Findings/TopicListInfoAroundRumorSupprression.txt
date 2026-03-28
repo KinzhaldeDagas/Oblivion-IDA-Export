@@ -134,3 +134,54 @@ GetNoRumors -> sub_5063D0 -> sub_4F5C50 -> Actor::IsNoRumor
 Conclusion
 ----------
 sub_59E680 should be treated as the TopicList renderer and state applier, not the policy owner for rumor suppression. Rumor suppression decisions are primarily upstream in sub_6B9010 via Actor::IsNoRumor checks around infogeneral topic 0xD7 handling, with persisted actor extra-data providing cross-frame/save continuity.
+
+Further discoveries: iterator and list mechanics
+----------------------------------------------
+1) UnkBohBoh appears to expose two iterator layers:
+   - Top-level topic iterator: sub_6B85C0 initializes cursor (`unk00`) and sub_6B85F0 advances to next topic node.
+   - Per-topic line iterator: sub_6B8560 initializes line cursor at `this+3`, sub_6B85B0 reads current line, sub_6B8580 advances.
+
+2) sub_59EB90 uses both iterators:
+   - It first synchronizes global topic cursor (finds current topic object in top-level list).
+   - Then resets per-topic line cursor and searches for the selected line pointer before advancing.
+
+Interpretation: selection state is maintained as pointer identity (topic object + line object), not just by display string.
+
+Further discoveries: cleanup/lifetime rules
+------------------------------------------
+1) sub_6B9250 is the central cleanup gate before rebuilding lists.
+   - It clears iterator head and then frees each MenuTopic node unless node byte +0x20 indicates retained ownership.
+   - The boolean argument decides whether cleanup starts from `this+1` or a saved alternate head at `this+2`.
+
+2) sub_6B8F50 (MenuTopic destructor helper) only frees child line-list objects when byte +0x20 is clear.
+   - Regardless, it then frees the title string and resets list counters.
+
+3) sub_6B8050 frees line text/audio strings for each dialogue line entry.
+
+Interpretation: the +0x20 control byte acts like a "borrowed/shared data" marker to avoid double-free across extra-data ownership paths.
+
+Further discoveries: InfoGeneralTopic cache validation behavior
+--------------------------------------------------------------
+1) sub_425970 fetches actor extra `kExtraData_InfoGeneralTopic` and returns `GeneralTopicData` if present.
+2) Before use, it checks sub_422DF0 over the stored line list:
+   - if line list is empty, it calls sub_6B8CF0 to regenerate the display lines lazily.
+
+Interpretation: cached infogeneral topic objects can persist with partially materialized content and self-heal on next use.
+
+Further discoveries: dialogue line materialization
+-------------------------------------------------
+1) sub_6B8CF0 pulls topic info entries (via sub_531270) and creates menu line objects via sub_6B83B0.
+2) sub_6B83B0 builds human-readable text (`sub_52E100`) and precomputes voice path (`GenerateVoiceAudioString`).
+3) sub_6B8CF0 uses byte +0x20 to optionally emit only the first valid line.
+
+Interpretation: topic rendering in UI is backed by pre-expanded, voice-aware line objects, not raw topic info pointers.
+
+Further discoveries: execution timing around selected info
+---------------------------------------------------------
+1) In sub_6B92C0 and sub_59DD40, selected topic info stored globally (dword_B3B294) can trigger:
+   - sub_531470(info, ...) script execution / mark-modified behavior.
+   - sub_5308D0(info) relation/cleanup bookkeeping.
+
+2) sub_59DD40 runs this execution path at menu close/transition with branches based on dialog state byte(s), then clears dword_B3B294.
+
+Interpretation: some dialogue-info side effects are intentionally deferred until transition points, not only immediate selection.
