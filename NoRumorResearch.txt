@@ -204,3 +204,55 @@ Internal topic-name register mapping summary:
 - `ESI` -> created tile pointer for current topic row
 
 This finalizes the internal topic-name register-level understanding needed to implement or review a safe Rumor topic button filter in `sub_59E680`.
+
+Research: kTopicLoopPatchAddr / Keep / Skip Continuations
+---------------------------------------------------------
+Requested constants:
+- kTopicLoopPatchAddr
+- kTopicLoopContinueKeepAddr
+- kTopicLoopContinueSkipAddr
+
+Context in loop body (sub_59E680):
+- `0x59E760..0x59E778` builds temporary "topic_template" BSString.
+- `0x59E78D` creates tile (`Menu_CreateTileFromTemplate`).
+- `0x59E794..0x59E7EB` resolves current topic name and writes tile text.
+- `0x59E961..0x59E96D` performs iterator advance and increments loop-visible counter.
+- `0x59E971..0x59E998` performs temp-string free + loop continuation test.
+
+Address candidates and rationale
+--------------------------------
+kTopicLoopPatchAddr (recommended research candidate): `0x59E794`
+- Reason:
+  - It is immediately before current-entry fetch (`sub_6B8650`) and name dereference (`mov eax, [eax]`).
+  - Hook/cave code at this site can inspect topic name with minimal disruption to pre-loop state.
+  - Tile pointer is already in `ESI` (created at `0x59E78D`), allowing optional post-create hide/remove behavior.
+
+kTopicLoopContinueKeepAddr (recommended): `0x59E794`
+- Reason:
+  - Keep path should continue normal name-copy and tile text setup exactly as original.
+  - Returning to this address preserves all original side effects for non-rumor topics.
+
+kTopicLoopContinueSkipAddr (recommended): `0x59E971`
+- Reason:
+  - This path enters shared cleanup/continuation block that frees temporary BSString (`var_18`) and applies existing loop-test branch.
+  - It avoids executing tile metadata/index writes and avoids first-item/selection logic intended for visible tiles.
+- Critical requirement for skip cave logic before jumping to `0x59E971`:
+  1) perform one iterator advance (equivalent to `sub_6B85F0`) and place result in `AL`,
+  2) do NOT increment visible/index counters for filtered topics,
+  3) ensure any created rumor tile is safely hidden/detached if patch point is post-create.
+
+Alternative pre-create patch placement (if avoiding transient tile create)
+---------------------------------------------------------------------------
+- Potential earlier patch point around `0x59E77D` (before `Menu_CreateTileFromTemplate`).
+- Tradeoff:
+  - Cleaner skip semantics (no rumor tile ever created),
+  - But requires careful reconstruction of overwritten setup instructions and maintaining local temp-string lifecycle.
+
+Current recommendation for constant naming use
+---------------------------------------------
+If implementing with a code-cave branch model:
+- `kTopicLoopPatchAddr = 0x59E794`
+- `kTopicLoopContinueKeepAddr = 0x59E794`
+- `kTopicLoopContinueSkipAddr = 0x59E971`
+
+These values are the most practical for a minimal invasive hook while preserving loop integrity constraints already documented in this file.
