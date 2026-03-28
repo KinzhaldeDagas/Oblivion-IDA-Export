@@ -30,6 +30,70 @@ Relevant behavior from pseudocode:
 Conclusion:
 - This is the precise location to suppress a specific displayed topic button (e.g., Rumor/Rumors) while preserving all other dialogue behavior.
 
+Deep Dive: Loop-State Integrity in sub_59E680
+---------------------------------------------
+This section focuses on safely filtering topics without corrupting menu/selection state.
+
+Core loop controls and invariants:
+- Iterator bootstrap:
+  - sub_6B8660() returns singleton topic iterator state object.
+  - sub_6B85C0(v5, 1) positions cursor at head and returns whether first item exists.
+- Current topic access:
+  - sub_6B8650(v5) returns current entry pointer (effectively **this->current ? *current : 0**).
+- Next-topic advance:
+  - sub_6B85F0(v5) advances to next node and returns whether a valid next item exists.
+- Loop continuation in sub_59E680 is driven by sub_6B85F0 return value.
+
+State variables that matter for safe filtering:
+- local visible/iteration counter at stack slot used as `var_28` (initialized to 0):
+  - tested to detect first visible tile path (FF0 assignment)
+  - tested post-loop for empty-state behavior (`if !var_28` -> hide/list state adjustments)
+- local per-tile index counter at stack slot decompiled as `*(_DWORD *)&v28[1]` (initialized to 0):
+  - used for tile properties 0xFA8 (index + 0x65) and 0xFAA (index)
+  - increments once per created tile
+- temporary BSString allocations (`v33`, `v32`) must remain balanced (FormHeapFree paths)
+
+Loop-state integrity rules for a Rumor filter:
+1) Advance source iterator exactly once per source topic.
+   - Regardless of filter match, call/execute the equivalent of sub_6B85F0 once.
+2) Increment visible counters only when a tile is actually kept.
+   - If filtering out Rumor, do NOT increment tile-visible counters used for first-item and empty-state checks.
+3) Keep tile-index assignment contiguous for visible tiles.
+   - If filtering out Rumor, do NOT bump index fields used for 0xFA8/0xFAA.
+4) Preserve memory cleanup ordering.
+   - Any temporary BSString allocated before match decision must still be cleared/freed on both keep/skip paths.
+5) Preserve first-visible-item selection marker logic.
+   - The `if (!var_28)` branch should trigger on first surviving tile, not first source topic.
+
+Why this matters:
+- If filtered topics still increment visibility counters, menu may think list is non-empty when zero tiles survive.
+- If index counters advance on skipped topics, visible tiles can get gaps/misaligned ordering.
+- If iterator advance is skipped on filtered topics, the loop can stall/repeat current topic.
+
+Recommended patch shape (integrity-safe):
+- Preferred: pre-create filter decision.
+  1) Read current topic name via sub_6B8650(v5) before Menu_CreateTileFromTemplate.
+  2) If name matches Rumor/Rumors (case-insensitive), jump to common iterator-advance/cleanup tail.
+  3) Only create tile + set strings + increment visible/index counters for non-filtered topics.
+- Acceptable fallback: post-create remove/hide path, but only if:
+  - created rumor tile is immediately detached/hidden,
+  - visible/index counters are rolled back or not incremented,
+  - selection and first-item marker logic remain correct.
+
+Observed helper semantics (relevant to loop integrity)
+-----------------------------------------------------
+sub_6B8650:
+- `if (*this) return **this; else return 0;`
+- Indicates current entry access through current-node pointer.
+
+sub_6B85F0:
+- Moves current pointer to next node (`current = current->next`) and returns true if next has payload.
+- This is the loop progression primitive; must execute exactly once each source iteration.
+
+sub_6B85C0:
+- Resets iterator cursor to start/head and returns whether first valid payload exists.
+- Used at start and end of sub_59E680 flow.
+
 Secondary Finding: Refresh/Entry Paths
 --------------------------------------
 sub_59E680 has known callers:
@@ -60,20 +124,19 @@ Implementation-Oriented Recommendations
 --------------------------------------
 Recommended patch strategy (UI-only filtering):
 1) Patch inside sub_59E680 topic-build loop.
-2) Read candidate topic name before (or immediately after retrieval, but before tile creation if possible).
+2) Read candidate topic name before tile creation.
 3) If case-insensitive match for "Rumor" or "Rumors":
    - skip tile creation and label assignment for this entry,
    - advance iterator exactly once,
-   - keep index/counter state coherent so remaining topics continue to map correctly.
-
-Safer alternative if pre-create compare is hard:
-- Create tile as usual, but immediately suppress/hide/remove tile when title matches rumor.
-- Pre-create filtering is preferred to avoid flicker or index mismatch.
+   - do not increment visible/index counters,
+   - preserve temp-memory cleanup.
+4) Continue normal creation path for all non-rumor topics.
 
 Potential pitfalls to validate:
 - Selection index continuity after skipping an entry.
 - Topic-added notifications/new-topic highlight behavior.
 - Whether localized strings can alter exact rumor label text.
+- Empty-list behavior when all candidate topics are filtered.
 
 Observed symbols/strings related to topic UI and menu
 -----------------------------------------------------
@@ -84,7 +147,11 @@ Observed symbols/strings related to topic UI and menu
 
 Quick reference file map used in this research
 ----------------------------------------------
-- functions/sub_59E680__59E680/{function.json,pseudocode.c,data_refs.json,callers.json,callees.json}
+- functions/sub_59E680__59E680/{function.json,pseudocode.c,disasm.asm,data_refs.json,callers.json,callees.json}
+- functions/sub_6B8660__6B8660/pseudocode.c
+- functions/sub_6B8650__6B8650/pseudocode.c
+- functions/sub_6B85C0__6B85C0/pseudocode.c
+- functions/sub_6B85F0__6B85F0/pseudocode.c
 - functions/sub_59EA10__59EA10/pseudocode.c
 - functions/sub_59EA60__59EA60/pseudocode.c
 - functions/sub_59EB90__59EB90/pseudocode.c
@@ -94,4 +161,4 @@ Quick reference file map used in this research
 
 Final recommendation
 --------------------
-For this implementation goal, target DialogMenu topic tile construction at sub_59E680 and perform an explicit topic-name filter for Rumor/Rumors during tile generation.
+For this implementation goal, target DialogMenu topic tile construction at sub_59E680 and perform an explicit topic-name filter for Rumor/Rumors during tile generation, while preserving loop-state invariants (iterator advance, visible-count semantics, and cleanup symmetry).
