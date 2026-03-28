@@ -57,6 +57,54 @@ sub_6B9010 is where TopicList candidate entries are expanded and conditioned:
 
 Interpretation: rumor suppression is actor-driven and mostly affects whether the infogeneral (0xD7) branch is injected/expanded. sub_59E680 is the renderer for that precomputed list.
 
+New findings: persistence + ownership behavior
+----------------------------------------------
+1) ExtraData ownership for "general topic" cache:
+   - sub_422C70 stores an UnkBohDialogueTopicBoh* in kExtraData_InfoGeneralTopic on the actor's ExtraDataList.
+   - sub_425970 reads that same extra, validates/refreshes its display string, and can inject it back into the topic flow.
+   - ExtraInfoGeneralTopic destructor frees the stored MenuTopic object and explicitly clears its isInfoGeneralTopic marker.
+
+2) Save/load persistence confirms this system is stateful:
+   - ExtraDataList_GetSaveSize has dedicated cases for both kExtraData_InfoGeneralTopic and kExtraData_HasNoRumors.
+   - kExtraData_HasNoRumors serializes as a 1-byte payload.
+   - kExtraData_InfoGeneralTopic serializes a variable-size MenuTopic payload via sub_6B86A0.
+   - ExtraDataList_LoadModified case 0x5A reloads HasNoRumors and routes through sub_420920.
+   - ExtraDataList_LoadModified case for InfoGeneralTopic rebuilds topic data then either stores it via sub_422C70 or destroys it.
+
+3) MenuTopic serialization shape (sub_6B86A0 / sub_6B8950):
+   - Save size is roughly strlen(topicString) + 0x10 (+debug block overhead when enabled).
+   - Load path restores: display text, isInfoGeneralTopic-ish flag byte, quest/topic/topicInfo form IDs.
+   - This means the rumor/topic UI cache survives save/load cycles and is not purely transient per menu open.
+
+New findings: SetNoRumors/GetNoRumors script pathway
+----------------------------------------------------
+1) GetNoRumors path:
+   - sub_5063D0 calls sub_4F5C50, which returns 1 and writes out float 1.0 when Actor::IsNoRumor is true, else 0.0.
+   - In console mode it prints: "GetNoRumors >> %0.2f".
+
+2) SetNoRumors path (sub_50D7B0):
+   - Casts calling ref to Actor and parses desired bool.
+   - Compares desired value against actor base flag kFlag_NoRumors (0x2000 on ActorBaseData flags).
+   - If desired matches base flag, it removes dynamic override via sub_4209C0 (remove kExtraData_HasNoRumors).
+   - If desired differs from base flag, it writes dynamic override via sub_420920 (add/update kExtraData_HasNoRumors).
+
+Interpretation: HasNoRumors extra acts as an override layer; default state comes from actor base flags.
+
+New findings: topic construction details around infogeneral
+-----------------------------------------------------------
+1) sub_6B8E00 (MenuTopic ctor-like) tags entries whose TESTopic refID == 0xD7 as isInfoGeneralTopic.
+2) For non-infogeneral entries, it computes whether linked info list content exists and sets a separate flag (unk08).
+3) It builds visible line data by expanding TESTopicInfo conditions/results into a list through sub_6B8CF0.
+4) sub_6B8CF0 only emits first line when a control byte at +0x20 indicates single-line mode.
+
+This helps explain why infogeneral entries feel "special": they are tagged at construction time and coupled with actor extra-data caching.
+
+Menu refresh integration points (broader)
+-----------------------------------------
+- sub_59F970 obtains open dialog menu (tile 0x3F1) and forces sub_59EA10 refresh + sub_59E2B0.
+- sub_59EAA0 handles category/node switch; if node has no entries it falls back to sub_59EA10 refresh.
+- sub_5BEA10 (cross-menu flow) sets dialog flag byte +0x96 then calls sub_59EA10; this causes sub_59EA10 to clear iterator head before rebuilding.
+
 Actor no-rumor source of truth
 ------------------------------
 Actor::IsNoRumor checks:
@@ -79,6 +127,10 @@ sub_59EA10/sub_59EA60/sub_59EB90
     -> sub_6B9010 (topic generation + rumor gating)
       -> sub_59E680 (UI tile rebuild/render)
 
+Script side:
+SetNoRumors -> sub_50D7B0 -> (sub_420920 / sub_4209C0) -> Actor::IsNoRumor consumers
+GetNoRumors -> sub_5063D0 -> sub_4F5C50 -> Actor::IsNoRumor
+
 Conclusion
 ----------
-sub_59E680 should be treated as the TopicList renderer and state applier, not the policy owner for rumor suppression. Rumor suppression decisions are primarily upstream in sub_6B9010 via Actor::IsNoRumor checks around infogeneral topic 0xD7 handling.
+sub_59E680 should be treated as the TopicList renderer and state applier, not the policy owner for rumor suppression. Rumor suppression decisions are primarily upstream in sub_6B9010 via Actor::IsNoRumor checks around infogeneral topic 0xD7 handling, with persisted actor extra-data providing cross-frame/save continuity.
