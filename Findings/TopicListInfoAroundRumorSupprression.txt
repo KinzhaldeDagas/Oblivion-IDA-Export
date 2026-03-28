@@ -1,0 +1,289 @@
+sub_59E680 (0x59E680) research notes - Topic list + rumor suppression
+===================================================================
+
+Scope
+-----
+This note focuses on how sub_59E680 refreshes dialogue topic UI entries and where rumor suppression (NoRumors) affects what appears.
+
+Primary role of sub_59E680
+--------------------------
+1) Clears existing topic entry tiles under the menu root.
+   - It walks the child list at (a1+0x28)->+0x34 and destructs each tile node/object.
+
+2) Initializes an iterator over a cached topic-result list via sub_6B85C0(v5, 1).
+   - If there are entries, it shows the list container at alpha/visible constant fConstant_2.
+   - If there are no entries, it leaves list hidden/collapsed and later sets fallback visibility on (a1+0x30).
+
+3) If (a1+0x88) is set, it exits early through sub_59DD40 and returns 1.
+   - In this mode it does not rebuild the individual topic tiles.
+
+4) Otherwise it loops all current entries and creates one "topic_template" tile per entry:
+   - label text source = sub_6B8650(v5) -> likely current topic node payload.
+   - sets tile string IDs/properties including 0xFDE (text) and float properties 0xFA8/0xFAA.
+   - assigns a unique interaction id via InterfaceManager::unk08C into property 0xFF0.
+   - checks per-entry flag byte at +0x21 to gate additional visual/layout handling.
+
+5) After list generation it finalizes layout via sub_58FBA0 and optional follow-up via sub_57FD60.
+
+How rumor suppression feeds this function
+-----------------------------------------
+sub_59E680 does not directly call Actor::IsNoRumor itself. Rumor suppression happens earlier when the list is built, then sub_59E680 only renders whatever survived filtering.
+
+Relevant upstream builders:
+
+A) sub_59EA10 -> sub_6B92C0 -> sub_59E680
+   - sub_59EA10 refreshes list state and stores result in byte (a1+0x88), then calls sub_59E680.
+
+B) sub_59EA60 -> sub_6B93B0 -> sub_59E680
+   - targeted topic refresh path; temporarily clears (a1+0x88) for render call and restores after.
+
+C) sub_59EB90 fallback path -> sub_6B92C0 -> sub_59E680
+   - used when current node/topic selection is missing/invalid.
+
+Core rumor filter logic (in sub_6B9010)
+---------------------------------------
+sub_6B9010 is where TopicList candidate entries are expanded and conditioned:
+
+1) It iterates topic nodes from a TopicList chain (a2).
+
+2) Special-case for topic refID == 0xD7 (commented as "infogeneral topic"):
+   - If actor is NOT no-rumor (!Actor::IsNoRumor), it attempts to add an alternate/general topic source via sub_425970 and remembers this with v20.
+
+3) During per-topic quest/topic resolution:
+   - For refID 0xD7 it toggles creation rules using v20 and Actor::IsNoRumor(v24):
+     * if v20 already set OR actor is no-rumor => disables one creation path (v21=0)
+     * else enables v22 path.
+   - Depending on flags on resolved info (byte +0x25 & 4), it may attach extra data via sub_422C70.
+
+Interpretation: rumor suppression is actor-driven and mostly affects whether the infogeneral (0xD7) branch is injected/expanded. sub_59E680 is the renderer for that precomputed list.
+
+New findings: persistence + ownership behavior
+----------------------------------------------
+1) ExtraData ownership for "general topic" cache:
+   - sub_422C70 stores an UnkBohDialogueTopicBoh* in kExtraData_InfoGeneralTopic on the actor's ExtraDataList.
+   - sub_425970 reads that same extra, validates/refreshes its display string, and can inject it back into the topic flow.
+   - ExtraInfoGeneralTopic destructor frees the stored MenuTopic object and explicitly clears its isInfoGeneralTopic marker.
+
+2) Save/load persistence confirms this system is stateful:
+   - ExtraDataList_GetSaveSize has dedicated cases for both kExtraData_InfoGeneralTopic and kExtraData_HasNoRumors.
+   - kExtraData_HasNoRumors serializes as a 1-byte payload.
+   - kExtraData_InfoGeneralTopic serializes a variable-size MenuTopic payload via sub_6B86A0.
+   - ExtraDataList_LoadModified case 0x5A reloads HasNoRumors and routes through sub_420920.
+   - ExtraDataList_LoadModified case for InfoGeneralTopic rebuilds topic data then either stores it via sub_422C70 or destroys it.
+
+3) MenuTopic serialization shape (sub_6B86A0 / sub_6B8950):
+   - Save size is roughly strlen(topicString) + 0x10 (+debug block overhead when enabled).
+   - Load path restores: display text, isInfoGeneralTopic-ish flag byte, quest/topic/topicInfo form IDs.
+   - This means the rumor/topic UI cache survives save/load cycles and is not purely transient per menu open.
+
+New findings: SetNoRumors/GetNoRumors script pathway
+----------------------------------------------------
+1) GetNoRumors path:
+   - sub_5063D0 calls sub_4F5C50, which returns 1 and writes out float 1.0 when Actor::IsNoRumor is true, else 0.0.
+   - In console mode it prints: "GetNoRumors >> %0.2f".
+
+2) SetNoRumors path (sub_50D7B0):
+   - Casts calling ref to Actor and parses desired bool.
+   - Compares desired value against actor base flag kFlag_NoRumors (0x2000 on ActorBaseData flags).
+   - If desired matches base flag, it removes dynamic override via sub_4209C0 (remove kExtraData_HasNoRumors).
+   - If desired differs from base flag, it writes dynamic override via sub_420920 (add/update kExtraData_HasNoRumors).
+
+Interpretation: HasNoRumors extra acts as an override layer; default state comes from actor base flags.
+
+New findings: topic construction details around infogeneral
+-----------------------------------------------------------
+1) sub_6B8E00 (MenuTopic ctor-like) tags entries whose TESTopic refID == 0xD7 as isInfoGeneralTopic.
+2) For non-infogeneral entries, it computes whether linked info list content exists and sets a separate flag (unk08).
+3) It builds visible line data by expanding TESTopicInfo conditions/results into a list through sub_6B8CF0.
+4) sub_6B8CF0 only emits first line when a control byte at +0x20 indicates single-line mode.
+
+This helps explain why infogeneral entries feel "special": they are tagged at construction time and coupled with actor extra-data caching.
+
+Menu refresh integration points (broader)
+-----------------------------------------
+- sub_59F970 obtains open dialog menu (tile 0x3F1) and forces sub_59EA10 refresh + sub_59E2B0.
+- sub_59EAA0 handles category/node switch; if node has no entries it falls back to sub_59EA10 refresh.
+- sub_5BEA10 (cross-menu flow) sets dialog flag byte +0x96 then calls sub_59EA10; this causes sub_59EA10 to clear iterator head before rebuilding.
+
+Actor no-rumor source of truth
+------------------------------
+Actor::IsNoRumor checks:
+1) non-NPC actors => true immediately.
+2) ExtraData kExtraData_HasNoRumors on actor.
+3) actor base flag kFlag_NoRumors.
+
+So the effective suppression can come from runtime extra data or base form flags.
+
+Notable UI/data hints
+---------------------
+- sub_59E680 references string "topic_template" (named data aTopic_template).
+- Engine metadata includes command/debug strings: "RefreshTopicList", "SetNoRumors", "GetNoRumors", and console print "GetNoRumors >> %0.2f".
+- This aligns with a pipeline where no-rumor state influences topic generation before menu tile creation.
+
+Quick call graph summary
+------------------------
+sub_59EA10/sub_59EA60/sub_59EB90
+  -> sub_6B92C0 or sub_6B93B0
+    -> sub_6B9010 (topic generation + rumor gating)
+      -> sub_59E680 (UI tile rebuild/render)
+
+Script side:
+SetNoRumors -> sub_50D7B0 -> (sub_420920 / sub_4209C0) -> Actor::IsNoRumor consumers
+GetNoRumors -> sub_5063D0 -> sub_4F5C50 -> Actor::IsNoRumor
+
+Conclusion
+----------
+sub_59E680 should be treated as the TopicList renderer and state applier, not the policy owner for rumor suppression. Rumor suppression decisions are primarily upstream in sub_6B9010 via Actor::IsNoRumor checks around infogeneral topic 0xD7 handling, with persisted actor extra-data providing cross-frame/save continuity.
+
+Further discoveries: iterator and list mechanics
+----------------------------------------------
+1) UnkBohBoh appears to expose two iterator layers:
+   - Top-level topic iterator: sub_6B85C0 initializes cursor (`unk00`) and sub_6B85F0 advances to next topic node.
+   - Per-topic line iterator: sub_6B8560 initializes line cursor at `this+3`, sub_6B85B0 reads current line, sub_6B8580 advances.
+
+2) sub_59EB90 uses both iterators:
+   - It first synchronizes global topic cursor (finds current topic object in top-level list).
+   - Then resets per-topic line cursor and searches for the selected line pointer before advancing.
+
+Interpretation: selection state is maintained as pointer identity (topic object + line object), not just by display string.
+
+Further discoveries: cleanup/lifetime rules
+------------------------------------------
+1) sub_6B9250 is the central cleanup gate before rebuilding lists.
+   - It clears iterator head and then frees each MenuTopic node unless `isInfoGeneralTopic` is set on that node.
+   - The boolean argument decides whether cleanup starts from `this+1` or a saved alternate head at `this+2`.
+
+2) sub_6B8F50 (MenuTopic destructor helper) only frees child line-list objects when `isInfoGeneralTopic` (byte +0x20) is clear.
+   - Regardless, it then frees the title string and resets list counters.
+
+3) sub_6B8050 frees line text/audio strings for each dialogue line entry.
+
+Correction: +0x20 is explicitly `isInfoGeneralTopic` (per recovered struct), not a generic ownership flag. The observed free/no-free branching in cleanup paths is therefore specifically tied to infogeneral-topic handling.
+
+Further discoveries: InfoGeneralTopic cache validation behavior
+--------------------------------------------------------------
+1) sub_425970 fetches actor extra `kExtraData_InfoGeneralTopic` and returns `GeneralTopicData` if present.
+2) Before use, it checks sub_422DF0 over the stored line list:
+   - if line list is empty, it calls sub_6B8CF0 to regenerate the display lines lazily.
+
+Interpretation: cached infogeneral topic objects can persist with partially materialized content and self-heal on next use.
+
+Further discoveries: dialogue line materialization
+-------------------------------------------------
+1) sub_6B8CF0 pulls topic info entries (via sub_531270) and creates menu line objects via sub_6B83B0.
+2) sub_6B83B0 builds human-readable text (`sub_52E100`) and precomputes voice path (`GenerateVoiceAudioString`).
+3) sub_6B8CF0 uses byte +0x20 to optionally emit only the first valid line.
+
+Interpretation: topic rendering in UI is backed by pre-expanded, voice-aware line objects, not raw topic info pointers.
+
+Further discoveries: execution timing around selected info
+---------------------------------------------------------
+1) In sub_6B92C0 and sub_59DD40, selected topic info stored globally (dword_B3B294) can trigger:
+   - sub_531470(info, ...) script execution / mark-modified behavior.
+   - sub_5308D0(info) relation/cleanup bookkeeping.
+
+2) sub_59DD40 runs this execution path at menu close/transition with branches based on dialog state byte(s), then clears dword_B3B294.
+
+Interpretation: some dialogue-info side effects are intentionally deferred until transition points, not only immediate selection.
+
+Cross-reference corrections and confidence notes
+----------------------------------------------
+1) Struct cross-check confirms `UnkBohDialogueTopicBoh+0x20` is named `isInfoGeneralTopic` (not an unlabeled ownership byte).
+2) Therefore, any cleanup branching on +0x20 should be interpreted as infogeneral-specific lifecycle handling.
+3) The statement about deferred side effects via `dword_B3B294` remains an inference from observed calls in `sub_6B92C0`/`sub_59DD40`; global naming is still unknown, but call sequencing is consistent.
+
+Repository-validated fact sheet (cross-reference)
+-------------------------------------------------
+The following facts were re-checked directly against exported metadata/types to reduce ambiguity:
+
+1) ExtraData enum values:
+   - `kExtraData_InfoGeneralTopic = 89 (0x59)`
+   - `kExtraData_HasNoRumors = 90 (0x5A)`
+   These values match load/save switch handling where `case 0x5A` routes through `sub_420920`.
+
+2) Recovered struct fields:
+   - `ExtraInfoGeneralTopic` holds `GeneralTopicData` at offset +0xC.
+   - `ExtraNoRoumor` (engine typo in symbol) holds `NoRumour` at offset +0xC.
+   - `UnkBohDialogueTopicBoh` has `isInfoGeneralTopic` at +0x20 and `pad21` at +0x21.
+   - `UnkBohBoh` is a compact 16-byte state holder with fields at +0x0/+0x4/+0x8/+0xC.
+
+3) Function identity anchors (addresses):
+   - `sub_59E680` at `0x59E680` (TopicList render/rebuild path).
+   - `sub_6B9010` at `0x6B9010` (topic expansion/filtering path).
+   - `Actor::IsNoRumor` at `0x5E1E30`.
+   - `sub_50D7B0` at `0x50D7B0` (SetNoRumors handler path).
+   - `sub_5063D0` at `0x5063D0` (GetNoRumors handler path).
+
+Corrections summary (this revision)
+----------------------------------
+1) Reaffirmed that +0x20 semantics are tied to `isInfoGeneralTopic` specifically.
+2) Reaffirmed ExtraData numeric mapping (`0x59` / `0x5A`) using enum metadata and load switch behavior.
+3) Retained inference labels where symbol names are unknown (e.g., global `dword_B3B294`) and avoided upgrading those to hard facts.
+
+Further research into TESTopic / TopicList resolution
+----------------------------------------------------
+1) Topic container shape is confirmed:
+   - `TopicList` is a simple singly-linked node: `{ TESTopic *topic; TopicList *next; }`.
+   - `TESTopic` includes `topicType` at +0x24, `firstEntry` at +0x28, and `editorID` at +0x34.
+
+2) `TESTopic::GEtTopic` (0x52ED50) is an indexed lookup, not a search by FormID:
+   - Uses per-topic-type global arrays at `0xB110F4` (count table) and `0xB111B8` (array table).
+   - Returns null if index is out of range; otherwise returns array element at `+0xC * index`.
+
+3) `sub_52F010` is the core candidate selector used beneath topic generation and CreateDialogueInfo:
+   - Rejects topics with a specific form-flag bit (`super.flags >> 5 & 1`).
+   - Evaluates topic info entries through `sub_530830(...)` condition checks.
+   - Uses info flag byte at `+0x25` for routing behavior:
+     * bit `0x20` influences early-stop behavior (`v29` path).
+     * bit `0x02` controls whether a candidate is immediately returned vs pushed to random pool.
+   - When multiple candidates are pooled, selects one via `GetRandomLargeInteger_() % count`.
+
+4) Fallback behavior is topic-type aware:
+   - If no candidate exists and call mode permits, the function can toggle player `isInSEWorld` and recurse only for topic types `{2,3,4,6}`.
+   - This indicates worldspace-sensitive dialogue selection logic, not purely static topic lookup.
+
+5) `TESTopic::CreateDialogueInfo` is a thin wrapper:
+   - Calls `sub_52F010` to pick topic info, resolves quest parent via `sub_52F570`, then builds a UI dialogue-info object (`sub_6B80D0`).
+
+Practical implication for rumor work
+-----------------------------------
+Rumor suppression and infogeneral injection occur inside a broader stochastic and flag-driven topic-info selector (`sub_52F010`). So behavior differences can come from both NoRumors policy and per-info flag routing/randomization.
+
+Requested deep-dive: ExtraHasNoRumors constructor / vtbl path
+------------------------------------------------------------
+1) Constructor-equivalent path is `sub_42AB50`:
+   - writes extra type byte `[+0x4] = 0x5A` (kExtraData_HasNoRumors)
+   - writes next pointer `[+0x8] = 0`
+   - writes vtable pointer `[+0x0] = ??_7ExtraHasNoRumors@@6B@` (at `0xA35A4C`)
+   - writes payload byte `[+0xC] = NoRumour` input value
+
+2) Allocation + construction sequence:
+   - `sub_420920` allocates 0x10 bytes via `FormHeapAlloc`
+   - then calls `sub_42AB50` to initialize the object
+   - then installs it via `BaseExtraList_AddExtra`
+
+3) Destructor/vtbl teardown path:
+   - No class-specific deleting destructor symbol was recovered for ExtraHasNoRumors.
+   - vtable targets the shared `BSExtraData::scalar deleting destructor` (`0x42AE30`) path.
+   - `0x42AE30` resets vtbl to `BSExtraData::vftable` and optionally heap-frees when flag bit 1 is set.
+
+4) RTTI path is present and consistent:
+   - `ExtraHasNoRumors` RTTI Type Descriptor: `??_R0?AVExtraHasNoRumors@@@8`
+   - Class Hierarchy / Base descriptors are present (`??_R3...`, `??_R2...`, `??_R1...`)
+   - Matches behavior that this extra is a lightweight BSExtraData-derived pod-like object.
+
+Requested deep-dive: exact helper entry points for override add/remove
+---------------------------------------------------------------------
+1) Add/update helper (`sub_420920`) call entry points in this export:
+   - `sub_50D7B0` (SetNoRumors command handler path)
+   - `ExtraDataList_LoadModified` (load/save reconstruction path, case 0x5A)
+
+2) Remove helper (`sub_4209C0`) call entry point in this export:
+   - `sub_50D7B0` (SetNoRumors path when desired value equals actor-base default)
+
+3) Script-facing registration anchor:
+   - `sub_50D7B0` and `sub_5063D0` are both referenced from `Script_CommandList?` (`0xB0C8C0`), consistent with SetNoRumors/GetNoRumors command exposure.
+
+4) Operational semantics (precise):
+   - SetNoRumors does NOT always add an extra.
+   - It removes override (`sub_4209C0`) when desired state equals base flag default, otherwise adds/updates override (`sub_420920`).
