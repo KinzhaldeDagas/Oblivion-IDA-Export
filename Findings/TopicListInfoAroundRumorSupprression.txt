@@ -248,3 +248,42 @@ Further research into TESTopic / TopicList resolution
 Practical implication for rumor work
 -----------------------------------
 Rumor suppression and infogeneral injection occur inside a broader stochastic and flag-driven topic-info selector (`sub_52F010`). So behavior differences can come from both NoRumors policy and per-info flag routing/randomization.
+
+Requested deep-dive: ExtraHasNoRumors constructor / vtbl path
+------------------------------------------------------------
+1) Constructor-equivalent path is `sub_42AB50`:
+   - writes extra type byte `[+0x4] = 0x5A` (kExtraData_HasNoRumors)
+   - writes next pointer `[+0x8] = 0`
+   - writes vtable pointer `[+0x0] = ??_7ExtraHasNoRumors@@6B@` (at `0xA35A4C`)
+   - writes payload byte `[+0xC] = NoRumour` input value
+
+2) Allocation + construction sequence:
+   - `sub_420920` allocates 0x10 bytes via `FormHeapAlloc`
+   - then calls `sub_42AB50` to initialize the object
+   - then installs it via `BaseExtraList_AddExtra`
+
+3) Destructor/vtbl teardown path:
+   - No class-specific deleting destructor symbol was recovered for ExtraHasNoRumors.
+   - vtable targets the shared `BSExtraData::scalar deleting destructor` (`0x42AE30`) path.
+   - `0x42AE30` resets vtbl to `BSExtraData::vftable` and optionally heap-frees when flag bit 1 is set.
+
+4) RTTI path is present and consistent:
+   - `ExtraHasNoRumors` RTTI Type Descriptor: `??_R0?AVExtraHasNoRumors@@@8`
+   - Class Hierarchy / Base descriptors are present (`??_R3...`, `??_R2...`, `??_R1...`)
+   - Matches behavior that this extra is a lightweight BSExtraData-derived pod-like object.
+
+Requested deep-dive: exact helper entry points for override add/remove
+---------------------------------------------------------------------
+1) Add/update helper (`sub_420920`) call entry points in this export:
+   - `sub_50D7B0` (SetNoRumors command handler path)
+   - `ExtraDataList_LoadModified` (load/save reconstruction path, case 0x5A)
+
+2) Remove helper (`sub_4209C0`) call entry point in this export:
+   - `sub_50D7B0` (SetNoRumors path when desired value equals actor-base default)
+
+3) Script-facing registration anchor:
+   - `sub_50D7B0` and `sub_5063D0` are both referenced from `Script_CommandList?` (`0xB0C8C0`), consistent with SetNoRumors/GetNoRumors command exposure.
+
+4) Operational semantics (precise):
+   - SetNoRumors does NOT always add an extra.
+   - It removes override (`sub_4209C0`) when desired state equals base flag default, otherwise adds/updates override (`sub_420920`).
