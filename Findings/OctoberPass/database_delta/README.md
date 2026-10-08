@@ -23,7 +23,7 @@ The audit identified 11,207 function refresh candidates, 2,104 named-item change
 
 ## Evidence and confidence
 
-Source comments and their confidence labels are preserved verbatim. `source_annotation_confidence` records an existing label; it is not a new verification claim. Bulk semantic interpretations are `Unknown` unless supported by the separately assessed focused report. Type/member annotations similarly retain `annotation_confidence: Unknown`. No Fallout match is automatically promoted.
+Source comments and their confidence labels are preserved verbatim. `source_annotation_confidence` records an existing label; it is not a new verification claim. Bulk semantic interpretations are `Unknown` unless supported by the separately assessed focused report. Type/member annotations similarly retain `annotation_confidence: Unknown`. No cross-executable match is automatically promoted.
 
 **Verified** requires strong direct Oblivion-side evidence. **Probable** requires multiple independent supporting indicators. **Candidate** means plausible but awaiting confirmation. **Unknown** means insufficient evidence. These labels apply to individual conclusions, not to every name, field, or expression within a function.
 
@@ -71,7 +71,7 @@ python scripts/validate_october_snapshot.py --source
 
 Interrupted production stages can resume from their own ignored `.checkpoints/` records. Checkpoints belong to one captured source inventory; finish that inventory or archive/remove its ignored checkpoints before beginning a fresh audit. `--resume-audit` reuses a complete saved function inventory when continuing the initial globals/type collection. Completed-stage receipts and generated artifacts should be checked before deciding what to resume.
 
-The extraction scripts do not close, reopen, replace, save, or patch an IDA database. The open Oblivion and Fallout databases remain at their existing locations. The comment corrections written into Oblivion are documented in the focused report. Working files and exports for this pass are kept under `H:\src\IDAs`.
+The extraction scripts do not close, reopen, replace, save, or patch an IDA database. The open Oblivion database remains at its existing location. The comment corrections written into Oblivion are documented in the focused report. Working files and exports for this pass are kept under `H:\src\IDAs`.
 
 ## Publication reconciliation
 

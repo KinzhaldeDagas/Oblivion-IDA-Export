@@ -14,7 +14,7 @@ These are reverse-engineering and documentation improvements. The pass does not 
 
 For plugin authors, this distinguishes list membership from resource ownership when investigating decal cleanup, stale references, and effect lifetime. It does not prove that a particular reported crash is caused by either path.
 
-[Ownership evidence, layouts, and destructor anchors](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/eac16674aa310f5ddfa1321bcd88fa9923680be5/Findings/OctoberPass/README.md#payload-ownership-and-property-linkage)
+[Ownership evidence, layouts, and destructor anchors](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/OctoberPass/Findings/OctoberPass/README.md#payload-ownership-and-property-linkage)
 
 ### 2. Temporary effects connected from registration through save/load
 
@@ -31,7 +31,7 @@ For plugin authors, this distinguishes list membership from resource ownership w
 
 **Verified:** saving filters effects through `IsSaveable`, writes their type byte, and dispatches virtual `SaveGame`. Loading constructs the selected class and dispatches virtual `LoadGame`. This provides concrete anchors for investigating why effects survive, disappear, or fail to restore across saves.
 
-[Manager, type-ID, and serialization evidence](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/eac16674aa310f5ddfa1321bcd88fa9923680be5/Findings/OctoberPass/README.md#creation-update-and-serialization)
+[Manager, type-ID, and serialization evidence](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/OctoberPass/Findings/OctoberPass/README.md#creation-update-and-serialization)
 
 ### 3. Asynchronous geometry-decal creation and fallback cleanup
 
@@ -39,9 +39,9 @@ For plugin authors, this distinguishes list membership from resource ownership w
 
 **Verified:** when the fallback byte is set, `Run` skips both the wrapped invocation and its local release. The later `ReturnToPool` path releases the remaining controller. This correction matters when tracing cancellation, skipped work, or apparent reference leaks: a skipped release in `Run` is not enough to establish a leak.
 
-**Unknown:** the initialization and runtime policy of the asynchronous-creation gate, and a direct Fallout counterpart for this pooled task path.
+**Unknown:** the initialization and runtime policy of the asynchronous-creation gate.
 
-[Task, pool, wait-helper, and fallback evidence](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/eac16674aa310f5ddfa1321bcd88fa9923680be5/Findings/OctoberPass/README.md#asynchronous-geometry-creation)
+[Task, pool, wait-helper, and fallback evidence](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/OctoberPass/Findings/OctoberPass/README.md#asynchronous-geometry-creation)
 
 ### 4. Decal rendering paths separated and named
 
@@ -56,7 +56,7 @@ For plugin authors, this distinguishes list membership from resource ownership w
 
 These anchors help rendering researchers identify which path they are instrumenting before changing batching or shader behavior. **Unknown:** the downstream meaning of the forwarded `passByte`; its value alone does not establish that contract.
 
-[Shader builders, resolver strings, and relationships](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/eac16674aa310f5ddfa1321bcd88fa9923680be5/Findings/OctoberPass/README.md#shader-pass-relationships)
+[Shader builders, resolver strings, and relationships](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/OctoberPass/Findings/OctoberPass/README.md#shader-pass-relationships)
 
 ## Corrections worth carrying into other research
 
@@ -68,7 +68,7 @@ These anchors help rendering researchers identify which path they are instrument
 | Verified | Describing `0x67ACA0` as a per-actor loop | The observed lists and update loop belong to the shared `ActorProcessManager`. |
 | Verified | Treating task `Run` as the entire cleanup path | Fallback cleanup continues through `ReturnToPool`. |
 
-[Correction details and instruction addresses](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/eac16674aa310f5ddfa1321bcd88fa9923680be5/Findings/OctoberPass/README.md#corrections-and-reproduction)
+[Correction details and instruction addresses](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/OctoberPass/Findings/OctoberPass/README.md#corrections-and-reproduction)
 
 ## A broader, reproducible research snapshot
 
@@ -76,14 +76,12 @@ The published snapshot contains **35,597 function starts, 27,062 named items, 10
 
 Publication reconciled **113 functions and six local types** with newer live annotations and corrected text encoding in **15 JSONL metadata records**. The export also records noncontiguous function chunks separately from the historical primary-range size/hash fields and preserves numeric xref types. Validation checks export consistency and source agreement; successful checks reused within the session are identified in the report.
 
-[Snapshot coverage and reproduction](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/eac16674aa310f5ddfa1321bcd88fa9923680be5/Findings/OctoberPass/database_delta/README.md) · [Validation record](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/eac16674aa310f5ddfa1321bcd88fa9923680be5/Findings/OctoberPass/database_delta/validation.json)
+[Snapshot coverage and reproduction](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/OctoberPass/Findings/OctoberPass/database_delta/README.md) · [Validation record](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/OctoberPass/Findings/OctoberPass/database_delta/validation.json)
 
 ## How to read the confidence labels
 
 **Verified** requires strong direct Oblivion-side evidence. **Probable** means multiple independent indicators strongly support an interpretation. **Candidate** is plausible but still requires confirmation. **Unknown** means the evidence is insufficient.
 
-Fallout's PPC reference database supplied neighboring-system and naming leads. Similarity alone remains **Candidate** at most. **Verified divergences** include property layouts, manager organization, and geometry-decal selectors; Fallout addresses, offsets, and algorithms are not automatically transferable to Oblivion x86. Bulk exported annotations retain their provenance without receiving blanket semantic verification.
+Cross-executable similarity alone remains **Candidate** at most. Bulk exported annotations retain their provenance without receiving blanket semantic verification.
 
 The main remaining leads include type ID `4`, unresolved decal-payload fields, the complete coordinate-space contract of geometry-builder parameters, the async gate's policy, and the producer of selector `0x189`.
-
-[Fallout comparison and limits](https://github.com/KinzhaldeDagas/Oblivion-IDA-Export/blob/eac16674aa310f5ddfa1321bcd88fa9923680be5/Findings/OctoberPass/README.md#fallout-comparison-and-limits)

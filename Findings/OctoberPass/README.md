@@ -76,16 +76,6 @@ flowchart LR
     Geometry -->|Verified: generated geometry| OwnPass[Geometry property pass 0x188]
 ```
 
-## Fallout comparison and limits
-
-The [reference evidence](fallout_reference/manifest.json) comes from the still-open Fallout PPC database (`d4jo`). It contains six function anchors and three type snapshots. It is a different executable/build and architecture from the Oblivion x86 database; addresses, layouts, and selector values are not transplanted.
-
-**Verified divergence:** Oblivion's property stores and manages the list at `+0x80` shown above. The Fallout reference `BSShaderLightingProperty` is `0x7C` bytes and has a different member layout. `ExtraDataList::GetDecalRefs` at `0x822748B0` queries extra-data type `0x57`; its [ExtraDecalRefs](fallout_reference/types/ExtraDecalRefs/type.json) is separate from the Oblivion payload/list arrangement.
-
-**Verified divergence:** the captured Fallout [BGSDecalManager](fallout_reference/types/BGSDecalManager/type.json) contains separate pending simple-decal and emitter lists, and `UpdateDecals` at `0x822E8288` calls their two update routines. The Oblivion manager routing/update chain is established independently at `0x678D30` / `0x67ACA0`. **Unknown:** feature-level one-to-one equivalence between these collections and Oblivion's temp-effect lists.
-
-**Verified divergence:** Fallout's geometry-decal property builder at `0x828CECC8` emits `0x1FF` for skinned geometry or `0x1FE` otherwise, while the Oblivion builder emits `0x188`. Fallout's accumulator at `0x8222D8B0` renders geometry groups 2 and 3. **Candidate:** these are useful neighboring-system anchors when researching Oblivion rendering; they do not establish identical algorithms or a direct function homology. **Unknown:** a direct Fallout counterpart for Oblivion's pooled `BSTECreateTask` path.
-
 ## Corrections and reproduction
 
 **Verified correction:** the old instruction comment at `0x679900` described particle restoration while attached to type 0. It now identifies the `0x1C` type-0 decal allocation/default initializer and points to the separate type-2 case at `0x679982` / `0x6799A0`. The save predicates and task fallback cleanup comments were also made branch-specific, and the literal-1 leaf comment now documents shared vtable use. These corrections were written into the live Oblivion IDA and included in this export.
@@ -100,4 +90,4 @@ Reproduce the selected refresh against the same open databases from the reposito
 python scripts/export_analysis_pass.py --repository . --targets Findings/OctoberPass/targets.json
 ```
 
-The script verifies executable identities and reads bounded targets. It preserves the original function schema, including primary-range `size` and `sha256`, and adds `total_chunk_size` / `chunks_sha256` for noncontiguous IDA tails. It exports actual numeric xref types and retains previous metadata from the pinned baseline commit. It uses no database open/close, shutdown, restart, or save operation. For metadata-only changes to the exporter, `--reuse-pseudocode --skip-reference` retains this pass's already validated decompilation/reference output while refreshing metadata.
+The script verifies the Oblivion executable identity and reads bounded targets. It preserves the original function schema, including primary-range `size` and `sha256`, and adds `total_chunk_size` / `chunks_sha256` for noncontiguous IDA tails. It exports actual numeric xref types and retains previous metadata from the pinned baseline commit. It uses no database open/close, shutdown, restart, or save operation. For metadata-only changes to the exporter, `--reuse-pseudocode` retains this pass's already validated decompilation output while refreshing metadata.

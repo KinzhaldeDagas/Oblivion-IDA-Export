@@ -2,7 +2,7 @@
 """Audit and publish live IDA annotation deltas on OctoberPass.
 
 Read-only IDA extraction in bounded batches. Interpretation confidence is never
-inferred from a symbol name or a matching Fallout symbol. Raw unlabelled
+inferred from a symbol name or a matching external symbol. Raw unlabelled
 annotations remain Unknown. The audit inventories the entire current function,
 named-item, and local-type populations before selecting canonical refreshes.
 """

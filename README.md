@@ -8,9 +8,9 @@ This is not original game source code. It is a structured analysis export intend
 
 ## OctoberPass findings
 
-[OctoberPass](Findings/OctoberPass/README.md) publishes the decal, temporary-effect, shader-pass, serialization, and asynchronous-task findings with explicit evidence-confidence labels. Its [complete annotation snapshot](Findings/OctoberPass/database_delta/README.md) refreshes the current function, named-item, type, metadata, and graph catalogs and preserves the wider database annotations. The focused report includes 84 evidence-anchor functions and Fallout comparison evidence; the complete snapshot covers 35,597 live function starts, 27,062 named items, and 10,147 defined local types. See the linked manifests and validation records for scope and confidence provenance.
+[OctoberPass](Findings/OctoberPass/README.md) publishes the decal, temporary-effect, shader-pass, serialization, and asynchronous-task findings with explicit evidence-confidence labels. Its [complete annotation snapshot](Findings/OctoberPass/database_delta/README.md) refreshes the current function, named-item, type, metadata, and graph catalogs and preserves the wider database annotations. The focused report includes 84 evidence-anchor functions; the complete snapshot covers 35,597 live function starts, 27,062 named items, and 10,147 defined local types. See the linked manifests and validation records for scope and confidence provenance.
 
-To reproduce this focused refresh while the Oblivion and Fallout databases are open:
+To reproduce this focused refresh while the Oblivion database is open:
 
 ```powershell
 python scripts/export_analysis_pass.py --repository . --targets Findings/OctoberPass/targets.json

@@ -203,7 +203,6 @@ def main():
     parser.add_argument("--targets", type=Path, required=True)
     parser.add_argument("--endpoint", default="http://127.0.0.1:56185/mcp")
     parser.add_argument("--reuse-pseudocode", action="store_true",help="reuse this pass's already exported pseudocode when only metadata extraction changed")
-    parser.add_argument("--skip-reference", action="store_true",help="retain the already exported Fallout reference bundle")
     args = parser.parse_args()
     repo = args.repository.resolve()
     config = json.loads(args.targets.read_text(encoding="utf-8"))
@@ -268,30 +267,6 @@ def main():
         json_write(directory / "xrefs_to.json",refs)
         if slots:
             json_write(directory / "vtable.json",slots)
-    reference = config.get("fallout_reference")
-    if reference and args.skip_reference and not (pass_root / "fallout_reference" / "manifest.json").exists():
-        raise RuntimeError("--skip-reference requires an existing Fallout reference bundle")
-    if reference and not args.skip_reference:
-        fallout = IdaMcp(reference["endpoint"],300)
-        source = fallout.py_eval("(ida_nalt.get_root_filename(),ida_nalt.get_input_file_path(),ida_ida.inf_get_procname())")
-        if source[0].lower() != "fallout.exe":
-            raise RuntimeError(f"Wrong reference database: {source}")
-        ref_root = pass_root / "fallout_reference"
-        for ea in reference["functions"]:
-            result = fallout.call("export_funcs",{"addrs":[ea],"format":"json"})["functions"][0]
-            directory = ref_root / "functions" / ea[2:].upper()
-            json_write(directory / "reference.json",result)
-            (directory / "disasm.asm").write_text(source_text(result.get("asm","")),encoding="utf-8")
-            (directory / "pseudocode.c").write_text(source_text(result.get("code","")),encoding="utf-8")
-        for name in reference["types"]:
-            record = export_type(fallout,name)
-            directory = ref_root / "types" / safe_name(name)
-            json_write(directory / "type.json",record)
-            decl = record["declaration"].rstrip()
-            (directory / "decl.c").write_text(decl + (";" if not decl.endswith(";") else "")+"\n",encoding="utf-8")
-        json_write(ref_root / "manifest.json",{"database":source,"functions":reference["functions"],
-                   "types":reference["types"],"homology_confidence":"Candidate",
-                   "scope":"Reference evidence only. Similarity does not establish an Oblivion interpretation."})
     manifest = {"pass":"OctoberPass","created_at":created,"completed_at":now(),
                 "baseline_commit":config.get("baseline_commit"),
                 "database":{"filename":identity[0],"input_path":identity[1],"ida_version":identity[2]},
