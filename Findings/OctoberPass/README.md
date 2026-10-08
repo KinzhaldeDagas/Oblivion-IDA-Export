@@ -1,5 +1,7 @@
 # OctoberPass: decals, temporary effects, and asynchronous creation
 
+[Wiki-ready highlights](Wiki-OctoberPass-Highlights.md) summarize the major completions, corrections, and practical research value for the Oblivion community.
+
 This pass publishes the decoded information from the open Oblivion database selected by the analyst (`0i4j`, `C:\Games\Oblivion\Oblivion.exe`). It refreshes 84 function records and their disassembly, pseudocode, prototypes, comments, instruction records, callers, callees, and references. It also adds 11 type snapshots, 10 global/vtable snapshots, and the observed relationships between these systems. The [manifest](manifest.json) identifies the source and baseline commit.
 
 The [function inventory](function_index.md) links the 84 focused evidence anchors to their current pseudocode. [function_changes.json](function_changes.json) retains their before/after metadata. Historical folder names are retained; the root indexes identify current names. The [complete annotation snapshot](database_delta/README.md) subsequently refreshes the full root function, type, data, metadata, and graph catalogs. The focused [types](types), [data](data), and [relationships.json](relationships.json) remain the evidence bundle for the conclusions below.
